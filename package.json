@@ -1,0 +1,19 @@
+{
+  "name": "simple-schema-typescript",
+  "version": "1.0.0",
+  "description": "Schema Salad TypeScript-codegen draft for simple-schema",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Adrian Zimmer",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^16.11.6",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.4.4"
+  },
+  "dependencies": {
+    "yaml": "^1.10.2"
+  }
+}
