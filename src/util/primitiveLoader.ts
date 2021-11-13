@@ -2,10 +2,11 @@ import { Loader } from './loader'
 import { ValidationException } from './validationException'
 
 export class PrimitiveLoader implements Loader {
-  tp: (num: any) => boolean
-  constructor (tp: (num: any) => boolean) {
+  tp: (val: any) => boolean
+  constructor (tp: (val: any) => boolean) {
     this.tp = tp
   }
+  // TODO: Better Typing?
 
   load (doc: any): any {
     if (!this.tp(doc)) {

@@ -1,4 +1,4 @@
-import { loadField } from './util/loader'
+import { expandUrl, loadField } from './util/loader'
 import { unionOfNoneTypeOrStrtype } from './util/loaderInstances'
 import { LoadingOptions } from './util/loadingOptions'
 import Saveable from './util/saveable'
@@ -16,12 +16,13 @@ export class Simple_schema extends Saveable {
     this.extensionFields = extensionFields
   }
 
-  static fromDoc (doc: any, baseuri: string, loadingOptions: LoadingOptions): Saveable {
-    // TODO: Copy doc, hasattr doc, lc
+  static async fromDoc (doc: any, baseuri: string, loadingOptions: LoadingOptions): Promise<Saveable> {
+    const _doc = Object.assign({}, doc)
+
     const errors = new Array<ValidationException>()
-    if ('label' in doc) {
+    if ('label' in _doc) {
       try {
-        var label: string | undefined = loadField(doc.label, unionOfNoneTypeOrStrtype, '', loadingOptions)
+        var label: string | undefined = await loadField(_doc.label, unionOfNoneTypeOrStrtype, '', loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
           errors.push(new ValidationException('the `label` field is not valid because: ', [e]))
@@ -30,11 +31,10 @@ export class Simple_schema extends Saveable {
     }
 
     const extensionFields = new Map<string, any>()
-    for (const [key, value] of doc.values()) {
+    for (const [key, value] of _doc) {
       if (!this.attr.has(key)) {
         if ((key as string).includes(':')) {
-          // Todo: expand url
-          const ex = ''
+          const ex = expandUrl(key, '', loadingOptions, false, false)
           extensionFields.set(ex, value)
         } else {
           errors.push(new ValidationException(`invalid field ${key as string}, expected one of: "label"`))

@@ -1,47 +1,59 @@
+import { Dictionary } from './dict'
+import { DefaultFetcher, Fetcher } from './fetcher'
 import { RVOCAB, VOCAB } from './vocabs'
 
 export class LoadingOptions {
-  // TODO: Fetcher
-  idx: Map<string, Map<string, any>>
+  fetcher: Fetcher
+  idx: Dictionary<any>
   fileUri?: string
-  namespaces?: Map<string, string>
-  schemas?: Map<string, string>
+  namespaces?: Dictionary<string>
+  schemas?: Dictionary<string>
   copyFrom?: LoadingOptions
   originalDoc: any
-  vocab: Map<string, string>
-  rvocab: Map<string, string>
+  vocab: Dictionary<string>
+  rvocab: Dictionary<string>
 
-  constructor (fileUri?: string, namespaces?: Map<string, string>, schemas?: Map<string, string>, originalDoc?: any, copyFrom?: LoadingOptions) {
-    this.idx = new Map<string, Map<string, any>>()
+  constructor ({ fileUri, namespaces, schemas, originalDoc, copyFrom, fetcher }: {fileUri?: string, namespaces?: Dictionary<string>, schemas?: Dictionary<string>, originalDoc?: any, copyFrom?: LoadingOptions, fetcher?: Fetcher}) {
+    this.idx = {}
     this.fileUri = fileUri
     this.namespaces = namespaces
     this.schemas = schemas
     this.originalDoc = originalDoc
 
     if (copyFrom != null) {
-      this.idx = new Map(copyFrom.idx)
-      // TODO: Fetcher
+      this.idx = copyFrom.idx
+      if (fetcher === undefined) {
+        this.fetcher = copyFrom.fetcher
+      }
       if (fileUri === undefined) {
         this.fileUri = copyFrom.fileUri
       }
       if (namespaces === undefined) {
-        this.namespaces = copyFrom.namespaces === undefined ? undefined : new Map(copyFrom.namespaces)
+        this.namespaces = copyFrom.namespaces
       }
       if (schemas === undefined) {
-        this.schemas = copyFrom.schemas === undefined ? undefined : new Map(copyFrom.schemas)
+        this.schemas = copyFrom.schemas
       }
+    }
+
+    if (fetcher != null) {
+      this.fetcher = fetcher
+    } else {
+      this.fetcher = new DefaultFetcher()
     }
 
     this.vocab = VOCAB
     this.rvocab = RVOCAB
 
-    if (namespaces !== undefined) {
-      this.vocab = new Map(this.vocab)
-      this.rvocab = new Map(this.rvocab)
-      namespaces.forEach((v, k) => {
-        this.vocab.set(k, v)
-        this.rvocab.set(v, k)
-      })
+    if (namespaces != null) {
+      // Copy vocabs
+      this.vocab = { ...this.vocab }
+      this.rvocab = { ...this.rvocab }
+      for (const key in namespaces) {
+        const value = namespaces[key]
+        this.vocab[key] = value
+        this.rvocab[value] = key
+      }
     }
   }
 }
