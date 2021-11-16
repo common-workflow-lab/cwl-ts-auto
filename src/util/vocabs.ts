@@ -1,2 +1,40 @@
-export const VOCAB = {}
-export const RVOCAB = {}
+export const VOCAB = {
+  Any: 'https://w3id.org/cwl/salad#Any',
+  ArraySchema: 'https://w3id.org/cwl/salad#ArraySchema',
+  Documented: 'https://w3id.org/cwl/salad#Documented',
+  EnumSchema: 'https://w3id.org/cwl/salad#EnumSchema',
+  PrimitiveType: 'https://w3id.org/cwl/salad#PrimitiveType',
+  RecordField: 'https://w3id.org/cwl/salad#RecordField',
+  RecordSchema: 'https://w3id.org/cwl/salad#RecordSchema',
+  array: 'https://w3id.org/cwl/salad#array',
+  boolean: 'http://www.w3.org/2001/XMLSchema#boolean',
+  double: 'http://www.w3.org/2001/XMLSchema#double',
+  enum: 'https://w3id.org/cwl/salad#enum',
+  float: 'http://www.w3.org/2001/XMLSchema#float',
+  int: 'http://www.w3.org/2001/XMLSchema#int',
+  long: 'http://www.w3.org/2001/XMLSchema#long',
+  null: 'https://w3id.org/cwl/salad#null',
+  record: 'https://w3id.org/cwl/salad#record',
+  simple_schema: 'https://w3id.org/cwl/simple-schema#simple_schema',
+  string: 'http://www.w3.org/2001/XMLSchema#string'
+}
+export const RVOCAB = {
+  'https://w3id.org/cwl/salad#Any': 'Any',
+  'https://w3id.org/cwl/salad#ArraySchema': 'ArraySchema',
+  'https://w3id.org/cwl/salad#Documented': 'Documented',
+  'https://w3id.org/cwl/salad#EnumSchema': 'EnumSchema',
+  'https://w3id.org/cwl/salad#PrimitiveType': 'PrimitiveType',
+  'https://w3id.org/cwl/salad#RecordField': 'RecordField',
+  'https://w3id.org/cwl/salad#RecordSchema': 'RecordSchema',
+  'https://w3id.org/cwl/salad#array': 'array',
+  'http://www.w3.org/2001/XMLSchema#boolean': 'boolean',
+  'http://www.w3.org/2001/XMLSchema#double': 'double',
+  'https://w3id.org/cwl/salad#enum': 'enum',
+  'http://www.w3.org/2001/XMLSchema#float': 'float',
+  'http://www.w3.org/2001/XMLSchema#int': 'int',
+  'http://www.w3.org/2001/XMLSchema#long': 'long',
+  'https://w3id.org/cwl/salad#null': 'null',
+  'https://w3id.org/cwl/salad#record': 'record',
+  'https://w3id.org/cwl/simple-schema#simple_schema': 'simple_schema',
+  'http://www.w3.org/2001/XMLSchema#string': 'string'
+}

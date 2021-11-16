@@ -1,4 +1,5 @@
 import { Loader } from './loader'
+import { LoadingOptions } from './loadingOptions'
 import { ValidationException } from './validationException'
 
 export class PrimitiveLoader implements Loader {
@@ -6,9 +7,9 @@ export class PrimitiveLoader implements Loader {
   constructor (tp: (val: any) => boolean) {
     this.tp = tp
   }
-  // TODO: Better Typing?
 
-  load (doc: any): any {
+  // TODO: Better Typing?
+  async load (doc: any, baseuri: string, loadingOptions: LoadingOptions): Promise<any> {
     if (!this.tp(doc)) {
       throw new ValidationException(`Expected a ${this.tp.name} but got ${(typeof doc)}`)
     }

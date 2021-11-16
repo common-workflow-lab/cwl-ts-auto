@@ -1,3 +1,4 @@
+import { Dictionary } from './util/dict'
 import { expandUrl, loadField } from './util/loader'
 import { unionOfNoneTypeOrStrtype } from './util/loaderInstances'
 import { LoadingOptions } from './util/loadingOptions'
@@ -7,19 +8,19 @@ import { ValidationException } from './util/validationException'
 export class Simple_schema extends Saveable {
   loadingOptions: LoadingOptions
   label?: string
-  extensionFields?: Map<string, any>
+  extensionFields?: Dictionary<any>
 
-  constructor (loadingOptions: LoadingOptions, label?: string, extensionFields?: Map<string, any>) {
+  constructor (loadingOptions: LoadingOptions, label?: string, extensionFields?: Dictionary<any>) {
     super()
     this.loadingOptions = loadingOptions
     this.label = label
     this.extensionFields = extensionFields
   }
 
-  static async fromDoc (doc: any, baseuri: string, loadingOptions: LoadingOptions): Promise<Saveable> {
+  static async fromDoc (doc: any, baseuri: string, loadingOptions: LoadingOptions, docRoot?: string): Promise<Saveable> {
     const _doc = Object.assign({}, doc)
 
-    const errors = new Array<ValidationException>()
+    const errors: ValidationException[] = []
     if ('label' in _doc) {
       try {
         var label: string | undefined = await loadField(_doc.label, unionOfNoneTypeOrStrtype, '', loadingOptions)
@@ -30,14 +31,14 @@ export class Simple_schema extends Saveable {
       }
     }
 
-    const extensionFields = new Map<string, any>()
+    const extensionFields: Dictionary<any> = {}
     for (const [key, value] of _doc) {
       if (!this.attr.has(key)) {
         if ((key as string).includes(':')) {
           const ex = expandUrl(key, '', loadingOptions, false, false)
-          extensionFields.set(ex, value)
+          extensionFields[ex] = value
         } else {
-          errors.push(new ValidationException(`invalid field ${key as string}, expected one of: "label"`))
+          errors.push(new ValidationException(`invalid field ${key as string}, expected one of: \`label\``))
           break
         }
       }
