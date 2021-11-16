@@ -8,7 +8,7 @@ export abstract class Fetcher {
   abstract checkExists (url: string): boolean
   abstract urljoin (baseUrl: string, url: string): string
 
-  static schemes = ['file:', 'http:', 'https:', 'mailto:']
+  static schemes = ['file', 'http', 'https', 'mailto']
 }
 
 export class DefaultFetcher extends Fetcher {
@@ -16,9 +16,8 @@ export class DefaultFetcher extends Fetcher {
     // TODO: cache
     const split = URI.parse(urlString)
     const scheme = split.scheme ?? ''
-
     if (Fetcher.schemes.includes(scheme)) {
-      if (['http:', 'https:'].includes(scheme)) {
+      if (['http', 'https'].includes(scheme)) {
         try {
           // TODO: content types
           const result = await fetch(new URL(urlString))
@@ -31,7 +30,7 @@ export class DefaultFetcher extends Fetcher {
             throw new ValidationException(`Error fetching ${urlString}: ${e.message}`)
           }
         }
-      } else if (scheme === 'file:') {
+      } else if (scheme === 'file') {
         try {
           return fs.readFileSync(split.path ?? '', { encoding: 'utf8' })
         } catch (e) {
