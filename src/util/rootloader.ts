@@ -1,9 +1,7 @@
-import { LoadingOptions } from './loadingOptions'
+import { LoadingOptions, Loader, TypeGuards } from './internal'
 import { pathToFileURL } from 'url'
 import { resolve } from 'path'
-import { Loader } from './loader'
 import * as yaml from 'js-yaml'
-import { isArrOfDictionary, isDictionary } from './typeguards'
 
 // TODO: better typechecking
 export async function documentLoad (loader: Loader, doc: unknown, baseuri: string, loadingOptions: LoadingOptions): Promise<any> {
@@ -11,11 +9,11 @@ export async function documentLoad (loader: Loader, doc: unknown, baseuri: strin
     await documentLoadByUrl(loader, loadingOptions.fetcher.urljoin(baseuri, doc), loadingOptions)
   }
 
-  if (isArrOfDictionary(doc)) {
+  if (TypeGuards.isArrOfDictionary(doc)) {
     return await loader.load(doc, baseuri, loadingOptions)
   }
 
-  if (isDictionary(doc)) {
+  if (TypeGuards.isDictionary(doc)) {
     if (doc != null) {
       if ('$namespaces' in doc || '$schemas' in doc) {
         loadingOptions = new LoadingOptions({ copyFrom: loadingOptions, namespaces: doc.$namespaces ?? undefined, schemas: doc.$schemas ?? undefined })

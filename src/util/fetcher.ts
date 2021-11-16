@@ -1,4 +1,4 @@
-import { ValidationException } from './validationException'
+import { ValidationException } from './internal'
 import fetch from 'node-fetch'
 import * as fs from 'fs'
 import * as URI from 'uri-js'

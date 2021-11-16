@@ -1,6 +1,4 @@
-import { Loader } from './loader'
-import { LoadingOptions } from './loadingOptions'
-import { ValidationException } from './validationException'
+import { Loader, LoadingOptions, ValidationException } from './internal'
 
 export class ExpressionLoader implements Loader {
   items: string[]

@@ -1,15 +1,12 @@
-import { LoadingOptions } from './loadingOptions'
-import { documentLoadByUrl } from './rootloader'
-import { isDictionary } from './typeguards'
+import { LoadingOptions, documentLoadByUrl, TypeGuards, ValidationException } from './internal'
 import * as URI from 'uri-js'
-import { ValidationException } from './validationException'
 // TODO: Docroot
 export interface Loader {
   load: (doc: any, baseuri: string, loadingOptions: LoadingOptions) => Promise<any>
 }
 
 export async function loadField (val: any, fieldType: Loader, baseuri: string, loadingOptions: LoadingOptions): Promise<any> {
-  if (isDictionary(val)) {
+  if (TypeGuards.isDictionary(val)) {
     if ('$import' in val) {
       if (loadingOptions.fileUri == null) {
         throw Error('Cannot load $import without fileuri')

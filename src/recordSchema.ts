@@ -1,9 +1,5 @@
-import { Dictionary } from './util/dict'
-import { expandUrl, loadField } from './util/loader'
-import { idmapFieldsUnionOfNoneTypeOrArrayOfRecordFieldLoader, typeDSLEnumd9cba076fca539106791a4f46d198c7fcfbdb779Loader2 } from './util/loaderInstances'
-import { LoadingOptions } from './util/loadingOptions'
-import Saveable from './util/saveable'
-import { ValidationException } from './util/validationException'
+
+import { Dictionary, expandUrl, loadField, idmapFieldsUnionOfNoneTypeOrArrayOfRecordFieldLoader, typeDSLEnumd9cba076fca539106791a4f46d198c7fcfbdb779Loader2, LoadingOptions, Saveable, ValidationException } from './util/internal'
 
 export class RecordSchema extends Saveable {
   fields?: any

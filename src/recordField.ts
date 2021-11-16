@@ -1,10 +1,4 @@
-import { Dictionary } from './util/dict'
-import { Documented } from './util/documented'
-import { expandUrl, loadField } from './util/loader'
-import { typedslUnionOfPrimitiveTypeLoaderOrRecordSchemaLoaderOrEnumSchemaLoaderOrArraySchemaLoaderOrStrtypeOrArrayOfUnionOfPrimitiveTypeLoaderOrRecordSchemaLoaderOrEnumSchemaLoaderOrArraySchemaLoaderOrStrtype2, unionOfNoneTypeOrStrTypeOrArrayOfStrType, uriStrtypeTrueFalseNone } from './util/loaderInstances'
-import { LoadingOptions } from './util/loadingOptions'
-import Saveable from './util/saveable'
-import { ValidationException } from './util/validationException'
+import { Dictionary, Documented, expandUrl, loadField, LoadingOptions, Saveable, ValidationException, typedslUnionOfPrimitiveTypeLoaderOrRecordSchemaLoaderOrEnumSchemaLoaderOrArraySchemaLoaderOrStrtypeOrArrayOfUnionOfPrimitiveTypeLoaderOrRecordSchemaLoaderOrEnumSchemaLoaderOrArraySchemaLoaderOrStrtype2, unionOfNoneTypeOrStrTypeOrArrayOfStrType, uriStrtypeTrueFalseNone } from './util/internal'
 
 export class RecordField extends Documented {
   name: any

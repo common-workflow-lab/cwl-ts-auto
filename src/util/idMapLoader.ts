@@ -1,8 +1,4 @@
-import { Dictionary } from './dict'
-import { Loader } from './loader'
-import { LoadingOptions } from './loadingOptions'
-import { isDictionary } from './typeguards'
-import { ValidationException } from './validationException'
+import { Dictionary, TypeGuards, Loader, LoadingOptions, ValidationException } from './internal'
 
 export class IdMapLoader implements Loader {
   inner: Loader
@@ -16,11 +12,11 @@ export class IdMapLoader implements Loader {
   }
 
   async load (doc: any, baseuri: string, loadingOptions: LoadingOptions): Promise<any> {
-    if (isDictionary(doc)) {
+    if (TypeGuards.isDictionary(doc)) {
       const r: any[] = []
       for (var k of Object.keys(doc).sort(undefined)) {
         const val = doc[k]
-        if (isDictionary(val)) {
+        if (TypeGuards.isDictionary(val)) {
           const v2 = Object.assign({}, val)
           v2[this.mapSubject] = k
           r.push(v2)

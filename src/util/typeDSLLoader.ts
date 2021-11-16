@@ -1,7 +1,5 @@
 import { assert } from 'console'
-import { Dictionary } from './dict'
-import { expandUrl, Loader } from './loader'
-import { LoadingOptions } from './loadingOptions'
+import { Dictionary, expandUrl, Loader, LoadingOptions } from './internal'
 
 export class TypeDSLLoader implements Loader {
   typeDSLRegex = /^([^[?]+)(\[\])?(\?)?$/
@@ -15,15 +13,15 @@ export class TypeDSLLoader implements Loader {
   resolve (doc: string, baseuri: string, loadingOptions: LoadingOptions): Array<Dictionary<string> | string> | Dictionary<string> | string {
     const m = this.typeDSLRegex.exec(doc)
     if (m != null) {
-      const group1 = m.groups?.[1]
+      const group1 = m[1]
       assert(group1 != null)
-      const first = expandUrl(group1 as string, baseuri, loadingOptions, false, true, this.refScope)
+      const first = expandUrl(group1, baseuri, loadingOptions, false, true, this.refScope)
       var second
       var third
-      if (m.groups?.[2] != null) {
+      if (m[2] != null) {
         second = { 'type:': 'array', items: first }
       }
-      if (m.groups?.[3] != null) {
+      if (m[3] != null) {
         third = ['null', second ?? first]
       }
       return third ?? second ?? first

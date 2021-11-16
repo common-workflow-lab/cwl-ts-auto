@@ -1,4 +1,4 @@
-import { Dictionary } from './dict'
+import { Dictionary } from './internal'
 
 export function Int (doc: any): boolean {
   return typeof doc === 'number' && Number.isInteger(doc)

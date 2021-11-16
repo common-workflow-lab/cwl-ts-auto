@@ -1,9 +1,4 @@
-import { Dictionary } from './util/dict'
-import { expandUrl, loadField } from './util/loader'
-import { unionOfNoneTypeOrStrtype } from './util/loaderInstances'
-import { LoadingOptions } from './util/loadingOptions'
-import Saveable from './util/saveable'
-import { ValidationException } from './util/validationException'
+import { Dictionary, expandUrl, loadField, unionOfNoneTypeOrStrtype, LoadingOptions, Saveable, ValidationException } from './util/internal'
 
 export class Simple_schema extends Saveable {
   loadingOptions: LoadingOptions

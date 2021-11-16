@@ -1,9 +1,4 @@
-import { Dictionary } from './util/dict'
-import { expandUrl, loadField } from './util/loader'
-import { typeDSLEnumd961d79c225752b9fadb617367615ab176b47d77Loader2, uriArrayOfStrTypeTrueFalseNone } from './util/loaderInstances'
-import { LoadingOptions } from './util/loadingOptions'
-import Saveable from './util/saveable'
-import { ValidationException } from './util/validationException'
+import { Dictionary, expandUrl, loadField, typeDSLEnumd961d79c225752b9fadb617367615ab176b47d77Loader2, uriArrayOfStrTypeTrueFalseNone, LoadingOptions, Saveable, ValidationException } from './util/internal'
 
 export class EnumSchema extends Saveable {
   symbols?: any

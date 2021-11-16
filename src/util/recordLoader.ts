@@ -1,6 +1,4 @@
-import { Loader } from './loader'
-import { LoadingOptions } from './loadingOptions'
-import Saveable from './saveable'
+import { Saveable, Loader, LoadingOptions } from './internal'
 
 export class RecordLoader implements Loader {
   createrFunc: (doc: any, baseuri: string, loadingOptions: LoadingOptions) => Promise<Saveable>

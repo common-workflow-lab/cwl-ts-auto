@@ -1,7 +1,4 @@
-import { Loader } from './loader'
-import { LoadingOptions } from './loadingOptions'
-import Saveable from './saveable'
-import { ValidationException } from './validationException'
+import { Loader, LoadingOptions, Saveable, ValidationException } from './internal'
 
 export class UnionLoader implements Loader {
   alternates: Loader[]

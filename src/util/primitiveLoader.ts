@@ -1,9 +1,8 @@
-import { Loader } from './loader'
-import { LoadingOptions } from './loadingOptions'
-import { ValidationException } from './validationException'
+import { Loader, LoadingOptions, ValidationException } from './internal'
 
 export class PrimitiveLoader implements Loader {
   tp: (val: any) => boolean
+
   constructor (tp: (val: any) => boolean) {
     this.tp = tp
   }
