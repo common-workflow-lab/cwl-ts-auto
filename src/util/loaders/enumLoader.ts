@@ -1,4 +1,4 @@
-import { Loader, LoadingOptions, ValidationException } from './internal'
+import { Loader, LoadingOptions, ValidationException } from '../internal'
 
 export class EnumLoader implements Loader {
   symbols: string[]
@@ -7,7 +7,7 @@ export class EnumLoader implements Loader {
     this.symbols = symbols
   }
 
-  async load (doc: string, baseuri: string, loadingOptions: LoadingOptions): Promise<any> {
+  async load (doc: string, baseuri: string, loadingOptions: LoadingOptions, docRoot?: string): Promise<any> {
     if (this.symbols.includes(doc)) {
       return doc
     } else {

@@ -15,7 +15,7 @@ export class RecordSchema extends Saveable {
     this.type = type
   }
 
-  static async fromDoc (doc: any, baseuri: string, loadingOptions: LoadingOptions, docRoot?: string): Promise<Saveable> {
+  static override async fromDoc (doc: any, baseuri: string, loadingOptions: LoadingOptions, docRoot?: string): Promise<Saveable> {
     const _doc = Object.assign({}, doc)
     const errors: ValidationException[] = []
     if ('fields' in _doc) {

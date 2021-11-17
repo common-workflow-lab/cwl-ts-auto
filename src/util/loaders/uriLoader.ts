@@ -1,4 +1,4 @@
-import { expandUrl, Loader, LoadingOptions } from './internal'
+import { expandUrl, Loader, LoadingOptions } from '../internal'
 
 export class URILoader implements Loader {
   inner: Loader
@@ -13,7 +13,7 @@ export class URILoader implements Loader {
     this.scopedRef = scopedRef
   }
 
-  async load (doc: any, baseuri: string, loadingOptions: LoadingOptions): Promise<any> {
+  async load (doc: any, baseuri: string, loadingOptions: LoadingOptions, docRoot?: string): Promise<any> {
     if (Array.isArray(doc)) {
       const newDoc: any[] = []
       for (const val of doc) {

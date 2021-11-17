@@ -1,8 +1,8 @@
-import { LoadingOptions, documentLoadByUrl, TypeGuards, ValidationException } from './internal'
+import { LoadingOptions, documentLoadByUrl, TypeGuards, ValidationException } from '../internal'
 import * as URI from 'uri-js'
-// TODO: Docroot
+
 export interface Loader {
-  load: (doc: any, baseuri: string, loadingOptions: LoadingOptions) => Promise<any>
+  load: (doc: any, baseuri: string, loadingOptions: LoadingOptions, docRoot?: string) => Promise<any>
 }
 
 export async function loadField (val: any, fieldType: Loader, baseuri: string, loadingOptions: LoadingOptions): Promise<any> {

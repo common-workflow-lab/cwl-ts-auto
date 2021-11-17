@@ -1,10 +1,10 @@
-import { assert } from 'console'
-import { Dictionary, expandUrl, Loader, LoadingOptions } from './internal'
+import { Dictionary, expandUrl, Loader, LoadingOptions } from '../internal'
 
 export class TypeDSLLoader implements Loader {
   typeDSLRegex = /^([^[?]+)(\[\])?(\?)?$/
   inner: Loader
   refScope?: number
+
   constructor (inner: Loader, refScope?: number) {
     this.inner = inner
     this.refScope = refScope
@@ -14,12 +14,15 @@ export class TypeDSLLoader implements Loader {
     const m = this.typeDSLRegex.exec(doc)
     if (m != null) {
       const group1 = m[1]
-      assert(group1 != null)
+      if (group1 == null) {
+        throw Error()
+      }
+
       const first = expandUrl(group1, baseuri, loadingOptions, false, true, this.refScope)
       var second
       var third
       if (m[2] != null) {
-        second = { 'type:': 'array', items: first }
+        second = { type: 'array', items: first }
       }
       if (m[3] != null) {
         third = ['null', second ?? first]
@@ -29,7 +32,7 @@ export class TypeDSLLoader implements Loader {
     return doc
   }
 
-  async load (doc: any, baseuri: string, loadingOptions: LoadingOptions): Promise<any> {
+  async load (doc: any, baseuri: string, loadingOptions: LoadingOptions, docRoot?: string): Promise<any> {
     if (Array.isArray(doc)) {
       const r: any[] = []
       for (const d of doc) {

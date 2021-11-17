@@ -1,4 +1,4 @@
-import { Loader, loadField, LoadingOptions, UnionLoader, ValidationException } from './internal'
+import { Loader, loadField, LoadingOptions, UnionLoader, ValidationException } from '../internal'
 
 export class ArrayLoader implements Loader {
   items: Loader[]
@@ -7,7 +7,7 @@ export class ArrayLoader implements Loader {
     this.items = items
   }
 
-  async load (doc: any, baseuri: string, loadingOptions: LoadingOptions): Promise<any> {
+  async load (doc: any, baseuri: string, loadingOptions: LoadingOptions, docRoot?: string): Promise<any> {
     if (!Array.isArray(doc)) {
       throw new ValidationException('Expected a list')
     }

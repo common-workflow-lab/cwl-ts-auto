@@ -1,4 +1,4 @@
-import { Dictionary, TypeGuards, Loader, LoadingOptions, ValidationException } from './internal'
+import { Dictionary, TypeGuards, Loader, LoadingOptions, ValidationException } from '../internal'
 
 export class IdMapLoader implements Loader {
   inner: Loader
@@ -11,7 +11,7 @@ export class IdMapLoader implements Loader {
     this.mapPredicate = mapPredicate
   }
 
-  async load (doc: any, baseuri: string, loadingOptions: LoadingOptions): Promise<any> {
+  async load (doc: any, baseuri: string, loadingOptions: LoadingOptions, docRoot?: string): Promise<any> {
     if (TypeGuards.isDictionary(doc)) {
       const r: any[] = []
       for (var k of Object.keys(doc).sort(undefined)) {

@@ -1,9 +1,8 @@
-import { LoadingOptions, Loader, TypeGuards } from './internal'
+import { LoadingOptions, Loader, TypeGuards } from '../internal'
 import { pathToFileURL } from 'url'
 import { resolve } from 'path'
 import * as yaml from 'js-yaml'
 
-// TODO: better typechecking
 export async function documentLoad (loader: Loader, doc: unknown, baseuri: string, loadingOptions: LoadingOptions): Promise<any> {
   if (typeof doc === 'string') {
     await documentLoadByUrl(loader, loadingOptions.fetcher.urljoin(baseuri, doc), loadingOptions)

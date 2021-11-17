@@ -16,7 +16,7 @@ export class RecordField extends Documented {
     this.loadingOptions = loadingOptions
   }
 
-  static async fromDoc (doc: any, baseuri: string, loadingOptions: LoadingOptions, docRoot?: string): Promise<Saveable> {
+  static override async fromDoc (doc: any, baseuri: string, loadingOptions: LoadingOptions, docRoot?: string): Promise<Saveable> {
     const _doc = Object.assign({}, doc)
     const errors: ValidationException[] = []
     if ('name' in _doc) {

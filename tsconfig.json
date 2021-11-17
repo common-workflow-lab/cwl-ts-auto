@@ -6,7 +6,8 @@
     "esModuleInterop": true,                             /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables `allowSyntheticDefaultImports` for type compatibility. */
     "forceConsistentCasingInFileNames": true,   
     "strict": true,
-    "declaration": true
+    "declaration": true,
+    "noImplicitOverride": true
   },
   "include": ["./src/**/*"],
   "exclude": [

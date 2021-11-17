@@ -12,7 +12,7 @@ export class Simple_schema extends Saveable {
     this.extensionFields = extensionFields
   }
 
-  static async fromDoc (doc: any, baseuri: string, loadingOptions: LoadingOptions, docRoot?: string): Promise<Saveable> {
+  static override async fromDoc (doc: any, baseuri: string, loadingOptions: LoadingOptions, docRoot?: string): Promise<Saveable> {
     const _doc = Object.assign({}, doc)
 
     const errors: ValidationException[] = []

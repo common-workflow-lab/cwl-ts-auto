@@ -1,4 +1,4 @@
-import { Loader, LoadingOptions, ValidationException } from './internal'
+import { Loader, LoadingOptions, ValidationException } from '../internal'
 
 export class ExpressionLoader implements Loader {
   items: string[]
@@ -7,7 +7,7 @@ export class ExpressionLoader implements Loader {
     this.items = items
   }
 
-  async load (doc: string, baseuri: string, loadingOptions: LoadingOptions): Promise<any> {
+  async load (doc: any, baseuri: string, loadingOptions: LoadingOptions, docRoot?: string): Promise<any> {
     if (typeof doc !== 'string') {
       throw new ValidationException('Expected a str')
     }
