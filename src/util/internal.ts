@@ -1,3 +1,4 @@
+// Internal modules pattern to deal with circular dependencies
 export * from './dict'
 export * as TypeGuards from './typeguards'
 export * from './loaders/arrayLoader'

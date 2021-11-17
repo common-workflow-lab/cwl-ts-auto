@@ -13,7 +13,7 @@ export class RecordField extends Documented {
     this.type = type
     this.doc = doc
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions
+    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
   }
 
   static override async fromDoc (doc: any, baseuri: string, loadingOptions: LoadingOptions, docRoot?: string): Promise<Saveable> {
@@ -72,7 +72,8 @@ export class RecordField extends Documented {
         }
       }
     }
-    if (errors.length >= 1) {
+
+    if (errors.length > 0) {
       throw new ValidationException("Trying 'RecordField'", errors)
     }
 

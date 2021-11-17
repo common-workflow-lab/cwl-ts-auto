@@ -51,7 +51,7 @@ export class RecordSchema extends Saveable {
       }
     }
 
-    if (errors.length >= 1) {
+    if (errors.length > 0) {
       throw new ValidationException("Trying 'RecordSchema'", errors)
     }
 

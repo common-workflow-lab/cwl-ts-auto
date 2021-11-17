@@ -7,9 +7,9 @@ export class Simple_schema extends Saveable {
 
   constructor (loadingOptions: LoadingOptions, label?: string, extensionFields?: Dictionary<any>) {
     super()
-    this.loadingOptions = loadingOptions
+    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.label = label
-    this.extensionFields = extensionFields
+    this.extensionFields = extensionFields ?? {}
   }
 
   static override async fromDoc (doc: any, baseuri: string, loadingOptions: LoadingOptions, docRoot?: string): Promise<Saveable> {
@@ -18,7 +18,7 @@ export class Simple_schema extends Saveable {
     const errors: ValidationException[] = []
     if ('label' in _doc) {
       try {
-        var label: string | undefined = await loadField(_doc.label, unionOfNoneTypeOrStrtype, '', loadingOptions)
+        var label: string | undefined = await loadField(_doc.label, unionOfNoneTypeOrStrtype, baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
           errors.push(new ValidationException('the `label` field is not valid because: ', [e]))
@@ -39,7 +39,7 @@ export class Simple_schema extends Saveable {
       }
     }
 
-    if (errors.length >= 1) {
+    if (errors.length > 0) {
       throw new ValidationException("Trying 'Simple_schema'", errors)
     }
 
