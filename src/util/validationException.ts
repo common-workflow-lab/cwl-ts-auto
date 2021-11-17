@@ -50,7 +50,7 @@ export class ValidationException extends Error {
     return ret
   }
 
-  toString (): string {
+  override toString (): string {
     return this.prettyStr()
   }
 }
