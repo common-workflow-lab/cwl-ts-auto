@@ -4,20 +4,21 @@
   "description": "Schema Salad TypeScript-codegen draft for simple-schema",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --require ts-node/register src/test/**/*.ts"
+    "test": "nyc mocha --require ts-node/register src/test/**/*.ts"
   },
   "author": "Adrian Zimmer",
   "license": "ISC",
   "devDependencies": {
     "@types/js-yaml": "^4.0.4",
+    "@types/mocha": "^9.0.0",
     "@types/node": "^16.11.6",
     "@types/node-fetch": "^2.5.12",
-    "@types/mocha": "^9.0.0",
+    "chai": "^4.3.4",
+    "mocha": "^9.1.3",
+    "nyc": "^15.1.0",
     "ts-node": "^10.4.0",
     "ts-standard": "^10.0.0",
-    "typescript": "^4.4.4",
-    "mocha": "^9.1.3",
-    "chai": "^4.3.4"
+    "typescript": "^4.4.4"
   },
   "dependencies": {
     "@types/chai": "^4.2.22",

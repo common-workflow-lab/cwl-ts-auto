@@ -3,6 +3,7 @@ import fetch from 'node-fetch'
 import * as fs from 'fs'
 import * as URI from 'uri-js'
 
+// Code implemented after https://github.com/common-workflow-language/schema_salad/blob/main/schema_salad/fetcher.py
 export abstract class Fetcher {
   abstract fetchText (url: string, contentTypes?: string[]): Promise<string>
   abstract checkExists (url: string): boolean
