@@ -21,9 +21,5 @@ export function Undefined (doc: any): boolean {
 }
 
 export function isDictionary (doc: any): doc is Dictionary {
-  return (typeof doc === 'object' && !Array.isArray(doc))
-}
-
-export function isArrOfDictionary (doc: any): doc is Dictionary[] {
-  return (Array.isArray(doc) && isDictionary(doc[0]))
+  return (doc != null && typeof doc === 'object' && !Array.isArray(doc))
 }

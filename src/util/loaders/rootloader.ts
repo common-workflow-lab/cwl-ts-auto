@@ -8,7 +8,7 @@ export async function documentLoad (loader: Loader, doc: unknown, baseuri: strin
     await documentLoadByUrl(loader, loadingOptions.fetcher.urljoin(baseuri, doc), loadingOptions)
   }
 
-  if (TypeGuards.isArrOfDictionary(doc)) {
+  if (Array.isArray(doc)) {
     return await loader.load(doc, baseuri, loadingOptions)
   }
 
