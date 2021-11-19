@@ -54,7 +54,7 @@ export class DefaultFetcher extends Fetcher {
     }
     const baseUrl = URI.parse(baseUrlString)
     const url = URI.parse(urlString)
-    if (baseUrl.scheme != null && baseUrl.scheme !== 'file:' && url.scheme === 'file:') {
+    if (baseUrl.scheme != null && baseUrl.scheme !== 'file' && url.scheme === 'file') {
       throw new ValidationException(`Not resolving potential remote exploit ${urlString} from base ${baseUrlString}`)
     }
     // TODO: Windows specific join?
