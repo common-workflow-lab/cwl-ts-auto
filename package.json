@@ -4,7 +4,7 @@
   "description": "Schema Salad TypeScript-codegen draft for simple-schema",
   "main": "index.js",
   "scripts": {
-    "test": "nyc mocha --require ts-node/register src/test/**/*.ts"
+    "test": "nyc --reporter=lcov mocha --require ts-node/register src/test/**/*.ts"
   },
   "author": "Adrian Zimmer",
   "license": "ISC",
@@ -26,6 +26,7 @@
     "typescript": "^4.4.4"
   },
   "dependencies": {
+    "codecov.io": "^0.1.6",
     "js-yaml": "^4.1.0",
     "node-fetch": "^2.6.6",
     "uri-js": "^4.4.1"
