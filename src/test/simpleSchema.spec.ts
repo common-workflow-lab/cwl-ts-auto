@@ -6,7 +6,6 @@ describe('Test Simple_Schema', () => {
     const doc = {
       label: '2'
     }
-
     const rs = await Simple_schema.fromDoc(doc, 'http://example.com', new LoadingOptions({})) as Simple_schema
     assert.equal(rs.label, '2')
   })

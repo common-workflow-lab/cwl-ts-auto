@@ -6,11 +6,11 @@ class TestLoader implements Loader {
     return doc
   }
 }
+const testLoader = new TestLoader()
 
 describe('Test IdMapLoader', () => {
   describe('load', () => {
     it('should load the document', async () => {
-      const testLoader = new TestLoader()
       const loader = new IdMapLoader(testLoader, 'key', 'value')
       const doc = {
         shaggy: {
@@ -26,7 +26,6 @@ describe('Test IdMapLoader', () => {
       ])
     })
     it('should throw a ValidationException with the message "No mapPredicate"', async () => {
-      const testLoader = new TestLoader()
       const loader = new IdMapLoader(testLoader, 'key')
       const doc = {
         fred: 'daphne'
