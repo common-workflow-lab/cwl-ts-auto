@@ -15,22 +15,21 @@ describe('Test Simple_Schema', () => {
     const doc = {
       label: 2
     }
-
+    let err
     try {
       await Simple_schema.fromDoc(doc, 'http://example.com', new LoadingOptions({}))
       assert(false, 'Loading doc should throw a ValidationException')
     } catch (e) {
-      if (e instanceof ValidationException) {
-        assert.equal(e.toString(),
+      err = e
+    }
+    assert.exists(err)
+    assert.isTrue(err instanceof ValidationException)
+    assert.equal((err as ValidationException).toString(),
 `Trying 'Simple_schema'
  the \`label\` field is not valid because: 
    tried PrimitiveLoader but
      Expected a String but got number
    tried PrimitiveLoader but
      Expected a Undefined but got number`)
-      } else {
-        assert(false, 'Loading doc should throw a ValidationException')
-      }
-    }
   })
 })
