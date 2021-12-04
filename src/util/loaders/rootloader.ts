@@ -1,6 +1,4 @@
 import { LoadingOptions, Loader, TypeGuards } from '../internal'
-import { pathToFileURL } from 'url'
-import { resolve } from 'path'
 import * as yaml from 'js-yaml'
 
 export async function documentLoad (loader: Loader, doc: unknown, baseuri: string, loadingOptions: LoadingOptions): Promise<any> {
@@ -44,13 +42,4 @@ export async function documentLoadByUrl (loader: Loader, url: string, loadingOpt
   loadingOptions.idx[url] = result
   loadingOptions = new LoadingOptions({ copyFrom: loadingOptions, fileUri: url })
   return await documentLoad(loader, result, url, loadingOptions)
-}
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function ensureBaseUri (baseUri?: string): string {
-  if (baseUri === undefined) {
-    return pathToFileURL(resolve('./')).toString() + '/'
-  }
-
-  return baseUri
 }

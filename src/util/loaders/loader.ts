@@ -34,13 +34,13 @@ export function expandUrl (url: string, baseUrl: string, loadingOptions: Loading
   if (loadingOptions.vocab != null && url.includes(':')) {
     const prefix = url.split(':')[0]
     if (prefix in loadingOptions.vocab) {
-      url = loadingOptions.vocab[prefix] + url[prefix.length + 1]
+      url = loadingOptions.vocab[prefix] + url.slice(prefix.length + 1)
     }
   }
 
   const split = URI.parse(url)
   if ((split.scheme != null && ['http', 'https', 'file'].includes(split.scheme)) || url.startsWith('$(') || url.startsWith('${')) {
-    throw Error('not implemnted')
+    throw Error('not implemented')
   } else if (scopedId && split.fragment === undefined) {
     const splitbase = URI.parse(baseUrl)
     let frg = ''

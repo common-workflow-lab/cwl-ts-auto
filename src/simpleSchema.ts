@@ -1,11 +1,11 @@
-import { Dictionary, expandUrl, loadField, unionOfNoneTypeOrStrtype, LoadingOptions, Saveable, ValidationException } from './util/internal'
+import { Dictionary, expandUrl, loadField, LoaderInstances, LoadingOptions, Saveable, ValidationException } from './util/internal'
 
 export class Simple_schema extends Saveable {
   loadingOptions: LoadingOptions
   label?: string
   extensionFields?: Dictionary<any>
 
-  constructor (loadingOptions: LoadingOptions, label?: string, extensionFields?: Dictionary<any>) {
+  constructor ({ loadingOptions, label, extensionFields }: {loadingOptions: LoadingOptions, label?: string, extensionFields?: Dictionary<any>}) {
     super()
     this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.label = label
@@ -16,9 +16,10 @@ export class Simple_schema extends Saveable {
     const _doc = Object.assign({}, doc)
 
     const errors: ValidationException[] = []
+    let label
     if ('label' in _doc) {
       try {
-        var label: string | undefined = await loadField(_doc.label, unionOfNoneTypeOrStrtype, baseuri, loadingOptions)
+        label = await loadField(_doc.label, LoaderInstances.unionOfNoneTypeOrStrtype, baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
           errors.push(new ValidationException('the `label` field is not valid because: ', [e]))
@@ -43,7 +44,7 @@ export class Simple_schema extends Saveable {
       throw new ValidationException("Trying 'Simple_schema'", errors)
     }
 
-    const schema = new Simple_schema(loadingOptions, label, extensionFields)
+    const schema = new Simple_schema({ loadingOptions: loadingOptions, label: label, extensionFields: extensionFields })
     return schema
   }
 

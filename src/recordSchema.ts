@@ -1,5 +1,5 @@
 
-import { Dictionary, expandUrl, loadField, idmapFieldsUnionOfNoneTypeOrArrayOfRecordFieldLoader, typeDSLEnumd9cba076fca539106791a4f46d198c7fcfbdb779Loader2, LoadingOptions, Saveable, ValidationException } from './util/internal'
+import { Dictionary, expandUrl, loadField, LoaderInstances, LoadingOptions, Saveable, ValidationException } from './util/internal'
 
 export class RecordSchema extends Saveable {
   fields?: any
@@ -20,7 +20,7 @@ export class RecordSchema extends Saveable {
     const errors: ValidationException[] = []
     if ('fields' in _doc) {
       try {
-        var fields = await loadField(_doc.fields, idmapFieldsUnionOfNoneTypeOrArrayOfRecordFieldLoader, baseuri, loadingOptions)
+        var fields = await loadField(_doc.fields, LoaderInstances.idmapFieldsUnionOfNoneTypeOrArrayOfRecordFieldLoader, baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
           errors.push(new ValidationException('the `fields` field is not valid because: ', [e]))
@@ -31,7 +31,7 @@ export class RecordSchema extends Saveable {
     }
     let type
     try {
-      type = await loadField(_doc.type, typeDSLEnumd9cba076fca539106791a4f46d198c7fcfbdb779Loader2, baseuri, loadingOptions)
+      type = await loadField(_doc.type, LoaderInstances.typeDSLEnumd9cba076fca539106791a4f46d198c7fcfbdb779Loader2, baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
         errors.push(new ValidationException('the `type` field is not valid because: ', [e]))

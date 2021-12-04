@@ -1,4 +1,4 @@
-import { Dictionary, Documented, expandUrl, loadField, LoadingOptions, Saveable, ValidationException, typedslUnionOfPrimitiveTypeLoaderOrRecordSchemaLoaderOrEnumSchemaLoaderOrArraySchemaLoaderOrStrtypeOrArrayOfUnionOfPrimitiveTypeLoaderOrRecordSchemaLoaderOrEnumSchemaLoaderOrArraySchemaLoaderOrStrtype2, unionOfNoneTypeOrStrTypeOrArrayOfStrType, uriStrtypeTrueFalseNone } from './util/internal'
+import { Dictionary, Documented, expandUrl, loadField, LoadingOptions, Saveable, ValidationException, LoaderInstances } from './util/internal'
 
 export class RecordField extends Documented {
   name: any
@@ -21,7 +21,7 @@ export class RecordField extends Documented {
     const errors: ValidationException[] = []
     if ('name' in _doc) {
       try {
-        var name: string|undefined = await loadField(_doc.name, uriStrtypeTrueFalseNone, baseuri, loadingOptions)
+        var name: string|undefined = await loadField(_doc.name, LoaderInstances.uriStrtypeTrueFalseNone, baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
           errors.push(new ValidationException('the `name` field is not valid because: ', [e]))
@@ -42,7 +42,7 @@ export class RecordField extends Documented {
 
     if ('doc' in _doc) {
       try {
-        doc = await loadField(_doc.doc, unionOfNoneTypeOrStrTypeOrArrayOfStrType, baseuri, loadingOptions)
+        doc = await loadField(_doc.doc, LoaderInstances.unionOfNoneTypeOrStrTypeOrArrayOfStrType, baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
           errors.push(new ValidationException('the `doc` field is not valid because:', [e]))
@@ -53,7 +53,7 @@ export class RecordField extends Documented {
     }
     let type
     try {
-      type = await loadField(_doc.type, typedslUnionOfPrimitiveTypeLoaderOrRecordSchemaLoaderOrEnumSchemaLoaderOrArraySchemaLoaderOrStrtypeOrArrayOfUnionOfPrimitiveTypeLoaderOrRecordSchemaLoaderOrEnumSchemaLoaderOrArraySchemaLoaderOrStrtype2, baseuri, loadingOptions)
+      type = await loadField(_doc.type, LoaderInstances.typedslUnionOfPrimitiveTypeLoaderOrRecordSchemaLoaderOrEnumSchemaLoaderOrArraySchemaLoaderOrStrtypeOrArrayOfUnionOfPrimitiveTypeLoaderOrRecordSchemaLoaderOrEnumSchemaLoaderOrArraySchemaLoaderOrStrtype2, baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
         errors.push(new ValidationException('The `type` field is not valid because: ', [e]))

@@ -1,4 +1,4 @@
-import { Dictionary, expandUrl, loadField, typeDSLEnumd961d79c225752b9fadb617367615ab176b47d77Loader2, uriArrayOfStrTypeTrueFalseNone, LoadingOptions, Saveable, ValidationException } from './util/internal'
+import { Dictionary, expandUrl, loadField, LoaderInstances, LoadingOptions, Saveable, ValidationException } from './util/internal'
 
 export class EnumSchema extends Saveable {
   symbols?: any
@@ -19,7 +19,7 @@ export class EnumSchema extends Saveable {
     const errors: ValidationException[] = []
     let symbols
     try {
-      symbols = await loadField(_doc.symbols, uriArrayOfStrTypeTrueFalseNone, baseuri, loadingOptions)
+      symbols = await loadField(_doc.symbols, LoaderInstances.uriArrayOfStrTypeTrueFalseNone, baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
         errors.push(new ValidationException('the `symbols` field is not valid because: ', [e]))
@@ -28,7 +28,7 @@ export class EnumSchema extends Saveable {
 
     let type
     try {
-      type = await loadField(_doc.type, typeDSLEnumd961d79c225752b9fadb617367615ab176b47d77Loader2, baseuri, loadingOptions)
+      type = await loadField(_doc.type, LoaderInstances.typeDSLEnumd961d79c225752b9fadb617367615ab176b47d77Loader2, baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
         errors.push(new ValidationException('the `type` field is not valid because: ', [e]))

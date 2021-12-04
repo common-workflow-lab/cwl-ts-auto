@@ -1,4 +1,12 @@
-import { Dictionary, expandUrl, loadField, typeDSLenumd062602be0b4b8fd33e69e29a841317b6ab665bcLoader2, UriUnionOfPrimitiveTypeLoaderOrRecordSchemaLoaderOrEnumSchemaLoaderOrArraySchemaLoaderOrStrtypeOrArrayOfUnionOfPrimitiveTypeLoaderOrRecordSchemaLoaderOrEnumSchemaLoaderOrArraySchemaLoaderOrStrtypeFalseTrue2, LoadingOptions, Saveable, ValidationException } from './util/internal'
+import {
+  Dictionary,
+  expandUrl,
+  loadField,
+  LoaderInstances,
+  LoadingOptions,
+  Saveable,
+  ValidationException
+} from './util/internal'
 
 export class ArraySchema extends Saveable {
   items?: any
@@ -19,7 +27,7 @@ export class ArraySchema extends Saveable {
     const errors: ValidationException[] = []
     let items
     try {
-      items = await loadField(_doc.items, UriUnionOfPrimitiveTypeLoaderOrRecordSchemaLoaderOrEnumSchemaLoaderOrArraySchemaLoaderOrStrtypeOrArrayOfUnionOfPrimitiveTypeLoaderOrRecordSchemaLoaderOrEnumSchemaLoaderOrArraySchemaLoaderOrStrtypeFalseTrue2, baseuri, loadingOptions)
+      items = await loadField(_doc.items, LoaderInstances.UriUnionOfPrimitiveTypeLoaderOrRecordSchemaLoaderOrEnumSchemaLoaderOrArraySchemaLoaderOrStrtypeOrArrayOfUnionOfPrimitiveTypeLoaderOrRecordSchemaLoaderOrEnumSchemaLoaderOrArraySchemaLoaderOrStrtypeFalseTrue2, baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
         errors.push(new ValidationException('the `items` field is not valid because: ', [e]))
@@ -28,7 +36,7 @@ export class ArraySchema extends Saveable {
 
     let type
     try {
-      type = await loadField(_doc.type, typeDSLenumd062602be0b4b8fd33e69e29a841317b6ab665bcLoader2, baseuri, loadingOptions)
+      type = await loadField(_doc.type, LoaderInstances.typeDSLenumd062602be0b4b8fd33e69e29a841317b6ab665bcLoader2, baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
         errors.push(new ValidationException('the `type` field is not valid because: ', [e]))
