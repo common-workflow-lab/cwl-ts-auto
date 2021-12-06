@@ -7,7 +7,7 @@
     "test": "nyc --reporter=lcov mocha --require ts-node/register src/test/**/*.ts"
   },
   "author": "Adrian Zimmer",
-  "license": "ISC",
+  "license": "Apache 2.0",
   "devDependencies": {
     "@types/chai": "^4.2.22",
     "@types/chai-as-promised": "^7.1.4",

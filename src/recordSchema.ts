@@ -18,17 +18,18 @@ export class RecordSchema extends Saveable {
   static override async fromDoc (doc: any, baseuri: string, loadingOptions: LoadingOptions, docRoot?: string): Promise<Saveable> {
     const _doc = Object.assign({}, doc)
     const errors: ValidationException[] = []
+
+    let fields
     if ('fields' in _doc) {
       try {
-        var fields = await loadField(_doc.fields, LoaderInstances.idmapFieldsUnionOfNoneTypeOrArrayOfRecordFieldLoader, baseuri, loadingOptions)
+        fields = await loadField(_doc.fields, LoaderInstances.idmapFieldsUnionOfNoneTypeOrArrayOfRecordFieldLoader, baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
           errors.push(new ValidationException('the `fields` field is not valid because: ', [e]))
         }
       }
-    } else {
-      fields = undefined
     }
+
     let type
     try {
       type = await loadField(_doc.type, LoaderInstances.typeDSLEnumd9cba076fca539106791a4f46d198c7fcfbdb779Loader2, baseuri, loadingOptions)

@@ -56,7 +56,7 @@ export class RecordField extends Documented {
       type = await loadField(_doc.type, LoaderInstances.typedslUnionOfPrimitiveTypeLoaderOrRecordSchemaLoaderOrEnumSchemaLoaderOrArraySchemaLoaderOrStrtypeOrArrayOfUnionOfPrimitiveTypeLoaderOrRecordSchemaLoaderOrEnumSchemaLoaderOrArraySchemaLoaderOrStrtype2, baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
-        errors.push(new ValidationException('The `type` field is not valid because: ', [e]))
+        errors.push(new ValidationException('the `type` field is not valid because: ', [e]))
       }
     }
 
