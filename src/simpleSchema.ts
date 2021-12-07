@@ -1,29 +1,42 @@
-import { Dictionary, expandUrl, loadField, LoaderInstances, LoadingOptions, Saveable, ValidationException } from './util/internal'
 
-export class Simple_schema extends Saveable {
+import {
+  Dictionary,
+  expandUrl,
+  loadField,
+  LoaderInstances,
+  LoadingOptions,
+  Saveable,
+  ValidationException
+} from './util/internal'
+import { v4 as uuidv4 } from 'uuid'
+import * as Internal from './util/internal'
+
+export class SimpleSchema extends Saveable {
   loadingOptions: LoadingOptions
-  label?: string
   extensionFields?: Dictionary<any>
+  label: undefined | string
 
-  constructor ({ loadingOptions, label, extensionFields }: {loadingOptions: LoadingOptions, label?: string, extensionFields?: Dictionary<any>}) {
+  constructor ({ extensionFields, loadingOptions, label }: {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions, label: undefined | string }) {
     super()
+    this.extensionFields = extensionFields ?? {}
     this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.label = label
-    this.extensionFields = extensionFields ?? {}
   }
 
-  static override async fromDoc (doc: any, baseuri: string, loadingOptions: LoadingOptions, docRoot?: string): Promise<Saveable> {
-    const _doc = Object.assign({}, doc)
-
+  static override async fromDoc (__doc: any, baseuri: string, loadingOptions: LoadingOptions,
+    docRoot?: string): Promise<Saveable> {
+    const _doc = Object.assign({}, __doc)
     const errors: ValidationException[] = []
+
     let label
-    if ('label' in _doc) {
-      try {
-        label = await loadField(_doc.label, LoaderInstances.unionOfNoneTypeOrStrtype, baseuri, loadingOptions)
-      } catch (e) {
-        if (e instanceof ValidationException) {
-          errors.push(new ValidationException('the `label` field is not valid because: ', [e]))
-        }
+    try {
+      label = await loadField(_doc.label, LoaderInstances.unionOfundefinedtypeOrstrtype,
+        baseuri, loadingOptions)
+    } catch (e) {
+      if (e instanceof ValidationException) {
+        errors.push(
+          new ValidationException('the `label` field is not valid because: ', [e])
+        )
       }
     }
 
@@ -34,17 +47,24 @@ export class Simple_schema extends Saveable {
           const ex = expandUrl(key, '', loadingOptions, false, false)
           extensionFields[ex] = value
         } else {
-          errors.push(new ValidationException(`invalid field ${key as string}, expected one of: \`label\``))
+          errors.push(
+            new ValidationException(`invalid field ${key as string}, \
+            expected one of: \`label\``)
+          )
           break
         }
       }
     }
 
     if (errors.length > 0) {
-      throw new ValidationException("Trying 'Simple_schema'", errors)
+      throw new ValidationException("Trying 'SimpleSchema'", errors)
     }
 
-    const schema = new Simple_schema({ loadingOptions: loadingOptions, label: label, extensionFields: extensionFields })
+    const schema = new SimpleSchema({
+      extensionFields: extensionFields,
+      loadingOptions: loadingOptions,
+      label: label
+    })
     return schema
   }
 

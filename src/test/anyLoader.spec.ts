@@ -1,12 +1,12 @@
 import chai from 'chai'
 import chaiAsPromised from 'chai-as-promised'
 
-import { AnyLoader, LoadingOptions } from '../util/internal'
+import { _AnyLoader, LoadingOptions } from '../util/internal'
 
 chai.use(chaiAsPromised)
 const assert = chai.assert
 
-const loader = new AnyLoader()
+const loader = new _AnyLoader()
 
 describe('Test AnyLoader', () => {
   it('Should load the documents', async () => {

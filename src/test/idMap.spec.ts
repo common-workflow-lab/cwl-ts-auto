@@ -1,5 +1,5 @@
 import { assert } from 'chai'
-import { IdMapLoader, Loader, LoadingOptions, ValidationException } from '../util/internal'
+import { _IdMapLoader, Loader, LoadingOptions, ValidationException } from '../util/internal'
 
 class TestLoader implements Loader {
   async load (doc: any, baseuri: string, loadingOptions: LoadingOptions, docRoot?: string | undefined): Promise<any> {
@@ -11,7 +11,7 @@ const testLoader = new TestLoader()
 describe('Test IdMapLoader', () => {
   describe('load', () => {
     it('should load the document', async () => {
-      const loader = new IdMapLoader(testLoader, 'key', 'value')
+      const loader = new _IdMapLoader(testLoader, 'key', 'value')
       const doc = {
         shaggy: {
           value: 'scooby'
@@ -26,7 +26,7 @@ describe('Test IdMapLoader', () => {
       ])
     })
     it('should throw a ValidationException with the message "No mapPredicate"', async () => {
-      const loader = new IdMapLoader(testLoader, 'key')
+      const loader = new _IdMapLoader(testLoader, 'key')
       const doc = {
         fred: 'daphne'
       }
