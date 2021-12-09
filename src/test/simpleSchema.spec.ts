@@ -8,6 +8,8 @@ describe('Test Simple_Schema', () => {
     }
     const rs = await SimpleSchema.fromDoc(doc, 'http://example.com', new LoadingOptions({})) as SimpleSchema
     assert.equal(rs.label, '2')
+
+    assert.deepEqual(rs.save(), doc)
   })
 
   it('Should throw a ValidationException', async () => {

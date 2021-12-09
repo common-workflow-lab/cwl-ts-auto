@@ -6,20 +6,21 @@ import {
   LoaderInstances,
   LoadingOptions,
   Saveable,
-  ValidationException
+  ValidationException,
+  prefixUrl,
+  save
 } from './util/internal'
 import { v4 as uuidv4 } from 'uuid'
 import * as Internal from './util/internal'
-
 
 /**
  * Auto-generated class implementation for SimpleSchema
  *
  * This is a test doc that
  * spans multiple lines.
- * 
+ *
  * Hello doc!
- * 
+ *
  */
 export class SimpleSchema extends Saveable {
   loadingOptions: LoadingOptions
@@ -30,8 +31,7 @@ export class SimpleSchema extends Saveable {
    */
   label: undefined | string
 
-
-  constructor ({extensionFields, loadingOptions, label}: {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  label: undefined | string}) {
+  constructor ({ extensionFields, loadingOptions, label }: {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions, label: undefined | string}) {
     super()
     this.extensionFields = extensionFields ?? {}
     this.loadingOptions = loadingOptions ?? new LoadingOptions({})
@@ -53,7 +53,7 @@ export class SimpleSchema extends Saveable {
     docRoot?: string): Promise<Saveable> {
     const _doc = Object.assign({}, __doc)
     const errors: ValidationException[] = []
-            
+
     let label
     try {
       label = await loadField(_doc.label, LoaderInstances.unionOfundefinedtypeOrstrtype,
@@ -93,6 +93,26 @@ export class SimpleSchema extends Saveable {
     })
     return schema
   }
-        
+
+  save (top: boolean = false, baseUrl: string = '', relativeUris: boolean = true): Dictionary<any> {
+    const r: Dictionary<any> = {}
+    for (const ef in this.extensionFields) {
+      r[prefixUrl(ef, this.loadingOptions.vocab)] = this.extensionFields.ef
+    }
+    if (this.label != null) {
+      r.label = save(this.label, false, baseUrl, relativeUris)
+    }
+
+    if (top) {
+      if (this.loadingOptions.namespaces != null) {
+        r.$namespaces = this.loadingOptions.namespaces
+      }
+      if (this.loadingOptions.schemas != null) {
+        r.$schemas = this.loadingOptions.schemas
+      }
+    }
+    return r
+  }
+
   static attr: Set<string> = new Set(['label'])
 }
