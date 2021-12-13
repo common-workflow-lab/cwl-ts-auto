@@ -169,7 +169,7 @@ export class WorkflowOutputParameter extends Saveable implements Internal.Output
   static override async fromDoc (__doc: any, baseuri: string, loadingOptions: LoadingOptions,
     docRoot?: string): Promise<Saveable> {
     const _doc = Object.assign({}, __doc)
-    const errors: ValidationException[] = []
+    const __errors: ValidationException[] = []
             
     let id
     if ('id' in _doc) {
@@ -178,7 +178,7 @@ export class WorkflowOutputParameter extends Saveable implements Internal.Output
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `id` field is not valid because: ', [e])
           )
         } else {
@@ -205,7 +205,7 @@ export class WorkflowOutputParameter extends Saveable implements Internal.Output
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `label` field is not valid because: ', [e])
           )
         } else {
@@ -221,7 +221,7 @@ export class WorkflowOutputParameter extends Saveable implements Internal.Output
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `secondaryFiles` field is not valid because: ', [e])
           )
         } else {
@@ -237,7 +237,7 @@ export class WorkflowOutputParameter extends Saveable implements Internal.Output
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `streamable` field is not valid because: ', [e])
           )
         } else {
@@ -253,7 +253,7 @@ export class WorkflowOutputParameter extends Saveable implements Internal.Output
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `doc` field is not valid because: ', [e])
           )
         } else {
@@ -269,7 +269,7 @@ export class WorkflowOutputParameter extends Saveable implements Internal.Output
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `format` field is not valid because: ', [e])
           )
         } else {
@@ -285,7 +285,7 @@ export class WorkflowOutputParameter extends Saveable implements Internal.Output
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `outputSource` field is not valid because: ', [e])
           )
         } else {
@@ -301,7 +301,7 @@ export class WorkflowOutputParameter extends Saveable implements Internal.Output
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `linkMerge` field is not valid because: ', [e])
           )
         } else {
@@ -317,7 +317,7 @@ export class WorkflowOutputParameter extends Saveable implements Internal.Output
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `pickValue` field is not valid because: ', [e])
           )
         } else {
@@ -332,7 +332,7 @@ export class WorkflowOutputParameter extends Saveable implements Internal.Output
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
-        errors.push(
+        __errors.push(
           new ValidationException('the `type` field is not valid because: ', [e])
         )
       } else {
@@ -347,7 +347,7 @@ export class WorkflowOutputParameter extends Saveable implements Internal.Output
           const ex = expandUrl(key, '', loadingOptions, false, false)
           extensionFields[ex] = value
         } else {
-          errors.push(
+          __errors.push(
             new ValidationException(`invalid field ${key as string}, \
             expected one of: \`label\`,\`secondaryFiles\`,\`streamable\`,\`doc\`,\`id\`,\`format\`,\`outputSource\`,\`linkMerge\`,\`pickValue\`,\`type\``)
           )
@@ -356,8 +356,8 @@ export class WorkflowOutputParameter extends Saveable implements Internal.Output
       }
     }
 
-    if (errors.length > 0) {
-      throw new ValidationException("Trying 'WorkflowOutputParameter'", errors)
+    if (__errors.length > 0) {
+      throw new ValidationException("Trying 'WorkflowOutputParameter'", __errors)
     }
 
     const schema = new WorkflowOutputParameter({

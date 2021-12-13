@@ -136,7 +136,7 @@ export class Dirent extends Saveable {
   static override async fromDoc (__doc: any, baseuri: string, loadingOptions: LoadingOptions,
     docRoot?: string): Promise<Saveable> {
     const _doc = Object.assign({}, __doc)
-    const errors: ValidationException[] = []
+    const __errors: ValidationException[] = []
             
     let entryname
     if ('entryname' in _doc) {
@@ -145,7 +145,7 @@ export class Dirent extends Saveable {
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `entryname` field is not valid because: ', [e])
           )
         } else {
@@ -160,7 +160,7 @@ export class Dirent extends Saveable {
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
-        errors.push(
+        __errors.push(
           new ValidationException('the `entry` field is not valid because: ', [e])
         )
       } else {
@@ -175,7 +175,7 @@ export class Dirent extends Saveable {
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `writable` field is not valid because: ', [e])
           )
         } else {
@@ -191,7 +191,7 @@ export class Dirent extends Saveable {
           const ex = expandUrl(key, '', loadingOptions, false, false)
           extensionFields[ex] = value
         } else {
-          errors.push(
+          __errors.push(
             new ValidationException(`invalid field ${key as string}, \
             expected one of: \`entryname\`,\`entry\`,\`writable\``)
           )
@@ -200,8 +200,8 @@ export class Dirent extends Saveable {
       }
     }
 
-    if (errors.length > 0) {
-      throw new ValidationException("Trying 'Dirent'", errors)
+    if (__errors.length > 0) {
+      throw new ValidationException("Trying 'Dirent'", __errors)
     }
 
     const schema = new Dirent({

@@ -151,7 +151,7 @@ export class CommandOutputBinding extends Saveable implements Internal.LoadConte
   static override async fromDoc (__doc: any, baseuri: string, loadingOptions: LoadingOptions,
     docRoot?: string): Promise<Saveable> {
     const _doc = Object.assign({}, __doc)
-    const errors: ValidationException[] = []
+    const __errors: ValidationException[] = []
             
     let loadContents
     if ('loadContents' in _doc) {
@@ -160,7 +160,7 @@ export class CommandOutputBinding extends Saveable implements Internal.LoadConte
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `loadContents` field is not valid because: ', [e])
           )
         } else {
@@ -176,7 +176,7 @@ export class CommandOutputBinding extends Saveable implements Internal.LoadConte
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `loadListing` field is not valid because: ', [e])
           )
         } else {
@@ -192,7 +192,7 @@ export class CommandOutputBinding extends Saveable implements Internal.LoadConte
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `glob` field is not valid because: ', [e])
           )
         } else {
@@ -208,7 +208,7 @@ export class CommandOutputBinding extends Saveable implements Internal.LoadConte
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `outputEval` field is not valid because: ', [e])
           )
         } else {
@@ -224,7 +224,7 @@ export class CommandOutputBinding extends Saveable implements Internal.LoadConte
           const ex = expandUrl(key, '', loadingOptions, false, false)
           extensionFields[ex] = value
         } else {
-          errors.push(
+          __errors.push(
             new ValidationException(`invalid field ${key as string}, \
             expected one of: \`loadContents\`,\`loadListing\`,\`glob\`,\`outputEval\``)
           )
@@ -233,8 +233,8 @@ export class CommandOutputBinding extends Saveable implements Internal.LoadConte
       }
     }
 
-    if (errors.length > 0) {
-      throw new ValidationException("Trying 'CommandOutputBinding'", errors)
+    if (__errors.length > 0) {
+      throw new ValidationException("Trying 'CommandOutputBinding'", __errors)
     }
 
     const schema = new CommandOutputBinding({

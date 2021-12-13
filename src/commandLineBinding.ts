@@ -159,7 +159,7 @@ export class CommandLineBinding extends Saveable implements Internal.InputBindin
   static override async fromDoc (__doc: any, baseuri: string, loadingOptions: LoadingOptions,
     docRoot?: string): Promise<Saveable> {
     const _doc = Object.assign({}, __doc)
-    const errors: ValidationException[] = []
+    const __errors: ValidationException[] = []
             
     let loadContents
     if ('loadContents' in _doc) {
@@ -168,7 +168,7 @@ export class CommandLineBinding extends Saveable implements Internal.InputBindin
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `loadContents` field is not valid because: ', [e])
           )
         } else {
@@ -184,7 +184,7 @@ export class CommandLineBinding extends Saveable implements Internal.InputBindin
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `position` field is not valid because: ', [e])
           )
         } else {
@@ -200,7 +200,7 @@ export class CommandLineBinding extends Saveable implements Internal.InputBindin
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `prefix` field is not valid because: ', [e])
           )
         } else {
@@ -216,7 +216,7 @@ export class CommandLineBinding extends Saveable implements Internal.InputBindin
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `separate` field is not valid because: ', [e])
           )
         } else {
@@ -232,7 +232,7 @@ export class CommandLineBinding extends Saveable implements Internal.InputBindin
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `itemSeparator` field is not valid because: ', [e])
           )
         } else {
@@ -248,7 +248,7 @@ export class CommandLineBinding extends Saveable implements Internal.InputBindin
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `valueFrom` field is not valid because: ', [e])
           )
         } else {
@@ -264,7 +264,7 @@ export class CommandLineBinding extends Saveable implements Internal.InputBindin
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `shellQuote` field is not valid because: ', [e])
           )
         } else {
@@ -280,7 +280,7 @@ export class CommandLineBinding extends Saveable implements Internal.InputBindin
           const ex = expandUrl(key, '', loadingOptions, false, false)
           extensionFields[ex] = value
         } else {
-          errors.push(
+          __errors.push(
             new ValidationException(`invalid field ${key as string}, \
             expected one of: \`loadContents\`,\`position\`,\`prefix\`,\`separate\`,\`itemSeparator\`,\`valueFrom\`,\`shellQuote\``)
           )
@@ -289,8 +289,8 @@ export class CommandLineBinding extends Saveable implements Internal.InputBindin
       }
     }
 
-    if (errors.length > 0) {
-      throw new ValidationException("Trying 'CommandLineBinding'", errors)
+    if (__errors.length > 0) {
+      throw new ValidationException("Trying 'CommandLineBinding'", __errors)
     }
 
     const schema = new CommandLineBinding({

@@ -208,7 +208,7 @@ export class WorkflowStep extends Saveable implements Internal.Identified, Inter
   static override async fromDoc (__doc: any, baseuri: string, loadingOptions: LoadingOptions,
     docRoot?: string): Promise<Saveable> {
     const _doc = Object.assign({}, __doc)
-    const errors: ValidationException[] = []
+    const __errors: ValidationException[] = []
             
     let id
     if ('id' in _doc) {
@@ -217,7 +217,7 @@ export class WorkflowStep extends Saveable implements Internal.Identified, Inter
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `id` field is not valid because: ', [e])
           )
         } else {
@@ -244,7 +244,7 @@ export class WorkflowStep extends Saveable implements Internal.Identified, Inter
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `label` field is not valid because: ', [e])
           )
         } else {
@@ -260,7 +260,7 @@ export class WorkflowStep extends Saveable implements Internal.Identified, Inter
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `doc` field is not valid because: ', [e])
           )
         } else {
@@ -275,7 +275,7 @@ export class WorkflowStep extends Saveable implements Internal.Identified, Inter
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
-        errors.push(
+        __errors.push(
           new ValidationException('the `in` field is not valid because: ', [e])
         )
       } else {
@@ -289,7 +289,7 @@ export class WorkflowStep extends Saveable implements Internal.Identified, Inter
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
-        errors.push(
+        __errors.push(
           new ValidationException('the `out` field is not valid because: ', [e])
         )
       } else {
@@ -304,7 +304,7 @@ export class WorkflowStep extends Saveable implements Internal.Identified, Inter
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `requirements` field is not valid because: ', [e])
           )
         } else {
@@ -320,7 +320,7 @@ export class WorkflowStep extends Saveable implements Internal.Identified, Inter
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `hints` field is not valid because: ', [e])
           )
         } else {
@@ -335,7 +335,7 @@ export class WorkflowStep extends Saveable implements Internal.Identified, Inter
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
-        errors.push(
+        __errors.push(
           new ValidationException('the `run` field is not valid because: ', [e])
         )
       } else {
@@ -350,7 +350,7 @@ export class WorkflowStep extends Saveable implements Internal.Identified, Inter
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `when` field is not valid because: ', [e])
           )
         } else {
@@ -366,7 +366,7 @@ export class WorkflowStep extends Saveable implements Internal.Identified, Inter
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `scatter` field is not valid because: ', [e])
           )
         } else {
@@ -382,7 +382,7 @@ export class WorkflowStep extends Saveable implements Internal.Identified, Inter
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `scatterMethod` field is not valid because: ', [e])
           )
         } else {
@@ -398,7 +398,7 @@ export class WorkflowStep extends Saveable implements Internal.Identified, Inter
           const ex = expandUrl(key, '', loadingOptions, false, false)
           extensionFields[ex] = value
         } else {
-          errors.push(
+          __errors.push(
             new ValidationException(`invalid field ${key as string}, \
             expected one of: \`id\`,\`label\`,\`doc\`,\`in\`,\`out\`,\`requirements\`,\`hints\`,\`run\`,\`when\`,\`scatter\`,\`scatterMethod\``)
           )
@@ -407,8 +407,8 @@ export class WorkflowStep extends Saveable implements Internal.Identified, Inter
       }
     }
 
-    if (errors.length > 0) {
-      throw new ValidationException("Trying 'WorkflowStep'", errors)
+    if (__errors.length > 0) {
+      throw new ValidationException("Trying 'WorkflowStep'", __errors)
     }
 
     const schema = new WorkflowStep({

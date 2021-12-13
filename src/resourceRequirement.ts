@@ -182,7 +182,7 @@ export class ResourceRequirement extends Saveable implements Internal.ProcessReq
   static override async fromDoc (__doc: any, baseuri: string, loadingOptions: LoadingOptions,
     docRoot?: string): Promise<Saveable> {
     const _doc = Object.assign({}, __doc)
-    const errors: ValidationException[] = []
+    const __errors: ValidationException[] = []
             
     let class_
     try {
@@ -190,7 +190,7 @@ export class ResourceRequirement extends Saveable implements Internal.ProcessReq
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
-        errors.push(
+        __errors.push(
           new ValidationException('the `class` field is not valid because: ', [e])
         )
       } else {
@@ -205,7 +205,7 @@ export class ResourceRequirement extends Saveable implements Internal.ProcessReq
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `coresMin` field is not valid because: ', [e])
           )
         } else {
@@ -221,7 +221,7 @@ export class ResourceRequirement extends Saveable implements Internal.ProcessReq
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `coresMax` field is not valid because: ', [e])
           )
         } else {
@@ -237,7 +237,7 @@ export class ResourceRequirement extends Saveable implements Internal.ProcessReq
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `ramMin` field is not valid because: ', [e])
           )
         } else {
@@ -253,7 +253,7 @@ export class ResourceRequirement extends Saveable implements Internal.ProcessReq
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `ramMax` field is not valid because: ', [e])
           )
         } else {
@@ -269,7 +269,7 @@ export class ResourceRequirement extends Saveable implements Internal.ProcessReq
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `tmpdirMin` field is not valid because: ', [e])
           )
         } else {
@@ -285,7 +285,7 @@ export class ResourceRequirement extends Saveable implements Internal.ProcessReq
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `tmpdirMax` field is not valid because: ', [e])
           )
         } else {
@@ -301,7 +301,7 @@ export class ResourceRequirement extends Saveable implements Internal.ProcessReq
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `outdirMin` field is not valid because: ', [e])
           )
         } else {
@@ -317,7 +317,7 @@ export class ResourceRequirement extends Saveable implements Internal.ProcessReq
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `outdirMax` field is not valid because: ', [e])
           )
         } else {
@@ -333,7 +333,7 @@ export class ResourceRequirement extends Saveable implements Internal.ProcessReq
           const ex = expandUrl(key, '', loadingOptions, false, false)
           extensionFields[ex] = value
         } else {
-          errors.push(
+          __errors.push(
             new ValidationException(`invalid field ${key as string}, \
             expected one of: \`class\`,\`coresMin\`,\`coresMax\`,\`ramMin\`,\`ramMax\`,\`tmpdirMin\`,\`tmpdirMax\`,\`outdirMin\`,\`outdirMax\``)
           )
@@ -342,8 +342,8 @@ export class ResourceRequirement extends Saveable implements Internal.ProcessReq
       }
     }
 
-    if (errors.length > 0) {
-      throw new ValidationException("Trying 'ResourceRequirement'", errors)
+    if (__errors.length > 0) {
+      throw new ValidationException("Trying 'ResourceRequirement'", __errors)
     }
 
     const schema = new ResourceRequirement({

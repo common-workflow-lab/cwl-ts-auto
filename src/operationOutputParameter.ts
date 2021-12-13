@@ -140,7 +140,7 @@ export class OperationOutputParameter extends Saveable implements Internal.Outpu
   static override async fromDoc (__doc: any, baseuri: string, loadingOptions: LoadingOptions,
     docRoot?: string): Promise<Saveable> {
     const _doc = Object.assign({}, __doc)
-    const errors: ValidationException[] = []
+    const __errors: ValidationException[] = []
             
     let id
     if ('id' in _doc) {
@@ -149,7 +149,7 @@ export class OperationOutputParameter extends Saveable implements Internal.Outpu
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `id` field is not valid because: ', [e])
           )
         } else {
@@ -176,7 +176,7 @@ export class OperationOutputParameter extends Saveable implements Internal.Outpu
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `label` field is not valid because: ', [e])
           )
         } else {
@@ -192,7 +192,7 @@ export class OperationOutputParameter extends Saveable implements Internal.Outpu
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `secondaryFiles` field is not valid because: ', [e])
           )
         } else {
@@ -208,7 +208,7 @@ export class OperationOutputParameter extends Saveable implements Internal.Outpu
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `streamable` field is not valid because: ', [e])
           )
         } else {
@@ -224,7 +224,7 @@ export class OperationOutputParameter extends Saveable implements Internal.Outpu
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `doc` field is not valid because: ', [e])
           )
         } else {
@@ -240,7 +240,7 @@ export class OperationOutputParameter extends Saveable implements Internal.Outpu
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `format` field is not valid because: ', [e])
           )
         } else {
@@ -255,7 +255,7 @@ export class OperationOutputParameter extends Saveable implements Internal.Outpu
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
-        errors.push(
+        __errors.push(
           new ValidationException('the `type` field is not valid because: ', [e])
         )
       } else {
@@ -270,7 +270,7 @@ export class OperationOutputParameter extends Saveable implements Internal.Outpu
           const ex = expandUrl(key, '', loadingOptions, false, false)
           extensionFields[ex] = value
         } else {
-          errors.push(
+          __errors.push(
             new ValidationException(`invalid field ${key as string}, \
             expected one of: \`label\`,\`secondaryFiles\`,\`streamable\`,\`doc\`,\`id\`,\`format\`,\`type\``)
           )
@@ -279,8 +279,8 @@ export class OperationOutputParameter extends Saveable implements Internal.Outpu
       }
     }
 
-    if (errors.length > 0) {
-      throw new ValidationException("Trying 'OperationOutputParameter'", errors)
+    if (__errors.length > 0) {
+      throw new ValidationException("Trying 'OperationOutputParameter'", __errors)
     }
 
     const schema = new OperationOutputParameter({

@@ -176,7 +176,7 @@ export class CommandInputRecordField extends Saveable implements Internal.InputR
   static override async fromDoc (__doc: any, baseuri: string, loadingOptions: LoadingOptions,
     docRoot?: string): Promise<Saveable> {
     const _doc = Object.assign({}, __doc)
-    const errors: ValidationException[] = []
+    const __errors: ValidationException[] = []
             
     let name
     if ('name' in _doc) {
@@ -185,7 +185,7 @@ export class CommandInputRecordField extends Saveable implements Internal.InputR
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `name` field is not valid because: ', [e])
           )
         } else {
@@ -212,7 +212,7 @@ export class CommandInputRecordField extends Saveable implements Internal.InputR
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `doc` field is not valid because: ', [e])
           )
         } else {
@@ -227,7 +227,7 @@ export class CommandInputRecordField extends Saveable implements Internal.InputR
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
-        errors.push(
+        __errors.push(
           new ValidationException('the `type` field is not valid because: ', [e])
         )
       } else {
@@ -242,7 +242,7 @@ export class CommandInputRecordField extends Saveable implements Internal.InputR
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `label` field is not valid because: ', [e])
           )
         } else {
@@ -258,7 +258,7 @@ export class CommandInputRecordField extends Saveable implements Internal.InputR
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `secondaryFiles` field is not valid because: ', [e])
           )
         } else {
@@ -274,7 +274,7 @@ export class CommandInputRecordField extends Saveable implements Internal.InputR
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `streamable` field is not valid because: ', [e])
           )
         } else {
@@ -290,7 +290,7 @@ export class CommandInputRecordField extends Saveable implements Internal.InputR
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `format` field is not valid because: ', [e])
           )
         } else {
@@ -306,7 +306,7 @@ export class CommandInputRecordField extends Saveable implements Internal.InputR
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `loadContents` field is not valid because: ', [e])
           )
         } else {
@@ -322,7 +322,7 @@ export class CommandInputRecordField extends Saveable implements Internal.InputR
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `loadListing` field is not valid because: ', [e])
           )
         } else {
@@ -338,7 +338,7 @@ export class CommandInputRecordField extends Saveable implements Internal.InputR
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `inputBinding` field is not valid because: ', [e])
           )
         } else {
@@ -354,7 +354,7 @@ export class CommandInputRecordField extends Saveable implements Internal.InputR
           const ex = expandUrl(key, '', loadingOptions, false, false)
           extensionFields[ex] = value
         } else {
-          errors.push(
+          __errors.push(
             new ValidationException(`invalid field ${key as string}, \
             expected one of: \`doc\`,\`name\`,\`type\`,\`label\`,\`secondaryFiles\`,\`streamable\`,\`format\`,\`loadContents\`,\`loadListing\`,\`inputBinding\``)
           )
@@ -363,8 +363,8 @@ export class CommandInputRecordField extends Saveable implements Internal.InputR
       }
     }
 
-    if (errors.length > 0) {
-      throw new ValidationException("Trying 'CommandInputRecordField'", errors)
+    if (__errors.length > 0) {
+      throw new ValidationException("Trying 'CommandInputRecordField'", __errors)
     }
 
     const schema = new CommandInputRecordField({

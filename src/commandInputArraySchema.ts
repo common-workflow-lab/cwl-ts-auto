@@ -79,7 +79,7 @@ export class CommandInputArraySchema extends Saveable implements Internal.InputA
   static override async fromDoc (__doc: any, baseuri: string, loadingOptions: LoadingOptions,
     docRoot?: string): Promise<Saveable> {
     const _doc = Object.assign({}, __doc)
-    const errors: ValidationException[] = []
+    const __errors: ValidationException[] = []
             
     let name
     if ('name' in _doc) {
@@ -88,7 +88,7 @@ export class CommandInputArraySchema extends Saveable implements Internal.InputA
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `name` field is not valid because: ', [e])
           )
         } else {
@@ -114,7 +114,7 @@ export class CommandInputArraySchema extends Saveable implements Internal.InputA
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
-        errors.push(
+        __errors.push(
           new ValidationException('the `items` field is not valid because: ', [e])
         )
       } else {
@@ -128,7 +128,7 @@ export class CommandInputArraySchema extends Saveable implements Internal.InputA
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
-        errors.push(
+        __errors.push(
           new ValidationException('the `type` field is not valid because: ', [e])
         )
       } else {
@@ -143,7 +143,7 @@ export class CommandInputArraySchema extends Saveable implements Internal.InputA
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `label` field is not valid because: ', [e])
           )
         } else {
@@ -159,7 +159,7 @@ export class CommandInputArraySchema extends Saveable implements Internal.InputA
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `doc` field is not valid because: ', [e])
           )
         } else {
@@ -175,7 +175,7 @@ export class CommandInputArraySchema extends Saveable implements Internal.InputA
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `inputBinding` field is not valid because: ', [e])
           )
         } else {
@@ -191,7 +191,7 @@ export class CommandInputArraySchema extends Saveable implements Internal.InputA
           const ex = expandUrl(key, '', loadingOptions, false, false)
           extensionFields[ex] = value
         } else {
-          errors.push(
+          __errors.push(
             new ValidationException(`invalid field ${key as string}, \
             expected one of: \`items\`,\`type\`,\`label\`,\`doc\`,\`name\`,\`inputBinding\``)
           )
@@ -200,8 +200,8 @@ export class CommandInputArraySchema extends Saveable implements Internal.InputA
       }
     }
 
-    if (errors.length > 0) {
-      throw new ValidationException("Trying 'CommandInputArraySchema'", errors)
+    if (__errors.length > 0) {
+      throw new ValidationException("Trying 'CommandInputArraySchema'", __errors)
     }
 
     const schema = new CommandInputArraySchema({

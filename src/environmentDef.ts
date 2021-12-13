@@ -60,7 +60,7 @@ export class EnvironmentDef extends Saveable {
   static override async fromDoc (__doc: any, baseuri: string, loadingOptions: LoadingOptions,
     docRoot?: string): Promise<Saveable> {
     const _doc = Object.assign({}, __doc)
-    const errors: ValidationException[] = []
+    const __errors: ValidationException[] = []
             
     let envName
     try {
@@ -68,7 +68,7 @@ export class EnvironmentDef extends Saveable {
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
-        errors.push(
+        __errors.push(
           new ValidationException('the `envName` field is not valid because: ', [e])
         )
       } else {
@@ -82,7 +82,7 @@ export class EnvironmentDef extends Saveable {
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
-        errors.push(
+        __errors.push(
           new ValidationException('the `envValue` field is not valid because: ', [e])
         )
       } else {
@@ -97,7 +97,7 @@ export class EnvironmentDef extends Saveable {
           const ex = expandUrl(key, '', loadingOptions, false, false)
           extensionFields[ex] = value
         } else {
-          errors.push(
+          __errors.push(
             new ValidationException(`invalid field ${key as string}, \
             expected one of: \`envName\`,\`envValue\``)
           )
@@ -106,8 +106,8 @@ export class EnvironmentDef extends Saveable {
       }
     }
 
-    if (errors.length > 0) {
-      throw new ValidationException("Trying 'EnvironmentDef'", errors)
+    if (__errors.length > 0) {
+      throw new ValidationException("Trying 'EnvironmentDef'", __errors)
     }
 
     const schema = new EnvironmentDef({

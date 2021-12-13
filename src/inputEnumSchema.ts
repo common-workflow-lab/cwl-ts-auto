@@ -73,7 +73,7 @@ export class InputEnumSchema extends Saveable implements Internal.EnumSchema, In
   static override async fromDoc (__doc: any, baseuri: string, loadingOptions: LoadingOptions,
     docRoot?: string): Promise<Saveable> {
     const _doc = Object.assign({}, __doc)
-    const errors: ValidationException[] = []
+    const __errors: ValidationException[] = []
             
     let name
     if ('name' in _doc) {
@@ -82,7 +82,7 @@ export class InputEnumSchema extends Saveable implements Internal.EnumSchema, In
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `name` field is not valid because: ', [e])
           )
         } else {
@@ -108,7 +108,7 @@ export class InputEnumSchema extends Saveable implements Internal.EnumSchema, In
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
-        errors.push(
+        __errors.push(
           new ValidationException('the `symbols` field is not valid because: ', [e])
         )
       } else {
@@ -122,7 +122,7 @@ export class InputEnumSchema extends Saveable implements Internal.EnumSchema, In
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
-        errors.push(
+        __errors.push(
           new ValidationException('the `type` field is not valid because: ', [e])
         )
       } else {
@@ -137,7 +137,7 @@ export class InputEnumSchema extends Saveable implements Internal.EnumSchema, In
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `label` field is not valid because: ', [e])
           )
         } else {
@@ -153,7 +153,7 @@ export class InputEnumSchema extends Saveable implements Internal.EnumSchema, In
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `doc` field is not valid because: ', [e])
           )
         } else {
@@ -169,7 +169,7 @@ export class InputEnumSchema extends Saveable implements Internal.EnumSchema, In
           const ex = expandUrl(key, '', loadingOptions, false, false)
           extensionFields[ex] = value
         } else {
-          errors.push(
+          __errors.push(
             new ValidationException(`invalid field ${key as string}, \
             expected one of: \`symbols\`,\`type\`,\`label\`,\`doc\`,\`name\``)
           )
@@ -178,8 +178,8 @@ export class InputEnumSchema extends Saveable implements Internal.EnumSchema, In
       }
     }
 
-    if (errors.length > 0) {
-      throw new ValidationException("Trying 'InputEnumSchema'", errors)
+    if (__errors.length > 0) {
+      throw new ValidationException("Trying 'InputEnumSchema'", __errors)
     }
 
     const schema = new InputEnumSchema({

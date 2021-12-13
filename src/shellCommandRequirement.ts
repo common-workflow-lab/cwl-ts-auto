@@ -58,7 +58,7 @@ export class ShellCommandRequirement extends Saveable implements Internal.Proces
   static override async fromDoc (__doc: any, baseuri: string, loadingOptions: LoadingOptions,
     docRoot?: string): Promise<Saveable> {
     const _doc = Object.assign({}, __doc)
-    const errors: ValidationException[] = []
+    const __errors: ValidationException[] = []
             
     let class_
     try {
@@ -66,7 +66,7 @@ export class ShellCommandRequirement extends Saveable implements Internal.Proces
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
-        errors.push(
+        __errors.push(
           new ValidationException('the `class` field is not valid because: ', [e])
         )
       } else {
@@ -81,7 +81,7 @@ export class ShellCommandRequirement extends Saveable implements Internal.Proces
           const ex = expandUrl(key, '', loadingOptions, false, false)
           extensionFields[ex] = value
         } else {
-          errors.push(
+          __errors.push(
             new ValidationException(`invalid field ${key as string}, \
             expected one of: \`class\``)
           )
@@ -90,8 +90,8 @@ export class ShellCommandRequirement extends Saveable implements Internal.Proces
       }
     }
 
-    if (errors.length > 0) {
-      throw new ValidationException("Trying 'ShellCommandRequirement'", errors)
+    if (__errors.length > 0) {
+      throw new ValidationException("Trying 'ShellCommandRequirement'", __errors)
     }
 
     const schema = new ShellCommandRequirement({

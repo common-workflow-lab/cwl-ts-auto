@@ -59,7 +59,7 @@ export class EnvVarRequirement extends Saveable implements Internal.ProcessRequi
   static override async fromDoc (__doc: any, baseuri: string, loadingOptions: LoadingOptions,
     docRoot?: string): Promise<Saveable> {
     const _doc = Object.assign({}, __doc)
-    const errors: ValidationException[] = []
+    const __errors: ValidationException[] = []
             
     let class_
     try {
@@ -67,7 +67,7 @@ export class EnvVarRequirement extends Saveable implements Internal.ProcessRequi
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
-        errors.push(
+        __errors.push(
           new ValidationException('the `class` field is not valid because: ', [e])
         )
       } else {
@@ -81,7 +81,7 @@ export class EnvVarRequirement extends Saveable implements Internal.ProcessRequi
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
-        errors.push(
+        __errors.push(
           new ValidationException('the `envDef` field is not valid because: ', [e])
         )
       } else {
@@ -96,7 +96,7 @@ export class EnvVarRequirement extends Saveable implements Internal.ProcessRequi
           const ex = expandUrl(key, '', loadingOptions, false, false)
           extensionFields[ex] = value
         } else {
-          errors.push(
+          __errors.push(
             new ValidationException(`invalid field ${key as string}, \
             expected one of: \`class\`,\`envDef\``)
           )
@@ -105,8 +105,8 @@ export class EnvVarRequirement extends Saveable implements Internal.ProcessRequi
       }
     }
 
-    if (errors.length > 0) {
-      throw new ValidationException("Trying 'EnvVarRequirement'", errors)
+    if (__errors.length > 0) {
+      throw new ValidationException("Trying 'EnvVarRequirement'", __errors)
     }
 
     const schema = new EnvVarRequirement({

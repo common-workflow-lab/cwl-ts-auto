@@ -293,7 +293,7 @@ export class File extends Saveable {
   static override async fromDoc (__doc: any, baseuri: string, loadingOptions: LoadingOptions,
     docRoot?: string): Promise<Saveable> {
     const _doc = Object.assign({}, __doc)
-    const errors: ValidationException[] = []
+    const __errors: ValidationException[] = []
             
     let class_
     try {
@@ -301,7 +301,7 @@ export class File extends Saveable {
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
-        errors.push(
+        __errors.push(
           new ValidationException('the `class` field is not valid because: ', [e])
         )
       } else {
@@ -316,7 +316,7 @@ export class File extends Saveable {
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `location` field is not valid because: ', [e])
           )
         } else {
@@ -332,7 +332,7 @@ export class File extends Saveable {
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `path` field is not valid because: ', [e])
           )
         } else {
@@ -348,7 +348,7 @@ export class File extends Saveable {
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `basename` field is not valid because: ', [e])
           )
         } else {
@@ -364,7 +364,7 @@ export class File extends Saveable {
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `dirname` field is not valid because: ', [e])
           )
         } else {
@@ -380,7 +380,7 @@ export class File extends Saveable {
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `nameroot` field is not valid because: ', [e])
           )
         } else {
@@ -396,7 +396,7 @@ export class File extends Saveable {
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `nameext` field is not valid because: ', [e])
           )
         } else {
@@ -412,7 +412,7 @@ export class File extends Saveable {
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `checksum` field is not valid because: ', [e])
           )
         } else {
@@ -428,7 +428,7 @@ export class File extends Saveable {
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `size` field is not valid because: ', [e])
           )
         } else {
@@ -444,7 +444,7 @@ export class File extends Saveable {
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `secondaryFiles` field is not valid because: ', [e])
           )
         } else {
@@ -460,7 +460,7 @@ export class File extends Saveable {
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `format` field is not valid because: ', [e])
           )
         } else {
@@ -476,7 +476,7 @@ export class File extends Saveable {
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `contents` field is not valid because: ', [e])
           )
         } else {
@@ -492,7 +492,7 @@ export class File extends Saveable {
           const ex = expandUrl(key, '', loadingOptions, false, false)
           extensionFields[ex] = value
         } else {
-          errors.push(
+          __errors.push(
             new ValidationException(`invalid field ${key as string}, \
             expected one of: \`class\`,\`location\`,\`path\`,\`basename\`,\`dirname\`,\`nameroot\`,\`nameext\`,\`checksum\`,\`size\`,\`secondaryFiles\`,\`format\`,\`contents\``)
           )
@@ -501,8 +501,8 @@ export class File extends Saveable {
       }
     }
 
-    if (errors.length > 0) {
-      throw new ValidationException("Trying 'File'", errors)
+    if (__errors.length > 0) {
+      throw new ValidationException("Trying 'File'", __errors)
     }
 
     const schema = new File({

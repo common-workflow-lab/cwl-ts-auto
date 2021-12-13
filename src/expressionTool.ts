@@ -155,7 +155,7 @@ export class ExpressionTool extends Saveable implements Internal.Process {
   static override async fromDoc (__doc: any, baseuri: string, loadingOptions: LoadingOptions,
     docRoot?: string): Promise<Saveable> {
     const _doc = Object.assign({}, __doc)
-    const errors: ValidationException[] = []
+    const __errors: ValidationException[] = []
             
     let id
     if ('id' in _doc) {
@@ -164,7 +164,7 @@ export class ExpressionTool extends Saveable implements Internal.Process {
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `id` field is not valid because: ', [e])
           )
         } else {
@@ -190,7 +190,7 @@ export class ExpressionTool extends Saveable implements Internal.Process {
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
-        errors.push(
+        __errors.push(
           new ValidationException('the `class` field is not valid because: ', [e])
         )
       } else {
@@ -205,7 +205,7 @@ export class ExpressionTool extends Saveable implements Internal.Process {
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `label` field is not valid because: ', [e])
           )
         } else {
@@ -221,7 +221,7 @@ export class ExpressionTool extends Saveable implements Internal.Process {
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `doc` field is not valid because: ', [e])
           )
         } else {
@@ -236,7 +236,7 @@ export class ExpressionTool extends Saveable implements Internal.Process {
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
-        errors.push(
+        __errors.push(
           new ValidationException('the `inputs` field is not valid because: ', [e])
         )
       } else {
@@ -250,7 +250,7 @@ export class ExpressionTool extends Saveable implements Internal.Process {
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
-        errors.push(
+        __errors.push(
           new ValidationException('the `outputs` field is not valid because: ', [e])
         )
       } else {
@@ -265,7 +265,7 @@ export class ExpressionTool extends Saveable implements Internal.Process {
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `requirements` field is not valid because: ', [e])
           )
         } else {
@@ -281,7 +281,7 @@ export class ExpressionTool extends Saveable implements Internal.Process {
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `hints` field is not valid because: ', [e])
           )
         } else {
@@ -297,7 +297,7 @@ export class ExpressionTool extends Saveable implements Internal.Process {
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `cwlVersion` field is not valid because: ', [e])
           )
         } else {
@@ -313,7 +313,7 @@ export class ExpressionTool extends Saveable implements Internal.Process {
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `intent` field is not valid because: ', [e])
           )
         } else {
@@ -328,7 +328,7 @@ export class ExpressionTool extends Saveable implements Internal.Process {
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
-        errors.push(
+        __errors.push(
           new ValidationException('the `expression` field is not valid because: ', [e])
         )
       } else {
@@ -343,7 +343,7 @@ export class ExpressionTool extends Saveable implements Internal.Process {
           const ex = expandUrl(key, '', loadingOptions, false, false)
           extensionFields[ex] = value
         } else {
-          errors.push(
+          __errors.push(
             new ValidationException(`invalid field ${key as string}, \
             expected one of: \`id\`,\`label\`,\`doc\`,\`inputs\`,\`outputs\`,\`requirements\`,\`hints\`,\`cwlVersion\`,\`intent\`,\`class\`,\`expression\``)
           )
@@ -352,8 +352,8 @@ export class ExpressionTool extends Saveable implements Internal.Process {
       }
     }
 
-    if (errors.length > 0) {
-      throw new ValidationException("Trying 'ExpressionTool'", errors)
+    if (__errors.length > 0) {
+      throw new ValidationException("Trying 'ExpressionTool'", __errors)
     }
 
     const schema = new ExpressionTool({

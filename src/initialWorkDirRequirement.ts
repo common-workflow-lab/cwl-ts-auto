@@ -82,7 +82,7 @@ export class InitialWorkDirRequirement extends Saveable implements Internal.Proc
   static override async fromDoc (__doc: any, baseuri: string, loadingOptions: LoadingOptions,
     docRoot?: string): Promise<Saveable> {
     const _doc = Object.assign({}, __doc)
-    const errors: ValidationException[] = []
+    const __errors: ValidationException[] = []
             
     let class_
     try {
@@ -90,7 +90,7 @@ export class InitialWorkDirRequirement extends Saveable implements Internal.Proc
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
-        errors.push(
+        __errors.push(
           new ValidationException('the `class` field is not valid because: ', [e])
         )
       } else {
@@ -104,7 +104,7 @@ export class InitialWorkDirRequirement extends Saveable implements Internal.Proc
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
-        errors.push(
+        __errors.push(
           new ValidationException('the `listing` field is not valid because: ', [e])
         )
       } else {
@@ -119,7 +119,7 @@ export class InitialWorkDirRequirement extends Saveable implements Internal.Proc
           const ex = expandUrl(key, '', loadingOptions, false, false)
           extensionFields[ex] = value
         } else {
-          errors.push(
+          __errors.push(
             new ValidationException(`invalid field ${key as string}, \
             expected one of: \`class\`,\`listing\``)
           )
@@ -128,8 +128,8 @@ export class InitialWorkDirRequirement extends Saveable implements Internal.Proc
       }
     }
 
-    if (errors.length > 0) {
-      throw new ValidationException("Trying 'InitialWorkDirRequirement'", errors)
+    if (__errors.length > 0) {
+      throw new ValidationException("Trying 'InitialWorkDirRequirement'", __errors)
     }
 
     const schema = new InitialWorkDirRequirement({

@@ -187,7 +187,7 @@ export class WorkflowInputParameter extends Saveable implements Internal.InputPa
   static override async fromDoc (__doc: any, baseuri: string, loadingOptions: LoadingOptions,
     docRoot?: string): Promise<Saveable> {
     const _doc = Object.assign({}, __doc)
-    const errors: ValidationException[] = []
+    const __errors: ValidationException[] = []
             
     let id
     if ('id' in _doc) {
@@ -196,7 +196,7 @@ export class WorkflowInputParameter extends Saveable implements Internal.InputPa
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `id` field is not valid because: ', [e])
           )
         } else {
@@ -223,7 +223,7 @@ export class WorkflowInputParameter extends Saveable implements Internal.InputPa
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `label` field is not valid because: ', [e])
           )
         } else {
@@ -239,7 +239,7 @@ export class WorkflowInputParameter extends Saveable implements Internal.InputPa
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `secondaryFiles` field is not valid because: ', [e])
           )
         } else {
@@ -255,7 +255,7 @@ export class WorkflowInputParameter extends Saveable implements Internal.InputPa
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `streamable` field is not valid because: ', [e])
           )
         } else {
@@ -271,7 +271,7 @@ export class WorkflowInputParameter extends Saveable implements Internal.InputPa
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `doc` field is not valid because: ', [e])
           )
         } else {
@@ -287,7 +287,7 @@ export class WorkflowInputParameter extends Saveable implements Internal.InputPa
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `format` field is not valid because: ', [e])
           )
         } else {
@@ -303,7 +303,7 @@ export class WorkflowInputParameter extends Saveable implements Internal.InputPa
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `loadContents` field is not valid because: ', [e])
           )
         } else {
@@ -319,7 +319,7 @@ export class WorkflowInputParameter extends Saveable implements Internal.InputPa
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `loadListing` field is not valid because: ', [e])
           )
         } else {
@@ -335,7 +335,7 @@ export class WorkflowInputParameter extends Saveable implements Internal.InputPa
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `default` field is not valid because: ', [e])
           )
         } else {
@@ -350,7 +350,7 @@ export class WorkflowInputParameter extends Saveable implements Internal.InputPa
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
-        errors.push(
+        __errors.push(
           new ValidationException('the `type` field is not valid because: ', [e])
         )
       } else {
@@ -365,7 +365,7 @@ export class WorkflowInputParameter extends Saveable implements Internal.InputPa
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `inputBinding` field is not valid because: ', [e])
           )
         } else {
@@ -381,7 +381,7 @@ export class WorkflowInputParameter extends Saveable implements Internal.InputPa
           const ex = expandUrl(key, '', loadingOptions, false, false)
           extensionFields[ex] = value
         } else {
-          errors.push(
+          __errors.push(
             new ValidationException(`invalid field ${key as string}, \
             expected one of: \`label\`,\`secondaryFiles\`,\`streamable\`,\`doc\`,\`id\`,\`format\`,\`loadContents\`,\`loadListing\`,\`default\`,\`type\`,\`inputBinding\``)
           )
@@ -390,8 +390,8 @@ export class WorkflowInputParameter extends Saveable implements Internal.InputPa
       }
     }
 
-    if (errors.length > 0) {
-      throw new ValidationException("Trying 'WorkflowInputParameter'", errors)
+    if (__errors.length > 0) {
+      throw new ValidationException("Trying 'WorkflowInputParameter'", __errors)
     }
 
     const schema = new WorkflowInputParameter({

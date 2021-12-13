@@ -73,7 +73,7 @@ export class CommandOutputRecordSchema extends Saveable implements Internal.Outp
   static override async fromDoc (__doc: any, baseuri: string, loadingOptions: LoadingOptions,
     docRoot?: string): Promise<Saveable> {
     const _doc = Object.assign({}, __doc)
-    const errors: ValidationException[] = []
+    const __errors: ValidationException[] = []
             
     let name
     if ('name' in _doc) {
@@ -82,7 +82,7 @@ export class CommandOutputRecordSchema extends Saveable implements Internal.Outp
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `name` field is not valid because: ', [e])
           )
         } else {
@@ -109,7 +109,7 @@ export class CommandOutputRecordSchema extends Saveable implements Internal.Outp
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `fields` field is not valid because: ', [e])
           )
         } else {
@@ -124,7 +124,7 @@ export class CommandOutputRecordSchema extends Saveable implements Internal.Outp
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
-        errors.push(
+        __errors.push(
           new ValidationException('the `type` field is not valid because: ', [e])
         )
       } else {
@@ -139,7 +139,7 @@ export class CommandOutputRecordSchema extends Saveable implements Internal.Outp
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `label` field is not valid because: ', [e])
           )
         } else {
@@ -155,7 +155,7 @@ export class CommandOutputRecordSchema extends Saveable implements Internal.Outp
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `doc` field is not valid because: ', [e])
           )
         } else {
@@ -171,7 +171,7 @@ export class CommandOutputRecordSchema extends Saveable implements Internal.Outp
           const ex = expandUrl(key, '', loadingOptions, false, false)
           extensionFields[ex] = value
         } else {
-          errors.push(
+          __errors.push(
             new ValidationException(`invalid field ${key as string}, \
             expected one of: \`fields\`,\`type\`,\`label\`,\`doc\`,\`name\``)
           )
@@ -180,8 +180,8 @@ export class CommandOutputRecordSchema extends Saveable implements Internal.Outp
       }
     }
 
-    if (errors.length > 0) {
-      throw new ValidationException("Trying 'CommandOutputRecordSchema'", errors)
+    if (__errors.length > 0) {
+      throw new ValidationException("Trying 'CommandOutputRecordSchema'", __errors)
     }
 
     const schema = new CommandOutputRecordSchema({

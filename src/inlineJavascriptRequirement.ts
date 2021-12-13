@@ -63,7 +63,7 @@ export class InlineJavascriptRequirement extends Saveable implements Internal.Pr
   static override async fromDoc (__doc: any, baseuri: string, loadingOptions: LoadingOptions,
     docRoot?: string): Promise<Saveable> {
     const _doc = Object.assign({}, __doc)
-    const errors: ValidationException[] = []
+    const __errors: ValidationException[] = []
             
     let class_
     try {
@@ -71,7 +71,7 @@ export class InlineJavascriptRequirement extends Saveable implements Internal.Pr
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
-        errors.push(
+        __errors.push(
           new ValidationException('the `class` field is not valid because: ', [e])
         )
       } else {
@@ -86,7 +86,7 @@ export class InlineJavascriptRequirement extends Saveable implements Internal.Pr
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `expressionLib` field is not valid because: ', [e])
           )
         } else {
@@ -102,7 +102,7 @@ export class InlineJavascriptRequirement extends Saveable implements Internal.Pr
           const ex = expandUrl(key, '', loadingOptions, false, false)
           extensionFields[ex] = value
         } else {
-          errors.push(
+          __errors.push(
             new ValidationException(`invalid field ${key as string}, \
             expected one of: \`class\`,\`expressionLib\``)
           )
@@ -111,8 +111,8 @@ export class InlineJavascriptRequirement extends Saveable implements Internal.Pr
       }
     }
 
-    if (errors.length > 0) {
-      throw new ValidationException("Trying 'InlineJavascriptRequirement'", errors)
+    if (__errors.length > 0) {
+      throw new ValidationException("Trying 'InlineJavascriptRequirement'", __errors)
     }
 
     const schema = new InlineJavascriptRequirement({

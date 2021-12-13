@@ -55,7 +55,7 @@ export class LoadListingRequirement extends Saveable implements Internal.Process
   static override async fromDoc (__doc: any, baseuri: string, loadingOptions: LoadingOptions,
     docRoot?: string): Promise<Saveable> {
     const _doc = Object.assign({}, __doc)
-    const errors: ValidationException[] = []
+    const __errors: ValidationException[] = []
             
     let class_
     try {
@@ -63,7 +63,7 @@ export class LoadListingRequirement extends Saveable implements Internal.Process
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
-        errors.push(
+        __errors.push(
           new ValidationException('the `class` field is not valid because: ', [e])
         )
       } else {
@@ -78,7 +78,7 @@ export class LoadListingRequirement extends Saveable implements Internal.Process
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `loadListing` field is not valid because: ', [e])
           )
         } else {
@@ -94,7 +94,7 @@ export class LoadListingRequirement extends Saveable implements Internal.Process
           const ex = expandUrl(key, '', loadingOptions, false, false)
           extensionFields[ex] = value
         } else {
-          errors.push(
+          __errors.push(
             new ValidationException(`invalid field ${key as string}, \
             expected one of: \`class\`,\`loadListing\``)
           )
@@ -103,8 +103,8 @@ export class LoadListingRequirement extends Saveable implements Internal.Process
       }
     }
 
-    if (errors.length > 0) {
-      throw new ValidationException("Trying 'LoadListingRequirement'", errors)
+    if (__errors.length > 0) {
+      throw new ValidationException("Trying 'LoadListingRequirement'", __errors)
     }
 
     const schema = new LoadListingRequirement({

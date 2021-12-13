@@ -66,7 +66,7 @@ export class ToolTimeLimit extends Saveable implements Internal.ProcessRequireme
   static override async fromDoc (__doc: any, baseuri: string, loadingOptions: LoadingOptions,
     docRoot?: string): Promise<Saveable> {
     const _doc = Object.assign({}, __doc)
-    const errors: ValidationException[] = []
+    const __errors: ValidationException[] = []
             
     let class_
     try {
@@ -74,7 +74,7 @@ export class ToolTimeLimit extends Saveable implements Internal.ProcessRequireme
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
-        errors.push(
+        __errors.push(
           new ValidationException('the `class` field is not valid because: ', [e])
         )
       } else {
@@ -88,7 +88,7 @@ export class ToolTimeLimit extends Saveable implements Internal.ProcessRequireme
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
-        errors.push(
+        __errors.push(
           new ValidationException('the `timelimit` field is not valid because: ', [e])
         )
       } else {
@@ -103,7 +103,7 @@ export class ToolTimeLimit extends Saveable implements Internal.ProcessRequireme
           const ex = expandUrl(key, '', loadingOptions, false, false)
           extensionFields[ex] = value
         } else {
-          errors.push(
+          __errors.push(
             new ValidationException(`invalid field ${key as string}, \
             expected one of: \`class\`,\`timelimit\``)
           )
@@ -112,8 +112,8 @@ export class ToolTimeLimit extends Saveable implements Internal.ProcessRequireme
       }
     }
 
-    if (errors.length > 0) {
-      throw new ValidationException("Trying 'ToolTimeLimit'", errors)
+    if (__errors.length > 0) {
+      throw new ValidationException("Trying 'ToolTimeLimit'", __errors)
     }
 
     const schema = new ToolTimeLimit({

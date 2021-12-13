@@ -145,7 +145,7 @@ export class CommandOutputParameter extends Saveable implements Internal.OutputP
   static override async fromDoc (__doc: any, baseuri: string, loadingOptions: LoadingOptions,
     docRoot?: string): Promise<Saveable> {
     const _doc = Object.assign({}, __doc)
-    const errors: ValidationException[] = []
+    const __errors: ValidationException[] = []
             
     let id
     if ('id' in _doc) {
@@ -154,7 +154,7 @@ export class CommandOutputParameter extends Saveable implements Internal.OutputP
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `id` field is not valid because: ', [e])
           )
         } else {
@@ -181,7 +181,7 @@ export class CommandOutputParameter extends Saveable implements Internal.OutputP
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `label` field is not valid because: ', [e])
           )
         } else {
@@ -197,7 +197,7 @@ export class CommandOutputParameter extends Saveable implements Internal.OutputP
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `secondaryFiles` field is not valid because: ', [e])
           )
         } else {
@@ -213,7 +213,7 @@ export class CommandOutputParameter extends Saveable implements Internal.OutputP
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `streamable` field is not valid because: ', [e])
           )
         } else {
@@ -229,7 +229,7 @@ export class CommandOutputParameter extends Saveable implements Internal.OutputP
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `doc` field is not valid because: ', [e])
           )
         } else {
@@ -245,7 +245,7 @@ export class CommandOutputParameter extends Saveable implements Internal.OutputP
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `format` field is not valid because: ', [e])
           )
         } else {
@@ -260,7 +260,7 @@ export class CommandOutputParameter extends Saveable implements Internal.OutputP
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
-        errors.push(
+        __errors.push(
           new ValidationException('the `type` field is not valid because: ', [e])
         )
       } else {
@@ -275,7 +275,7 @@ export class CommandOutputParameter extends Saveable implements Internal.OutputP
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `outputBinding` field is not valid because: ', [e])
           )
         } else {
@@ -291,7 +291,7 @@ export class CommandOutputParameter extends Saveable implements Internal.OutputP
           const ex = expandUrl(key, '', loadingOptions, false, false)
           extensionFields[ex] = value
         } else {
-          errors.push(
+          __errors.push(
             new ValidationException(`invalid field ${key as string}, \
             expected one of: \`label\`,\`secondaryFiles\`,\`streamable\`,\`doc\`,\`id\`,\`format\`,\`type\`,\`outputBinding\``)
           )
@@ -300,8 +300,8 @@ export class CommandOutputParameter extends Saveable implements Internal.OutputP
       }
     }
 
-    if (errors.length > 0) {
-      throw new ValidationException("Trying 'CommandOutputParameter'", errors)
+    if (__errors.length > 0) {
+      throw new ValidationException("Trying 'CommandOutputParameter'", __errors)
     }
 
     const schema = new CommandOutputParameter({

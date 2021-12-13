@@ -138,7 +138,7 @@ export class OutputRecordField extends Saveable implements Internal.RecordField,
   static override async fromDoc (__doc: any, baseuri: string, loadingOptions: LoadingOptions,
     docRoot?: string): Promise<Saveable> {
     const _doc = Object.assign({}, __doc)
-    const errors: ValidationException[] = []
+    const __errors: ValidationException[] = []
             
     let name
     if ('name' in _doc) {
@@ -147,7 +147,7 @@ export class OutputRecordField extends Saveable implements Internal.RecordField,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `name` field is not valid because: ', [e])
           )
         } else {
@@ -174,7 +174,7 @@ export class OutputRecordField extends Saveable implements Internal.RecordField,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `doc` field is not valid because: ', [e])
           )
         } else {
@@ -189,7 +189,7 @@ export class OutputRecordField extends Saveable implements Internal.RecordField,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
-        errors.push(
+        __errors.push(
           new ValidationException('the `type` field is not valid because: ', [e])
         )
       } else {
@@ -204,7 +204,7 @@ export class OutputRecordField extends Saveable implements Internal.RecordField,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `label` field is not valid because: ', [e])
           )
         } else {
@@ -220,7 +220,7 @@ export class OutputRecordField extends Saveable implements Internal.RecordField,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `secondaryFiles` field is not valid because: ', [e])
           )
         } else {
@@ -236,7 +236,7 @@ export class OutputRecordField extends Saveable implements Internal.RecordField,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `streamable` field is not valid because: ', [e])
           )
         } else {
@@ -252,7 +252,7 @@ export class OutputRecordField extends Saveable implements Internal.RecordField,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
-          errors.push(
+          __errors.push(
             new ValidationException('the `format` field is not valid because: ', [e])
           )
         } else {
@@ -268,7 +268,7 @@ export class OutputRecordField extends Saveable implements Internal.RecordField,
           const ex = expandUrl(key, '', loadingOptions, false, false)
           extensionFields[ex] = value
         } else {
-          errors.push(
+          __errors.push(
             new ValidationException(`invalid field ${key as string}, \
             expected one of: \`doc\`,\`name\`,\`type\`,\`label\`,\`secondaryFiles\`,\`streamable\`,\`format\``)
           )
@@ -277,8 +277,8 @@ export class OutputRecordField extends Saveable implements Internal.RecordField,
       }
     }
 
-    if (errors.length > 0) {
-      throw new ValidationException("Trying 'OutputRecordField'", errors)
+    if (__errors.length > 0) {
+      throw new ValidationException("Trying 'OutputRecordField'", __errors)
     }
 
     const schema = new OutputRecordField({
