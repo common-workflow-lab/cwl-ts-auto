@@ -71,6 +71,8 @@ export class EnvironmentDef extends Saveable {
         errors.push(
           new ValidationException('the `envName` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 
@@ -83,6 +85,8 @@ export class EnvironmentDef extends Saveable {
         errors.push(
           new ValidationException('the `envValue` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 

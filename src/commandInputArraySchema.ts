@@ -91,6 +91,8 @@ export class CommandInputArraySchema extends Saveable implements Internal.InputA
           errors.push(
             new ValidationException('the `name` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -115,6 +117,8 @@ export class CommandInputArraySchema extends Saveable implements Internal.InputA
         errors.push(
           new ValidationException('the `items` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 
@@ -127,6 +131,8 @@ export class CommandInputArraySchema extends Saveable implements Internal.InputA
         errors.push(
           new ValidationException('the `type` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 
@@ -140,6 +146,8 @@ export class CommandInputArraySchema extends Saveable implements Internal.InputA
           errors.push(
             new ValidationException('the `label` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -154,6 +162,8 @@ export class CommandInputArraySchema extends Saveable implements Internal.InputA
           errors.push(
             new ValidationException('the `doc` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -168,6 +178,8 @@ export class CommandInputArraySchema extends Saveable implements Internal.InputA
           errors.push(
             new ValidationException('the `inputBinding` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }

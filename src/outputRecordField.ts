@@ -150,6 +150,8 @@ export class OutputRecordField extends Saveable implements Internal.RecordField,
           errors.push(
             new ValidationException('the `name` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -175,6 +177,8 @@ export class OutputRecordField extends Saveable implements Internal.RecordField,
           errors.push(
             new ValidationException('the `doc` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -188,6 +192,8 @@ export class OutputRecordField extends Saveable implements Internal.RecordField,
         errors.push(
           new ValidationException('the `type` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 
@@ -201,6 +207,8 @@ export class OutputRecordField extends Saveable implements Internal.RecordField,
           errors.push(
             new ValidationException('the `label` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -215,6 +223,8 @@ export class OutputRecordField extends Saveable implements Internal.RecordField,
           errors.push(
             new ValidationException('the `secondaryFiles` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -229,6 +239,8 @@ export class OutputRecordField extends Saveable implements Internal.RecordField,
           errors.push(
             new ValidationException('the `streamable` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -243,6 +255,8 @@ export class OutputRecordField extends Saveable implements Internal.RecordField,
           errors.push(
             new ValidationException('the `format` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }

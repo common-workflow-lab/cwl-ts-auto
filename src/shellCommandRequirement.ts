@@ -69,6 +69,8 @@ export class ShellCommandRequirement extends Saveable implements Internal.Proces
         errors.push(
           new ValidationException('the `class` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 

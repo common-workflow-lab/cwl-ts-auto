@@ -71,6 +71,8 @@ export class WorkflowStepOutput extends Saveable implements Internal.Identified 
           errors.push(
             new ValidationException('the `id` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }

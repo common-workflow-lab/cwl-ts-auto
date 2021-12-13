@@ -158,6 +158,8 @@ export class DockerRequirement extends Saveable implements Internal.ProcessRequi
         errors.push(
           new ValidationException('the `class` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 
@@ -171,6 +173,8 @@ export class DockerRequirement extends Saveable implements Internal.ProcessRequi
           errors.push(
             new ValidationException('the `dockerPull` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -185,6 +189,8 @@ export class DockerRequirement extends Saveable implements Internal.ProcessRequi
           errors.push(
             new ValidationException('the `dockerLoad` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -199,6 +205,8 @@ export class DockerRequirement extends Saveable implements Internal.ProcessRequi
           errors.push(
             new ValidationException('the `dockerFile` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -213,6 +221,8 @@ export class DockerRequirement extends Saveable implements Internal.ProcessRequi
           errors.push(
             new ValidationException('the `dockerImport` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -227,6 +237,8 @@ export class DockerRequirement extends Saveable implements Internal.ProcessRequi
           errors.push(
             new ValidationException('the `dockerImageId` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -241,6 +253,8 @@ export class DockerRequirement extends Saveable implements Internal.ProcessRequi
           errors.push(
             new ValidationException('the `dockerOutputDirectory` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }

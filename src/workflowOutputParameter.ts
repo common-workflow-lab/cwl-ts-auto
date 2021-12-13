@@ -181,6 +181,8 @@ export class WorkflowOutputParameter extends Saveable implements Internal.Output
           errors.push(
             new ValidationException('the `id` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -206,6 +208,8 @@ export class WorkflowOutputParameter extends Saveable implements Internal.Output
           errors.push(
             new ValidationException('the `label` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -220,6 +224,8 @@ export class WorkflowOutputParameter extends Saveable implements Internal.Output
           errors.push(
             new ValidationException('the `secondaryFiles` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -234,6 +240,8 @@ export class WorkflowOutputParameter extends Saveable implements Internal.Output
           errors.push(
             new ValidationException('the `streamable` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -248,6 +256,8 @@ export class WorkflowOutputParameter extends Saveable implements Internal.Output
           errors.push(
             new ValidationException('the `doc` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -262,6 +272,8 @@ export class WorkflowOutputParameter extends Saveable implements Internal.Output
           errors.push(
             new ValidationException('the `format` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -276,6 +288,8 @@ export class WorkflowOutputParameter extends Saveable implements Internal.Output
           errors.push(
             new ValidationException('the `outputSource` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -290,6 +304,8 @@ export class WorkflowOutputParameter extends Saveable implements Internal.Output
           errors.push(
             new ValidationException('the `linkMerge` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -304,6 +320,8 @@ export class WorkflowOutputParameter extends Saveable implements Internal.Output
           errors.push(
             new ValidationException('the `pickValue` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -317,6 +335,8 @@ export class WorkflowOutputParameter extends Saveable implements Internal.Output
         errors.push(
           new ValidationException('the `type` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 

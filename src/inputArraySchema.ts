@@ -85,6 +85,8 @@ export class InputArraySchema extends Saveable implements Internal.ArraySchema, 
           errors.push(
             new ValidationException('the `name` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -109,6 +111,8 @@ export class InputArraySchema extends Saveable implements Internal.ArraySchema, 
         errors.push(
           new ValidationException('the `items` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 
@@ -121,6 +125,8 @@ export class InputArraySchema extends Saveable implements Internal.ArraySchema, 
         errors.push(
           new ValidationException('the `type` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 
@@ -134,6 +140,8 @@ export class InputArraySchema extends Saveable implements Internal.ArraySchema, 
           errors.push(
             new ValidationException('the `label` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -148,6 +156,8 @@ export class InputArraySchema extends Saveable implements Internal.ArraySchema, 
           errors.push(
             new ValidationException('the `doc` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }

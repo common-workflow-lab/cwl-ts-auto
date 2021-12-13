@@ -163,6 +163,8 @@ export class CommandOutputBinding extends Saveable implements Internal.LoadConte
           errors.push(
             new ValidationException('the `loadContents` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -177,6 +179,8 @@ export class CommandOutputBinding extends Saveable implements Internal.LoadConte
           errors.push(
             new ValidationException('the `loadListing` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -191,6 +195,8 @@ export class CommandOutputBinding extends Saveable implements Internal.LoadConte
           errors.push(
             new ValidationException('the `glob` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -205,6 +211,8 @@ export class CommandOutputBinding extends Saveable implements Internal.LoadConte
           errors.push(
             new ValidationException('the `outputEval` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }

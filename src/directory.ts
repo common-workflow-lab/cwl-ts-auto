@@ -176,6 +176,8 @@ export class Directory extends Saveable {
         errors.push(
           new ValidationException('the `class` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 
@@ -189,6 +191,8 @@ export class Directory extends Saveable {
           errors.push(
             new ValidationException('the `location` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -203,6 +207,8 @@ export class Directory extends Saveable {
           errors.push(
             new ValidationException('the `path` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -217,6 +223,8 @@ export class Directory extends Saveable {
           errors.push(
             new ValidationException('the `basename` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -231,6 +239,8 @@ export class Directory extends Saveable {
           errors.push(
             new ValidationException('the `listing` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }

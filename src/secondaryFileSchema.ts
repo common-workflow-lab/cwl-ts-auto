@@ -134,6 +134,8 @@ export class SecondaryFileSchema extends Saveable {
         errors.push(
           new ValidationException('the `pattern` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 
@@ -147,6 +149,8 @@ export class SecondaryFileSchema extends Saveable {
           errors.push(
             new ValidationException('the `required` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }

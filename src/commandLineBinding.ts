@@ -171,6 +171,8 @@ export class CommandLineBinding extends Saveable implements Internal.InputBindin
           errors.push(
             new ValidationException('the `loadContents` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -185,6 +187,8 @@ export class CommandLineBinding extends Saveable implements Internal.InputBindin
           errors.push(
             new ValidationException('the `position` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -199,6 +203,8 @@ export class CommandLineBinding extends Saveable implements Internal.InputBindin
           errors.push(
             new ValidationException('the `prefix` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -213,6 +219,8 @@ export class CommandLineBinding extends Saveable implements Internal.InputBindin
           errors.push(
             new ValidationException('the `separate` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -227,6 +235,8 @@ export class CommandLineBinding extends Saveable implements Internal.InputBindin
           errors.push(
             new ValidationException('the `itemSeparator` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -241,6 +251,8 @@ export class CommandLineBinding extends Saveable implements Internal.InputBindin
           errors.push(
             new ValidationException('the `valueFrom` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -255,6 +267,8 @@ export class CommandLineBinding extends Saveable implements Internal.InputBindin
           errors.push(
             new ValidationException('the `shellQuote` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }

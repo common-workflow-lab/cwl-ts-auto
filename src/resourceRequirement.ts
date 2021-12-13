@@ -193,6 +193,8 @@ export class ResourceRequirement extends Saveable implements Internal.ProcessReq
         errors.push(
           new ValidationException('the `class` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 
@@ -206,6 +208,8 @@ export class ResourceRequirement extends Saveable implements Internal.ProcessReq
           errors.push(
             new ValidationException('the `coresMin` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -220,6 +224,8 @@ export class ResourceRequirement extends Saveable implements Internal.ProcessReq
           errors.push(
             new ValidationException('the `coresMax` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -234,6 +240,8 @@ export class ResourceRequirement extends Saveable implements Internal.ProcessReq
           errors.push(
             new ValidationException('the `ramMin` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -248,6 +256,8 @@ export class ResourceRequirement extends Saveable implements Internal.ProcessReq
           errors.push(
             new ValidationException('the `ramMax` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -262,6 +272,8 @@ export class ResourceRequirement extends Saveable implements Internal.ProcessReq
           errors.push(
             new ValidationException('the `tmpdirMin` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -276,6 +288,8 @@ export class ResourceRequirement extends Saveable implements Internal.ProcessReq
           errors.push(
             new ValidationException('the `tmpdirMax` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -290,6 +304,8 @@ export class ResourceRequirement extends Saveable implements Internal.ProcessReq
           errors.push(
             new ValidationException('the `outdirMin` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -304,6 +320,8 @@ export class ResourceRequirement extends Saveable implements Internal.ProcessReq
           errors.push(
             new ValidationException('the `outdirMax` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }

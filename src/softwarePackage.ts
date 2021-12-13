@@ -118,6 +118,8 @@ export class SoftwarePackage extends Saveable {
         errors.push(
           new ValidationException('the `package` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 
@@ -131,6 +133,8 @@ export class SoftwarePackage extends Saveable {
           errors.push(
             new ValidationException('the `version` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -145,6 +149,8 @@ export class SoftwarePackage extends Saveable {
           errors.push(
             new ValidationException('the `specs` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }

@@ -304,6 +304,8 @@ export class File extends Saveable {
         errors.push(
           new ValidationException('the `class` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 
@@ -317,6 +319,8 @@ export class File extends Saveable {
           errors.push(
             new ValidationException('the `location` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -331,6 +335,8 @@ export class File extends Saveable {
           errors.push(
             new ValidationException('the `path` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -345,6 +351,8 @@ export class File extends Saveable {
           errors.push(
             new ValidationException('the `basename` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -359,6 +367,8 @@ export class File extends Saveable {
           errors.push(
             new ValidationException('the `dirname` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -373,6 +383,8 @@ export class File extends Saveable {
           errors.push(
             new ValidationException('the `nameroot` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -387,6 +399,8 @@ export class File extends Saveable {
           errors.push(
             new ValidationException('the `nameext` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -401,6 +415,8 @@ export class File extends Saveable {
           errors.push(
             new ValidationException('the `checksum` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -415,6 +431,8 @@ export class File extends Saveable {
           errors.push(
             new ValidationException('the `size` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -429,6 +447,8 @@ export class File extends Saveable {
           errors.push(
             new ValidationException('the `secondaryFiles` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -443,6 +463,8 @@ export class File extends Saveable {
           errors.push(
             new ValidationException('the `format` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -457,6 +479,8 @@ export class File extends Saveable {
           errors.push(
             new ValidationException('the `contents` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }

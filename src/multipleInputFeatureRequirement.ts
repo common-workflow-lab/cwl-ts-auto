@@ -64,6 +64,8 @@ export class MultipleInputFeatureRequirement extends Saveable implements Interna
         errors.push(
           new ValidationException('the `class` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 

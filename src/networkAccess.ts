@@ -79,6 +79,8 @@ export class NetworkAccess extends Saveable implements Internal.ProcessRequireme
         errors.push(
           new ValidationException('the `class` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 
@@ -91,6 +93,8 @@ export class NetworkAccess extends Saveable implements Internal.ProcessRequireme
         errors.push(
           new ValidationException('the `networkAccess` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 

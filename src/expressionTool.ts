@@ -167,6 +167,8 @@ export class ExpressionTool extends Saveable implements Internal.Process {
           errors.push(
             new ValidationException('the `id` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -191,6 +193,8 @@ export class ExpressionTool extends Saveable implements Internal.Process {
         errors.push(
           new ValidationException('the `class` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 
@@ -204,6 +208,8 @@ export class ExpressionTool extends Saveable implements Internal.Process {
           errors.push(
             new ValidationException('the `label` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -218,6 +224,8 @@ export class ExpressionTool extends Saveable implements Internal.Process {
           errors.push(
             new ValidationException('the `doc` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -231,6 +239,8 @@ export class ExpressionTool extends Saveable implements Internal.Process {
         errors.push(
           new ValidationException('the `inputs` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 
@@ -243,6 +253,8 @@ export class ExpressionTool extends Saveable implements Internal.Process {
         errors.push(
           new ValidationException('the `outputs` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 
@@ -256,6 +268,8 @@ export class ExpressionTool extends Saveable implements Internal.Process {
           errors.push(
             new ValidationException('the `requirements` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -270,6 +284,8 @@ export class ExpressionTool extends Saveable implements Internal.Process {
           errors.push(
             new ValidationException('the `hints` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -284,6 +300,8 @@ export class ExpressionTool extends Saveable implements Internal.Process {
           errors.push(
             new ValidationException('the `cwlVersion` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -298,6 +316,8 @@ export class ExpressionTool extends Saveable implements Internal.Process {
           errors.push(
             new ValidationException('the `intent` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -311,6 +331,8 @@ export class ExpressionTool extends Saveable implements Internal.Process {
         errors.push(
           new ValidationException('the `expression` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 

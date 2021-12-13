@@ -94,6 +94,8 @@ export class InplaceUpdateRequirement extends Saveable implements Internal.Proce
         errors.push(
           new ValidationException('the `class` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 
@@ -106,6 +108,8 @@ export class InplaceUpdateRequirement extends Saveable implements Internal.Proce
         errors.push(
           new ValidationException('the `inplaceUpdate` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 

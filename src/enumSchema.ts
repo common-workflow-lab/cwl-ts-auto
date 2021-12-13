@@ -69,6 +69,8 @@ export class EnumSchema extends Saveable {
         errors.push(
           new ValidationException('the `symbols` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 
@@ -81,6 +83,8 @@ export class EnumSchema extends Saveable {
         errors.push(
           new ValidationException('the `type` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 

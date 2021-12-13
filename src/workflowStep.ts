@@ -220,6 +220,8 @@ export class WorkflowStep extends Saveable implements Internal.Identified, Inter
           errors.push(
             new ValidationException('the `id` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -245,6 +247,8 @@ export class WorkflowStep extends Saveable implements Internal.Identified, Inter
           errors.push(
             new ValidationException('the `label` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -259,6 +263,8 @@ export class WorkflowStep extends Saveable implements Internal.Identified, Inter
           errors.push(
             new ValidationException('the `doc` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -272,6 +278,8 @@ export class WorkflowStep extends Saveable implements Internal.Identified, Inter
         errors.push(
           new ValidationException('the `in` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 
@@ -284,6 +292,8 @@ export class WorkflowStep extends Saveable implements Internal.Identified, Inter
         errors.push(
           new ValidationException('the `out` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 
@@ -297,6 +307,8 @@ export class WorkflowStep extends Saveable implements Internal.Identified, Inter
           errors.push(
             new ValidationException('the `requirements` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -311,6 +323,8 @@ export class WorkflowStep extends Saveable implements Internal.Identified, Inter
           errors.push(
             new ValidationException('the `hints` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -324,6 +338,8 @@ export class WorkflowStep extends Saveable implements Internal.Identified, Inter
         errors.push(
           new ValidationException('the `run` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 
@@ -337,6 +353,8 @@ export class WorkflowStep extends Saveable implements Internal.Identified, Inter
           errors.push(
             new ValidationException('the `when` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -351,6 +369,8 @@ export class WorkflowStep extends Saveable implements Internal.Identified, Inter
           errors.push(
             new ValidationException('the `scatter` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -365,6 +385,8 @@ export class WorkflowStep extends Saveable implements Internal.Identified, Inter
           errors.push(
             new ValidationException('the `scatterMethod` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }

@@ -66,6 +66,8 @@ export class ArraySchema extends Saveable {
         errors.push(
           new ValidationException('the `items` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 
@@ -78,6 +80,8 @@ export class ArraySchema extends Saveable {
         errors.push(
           new ValidationException('the `type` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 

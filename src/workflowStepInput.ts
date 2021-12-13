@@ -267,6 +267,8 @@ export class WorkflowStepInput extends Saveable implements Internal.Identified, 
           errors.push(
             new ValidationException('the `id` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -292,6 +294,8 @@ export class WorkflowStepInput extends Saveable implements Internal.Identified, 
           errors.push(
             new ValidationException('the `source` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -306,6 +310,8 @@ export class WorkflowStepInput extends Saveable implements Internal.Identified, 
           errors.push(
             new ValidationException('the `linkMerge` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -320,6 +326,8 @@ export class WorkflowStepInput extends Saveable implements Internal.Identified, 
           errors.push(
             new ValidationException('the `pickValue` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -334,6 +342,8 @@ export class WorkflowStepInput extends Saveable implements Internal.Identified, 
           errors.push(
             new ValidationException('the `loadContents` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -348,6 +358,8 @@ export class WorkflowStepInput extends Saveable implements Internal.Identified, 
           errors.push(
             new ValidationException('the `loadListing` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -362,6 +374,8 @@ export class WorkflowStepInput extends Saveable implements Internal.Identified, 
           errors.push(
             new ValidationException('the `label` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -376,6 +390,8 @@ export class WorkflowStepInput extends Saveable implements Internal.Identified, 
           errors.push(
             new ValidationException('the `default` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -390,6 +406,8 @@ export class WorkflowStepInput extends Saveable implements Internal.Identified, 
           errors.push(
             new ValidationException('the `valueFrom` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }

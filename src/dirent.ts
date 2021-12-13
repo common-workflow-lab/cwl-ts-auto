@@ -148,6 +148,8 @@ export class Dirent extends Saveable {
           errors.push(
             new ValidationException('the `entryname` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -161,6 +163,8 @@ export class Dirent extends Saveable {
         errors.push(
           new ValidationException('the `entry` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 
@@ -174,6 +178,8 @@ export class Dirent extends Saveable {
           errors.push(
             new ValidationException('the `writable` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }

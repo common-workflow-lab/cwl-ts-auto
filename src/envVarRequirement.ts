@@ -70,6 +70,8 @@ export class EnvVarRequirement extends Saveable implements Internal.ProcessRequi
         errors.push(
           new ValidationException('the `class` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 
@@ -82,6 +84,8 @@ export class EnvVarRequirement extends Saveable implements Internal.ProcessRequi
         errors.push(
           new ValidationException('the `envDef` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 

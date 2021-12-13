@@ -157,6 +157,8 @@ export class CommandOutputParameter extends Saveable implements Internal.OutputP
           errors.push(
             new ValidationException('the `id` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -182,6 +184,8 @@ export class CommandOutputParameter extends Saveable implements Internal.OutputP
           errors.push(
             new ValidationException('the `label` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -196,6 +200,8 @@ export class CommandOutputParameter extends Saveable implements Internal.OutputP
           errors.push(
             new ValidationException('the `secondaryFiles` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -210,6 +216,8 @@ export class CommandOutputParameter extends Saveable implements Internal.OutputP
           errors.push(
             new ValidationException('the `streamable` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -224,6 +232,8 @@ export class CommandOutputParameter extends Saveable implements Internal.OutputP
           errors.push(
             new ValidationException('the `doc` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -238,6 +248,8 @@ export class CommandOutputParameter extends Saveable implements Internal.OutputP
           errors.push(
             new ValidationException('the `format` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -251,6 +263,8 @@ export class CommandOutputParameter extends Saveable implements Internal.OutputP
         errors.push(
           new ValidationException('the `type` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 
@@ -264,6 +278,8 @@ export class CommandOutputParameter extends Saveable implements Internal.OutputP
           errors.push(
             new ValidationException('the `outputBinding` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }

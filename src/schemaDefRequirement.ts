@@ -80,6 +80,8 @@ export class SchemaDefRequirement extends Saveable implements Internal.ProcessRe
         errors.push(
           new ValidationException('the `class` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 
@@ -92,6 +94,8 @@ export class SchemaDefRequirement extends Saveable implements Internal.ProcessRe
         errors.push(
           new ValidationException('the `types` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 

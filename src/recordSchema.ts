@@ -67,6 +67,8 @@ export class RecordSchema extends Saveable {
           errors.push(
             new ValidationException('the `fields` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -80,6 +82,8 @@ export class RecordSchema extends Saveable {
         errors.push(
           new ValidationException('the `type` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 

@@ -61,6 +61,8 @@ export class CommandLineBindable extends Saveable {
           errors.push(
             new ValidationException('the `inputBinding` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }

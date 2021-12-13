@@ -77,6 +77,8 @@ export class RecordField extends Saveable implements Internal.Documented {
           errors.push(
             new ValidationException('the `name` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -102,6 +104,8 @@ export class RecordField extends Saveable implements Internal.Documented {
           errors.push(
             new ValidationException('the `doc` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }
@@ -115,6 +119,8 @@ export class RecordField extends Saveable implements Internal.Documented {
         errors.push(
           new ValidationException('the `type` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 

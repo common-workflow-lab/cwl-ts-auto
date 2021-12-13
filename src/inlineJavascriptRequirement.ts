@@ -74,6 +74,8 @@ export class InlineJavascriptRequirement extends Saveable implements Internal.Pr
         errors.push(
           new ValidationException('the `class` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 
@@ -87,6 +89,8 @@ export class InlineJavascriptRequirement extends Saveable implements Internal.Pr
           errors.push(
             new ValidationException('the `expressionLib` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }

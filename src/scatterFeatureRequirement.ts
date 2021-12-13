@@ -64,6 +64,8 @@ export class ScatterFeatureRequirement extends Saveable implements Internal.Proc
         errors.push(
           new ValidationException('the `class` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 

@@ -64,6 +64,8 @@ export class InputBinding extends Saveable {
           errors.push(
             new ValidationException('the `loadContents` field is not valid because: ', [e])
           )
+        } else {
+          throw e
         }
       }
     }

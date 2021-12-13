@@ -70,6 +70,8 @@ export class SoftwareRequirement extends Saveable implements Internal.ProcessReq
         errors.push(
           new ValidationException('the `class` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 
@@ -82,6 +84,8 @@ export class SoftwareRequirement extends Saveable implements Internal.ProcessReq
         errors.push(
           new ValidationException('the `packages` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 

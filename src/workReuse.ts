@@ -73,6 +73,8 @@ export class WorkReuse extends Saveable implements Internal.ProcessRequirement {
         errors.push(
           new ValidationException('the `class` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 
@@ -85,6 +87,8 @@ export class WorkReuse extends Saveable implements Internal.ProcessRequirement {
         errors.push(
           new ValidationException('the `enableReuse` field is not valid because: ', [e])
         )
+      } else {
+        throw e
       }
     }
 
