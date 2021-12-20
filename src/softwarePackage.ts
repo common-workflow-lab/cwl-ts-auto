@@ -18,9 +18,8 @@ import * as Internal from './util/internal'
 /**
  * Auto-generated class implementation for https://w3id.org/cwl/cwl#SoftwarePackage
  */
-export class SoftwarePackage extends Saveable {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class SoftwarePackage extends Saveable implements Internal.SoftwarePackageProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * The name of the software to be made available. If the name is
@@ -35,7 +34,7 @@ export class SoftwarePackage extends Saveable {
    * compatible.
    * 
    */
-  version: undefined | Array<string>
+  version?: undefined | Array<string>
 
   /**
    * One or more [IRI](https://en.wikipedia.org/wiki/Internationalized_Resource_Identifier)s
@@ -81,13 +80,12 @@ export class SoftwarePackage extends Saveable {
    * clutter.
    * 
    */
-  specs: undefined | Array<string>
+  specs?: undefined | Array<string>
 
 
-  constructor ({extensionFields, loadingOptions, package_, version, specs} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  package_: string, version: undefined | Array<string>, specs: undefined | Array<string>,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, package_, version, specs} : {loadingOptions?: LoadingOptions} & Internal.SoftwarePackageProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.package_ = package_
     this.version = version
     this.specs = specs

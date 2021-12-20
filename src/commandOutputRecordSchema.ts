@@ -18,19 +18,18 @@ import * as Internal from './util/internal'
 /**
  * Auto-generated class implementation for https://w3id.org/cwl/cwl#CommandOutputRecordSchema
  */
-export class CommandOutputRecordSchema extends Saveable implements Internal.OutputRecordSchema {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class CommandOutputRecordSchema extends Saveable implements Internal.CommandOutputRecordSchemaProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * The identifier for this type
    */
-  name: undefined | string
+  name?: undefined | string
 
   /**
    * Defines the fields of the record.
    */
-  fields: undefined | Array<Internal.CommandOutputRecordField>
+  fields?: undefined | Array<Internal.CommandOutputRecordField>
 
   /**
    * Must be `record`
@@ -40,18 +39,17 @@ export class CommandOutputRecordSchema extends Saveable implements Internal.Outp
   /**
    * A short, human-readable label of this object.
    */
-  label: undefined | string
+  label?: undefined | string
 
   /**
    * A documentation string for this object, or an array of strings which should be concatenated.
    */
-  doc: undefined | string | Array<string>
+  doc?: undefined | string | Array<string>
 
 
-  constructor ({extensionFields, loadingOptions, name, fields, type, label, doc} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  fields: undefined | Array<Internal.CommandOutputRecordField>, type: string, label: undefined | string, doc: undefined | string | Array<string>, name: undefined | string,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, name, fields, type, label, doc} : {loadingOptions?: LoadingOptions} & Internal.CommandOutputRecordSchemaProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.name = name
     this.fields = fields
     this.type = type

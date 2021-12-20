@@ -18,14 +18,13 @@ import * as Internal from './util/internal'
 /**
  * Auto-generated class implementation for https://w3id.org/cwl/cwl#CommandInputEnumSchema
  */
-export class CommandInputEnumSchema extends Saveable implements Internal.InputEnumSchema, Internal.CommandInputSchema, Internal.CommandLineBindable {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class CommandInputEnumSchema extends Saveable implements Internal.CommandInputEnumSchemaProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * The identifier for this type
    */
-  name: undefined | string
+  name?: undefined | string
 
   /**
    * Defines the set of valid symbols.
@@ -40,23 +39,22 @@ export class CommandInputEnumSchema extends Saveable implements Internal.InputEn
   /**
    * A short, human-readable label of this object.
    */
-  label: undefined | string
+  label?: undefined | string
 
   /**
    * A documentation string for this object, or an array of strings which should be concatenated.
    */
-  doc: undefined | string | Array<string>
+  doc?: undefined | string | Array<string>
 
   /**
    * Describes how to turn this object into command line arguments.
    */
-  inputBinding: undefined | Internal.CommandLineBinding
+  inputBinding?: undefined | Internal.CommandLineBinding
 
 
-  constructor ({extensionFields, loadingOptions, name, symbols, type, label, doc, inputBinding} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  symbols: Array<string>, type: string, label: undefined | string, doc: undefined | string | Array<string>, name: undefined | string, inputBinding: undefined | Internal.CommandLineBinding,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, name, symbols, type, label, doc, inputBinding} : {loadingOptions?: LoadingOptions} & Internal.CommandInputEnumSchemaProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.name = name
     this.symbols = symbols
     this.type = type

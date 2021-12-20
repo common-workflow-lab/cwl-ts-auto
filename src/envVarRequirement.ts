@@ -22,9 +22,8 @@ import * as Internal from './util/internal'
  * execution environment of the tool.  See `EnvironmentDef` for details.
  * 
  */
-export class EnvVarRequirement extends Saveable implements Internal.ProcessRequirement {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class EnvVarRequirement extends Saveable implements Internal.EnvVarRequirementProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * Always 'EnvVarRequirement'
@@ -37,10 +36,9 @@ export class EnvVarRequirement extends Saveable implements Internal.ProcessRequi
   envDef: Array<Internal.EnvironmentDef>
 
 
-  constructor ({extensionFields, loadingOptions, class_, envDef} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  class_: string, envDef: Array<Internal.EnvironmentDef>,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, class_, envDef} : {loadingOptions?: LoadingOptions} & Internal.EnvVarRequirementProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.class_ = class_
     this.envDef = envDef
   }

@@ -18,14 +18,13 @@ import * as Internal from './util/internal'
 /**
  * Auto-generated class implementation for https://w3id.org/cwl/cwl#InputEnumSchema
  */
-export class InputEnumSchema extends Saveable implements Internal.EnumSchema, Internal.InputSchema {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class InputEnumSchema extends Saveable implements Internal.InputEnumSchemaProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * The identifier for this type
    */
-  name: undefined | string
+  name?: undefined | string
 
   /**
    * Defines the set of valid symbols.
@@ -40,18 +39,17 @@ export class InputEnumSchema extends Saveable implements Internal.EnumSchema, In
   /**
    * A short, human-readable label of this object.
    */
-  label: undefined | string
+  label?: undefined | string
 
   /**
    * A documentation string for this object, or an array of strings which should be concatenated.
    */
-  doc: undefined | string | Array<string>
+  doc?: undefined | string | Array<string>
 
 
-  constructor ({extensionFields, loadingOptions, name, symbols, type, label, doc} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  symbols: Array<string>, type: string, label: undefined | string, doc: undefined | string | Array<string>, name: undefined | string,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, name, symbols, type, label, doc} : {loadingOptions?: LoadingOptions} & Internal.InputEnumSchemaProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.name = name
     this.symbols = symbols
     this.type = type

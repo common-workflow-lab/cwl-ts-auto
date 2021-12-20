@@ -50,9 +50,8 @@ import * as Internal from './util/internal'
  * not be enabled.
  * 
  */
-export class InplaceUpdateRequirement extends Saveable implements Internal.ProcessRequirement {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class InplaceUpdateRequirement extends Saveable implements Internal.InplaceUpdateRequirementProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * Always 'InplaceUpdateRequirement'
@@ -61,10 +60,9 @@ export class InplaceUpdateRequirement extends Saveable implements Internal.Proce
   inplaceUpdate: boolean
 
 
-  constructor ({extensionFields, loadingOptions, class_, inplaceUpdate} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  class_: string, inplaceUpdate: boolean,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, class_, inplaceUpdate} : {loadingOptions?: LoadingOptions} & Internal.InplaceUpdateRequirementProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.class_ = class_
     this.inplaceUpdate = inplaceUpdate
   }

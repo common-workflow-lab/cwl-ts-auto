@@ -23,9 +23,8 @@ import * as Internal from './util/internal'
  * result of executing an expression, such as getting a parameter from input.
  * 
  */
-export class EnvironmentDef extends Saveable {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class EnvironmentDef extends Saveable implements Internal.EnvironmentDefProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * The environment variable name
@@ -38,10 +37,9 @@ export class EnvironmentDef extends Saveable {
   envValue: string
 
 
-  constructor ({extensionFields, loadingOptions, envName, envValue} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  envName: string, envValue: string,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, envName, envValue} : {loadingOptions?: LoadingOptions} & Internal.EnvironmentDefProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.envName = envName
     this.envValue = envValue
   }

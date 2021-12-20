@@ -21,9 +21,8 @@ import * as Internal from './util/internal'
  * Define an enumerated type.
  * 
  */
-export class EnumSchema extends Saveable {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class EnumSchema extends Saveable implements Internal.EnumSchemaProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * Defines the set of valid symbols.
@@ -36,10 +35,9 @@ export class EnumSchema extends Saveable {
   type: string
 
 
-  constructor ({extensionFields, loadingOptions, symbols, type} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  symbols: Array<string>, type: string,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, symbols, type} : {loadingOptions?: LoadingOptions} & Internal.EnumSchemaProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.symbols = symbols
     this.type = type
   }

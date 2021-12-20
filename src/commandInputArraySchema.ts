@@ -18,14 +18,13 @@ import * as Internal from './util/internal'
 /**
  * Auto-generated class implementation for https://w3id.org/cwl/cwl#CommandInputArraySchema
  */
-export class CommandInputArraySchema extends Saveable implements Internal.InputArraySchema, Internal.CommandInputSchema, Internal.CommandLineBindable {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class CommandInputArraySchema extends Saveable implements Internal.CommandInputArraySchemaProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * The identifier for this type
    */
-  name: undefined | string
+  name?: undefined | string
 
   /**
    * Defines the type of the array elements.
@@ -40,23 +39,22 @@ export class CommandInputArraySchema extends Saveable implements Internal.InputA
   /**
    * A short, human-readable label of this object.
    */
-  label: undefined | string
+  label?: undefined | string
 
   /**
    * A documentation string for this object, or an array of strings which should be concatenated.
    */
-  doc: undefined | string | Array<string>
+  doc?: undefined | string | Array<string>
 
   /**
    * Describes how to turn this object into command line arguments.
    */
-  inputBinding: undefined | Internal.CommandLineBinding
+  inputBinding?: undefined | Internal.CommandLineBinding
 
 
-  constructor ({extensionFields, loadingOptions, name, items, type, label, doc, inputBinding} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  items: string | Internal.CommandInputRecordSchema | Internal.CommandInputEnumSchema | Internal.CommandInputArraySchema | Array<string | Internal.CommandInputRecordSchema | Internal.CommandInputEnumSchema | Internal.CommandInputArraySchema>, type: string, label: undefined | string, doc: undefined | string | Array<string>, name: undefined | string, inputBinding: undefined | Internal.CommandLineBinding,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, name, items, type, label, doc, inputBinding} : {loadingOptions?: LoadingOptions} & Internal.CommandInputArraySchemaProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.name = name
     this.items = items
     this.type = type

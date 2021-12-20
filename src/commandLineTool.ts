@@ -21,25 +21,24 @@ import * as Internal from './util/internal'
  * This defines the schema of the CWL Command Line Tool Description document.
  * 
  */
-export class CommandLineTool extends Saveable implements Internal.Process {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class CommandLineTool extends Saveable implements Internal.CommandLineToolProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * The unique identifier for this object.
    */
-  id: undefined | string
+  id?: undefined | string
   class_: string
 
   /**
    * A short, human-readable label of this object.
    */
-  label: undefined | string
+  label?: undefined | string
 
   /**
    * A documentation string for this object, or an array of strings which should be concatenated.
    */
-  doc: undefined | string | Array<string>
+  doc?: undefined | string | Array<string>
 
   /**
    * Defines the input parameters of the process.  The process is ready to
@@ -73,7 +72,7 @@ export class CommandLineTool extends Saveable implements Internal.Process {
    * unless overridden at user option.
    * 
    */
-  requirements: undefined | Array<Internal.InlineJavascriptRequirement | Internal.SchemaDefRequirement | Internal.LoadListingRequirement | Internal.DockerRequirement | Internal.SoftwareRequirement | Internal.InitialWorkDirRequirement | Internal.EnvVarRequirement | Internal.ShellCommandRequirement | Internal.ResourceRequirement | Internal.WorkReuse | Internal.NetworkAccess | Internal.InplaceUpdateRequirement | Internal.ToolTimeLimit | Internal.SubworkflowFeatureRequirement | Internal.ScatterFeatureRequirement | Internal.MultipleInputFeatureRequirement | Internal.StepInputExpressionRequirement>
+  requirements?: undefined | Array<Internal.InlineJavascriptRequirement | Internal.SchemaDefRequirement | Internal.LoadListingRequirement | Internal.DockerRequirement | Internal.SoftwareRequirement | Internal.InitialWorkDirRequirement | Internal.EnvVarRequirement | Internal.ShellCommandRequirement | Internal.ResourceRequirement | Internal.WorkReuse | Internal.NetworkAccess | Internal.InplaceUpdateRequirement | Internal.ToolTimeLimit | Internal.SubworkflowFeatureRequirement | Internal.ScatterFeatureRequirement | Internal.MultipleInputFeatureRequirement | Internal.StepInputExpressionRequirement>
 
   /**
    * Declares hints applying to either the runtime environment or the
@@ -82,14 +81,14 @@ export class CommandLineTool extends Saveable implements Internal.Process {
    * the implementation may report a warning.
    * 
    */
-  hints: undefined | Array<any>
+  hints?: undefined | Array<any>
 
   /**
    * CWL document version. Always required at the document root. Not
    * required for a Process embedded inside another Process.
    * 
    */
-  cwlVersion: undefined | string
+  cwlVersion?: undefined | string
 
   /**
    * An identifier for the type of computational operation, of this Process.
@@ -107,7 +106,7 @@ export class CommandLineTool extends Saveable implements Internal.Process {
    * [Split read mapping](http://edamontology.org/operation_3199).
    * 
    */
-  intent: undefined | Array<string>
+  intent?: undefined | Array<string>
 
   /**
    * Specifies the program to execute.  If an array, the first element of
@@ -127,7 +126,7 @@ export class CommandLineTool extends Saveable implements Internal.Process {
    * executable.
    * 
    */
-  baseCommand: undefined | string | Array<string>
+  baseCommand?: undefined | string | Array<string>
 
   /**
    * Command line bindings which are not directly associated with input
@@ -136,14 +135,14 @@ export class CommandLineTool extends Saveable implements Internal.Process {
    * as an argument.
    * 
    */
-  arguments_: undefined | Array<string | Internal.CommandLineBinding>
+  arguments_?: undefined | Array<string | Internal.CommandLineBinding>
 
   /**
    * A path to a file whose contents must be piped into the command's
    * standard input stream.
    * 
    */
-  stdin: undefined | string
+  stdin?: undefined | string
 
   /**
    * Capture the command's standard error stream to a file written to
@@ -157,7 +156,7 @@ export class CommandLineTool extends Saveable implements Internal.Process {
    * characters (such as the path separator `/`) it is an error.
    * 
    */
-  stderr: undefined | string
+  stderr?: undefined | string
 
   /**
    * Capture the command's standard output stream to a file written to
@@ -171,7 +170,7 @@ export class CommandLineTool extends Saveable implements Internal.Process {
    * characters (such as the path separator `/`) it is an error.
    * 
    */
-  stdout: undefined | string
+  stdout?: undefined | string
 
   /**
    * Exit codes that indicate the process completed successfully.
@@ -179,7 +178,7 @@ export class CommandLineTool extends Saveable implements Internal.Process {
    * If not specified, only exit code 0 is considered success.
    * 
    */
-  successCodes: undefined | Array<number>
+  successCodes?: undefined | Array<number>
 
   /**
    * Exit codes that indicate the process failed due to a possibly
@@ -189,19 +188,18 @@ export class CommandLineTool extends Saveable implements Internal.Process {
    * If not specified, no exit codes are considered temporary failure.
    * 
    */
-  temporaryFailCodes: undefined | Array<number>
+  temporaryFailCodes?: undefined | Array<number>
 
   /**
    * Exit codes that indicate the process failed due to a permanent logic error, where executing the process with the same runtime environment and same inputs is expected to always fail.
    * If not specified, all exit codes except 0 are considered permanent failure.
    */
-  permanentFailCodes: undefined | Array<number>
+  permanentFailCodes?: undefined | Array<number>
 
 
-  constructor ({extensionFields, loadingOptions, id, class_, label, doc, inputs, outputs, requirements, hints, cwlVersion, intent, baseCommand, arguments_, stdin, stderr, stdout, successCodes, temporaryFailCodes, permanentFailCodes} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  id: undefined | string, label: undefined | string, doc: undefined | string | Array<string>, inputs: Array<Internal.CommandInputParameter>, outputs: Array<Internal.CommandOutputParameter>, requirements: undefined | Array<Internal.InlineJavascriptRequirement | Internal.SchemaDefRequirement | Internal.LoadListingRequirement | Internal.DockerRequirement | Internal.SoftwareRequirement | Internal.InitialWorkDirRequirement | Internal.EnvVarRequirement | Internal.ShellCommandRequirement | Internal.ResourceRequirement | Internal.WorkReuse | Internal.NetworkAccess | Internal.InplaceUpdateRequirement | Internal.ToolTimeLimit | Internal.SubworkflowFeatureRequirement | Internal.ScatterFeatureRequirement | Internal.MultipleInputFeatureRequirement | Internal.StepInputExpressionRequirement>, hints: undefined | Array<any>, cwlVersion: undefined | string, intent: undefined | Array<string>, class_: string, baseCommand: undefined | string | Array<string>, arguments_: undefined | Array<string | Internal.CommandLineBinding>, stdin: undefined | string, stderr: undefined | string, stdout: undefined | string, successCodes: undefined | Array<number>, temporaryFailCodes: undefined | Array<number>, permanentFailCodes: undefined | Array<number>,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, id, class_, label, doc, inputs, outputs, requirements, hints, cwlVersion, intent, baseCommand, arguments_, stdin, stderr, stdout, successCodes, temporaryFailCodes, permanentFailCodes} : {loadingOptions?: LoadingOptions} & Internal.CommandLineToolProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.id = id
     this.class_ = class_
     this.label = label

@@ -22,9 +22,8 @@ import * as Internal from './util/internal'
  * the defined process.
  * 
  */
-export class SoftwareRequirement extends Saveable implements Internal.ProcessRequirement {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class SoftwareRequirement extends Saveable implements Internal.SoftwareRequirementProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * Always 'SoftwareRequirement'
@@ -37,10 +36,9 @@ export class SoftwareRequirement extends Saveable implements Internal.ProcessReq
   packages: Array<Internal.SoftwarePackage>
 
 
-  constructor ({extensionFields, loadingOptions, class_, packages} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  class_: string, packages: Array<Internal.SoftwarePackage>,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, class_, packages} : {loadingOptions?: LoadingOptions} & Internal.SoftwareRequirementProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.class_ = class_
     this.packages = packages
   }

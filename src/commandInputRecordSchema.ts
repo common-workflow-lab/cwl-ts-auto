@@ -18,19 +18,18 @@ import * as Internal from './util/internal'
 /**
  * Auto-generated class implementation for https://w3id.org/cwl/cwl#CommandInputRecordSchema
  */
-export class CommandInputRecordSchema extends Saveable implements Internal.InputRecordSchema, Internal.CommandInputSchema, Internal.CommandLineBindable {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class CommandInputRecordSchema extends Saveable implements Internal.CommandInputRecordSchemaProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * The identifier for this type
    */
-  name: undefined | string
+  name?: undefined | string
 
   /**
    * Defines the fields of the record.
    */
-  fields: undefined | Array<Internal.CommandInputRecordField>
+  fields?: undefined | Array<Internal.CommandInputRecordField>
 
   /**
    * Must be `record`
@@ -40,23 +39,22 @@ export class CommandInputRecordSchema extends Saveable implements Internal.Input
   /**
    * A short, human-readable label of this object.
    */
-  label: undefined | string
+  label?: undefined | string
 
   /**
    * A documentation string for this object, or an array of strings which should be concatenated.
    */
-  doc: undefined | string | Array<string>
+  doc?: undefined | string | Array<string>
 
   /**
    * Describes how to turn this object into command line arguments.
    */
-  inputBinding: undefined | Internal.CommandLineBinding
+  inputBinding?: undefined | Internal.CommandLineBinding
 
 
-  constructor ({extensionFields, loadingOptions, name, fields, type, label, doc, inputBinding} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  fields: undefined | Array<Internal.CommandInputRecordField>, type: string, label: undefined | string, doc: undefined | string | Array<string>, name: undefined | string, inputBinding: undefined | Internal.CommandLineBinding,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, name, fields, type, label, doc, inputBinding} : {loadingOptions?: LoadingOptions} & Internal.CommandInputRecordSchemaProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.name = name
     this.fields = fields
     this.type = type

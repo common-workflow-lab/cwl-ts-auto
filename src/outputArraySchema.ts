@@ -18,14 +18,13 @@ import * as Internal from './util/internal'
 /**
  * Auto-generated class implementation for https://w3id.org/cwl/cwl#OutputArraySchema
  */
-export class OutputArraySchema extends Saveable implements Internal.ArraySchema, Internal.OutputSchema {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class OutputArraySchema extends Saveable implements Internal.OutputArraySchemaProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * The identifier for this type
    */
-  name: undefined | string
+  name?: undefined | string
 
   /**
    * Defines the type of the array elements.
@@ -40,18 +39,17 @@ export class OutputArraySchema extends Saveable implements Internal.ArraySchema,
   /**
    * A short, human-readable label of this object.
    */
-  label: undefined | string
+  label?: undefined | string
 
   /**
    * A documentation string for this object, or an array of strings which should be concatenated.
    */
-  doc: undefined | string | Array<string>
+  doc?: undefined | string | Array<string>
 
 
-  constructor ({extensionFields, loadingOptions, name, items, type, label, doc} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  items: string | Internal.OutputRecordSchema | Internal.OutputEnumSchema | Internal.OutputArraySchema | Array<string | Internal.OutputRecordSchema | Internal.OutputEnumSchema | Internal.OutputArraySchema>, type: string, label: undefined | string, doc: undefined | string | Array<string>, name: undefined | string,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, name, items, type, label, doc} : {loadingOptions?: LoadingOptions} & Internal.OutputArraySchemaProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.name = name
     this.items = items
     this.type = type

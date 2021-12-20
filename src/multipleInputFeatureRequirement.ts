@@ -22,9 +22,8 @@ import * as Internal from './util/internal'
  * listed in the `source` field of [WorkflowStepInput](#WorkflowStepInput).
  * 
  */
-export class MultipleInputFeatureRequirement extends Saveable implements Internal.ProcessRequirement {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class MultipleInputFeatureRequirement extends Saveable implements Internal.MultipleInputFeatureRequirementProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * Always 'MultipleInputFeatureRequirement'
@@ -32,10 +31,9 @@ export class MultipleInputFeatureRequirement extends Saveable implements Interna
   class_: string
 
 
-  constructor ({extensionFields, loadingOptions, class_} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  class_: string,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, class_} : {loadingOptions?: LoadingOptions} & Internal.MultipleInputFeatureRequirementProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.class_ = class_
   }
 

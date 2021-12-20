@@ -20,9 +20,8 @@ import * as Internal from './util/internal'
  *
  * A field of a record.
  */
-export class RecordField extends Saveable implements Internal.Documented {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class RecordField extends Saveable implements Internal.RecordFieldProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * The name of the field
@@ -33,7 +32,7 @@ export class RecordField extends Saveable implements Internal.Documented {
   /**
    * A documentation string for this object, or an array of strings which should be concatenated.
    */
-  doc: undefined | string | Array<string>
+  doc?: undefined | string | Array<string>
 
   /**
    * The field type
@@ -42,10 +41,9 @@ export class RecordField extends Saveable implements Internal.Documented {
   type: string | Internal.RecordSchema | Internal.EnumSchema | Internal.ArraySchema | Array<string | Internal.RecordSchema | Internal.EnumSchema | Internal.ArraySchema>
 
 
-  constructor ({extensionFields, loadingOptions, name, doc, type} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  doc: undefined | string | Array<string>, name: string, type: string | Internal.RecordSchema | Internal.EnumSchema | Internal.ArraySchema | Array<string | Internal.RecordSchema | Internal.EnumSchema | Internal.ArraySchema>,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, name, doc, type} : {loadingOptions?: LoadingOptions} & Internal.RecordFieldProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.name = name
     this.doc = doc
     this.type = type

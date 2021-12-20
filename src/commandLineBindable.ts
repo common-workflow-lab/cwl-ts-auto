@@ -18,20 +18,18 @@ import * as Internal from './util/internal'
 /**
  * Auto-generated class implementation for https://w3id.org/cwl/cwl#CommandLineBindable
  */
-export class CommandLineBindable extends Saveable {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class CommandLineBindable extends Saveable implements Internal.CommandLineBindableProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * Describes how to turn this object into command line arguments.
    */
-  inputBinding: undefined | Internal.CommandLineBinding
+  inputBinding?: undefined | Internal.CommandLineBinding
 
 
-  constructor ({extensionFields, loadingOptions, inputBinding} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  inputBinding: undefined | Internal.CommandLineBinding,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, inputBinding} : {loadingOptions?: LoadingOptions} & Internal.CommandLineBindableProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.inputBinding = inputBinding
   }
 

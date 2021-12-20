@@ -28,9 +28,8 @@ import * as Internal from './util/internal'
  * arbitrary locations, see discussion for `entryname`.
  * 
  */
-export class Dirent extends Saveable {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class Dirent extends Saveable implements Internal.DirentProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * The "target" name of the file or subdirectory.  If `entry` is
@@ -59,7 +58,7 @@ export class Dirent extends Saveable {
    * where the file or directory must be placed.
    * 
    */
-  entryname: undefined | string
+  entryname?: undefined | string
 
   /**
    * If the value is a string literal or an expression which evaluates to a
@@ -110,13 +109,12 @@ export class Dirent extends Saveable {
    * not explicitly marked as writable.
    * 
    */
-  writable: undefined | boolean
+  writable?: undefined | boolean
 
 
-  constructor ({extensionFields, loadingOptions, entryname, entry, writable} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  entryname: undefined | string, entry: string, writable: undefined | boolean,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, entryname, entry, writable} : {loadingOptions?: LoadingOptions} & Internal.DirentProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.entryname = entryname
     this.entry = entry
     this.writable = writable

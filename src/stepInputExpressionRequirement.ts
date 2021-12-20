@@ -22,9 +22,8 @@ import * as Internal from './util/internal'
  * of [WorkflowStepInput](#WorkflowStepInput).
  * 
  */
-export class StepInputExpressionRequirement extends Saveable implements Internal.ProcessRequirement {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class StepInputExpressionRequirement extends Saveable implements Internal.StepInputExpressionRequirementProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * Always 'StepInputExpressionRequirement'
@@ -32,10 +31,9 @@ export class StepInputExpressionRequirement extends Saveable implements Internal
   class_: string
 
 
-  constructor ({extensionFields, loadingOptions, class_} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  class_: string,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, class_} : {loadingOptions?: LoadingOptions} & Internal.StepInputExpressionRequirementProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.class_ = class_
   }
 

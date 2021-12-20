@@ -28,20 +28,18 @@ import * as Internal from './util/internal'
  * to connect the output value to downstream parameters.
  * 
  */
-export class WorkflowStepOutput extends Saveable implements Internal.Identified {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class WorkflowStepOutput extends Saveable implements Internal.WorkflowStepOutputProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * The unique identifier for this object.
    */
-  id: undefined | string
+  id?: undefined | string
 
 
-  constructor ({extensionFields, loadingOptions, id} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  id: undefined | string,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, id} : {loadingOptions?: LoadingOptions} & Internal.WorkflowStepOutputProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.id = id
   }
 

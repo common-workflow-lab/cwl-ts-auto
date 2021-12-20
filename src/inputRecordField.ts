@@ -18,9 +18,8 @@ import * as Internal from './util/internal'
 /**
  * Auto-generated class implementation for https://w3id.org/cwl/cwl#InputRecordField
  */
-export class InputRecordField extends Saveable implements Internal.RecordField, Internal.FieldBase, Internal.InputFormat, Internal.LoadContents {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class InputRecordField extends Saveable implements Internal.InputRecordFieldProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * The name of the field
@@ -31,7 +30,7 @@ export class InputRecordField extends Saveable implements Internal.RecordField, 
   /**
    * A documentation string for this object, or an array of strings which should be concatenated.
    */
-  doc: undefined | string | Array<string>
+  doc?: undefined | string | Array<string>
 
   /**
    * The field type
@@ -42,7 +41,7 @@ export class InputRecordField extends Saveable implements Internal.RecordField, 
   /**
    * A short, human-readable label of this object.
    */
-  label: undefined | string
+  label?: undefined | string
 
   /**
    * Only valid when `type: File` or is an array of `items: File`.
@@ -88,7 +87,7 @@ export class InputRecordField extends Saveable implements Internal.RecordField, 
    *   3. Append the remainder of the string to the end of the file path.
    * 
    */
-  secondaryFiles: undefined | Internal.SecondaryFileSchema | Array<Internal.SecondaryFileSchema>
+  secondaryFiles?: undefined | Internal.SecondaryFileSchema | Array<Internal.SecondaryFileSchema>
 
   /**
    * Only valid when `type: File` or is an array of `items: File`.
@@ -99,7 +98,7 @@ export class InputRecordField extends Saveable implements Internal.RecordField, 
    * pipe.  Default: `false`.
    * 
    */
-  streamable: undefined | boolean
+  streamable?: undefined | boolean
 
   /**
    * Only valid when `type: File` or is an array of `items: File`.
@@ -110,7 +109,7 @@ export class InputRecordField extends Saveable implements Internal.RecordField, 
    * available, file formats may be tested by exact match.
    * 
    */
-  format: undefined | string | Array<string>
+  format?: undefined | string | Array<string>
 
   /**
    * Only valid when `type: File` or is an array of `items: File`.
@@ -123,7 +122,7 @@ export class InputRecordField extends Saveable implements Internal.RecordField, 
    * the implementation must raise a fatal error.
    * 
    */
-  loadContents: undefined | boolean
+  loadContents?: undefined | boolean
 
   /**
    * Only valid when `type: Directory` or is an array of `items: Directory`.
@@ -138,13 +137,12 @@ export class InputRecordField extends Saveable implements Internal.RecordField, 
    *   3. By default: `no_listing`
    * 
    */
-  loadListing: undefined | string
+  loadListing?: undefined | string
 
 
-  constructor ({extensionFields, loadingOptions, name, doc, type, label, secondaryFiles, streamable, format, loadContents, loadListing} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  doc: undefined | string | Array<string>, name: string, type: string | Internal.InputRecordSchema | Internal.InputEnumSchema | Internal.InputArraySchema | Array<string | Internal.InputRecordSchema | Internal.InputEnumSchema | Internal.InputArraySchema>, label: undefined | string, secondaryFiles: undefined | Internal.SecondaryFileSchema | Array<Internal.SecondaryFileSchema>, streamable: undefined | boolean, format: undefined | string | Array<string>, loadContents: undefined | boolean, loadListing: undefined | string,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, name, doc, type, label, secondaryFiles, streamable, format, loadContents, loadListing} : {loadingOptions?: LoadingOptions} & Internal.InputRecordFieldProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.name = name
     this.doc = doc
     this.type = type

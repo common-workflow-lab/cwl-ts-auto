@@ -20,19 +20,18 @@ import * as Internal from './util/internal'
  *
  * An input parameter for a CommandLineTool.
  */
-export class CommandInputParameter extends Saveable implements Internal.InputParameter {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class CommandInputParameter extends Saveable implements Internal.CommandInputParameterProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * The unique identifier for this object.
    */
-  id: undefined | string
+  id?: undefined | string
 
   /**
    * A short, human-readable label of this object.
    */
-  label: undefined | string
+  label?: undefined | string
 
   /**
    * Only valid when `type: File` or is an array of `items: File`.
@@ -78,7 +77,7 @@ export class CommandInputParameter extends Saveable implements Internal.InputPar
    *   3. Append the remainder of the string to the end of the file path.
    * 
    */
-  secondaryFiles: undefined | Internal.SecondaryFileSchema | Array<Internal.SecondaryFileSchema>
+  secondaryFiles?: undefined | Internal.SecondaryFileSchema | Array<Internal.SecondaryFileSchema>
 
   /**
    * Only valid when `type: File` or is an array of `items: File`.
@@ -89,12 +88,12 @@ export class CommandInputParameter extends Saveable implements Internal.InputPar
    * pipe.  Default: `false`.
    * 
    */
-  streamable: undefined | boolean
+  streamable?: undefined | boolean
 
   /**
    * A documentation string for this object, or an array of strings which should be concatenated.
    */
-  doc: undefined | string | Array<string>
+  doc?: undefined | string | Array<string>
 
   /**
    * Only valid when `type: File` or is an array of `items: File`.
@@ -105,7 +104,7 @@ export class CommandInputParameter extends Saveable implements Internal.InputPar
    * available, file formats may be tested by exact match.
    * 
    */
-  format: undefined | string | Array<string>
+  format?: undefined | string | Array<string>
 
   /**
    * Only valid when `type: File` or is an array of `items: File`.
@@ -118,7 +117,7 @@ export class CommandInputParameter extends Saveable implements Internal.InputPar
    * the implementation must raise a fatal error.
    * 
    */
-  loadContents: undefined | boolean
+  loadContents?: undefined | boolean
 
   /**
    * Only valid when `type: Directory` or is an array of `items: Directory`.
@@ -133,7 +132,7 @@ export class CommandInputParameter extends Saveable implements Internal.InputPar
    *   3. By default: `no_listing`
    * 
    */
-  loadListing: undefined | string
+  loadListing?: undefined | string
 
   /**
    * The default value to use for this parameter if the parameter is missing
@@ -142,7 +141,7 @@ export class CommandInputParameter extends Saveable implements Internal.InputPar
    * (e.g. dependent `valueFrom` fields).
    * 
    */
-  default_: undefined | any
+  default_?: undefined | any
 
   /**
    * Specify valid types of data that may be assigned to this parameter.
@@ -155,13 +154,12 @@ export class CommandInputParameter extends Saveable implements Internal.InputPar
    * command line arguments.
    * 
    */
-  inputBinding: undefined | Internal.CommandLineBinding
+  inputBinding?: undefined | Internal.CommandLineBinding
 
 
-  constructor ({extensionFields, loadingOptions, id, label, secondaryFiles, streamable, doc, format, loadContents, loadListing, default_, type, inputBinding} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  label: undefined | string, secondaryFiles: undefined | Internal.SecondaryFileSchema | Array<Internal.SecondaryFileSchema>, streamable: undefined | boolean, doc: undefined | string | Array<string>, id: undefined | string, format: undefined | string | Array<string>, loadContents: undefined | boolean, loadListing: undefined | string, default_: undefined | any, type: string | Internal.CommandInputRecordSchema | Internal.CommandInputEnumSchema | Internal.CommandInputArraySchema | Array<string | Internal.CommandInputRecordSchema | Internal.CommandInputEnumSchema | Internal.CommandInputArraySchema>, inputBinding: undefined | Internal.CommandLineBinding,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, id, label, secondaryFiles, streamable, doc, format, loadContents, loadListing, default_, type, inputBinding} : {loadingOptions?: LoadingOptions} & Internal.CommandInputParameterProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.id = id
     this.label = label
     this.secondaryFiles = secondaryFiles

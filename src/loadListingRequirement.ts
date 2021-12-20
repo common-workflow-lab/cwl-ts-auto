@@ -22,21 +22,19 @@ import * as Internal from './util/internal'
  * a Directory object for use by expressions.
  * 
  */
-export class LoadListingRequirement extends Saveable implements Internal.ProcessRequirement {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class LoadListingRequirement extends Saveable implements Internal.LoadListingRequirementProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * Always 'LoadListingRequirement'
    */
   class_: string
-  loadListing: undefined | string
+  loadListing?: undefined | string
 
 
-  constructor ({extensionFields, loadingOptions, class_, loadListing} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  class_: string, loadListing: undefined | string,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, class_, loadListing} : {loadingOptions?: LoadingOptions} & Internal.LoadListingRequirementProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.class_ = class_
     this.loadListing = loadListing
   }

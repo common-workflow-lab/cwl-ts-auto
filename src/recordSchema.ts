@@ -18,14 +18,13 @@ import * as Internal from './util/internal'
 /**
  * Auto-generated class implementation for https://w3id.org/cwl/salad#RecordSchema
  */
-export class RecordSchema extends Saveable {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class RecordSchema extends Saveable implements Internal.RecordSchemaProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * Defines the fields of the record.
    */
-  fields: undefined | Array<Internal.RecordField>
+  fields?: undefined | Array<Internal.RecordField>
 
   /**
    * Must be `record`
@@ -33,10 +32,9 @@ export class RecordSchema extends Saveable {
   type: string
 
 
-  constructor ({extensionFields, loadingOptions, fields, type} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  fields: undefined | Array<Internal.RecordField>, type: string,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, fields, type} : {loadingOptions?: LoadingOptions} & Internal.RecordSchemaProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.fields = fields
     this.type = type
   }

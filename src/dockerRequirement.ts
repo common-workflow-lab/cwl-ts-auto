@@ -71,9 +71,8 @@ import * as Internal from './util/internal'
  * environment as defined by Docker.
  * 
  */
-export class DockerRequirement extends Saveable implements Internal.ProcessRequirement {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class DockerRequirement extends Saveable implements Internal.DockerRequirementProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * Always 'DockerRequirement'
@@ -86,22 +85,22 @@ export class DockerRequirement extends Saveable implements Internal.ProcessRequi
    * `dockerPull: ubuntu@sha256:45b23dee08af5e43a7fea6c4cf9c25ccf269ee113168c19722f87876677c5cb2`
    * 
    */
-  dockerPull: undefined | string
+  dockerPull?: undefined | string
 
   /**
    * Specify a HTTP URL from which to download a Docker image using `docker load`.
    */
-  dockerLoad: undefined | string
+  dockerLoad?: undefined | string
 
   /**
    * Supply the contents of a Dockerfile which will be built using `docker build`.
    */
-  dockerFile: undefined | string
+  dockerFile?: undefined | string
 
   /**
    * Provide HTTP URL to download and gunzip a Docker images using `docker import.
    */
-  dockerImport: undefined | string
+  dockerImport?: undefined | string
 
   /**
    * The image id that will be used for `docker run`.  May be a
@@ -110,20 +109,19 @@ export class DockerRequirement extends Saveable implements Internal.ProcessRequi
    * must be used.
    * 
    */
-  dockerImageId: undefined | string
+  dockerImageId?: undefined | string
 
   /**
    * Set the designated output directory to a specific location inside the
    * Docker container.
    * 
    */
-  dockerOutputDirectory: undefined | string
+  dockerOutputDirectory?: undefined | string
 
 
-  constructor ({extensionFields, loadingOptions, class_, dockerPull, dockerLoad, dockerFile, dockerImport, dockerImageId, dockerOutputDirectory} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  class_: string, dockerPull: undefined | string, dockerLoad: undefined | string, dockerFile: undefined | string, dockerImport: undefined | string, dockerImageId: undefined | string, dockerOutputDirectory: undefined | string,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, class_, dockerPull, dockerLoad, dockerFile, dockerImport, dockerImageId, dockerOutputDirectory} : {loadingOptions?: LoadingOptions} & Internal.DockerRequirementProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.class_ = class_
     this.dockerPull = dockerPull
     this.dockerLoad = dockerLoad

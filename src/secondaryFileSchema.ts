@@ -33,9 +33,8 @@ import * as Internal from './util/internal'
  * in the Schema Salad specification.
  * 
  */
-export class SecondaryFileSchema extends Saveable {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class SecondaryFileSchema extends Saveable implements Internal.SecondaryFileSchemaProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * Provides a pattern or expression specifying files or directories that
@@ -98,13 +97,12 @@ export class SecondaryFileSchema extends Saveable {
    * input and `false` for secondary files on output.
    * 
    */
-  required: undefined | boolean | string
+  required?: undefined | boolean | string
 
 
-  constructor ({extensionFields, loadingOptions, pattern, required} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  pattern: string, required: undefined | boolean | string,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, pattern, required} : {loadingOptions?: LoadingOptions} & Internal.SecondaryFileSchemaProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.pattern = pattern
     this.required = required
   }

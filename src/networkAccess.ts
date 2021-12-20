@@ -35,9 +35,8 @@ import * as Internal from './util/internal'
  * address or the ability to accept inbound connections.
  * 
  */
-export class NetworkAccess extends Saveable implements Internal.ProcessRequirement {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class NetworkAccess extends Saveable implements Internal.NetworkAccessProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * Always 'NetworkAccess'
@@ -46,10 +45,9 @@ export class NetworkAccess extends Saveable implements Internal.ProcessRequireme
   networkAccess: boolean | string
 
 
-  constructor ({extensionFields, loadingOptions, class_, networkAccess} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  class_: string, networkAccess: boolean | string,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, class_, networkAccess} : {loadingOptions?: LoadingOptions} & Internal.NetworkAccessProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.class_ = class_
     this.networkAccess = networkAccess
   }

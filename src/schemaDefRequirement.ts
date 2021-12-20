@@ -32,9 +32,8 @@ import * as Internal from './util/internal'
  * - A file can contain a list of type definitions
  * 
  */
-export class SchemaDefRequirement extends Saveable implements Internal.ProcessRequirement {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class SchemaDefRequirement extends Saveable implements Internal.SchemaDefRequirementProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * Always 'SchemaDefRequirement'
@@ -47,10 +46,9 @@ export class SchemaDefRequirement extends Saveable implements Internal.ProcessRe
   types: Array<Internal.CommandInputRecordSchema | Internal.CommandInputEnumSchema | Internal.CommandInputArraySchema>
 
 
-  constructor ({extensionFields, loadingOptions, class_, types} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  class_: string, types: Array<Internal.CommandInputRecordSchema | Internal.CommandInputEnumSchema | Internal.CommandInputArraySchema>,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, class_, types} : {loadingOptions?: LoadingOptions} & Internal.SchemaDefRequirementProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.class_ = class_
     this.types = types
   }

@@ -18,9 +18,8 @@ import * as Internal from './util/internal'
 /**
  * Auto-generated class implementation for https://w3id.org/cwl/cwl#OutputRecordField
  */
-export class OutputRecordField extends Saveable implements Internal.RecordField, Internal.FieldBase, Internal.OutputFormat {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class OutputRecordField extends Saveable implements Internal.OutputRecordFieldProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * The name of the field
@@ -31,7 +30,7 @@ export class OutputRecordField extends Saveable implements Internal.RecordField,
   /**
    * A documentation string for this object, or an array of strings which should be concatenated.
    */
-  doc: undefined | string | Array<string>
+  doc?: undefined | string | Array<string>
 
   /**
    * The field type
@@ -42,7 +41,7 @@ export class OutputRecordField extends Saveable implements Internal.RecordField,
   /**
    * A short, human-readable label of this object.
    */
-  label: undefined | string
+  label?: undefined | string
 
   /**
    * Only valid when `type: File` or is an array of `items: File`.
@@ -88,7 +87,7 @@ export class OutputRecordField extends Saveable implements Internal.RecordField,
    *   3. Append the remainder of the string to the end of the file path.
    * 
    */
-  secondaryFiles: undefined | Internal.SecondaryFileSchema | Array<Internal.SecondaryFileSchema>
+  secondaryFiles?: undefined | Internal.SecondaryFileSchema | Array<Internal.SecondaryFileSchema>
 
   /**
    * Only valid when `type: File` or is an array of `items: File`.
@@ -99,7 +98,7 @@ export class OutputRecordField extends Saveable implements Internal.RecordField,
    * pipe.  Default: `false`.
    * 
    */
-  streamable: undefined | boolean
+  streamable?: undefined | boolean
 
   /**
    * Only valid when `type: File` or is an array of `items: File`.
@@ -108,13 +107,12 @@ export class OutputRecordField extends Saveable implements Internal.RecordField,
    * File object.
    * 
    */
-  format: undefined | string
+  format?: undefined | string
 
 
-  constructor ({extensionFields, loadingOptions, name, doc, type, label, secondaryFiles, streamable, format} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  doc: undefined | string | Array<string>, name: string, type: string | Internal.OutputRecordSchema | Internal.OutputEnumSchema | Internal.OutputArraySchema | Array<string | Internal.OutputRecordSchema | Internal.OutputEnumSchema | Internal.OutputArraySchema>, label: undefined | string, secondaryFiles: undefined | Internal.SecondaryFileSchema | Array<Internal.SecondaryFileSchema>, streamable: undefined | boolean, format: undefined | string,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, name, doc, type, label, secondaryFiles, streamable, format} : {loadingOptions?: LoadingOptions} & Internal.OutputRecordFieldProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.name = name
     this.doc = doc
     this.type = type

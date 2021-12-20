@@ -29,9 +29,8 @@ import * as Internal from './util/internal'
  * is enabled by default.
  * 
  */
-export class WorkReuse extends Saveable implements Internal.ProcessRequirement {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class WorkReuse extends Saveable implements Internal.WorkReuseProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * Always 'WorkReuse'
@@ -40,10 +39,9 @@ export class WorkReuse extends Saveable implements Internal.ProcessRequirement {
   enableReuse: boolean | string
 
 
-  constructor ({extensionFields, loadingOptions, class_, enableReuse} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  class_: string, enableReuse: boolean | string,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, class_, enableReuse} : {loadingOptions?: LoadingOptions} & Internal.WorkReuseProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.class_ = class_
     this.enableReuse = enableReuse
   }

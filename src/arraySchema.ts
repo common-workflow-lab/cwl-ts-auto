@@ -18,9 +18,8 @@ import * as Internal from './util/internal'
 /**
  * Auto-generated class implementation for https://w3id.org/cwl/salad#ArraySchema
  */
-export class ArraySchema extends Saveable {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class ArraySchema extends Saveable implements Internal.ArraySchemaProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * Defines the type of the array elements.
@@ -33,10 +32,9 @@ export class ArraySchema extends Saveable {
   type: string
 
 
-  constructor ({extensionFields, loadingOptions, items, type} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  items: string | Internal.RecordSchema | Internal.EnumSchema | Internal.ArraySchema | Array<string | Internal.RecordSchema | Internal.EnumSchema | Internal.ArraySchema>, type: string,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, items, type} : {loadingOptions?: LoadingOptions} & Internal.ArraySchemaProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.items = items
     this.type = type
   }

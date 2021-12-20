@@ -22,9 +22,8 @@ import * as Internal from './util/internal'
  * the `run` field of [WorkflowStep](#WorkflowStep).
  * 
  */
-export class SubworkflowFeatureRequirement extends Saveable implements Internal.ProcessRequirement {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class SubworkflowFeatureRequirement extends Saveable implements Internal.SubworkflowFeatureRequirementProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * Always 'SubworkflowFeatureRequirement'
@@ -32,10 +31,9 @@ export class SubworkflowFeatureRequirement extends Saveable implements Internal.
   class_: string
 
 
-  constructor ({extensionFields, loadingOptions, class_} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  class_: string,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, class_} : {loadingOptions?: LoadingOptions} & Internal.SubworkflowFeatureRequirementProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.class_ = class_
   }
 

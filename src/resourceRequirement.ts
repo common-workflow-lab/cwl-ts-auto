@@ -45,9 +45,8 @@ import * as Internal from './util/internal'
  * If neither "min" nor "max" is specified for a resource, use the default values below.
  * 
  */
-export class ResourceRequirement extends Saveable implements Internal.ProcessRequirement {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class ResourceRequirement extends Saveable implements Internal.ResourceRequirementProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * Always 'ResourceRequirement'
@@ -82,7 +81,7 @@ export class ResourceRequirement extends Saveable implements Internal.ProcessReq
    * next whole number.
    * 
    */
-  coresMin: undefined | number | string
+  coresMin?: undefined | number | string
 
   /**
    * Maximum reserved number of CPU cores.
@@ -90,7 +89,7 @@ export class ResourceRequirement extends Saveable implements Internal.ProcessReq
    * See `coresMin` for discussion about fractional CPU requests.
    * 
    */
-  coresMax: undefined | number | string
+  coresMax?: undefined | number | string
 
   /**
    * Minimum reserved RAM in mebibytes (2**20) (default is 256)
@@ -102,7 +101,7 @@ export class ResourceRequirement extends Saveable implements Internal.ProcessReq
    * non-zero integer.
    * 
    */
-  ramMin: undefined | number | string
+  ramMin?: undefined | number | string
 
   /**
    * Maximum reserved RAM in mebibytes (2**20)
@@ -110,7 +109,7 @@ export class ResourceRequirement extends Saveable implements Internal.ProcessReq
    * See `ramMin` for discussion about fractional RAM requests.
    * 
    */
-  ramMax: undefined | number | string
+  ramMax?: undefined | number | string
 
   /**
    * Minimum reserved filesystem based storage for the designated temporary directory, in mebibytes (2**20) (default is 1024)
@@ -122,7 +121,7 @@ export class ResourceRequirement extends Saveable implements Internal.ProcessReq
    * must be a non-zero integer.
    * 
    */
-  tmpdirMin: undefined | number | string
+  tmpdirMin?: undefined | number | string
 
   /**
    * Maximum reserved filesystem based storage for the designated temporary directory, in mebibytes (2**20)
@@ -130,7 +129,7 @@ export class ResourceRequirement extends Saveable implements Internal.ProcessReq
    * See `tmpdirMin` for discussion about fractional storage requests.
    * 
    */
-  tmpdirMax: undefined | number | string
+  tmpdirMax?: undefined | number | string
 
   /**
    * Minimum reserved filesystem based storage for the designated output directory, in mebibytes (2**20) (default is 1024)
@@ -142,7 +141,7 @@ export class ResourceRequirement extends Saveable implements Internal.ProcessReq
    * must be a non-zero integer.
    * 
    */
-  outdirMin: undefined | number | string
+  outdirMin?: undefined | number | string
 
   /**
    * Maximum reserved filesystem based storage for the designated output directory, in mebibytes (2**20)
@@ -150,13 +149,12 @@ export class ResourceRequirement extends Saveable implements Internal.ProcessReq
    * See `outdirMin` for discussion about fractional storage requests.
    * 
    */
-  outdirMax: undefined | number | string
+  outdirMax?: undefined | number | string
 
 
-  constructor ({extensionFields, loadingOptions, class_, coresMin, coresMax, ramMin, ramMax, tmpdirMin, tmpdirMax, outdirMin, outdirMax} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  class_: string, coresMin: undefined | number | string, coresMax: undefined | number | string, ramMin: undefined | number | string, ramMax: undefined | number | string, tmpdirMin: undefined | number | string, tmpdirMax: undefined | number | string, outdirMin: undefined | number | string, outdirMax: undefined | number | string,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, class_, coresMin, coresMax, ramMin, ramMax, tmpdirMin, tmpdirMax, outdirMin, outdirMax} : {loadingOptions?: LoadingOptions} & Internal.ResourceRequirementProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.class_ = class_
     this.coresMin = coresMin
     this.coresMax = coresMax

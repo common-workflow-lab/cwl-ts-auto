@@ -55,9 +55,8 @@ import * as Internal from './util/internal'
  *   - **null**: Add nothing.
  * 
  */
-export class CommandLineBinding extends Saveable implements Internal.InputBinding {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class CommandLineBinding extends Saveable implements Internal.CommandLineBindingProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * Use of `loadContents` in `InputBinding` is deprecated.
@@ -65,7 +64,7 @@ export class CommandLineBinding extends Saveable implements Internal.InputBindin
    * CWL v2.0.  Use `InputParameter.loadContents` instead.
    * 
    */
-  loadContents: undefined | boolean
+  loadContents?: undefined | boolean
 
   /**
    * The sorting key.  Default position is 0. If a [CWL Parameter Reference](#Parameter_references)
@@ -77,12 +76,12 @@ export class CommandLineBinding extends Saveable implements Internal.InputBindin
    * single value of type int or a null.
    * 
    */
-  position: undefined | number | string
+  position?: undefined | number | string
 
   /**
    * Command line prefix to add before the value.
    */
-  prefix: undefined | string
+  prefix?: undefined | string
 
   /**
    * If true (default), then the prefix and value must be added as separate
@@ -90,14 +89,14 @@ export class CommandLineBinding extends Saveable implements Internal.InputBindin
    * into a single command line argument.
    * 
    */
-  separate: undefined | boolean
+  separate?: undefined | boolean
 
   /**
    * Join the array elements into a single string with the elements
    * separated by by `itemSeparator`.
    * 
    */
-  itemSeparator: undefined | string
+  itemSeparator?: undefined | string
 
   /**
    * If `valueFrom` is a constant string value, use this as the value and
@@ -118,7 +117,7 @@ export class CommandLineBinding extends Saveable implements Internal.InputBindin
    * the `valueFrom` field is required.
    * 
    */
-  valueFrom: undefined | string
+  valueFrom?: undefined | string
 
   /**
    * If `ShellCommandRequirement` is in the requirements for the current command,
@@ -129,13 +128,12 @@ export class CommandLineBinding extends Saveable implements Internal.InputBindin
    * permit interpretation of any shell metacharacters or directives.
    * 
    */
-  shellQuote: undefined | boolean
+  shellQuote?: undefined | boolean
 
 
-  constructor ({extensionFields, loadingOptions, loadContents, position, prefix, separate, itemSeparator, valueFrom, shellQuote} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  loadContents: undefined | boolean, position: undefined | number | string, prefix: undefined | string, separate: undefined | boolean, itemSeparator: undefined | string, valueFrom: undefined | string, shellQuote: undefined | boolean,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, loadContents, position, prefix, separate, itemSeparator, valueFrom, shellQuote} : {loadingOptions?: LoadingOptions} & Internal.CommandLineBindingProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.loadContents = loadContents
     this.position = position
     this.prefix = prefix

@@ -18,9 +18,8 @@ import * as Internal from './util/internal'
 /**
  * Auto-generated class implementation for https://w3id.org/cwl/cwl#InputBinding
  */
-export class InputBinding extends Saveable {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class InputBinding extends Saveable implements Internal.InputBindingProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * Use of `loadContents` in `InputBinding` is deprecated.
@@ -28,13 +27,12 @@ export class InputBinding extends Saveable {
    * CWL v2.0.  Use `InputParameter.loadContents` instead.
    * 
    */
-  loadContents: undefined | boolean
+  loadContents?: undefined | boolean
 
 
-  constructor ({extensionFields, loadingOptions, loadContents} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  loadContents: undefined | boolean,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, loadContents} : {loadingOptions?: LoadingOptions} & Internal.InputBindingProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.loadContents = loadContents
   }
 

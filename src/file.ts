@@ -86,9 +86,8 @@ import * as Internal from './util/internal'
  * the same value for `location`.
  * 
  */
-export class File extends Saveable {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class File extends Saveable implements Internal.FileProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * Must be `File` to indicate this object describes a file.
@@ -113,7 +112,7 @@ export class File extends Saveable {
    * then follow the rules above.
    * 
    */
-  location: undefined | string
+  location?: undefined | string
 
   /**
    * The local host path where the File is available when a CommandLineTool is
@@ -136,7 +135,7 @@ export class File extends Saveable {
    * `permanentFailure`.
    * 
    */
-  path: undefined | string
+  path?: undefined | string
 
   /**
    * The base name of the file, that is, the name of the file without any
@@ -152,7 +151,7 @@ export class File extends Saveable {
    * `basename`.
    * 
    */
-  basename: undefined | string
+  basename?: undefined | string
 
   /**
    * The name of the directory containing file, that is, the path leading up
@@ -165,7 +164,7 @@ export class File extends Saveable {
    * context.
    * 
    */
-  dirname: undefined | string
+  dirname?: undefined | string
 
   /**
    * The basename root such that `nameroot + nameext == basename`, and
@@ -178,7 +177,7 @@ export class File extends Saveable {
    * of `basename` prior to evaluating parameter references or expressions.
    * 
    */
-  nameroot: undefined | string
+  nameroot?: undefined | string
 
   /**
    * The basename extension such that `nameroot + nameext == basename`, and
@@ -190,19 +189,19 @@ export class File extends Saveable {
    * of `basename` prior to evaluating parameter references or expressions.
    * 
    */
-  nameext: undefined | string
+  nameext?: undefined | string
 
   /**
    * Optional hash code for validating file integrity.  Currently must be in the form
    * "sha1$ + hexadecimal string" using the SHA-1 algorithm.
    * 
    */
-  checksum: undefined | string
+  checksum?: undefined | string
 
   /**
    * Optional file size (in bytes)
    */
-  size: undefined | number
+  size?: undefined | number
 
   /**
    * A list of additional files or directories that are associated with the
@@ -213,7 +212,7 @@ export class File extends Saveable {
    * which the same rules apply.
    * 
    */
-  secondaryFiles: undefined | Array<Internal.File | Internal.Directory>
+  secondaryFiles?: undefined | Array<Internal.File | Internal.Directory>
 
   /**
    * The format of the file: this must be an IRI of a concept node that
@@ -232,7 +231,7 @@ export class File extends Saveable {
    * runtime may perform exact file format matches.
    * 
    */
-  format: undefined | string
+  format?: undefined | string
 
   /**
    * File contents literal.
@@ -258,13 +257,12 @@ export class File extends Saveable {
    * implementation must raise a fatal error.
    * 
    */
-  contents: undefined | string
+  contents?: undefined | string
 
 
-  constructor ({extensionFields, loadingOptions, class_, location, path, basename, dirname, nameroot, nameext, checksum, size, secondaryFiles, format, contents} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  class_: string, location: undefined | string, path: undefined | string, basename: undefined | string, dirname: undefined | string, nameroot: undefined | string, nameext: undefined | string, checksum: undefined | string, size: undefined | number, secondaryFiles: undefined | Array<Internal.File | Internal.Directory>, format: undefined | string, contents: undefined | string,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, class_, location, path, basename, dirname, nameroot, nameext, checksum, size, secondaryFiles, format, contents} : {loadingOptions?: LoadingOptions} & Internal.FileProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.class_ = class_
     this.location = location
     this.path = path

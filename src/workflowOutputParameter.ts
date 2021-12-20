@@ -27,19 +27,18 @@ import * as Internal from './util/internal'
  * `linkMerge` and `pickValue`.
  * 
  */
-export class WorkflowOutputParameter extends Saveable implements Internal.OutputParameter {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class WorkflowOutputParameter extends Saveable implements Internal.WorkflowOutputParameterProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * The unique identifier for this object.
    */
-  id: undefined | string
+  id?: undefined | string
 
   /**
    * A short, human-readable label of this object.
    */
-  label: undefined | string
+  label?: undefined | string
 
   /**
    * Only valid when `type: File` or is an array of `items: File`.
@@ -85,7 +84,7 @@ export class WorkflowOutputParameter extends Saveable implements Internal.Output
    *   3. Append the remainder of the string to the end of the file path.
    * 
    */
-  secondaryFiles: undefined | Internal.SecondaryFileSchema | Array<Internal.SecondaryFileSchema>
+  secondaryFiles?: undefined | Internal.SecondaryFileSchema | Array<Internal.SecondaryFileSchema>
 
   /**
    * Only valid when `type: File` or is an array of `items: File`.
@@ -96,12 +95,12 @@ export class WorkflowOutputParameter extends Saveable implements Internal.Output
    * pipe.  Default: `false`.
    * 
    */
-  streamable: undefined | boolean
+  streamable?: undefined | boolean
 
   /**
    * A documentation string for this object, or an array of strings which should be concatenated.
    */
-  doc: undefined | string | Array<string>
+  doc?: undefined | string | Array<string>
 
   /**
    * Only valid when `type: File` or is an array of `items: File`.
@@ -110,27 +109,27 @@ export class WorkflowOutputParameter extends Saveable implements Internal.Output
    * File object.
    * 
    */
-  format: undefined | string
+  format?: undefined | string
 
   /**
    * Specifies one or more workflow parameters that supply the value of to
    * the output parameter.
    * 
    */
-  outputSource: undefined | string | Array<string>
+  outputSource?: undefined | string | Array<string>
 
   /**
    * The method to use to merge multiple sources into a single array.
    * If not specified, the default method is "merge_nested".
    * 
    */
-  linkMerge: undefined | string
+  linkMerge?: undefined | string
 
   /**
    * The method to use to choose non-null elements among multiple sources.
    * 
    */
-  pickValue: undefined | string
+  pickValue?: undefined | string
 
   /**
    * Specify valid types of data that may be assigned to this parameter.
@@ -139,10 +138,9 @@ export class WorkflowOutputParameter extends Saveable implements Internal.Output
   type: string | Internal.OutputRecordSchema | Internal.OutputEnumSchema | Internal.OutputArraySchema | Array<string | Internal.OutputRecordSchema | Internal.OutputEnumSchema | Internal.OutputArraySchema>
 
 
-  constructor ({extensionFields, loadingOptions, id, label, secondaryFiles, streamable, doc, format, outputSource, linkMerge, pickValue, type} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  label: undefined | string, secondaryFiles: undefined | Internal.SecondaryFileSchema | Array<Internal.SecondaryFileSchema>, streamable: undefined | boolean, doc: undefined | string | Array<string>, id: undefined | string, format: undefined | string, outputSource: undefined | string | Array<string>, linkMerge: undefined | string, pickValue: undefined | string, type: string | Internal.OutputRecordSchema | Internal.OutputEnumSchema | Internal.OutputArraySchema | Array<string | Internal.OutputRecordSchema | Internal.OutputEnumSchema | Internal.OutputArraySchema>,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, id, label, secondaryFiles, streamable, doc, format, outputSource, linkMerge, pickValue, type} : {loadingOptions?: LoadingOptions} & Internal.WorkflowOutputParameterProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.id = id
     this.label = label
     this.secondaryFiles = secondaryFiles

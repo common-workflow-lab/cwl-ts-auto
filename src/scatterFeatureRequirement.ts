@@ -22,9 +22,8 @@ import * as Internal from './util/internal'
  * `scatterMethod` fields of [WorkflowStep](#WorkflowStep).
  * 
  */
-export class ScatterFeatureRequirement extends Saveable implements Internal.ProcessRequirement {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class ScatterFeatureRequirement extends Saveable implements Internal.ScatterFeatureRequirementProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * Always 'ScatterFeatureRequirement'
@@ -32,10 +31,9 @@ export class ScatterFeatureRequirement extends Saveable implements Internal.Proc
   class_: string
 
 
-  constructor ({extensionFields, loadingOptions, class_} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  class_: string,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, class_} : {loadingOptions?: LoadingOptions} & Internal.ScatterFeatureRequirementProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.class_ = class_
   }
 

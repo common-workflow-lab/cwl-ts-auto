@@ -18,9 +18,8 @@ import * as Internal from './util/internal'
 /**
  * Auto-generated class implementation for https://w3id.org/cwl/cwl#CommandInputRecordField
  */
-export class CommandInputRecordField extends Saveable implements Internal.InputRecordField, Internal.CommandLineBindable {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class CommandInputRecordField extends Saveable implements Internal.CommandInputRecordFieldProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * The name of the field
@@ -31,7 +30,7 @@ export class CommandInputRecordField extends Saveable implements Internal.InputR
   /**
    * A documentation string for this object, or an array of strings which should be concatenated.
    */
-  doc: undefined | string | Array<string>
+  doc?: undefined | string | Array<string>
 
   /**
    * The field type
@@ -42,7 +41,7 @@ export class CommandInputRecordField extends Saveable implements Internal.InputR
   /**
    * A short, human-readable label of this object.
    */
-  label: undefined | string
+  label?: undefined | string
 
   /**
    * Only valid when `type: File` or is an array of `items: File`.
@@ -88,7 +87,7 @@ export class CommandInputRecordField extends Saveable implements Internal.InputR
    *   3. Append the remainder of the string to the end of the file path.
    * 
    */
-  secondaryFiles: undefined | Internal.SecondaryFileSchema | Array<Internal.SecondaryFileSchema>
+  secondaryFiles?: undefined | Internal.SecondaryFileSchema | Array<Internal.SecondaryFileSchema>
 
   /**
    * Only valid when `type: File` or is an array of `items: File`.
@@ -99,7 +98,7 @@ export class CommandInputRecordField extends Saveable implements Internal.InputR
    * pipe.  Default: `false`.
    * 
    */
-  streamable: undefined | boolean
+  streamable?: undefined | boolean
 
   /**
    * Only valid when `type: File` or is an array of `items: File`.
@@ -110,7 +109,7 @@ export class CommandInputRecordField extends Saveable implements Internal.InputR
    * available, file formats may be tested by exact match.
    * 
    */
-  format: undefined | string | Array<string>
+  format?: undefined | string | Array<string>
 
   /**
    * Only valid when `type: File` or is an array of `items: File`.
@@ -123,7 +122,7 @@ export class CommandInputRecordField extends Saveable implements Internal.InputR
    * the implementation must raise a fatal error.
    * 
    */
-  loadContents: undefined | boolean
+  loadContents?: undefined | boolean
 
   /**
    * Only valid when `type: Directory` or is an array of `items: Directory`.
@@ -138,18 +137,17 @@ export class CommandInputRecordField extends Saveable implements Internal.InputR
    *   3. By default: `no_listing`
    * 
    */
-  loadListing: undefined | string
+  loadListing?: undefined | string
 
   /**
    * Describes how to turn this object into command line arguments.
    */
-  inputBinding: undefined | Internal.CommandLineBinding
+  inputBinding?: undefined | Internal.CommandLineBinding
 
 
-  constructor ({extensionFields, loadingOptions, name, doc, type, label, secondaryFiles, streamable, format, loadContents, loadListing, inputBinding} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  doc: undefined | string | Array<string>, name: string, type: string | Internal.CommandInputRecordSchema | Internal.CommandInputEnumSchema | Internal.CommandInputArraySchema | Array<string | Internal.CommandInputRecordSchema | Internal.CommandInputEnumSchema | Internal.CommandInputArraySchema>, label: undefined | string, secondaryFiles: undefined | Internal.SecondaryFileSchema | Array<Internal.SecondaryFileSchema>, streamable: undefined | boolean, format: undefined | string | Array<string>, loadContents: undefined | boolean, loadListing: undefined | string, inputBinding: undefined | Internal.CommandLineBinding,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, name, doc, type, label, secondaryFiles, streamable, format, loadContents, loadListing, inputBinding} : {loadingOptions?: LoadingOptions} & Internal.CommandInputRecordFieldProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.name = name
     this.doc = doc
     this.type = type

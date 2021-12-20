@@ -27,9 +27,8 @@ import * as Internal from './util/internal'
  * wall-time for the execution of the command line itself.
  * 
  */
-export class ToolTimeLimit extends Saveable implements Internal.ProcessRequirement {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class ToolTimeLimit extends Saveable implements Internal.ToolTimeLimitProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * Always 'ToolTimeLimit'
@@ -44,10 +43,9 @@ export class ToolTimeLimit extends Saveable implements Internal.ProcessRequireme
   timelimit: number | string
 
 
-  constructor ({extensionFields, loadingOptions, class_, timelimit} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  class_: string, timelimit: number | string,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, class_, timelimit} : {loadingOptions?: LoadingOptions} & Internal.ToolTimeLimitProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.class_ = class_
     this.timelimit = timelimit
   }

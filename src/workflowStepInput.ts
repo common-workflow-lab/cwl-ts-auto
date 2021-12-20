@@ -128,34 +128,33 @@ import * as Internal from './util/internal'
  *    should be filtered out.
  * 
  */
-export class WorkflowStepInput extends Saveable implements Internal.Identified, Internal.Sink, Internal.LoadContents, Internal.Labeled {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class WorkflowStepInput extends Saveable implements Internal.WorkflowStepInputProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * The unique identifier for this object.
    */
-  id: undefined | string
+  id?: undefined | string
 
   /**
    * Specifies one or more workflow parameters that will provide input to
    * the underlying step parameter.
    * 
    */
-  source: undefined | string | Array<string>
+  source?: undefined | string | Array<string>
 
   /**
    * The method to use to merge multiple inbound links into a single array.
    * If not specified, the default method is "merge_nested".
    * 
    */
-  linkMerge: undefined | string
+  linkMerge?: undefined | string
 
   /**
    * The method to use to choose non-null elements among multiple sources.
    * 
    */
-  pickValue: undefined | string
+  pickValue?: undefined | string
 
   /**
    * Only valid when `type: File` or is an array of `items: File`.
@@ -168,7 +167,7 @@ export class WorkflowStepInput extends Saveable implements Internal.Identified, 
    * the implementation must raise a fatal error.
    * 
    */
-  loadContents: undefined | boolean
+  loadContents?: undefined | boolean
 
   /**
    * Only valid when `type: Directory` or is an array of `items: Directory`.
@@ -183,12 +182,12 @@ export class WorkflowStepInput extends Saveable implements Internal.Identified, 
    *   3. By default: `no_listing`
    * 
    */
-  loadListing: undefined | string
+  loadListing?: undefined | string
 
   /**
    * A short, human-readable label of this object.
    */
-  label: undefined | string
+  label?: undefined | string
 
   /**
    * The default value for this parameter to use if either there is no
@@ -196,7 +195,7 @@ export class WorkflowStepInput extends Saveable implements Internal.Identified, 
    * default must be applied prior to scattering or evaluating `valueFrom`.
    * 
    */
-  default_: undefined | any
+  default_?: undefined | any
 
   /**
    * To use valueFrom, [StepInputExpressionRequirement](#StepInputExpressionRequirement) must
@@ -223,13 +222,12 @@ export class WorkflowStepInput extends Saveable implements Internal.Identified, 
    * evaluation of `valueFrom` on other parameters.
    * 
    */
-  valueFrom: undefined | string
+  valueFrom?: undefined | string
 
 
-  constructor ({extensionFields, loadingOptions, id, source, linkMerge, pickValue, loadContents, loadListing, label, default_, valueFrom} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  id: undefined | string, source: undefined | string | Array<string>, linkMerge: undefined | string, pickValue: undefined | string, loadContents: undefined | boolean, loadListing: undefined | string, label: undefined | string, default_: undefined | any, valueFrom: undefined | string,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, id, source, linkMerge, pickValue, loadContents, loadListing, label, default_, valueFrom} : {loadingOptions?: LoadingOptions} & Internal.WorkflowStepInputProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.id = id
     this.source = source
     this.linkMerge = linkMerge

@@ -23,9 +23,8 @@ import * as Internal from './util/internal'
  * interpolatation.
  * 
  */
-export class InlineJavascriptRequirement extends Saveable implements Internal.ProcessRequirement {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class InlineJavascriptRequirement extends Saveable implements Internal.InlineJavascriptRequirementProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * Always 'InlineJavascriptRequirement'
@@ -38,13 +37,12 @@ export class InlineJavascriptRequirement extends Saveable implements Internal.Pr
    * be called from CWL expressions.
    * 
    */
-  expressionLib: undefined | Array<string>
+  expressionLib?: undefined | Array<string>
 
 
-  constructor ({extensionFields, loadingOptions, class_, expressionLib} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  class_: string, expressionLib: undefined | Array<string>,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, class_, expressionLib} : {loadingOptions?: LoadingOptions} & Internal.InlineJavascriptRequirementProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.class_ = class_
     this.expressionLib = expressionLib
   }

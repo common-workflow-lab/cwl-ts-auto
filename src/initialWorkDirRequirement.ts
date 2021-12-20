@@ -21,9 +21,8 @@ import * as Internal from './util/internal'
  * Define a list of files and subdirectories that must be staged by the workflow platform prior to executing the command line tool.
  * Normally files are staged within the designated output directory. However, when running inside containers, files may be staged at arbitrary locations, see discussion for `Dirent.entryname`. Together with `DockerRequirement.dockerOutputDirectory` this it possible to control the locations of both input and output files when running in containers.
  */
-export class InitialWorkDirRequirement extends Saveable implements Internal.ProcessRequirement {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class InitialWorkDirRequirement extends Saveable implements Internal.InitialWorkDirRequirementProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * InitialWorkDirRequirement
@@ -57,13 +56,12 @@ export class InitialWorkDirRequirement extends Saveable implements Internal.Proc
    * is undefined.
    * 
    */
-  listing: string | Array<undefined | Internal.Dirent | string | Internal.File | Internal.Directory | Array<Internal.File | Internal.Directory>>
+  listing?: string | Array<undefined | Internal.Dirent | string | Internal.File | Internal.Directory | Array<Internal.File | Internal.Directory>>
 
 
-  constructor ({extensionFields, loadingOptions, class_, listing} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  class_: string, listing: string | Array<undefined | Internal.Dirent | string | Internal.File | Internal.Directory | Array<Internal.File | Internal.Directory>>,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, class_, listing} : {loadingOptions?: LoadingOptions} & Internal.InitialWorkDirRequirementProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.class_ = class_
     this.listing = listing
   }

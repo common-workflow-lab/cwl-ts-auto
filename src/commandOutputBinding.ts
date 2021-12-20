@@ -30,9 +30,8 @@ import * as Internal from './util/internal'
  *   - secondaryFiles
  * 
  */
-export class CommandOutputBinding extends Saveable implements Internal.LoadContents {
-  loadingOptions: LoadingOptions
-  extensionFields?: Dictionary<any>
+export class CommandOutputBinding extends Saveable implements Internal.CommandOutputBindingProperties {
+  extensionFields?: Internal.Dictionary<any>
 
   /**
    * Only valid when `type: File` or is an array of `items: File`.
@@ -45,7 +44,7 @@ export class CommandOutputBinding extends Saveable implements Internal.LoadConte
    * the implementation must raise a fatal error.
    * 
    */
-  loadContents: undefined | boolean
+  loadContents?: undefined | boolean
 
   /**
    * Only valid when `type: Directory` or is an array of `items: Directory`.
@@ -60,7 +59,7 @@ export class CommandOutputBinding extends Saveable implements Internal.LoadConte
    *   3. By default: `no_listing`
    * 
    */
-  loadListing: undefined | string
+  loadListing?: undefined | string
 
   /**
    * Find files or directories relative to the output directory, using POSIX
@@ -100,7 +99,7 @@ export class CommandOutputBinding extends Saveable implements Internal.LoadConte
    * container filesystem except for declared input and output.
    * 
    */
-  glob: undefined | string | Array<string>
+  glob?: undefined | string | Array<string>
 
   /**
    * Evaluate an expression to generate the output value.  If
@@ -124,13 +123,12 @@ export class CommandOutputBinding extends Saveable implements Internal.LoadConte
    * `loadContents` limit.
    * 
    */
-  outputEval: undefined | string
+  outputEval?: undefined | string
 
 
-  constructor ({extensionFields, loadingOptions, loadContents, loadListing, glob, outputEval} : {extensionFields?: Dictionary<any>, loadingOptions?: LoadingOptions,  loadContents: undefined | boolean, loadListing: undefined | string, glob: undefined | string | Array<string>, outputEval: undefined | string,}) {
-    super()
+  constructor ({loadingOptions, extensionFields, loadContents, loadListing, glob, outputEval} : {loadingOptions?: LoadingOptions} & Internal.CommandOutputBindingProperties) {
+    super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.loadingOptions = loadingOptions ?? new LoadingOptions({})
     this.loadContents = loadContents
     this.loadListing = loadListing
     this.glob = glob
