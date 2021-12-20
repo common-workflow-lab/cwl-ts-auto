@@ -78,7 +78,7 @@ export class Workflow extends Saveable implements Internal.WorkflowProperties {
    * The unique identifier for this object.
    */
   id?: undefined | string
-  class_: string
+  class_: Internal.Workflow_class
 
   /**
    * A short, human-readable label of this object.
@@ -138,7 +138,7 @@ export class Workflow extends Saveable implements Internal.WorkflowProperties {
    * required for a Process embedded inside another Process.
    * 
    */
-  cwlVersion?: undefined | string
+  cwlVersion?: undefined | Internal.CWLVersion
 
   /**
    * An identifier for the type of computational operation, of this Process.
@@ -168,7 +168,7 @@ export class Workflow extends Saveable implements Internal.WorkflowProperties {
   steps: Array<Internal.WorkflowStep>
 
 
-  constructor ({loadingOptions, extensionFields, id, class_, label, doc, inputs, outputs, requirements, hints, cwlVersion, intent, steps} : {loadingOptions?: LoadingOptions} & Internal.WorkflowProperties) {
+  constructor ({loadingOptions, extensionFields, id, class_ = Internal.Workflow_class.WORKFLOW, label, doc, inputs, outputs, requirements, hints, cwlVersion, intent, steps} : {loadingOptions?: LoadingOptions} & Internal.WorkflowProperties) {
     super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
     this.id = id

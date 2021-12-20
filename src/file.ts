@@ -92,7 +92,7 @@ export class File extends Saveable implements Internal.FileProperties {
   /**
    * Must be `File` to indicate this object describes a file.
    */
-  class_: string
+  class_: Internal.File_class
 
   /**
    * An IRI that identifies the file resource.  This may be a relative
@@ -260,7 +260,7 @@ export class File extends Saveable implements Internal.FileProperties {
   contents?: undefined | string
 
 
-  constructor ({loadingOptions, extensionFields, class_, location, path, basename, dirname, nameroot, nameext, checksum, size, secondaryFiles, format, contents} : {loadingOptions?: LoadingOptions} & Internal.FileProperties) {
+  constructor ({loadingOptions, extensionFields, class_ = Internal.File_class.FILE, location, path, basename, dirname, nameroot, nameext, checksum, size, secondaryFiles, format, contents} : {loadingOptions?: LoadingOptions} & Internal.FileProperties) {
     super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
     this.class_ = class_

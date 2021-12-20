@@ -16,25 +16,96 @@ import * as Internal from './util/internal'
 
 
 /**
- * Auto-generated class implementation for https://w3id.org/cwl/cwl#Operation
+ * Auto-generated class implementation for https://w3id.org/cwl/cwl#WorkflowStep
  *
- * This record describes an abstract operation.  It is a potential
- * step of a workflow that has not yet been bound to a concrete
- * implementation.  It specifies an input and output signature, but
- * does not provide enough information to be executed.  An
- * implementation (or other tooling) may provide a means of binding
- * an Operation to a concrete process (such as Workflow,
- * CommandLineTool, or ExpressionTool) with a compatible signature.
+ * A workflow step is an executable element of a workflow.  It specifies the
+ * underlying process implementation (such as `CommandLineTool` or another
+ * `Workflow`) in the `run` field and connects the input and output parameters
+ * of the underlying process to workflow parameters.
+ * 
+ * # Scatter/gather
+ * 
+ * To use scatter/gather,
+ * [ScatterFeatureRequirement](#ScatterFeatureRequirement) must be specified
+ * in the workflow or workflow step requirements.
+ * 
+ * A "scatter" operation specifies that the associated workflow step or
+ * subworkflow should execute separately over a list of input elements.  Each
+ * job making up a scatter operation is independent and may be executed
+ * concurrently.
+ * 
+ * The `scatter` field specifies one or more input parameters which will be
+ * scattered.  An input parameter may be listed more than once.  The declared
+ * type of each input parameter is implicitly becomes an array of items of the
+ * input parameter type.  If a parameter is listed more than once, it becomes
+ * a nested array.  As a result, upstream parameters which are connected to
+ * scattered parameters must be arrays.
+ * 
+ * All output parameter types are also implicitly wrapped in arrays.  Each job
+ * in the scatter results in an entry in the output array.
+ * 
+ * If any scattered parameter runtime value is an empty array, all outputs are
+ * set to empty arrays and no work is done for the step, according to
+ * applicable scattering rules.
+ * 
+ * If `scatter` declares more than one input parameter, `scatterMethod`
+ * describes how to decompose the input into a discrete set of jobs.
+ * 
+ *   * **dotproduct** specifies that each of the input arrays are aligned and one
+ *       element taken from each array to construct each job.  It is an error
+ *       if all input arrays are not the same length.
+ * 
+ *   * **nested_crossproduct** specifies the Cartesian product of the inputs,
+ *       producing a job for every combination of the scattered inputs.  The
+ *       output must be nested arrays for each level of scattering, in the
+ *       order that the input arrays are listed in the `scatter` field.
+ * 
+ *   * **flat_crossproduct** specifies the Cartesian product of the inputs,
+ *       producing a job for every combination of the scattered inputs.  The
+ *       output arrays must be flattened to a single level, but otherwise listed in the
+ *       order that the input arrays are listed in the `scatter` field.
+ * 
+ * # Conditional execution (Optional)
+ * 
+ * Conditional execution makes execution of a step conditional on an
+ * expression.  A step that is not executed is "skipped".  A skipped
+ * step produces `null` for all output parameters.
+ * 
+ * The condition is evaluated after `scatter`, using the input object
+ * of each individual scatter job.  This means over a set of scatter
+ * jobs, some may be executed and some may be skipped.  When the
+ * results are gathered, skipped steps must be `null` in the output
+ * arrays.
+ * 
+ * The `when` field controls conditional execution.  This is an
+ * expression that must be evaluated with `inputs` bound to the step
+ * input object (or individual scatter job), and returns a boolean
+ * value.  It is an error if this expression returns a value other
+ * than `true` or `false`.
+ * 
+ * Conditionals in CWL are an optional feature and are not required
+ * to be implemented by all consumers of CWL documents.  An
+ * implementation that does not support conditionals must return a
+ * fatal error when attempting execute a workflow that uses
+ * conditional constructs the implementation does not support.
+ * 
+ * # Subworkflows
+ * 
+ * To specify a nested workflow as part of a workflow step,
+ * [SubworkflowFeatureRequirement](#SubworkflowFeatureRequirement) must be
+ * specified in the workflow or workflow step requirements.
+ * 
+ * It is a fatal error if a workflow directly or indirectly invokes itself as
+ * a subworkflow (recursive workflows are not allowed).
  * 
  */
-export class Operation extends Saveable implements Internal.OperationProperties {
+export class WorkflowStep extends Saveable implements Internal.WorkflowStepProperties {
   extensionFields?: Internal.Dictionary<any>
 
   /**
    * The unique identifier for this object.
    */
   id?: undefined | string
-  class_: Internal.Operation_class
 
   /**
    * A short, human-readable label of this object.
@@ -47,31 +118,25 @@ export class Operation extends Saveable implements Internal.OperationProperties 
   doc?: undefined | string | Array<string>
 
   /**
-   * Defines the input parameters of the process.  The process is ready to
+   * Defines the input parameters of the workflow step.  The process is ready to
    * run when all required input parameters are associated with concrete
    * values.  Input parameters include a schema for each parameter which is
-   * used to validate the input object.  It may also be used to build a user
+   * used to validate the input object.  It may also be used build a user
    * interface for constructing the input object.
    * 
-   * When accepting an input object, all input parameters must have a value.
-   * If an input parameter is missing from the input object, it must be
-   * assigned a value of `null` (or the value of `default` for that
-   * parameter, if provided) for the purposes of validation and evaluation
-   * of expressions.
-   * 
    */
-  inputs: Array<Internal.OperationInputParameter>
+  in_: Array<Internal.WorkflowStepInput>
 
   /**
    * Defines the parameters representing the output of the process.  May be
    * used to generate and/or validate the output object.
    * 
    */
-  outputs: Array<Internal.OperationOutputParameter>
+  out: Array<string | Internal.WorkflowStepOutput>
 
   /**
    * Declares requirements that apply to either the runtime environment or the
-   * workflow engine that must be met in order to execute this process.  If
+   * workflow engine that must be met in order to execute this workflow step.  If
    * an implementation cannot satisfy all requirements, or a requirement is
    * listed which is not recognized by the implementation, it is a fatal
    * error and the implementation must not attempt to run the process,
@@ -82,7 +147,7 @@ export class Operation extends Saveable implements Internal.OperationProperties 
 
   /**
    * Declares hints applying to either the runtime environment or the
-   * workflow engine that may be helpful in executing this process.  It is
+   * workflow engine that may be helpful in executing this workflow step.  It is
    * not an error if an implementation cannot satisfy all hints, however
    * the implementation may report a warning.
    * 
@@ -90,54 +155,51 @@ export class Operation extends Saveable implements Internal.OperationProperties 
   hints?: undefined | Array<any>
 
   /**
-   * CWL document version. Always required at the document root. Not
-   * required for a Process embedded inside another Process.
+   * Specifies the process to run.
    * 
    */
-  cwlVersion?: undefined | Internal.CWLVersion
+  run: string | Internal.CommandLineTool | Internal.ExpressionTool | Internal.Workflow | Internal.Operation
 
   /**
-   * An identifier for the type of computational operation, of this Process.
-   * Especially useful for "class: Operation", but can also be used for
-   * CommandLineTool, Workflow, or ExpressionTool.
-   * 
-   * If provided, then this must be an IRI of a concept node that
-   * represents the type of operation, preferrably defined within an ontology.
-   * 
-   * For example, in the domain of bioinformatics, one can use an IRI from
-   * the EDAM Ontology's [Operation concept nodes](http://edamontology.org/operation_0004),
-   * like [Alignment](http://edamontology.org/operation_2928),
-   * or [Clustering](http://edamontology.org/operation_3432); or a more
-   * specific Operation concept like
-   * [Split read mapping](http://edamontology.org/operation_3199).
+   * If defined, only run the step when the expression evaluates to
+   * `true`.  If `false` the step is skipped.  A skipped step
+   * produces a `null` on each output.
    * 
    */
-  intent?: undefined | Array<string>
+  when?: undefined | string
+  scatter?: undefined | string | Array<string>
+
+  /**
+   * Required if `scatter` is an array of more than one element.
+   * 
+   */
+  scatterMethod?: undefined | Internal.ScatterMethod
 
 
-  constructor ({loadingOptions, extensionFields, id, class_ = Internal.Operation_class.OPERATION, label, doc, inputs, outputs, requirements, hints, cwlVersion, intent} : {loadingOptions?: LoadingOptions} & Internal.OperationProperties) {
+  constructor ({loadingOptions, extensionFields, id, label, doc, in_, out, requirements, hints, run, when, scatter, scatterMethod} : {loadingOptions?: LoadingOptions} & Internal.WorkflowStepProperties) {
     super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
     this.id = id
-    this.class_ = class_
     this.label = label
     this.doc = doc
-    this.inputs = inputs
-    this.outputs = outputs
+    this.in_ = in_
+    this.out = out
     this.requirements = requirements
     this.hints = hints
-    this.cwlVersion = cwlVersion
-    this.intent = intent
+    this.run = run
+    this.when = when
+    this.scatter = scatter
+    this.scatterMethod = scatterMethod
   }
 
   /**
-   * Used to construct instances of {@link Operation }.
+   * Used to construct instances of {@link WorkflowStep }.
    *
    * @param __doc                           Document fragment to load this record object from.
    * @param baseuri                         Base URI to generate child document IDs against.
    * @param loadingOptions                  Context for loading URIs and populating objects.
    * @param docRoot                         ID at this position in the document (if available)
-   * @returns                               An instance of {@link Operation }
+   * @returns                               An instance of {@link WorkflowStep }
    * @throws {@link ValidationException}    If the document fragment is not a
    *                                        {@link Dictionary} or validation of fields fails.
    */
@@ -173,20 +235,6 @@ export class Operation extends Saveable implements Internal.OperationProperties 
       baseuri = id as string
     }
             
-    let class_
-    try {
-      class_ = await loadField(_doc.class, LoaderInstances.uriOperation_classLoaderFalseTrueNone,
-        baseuri, loadingOptions)
-    } catch (e) {
-      if (e instanceof ValidationException) {
-        __errors.push(
-          new ValidationException('the `class` field is not valid because: ', [e])
-        )
-      } else {
-        throw e
-      }
-    }
-
     let label
     if ('label' in _doc) {
       try {
@@ -219,28 +267,28 @@ export class Operation extends Saveable implements Internal.OperationProperties 
       }
     }
 
-    let inputs
+    let in_
     try {
-      inputs = await loadField(_doc.inputs, LoaderInstances.idmapinputsarrayOfOperationInputParameterLoader,
+      in_ = await loadField(_doc.in, LoaderInstances.idmapin_arrayOfWorkflowStepInputLoader,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
         __errors.push(
-          new ValidationException('the `inputs` field is not valid because: ', [e])
+          new ValidationException('the `in` field is not valid because: ', [e])
         )
       } else {
         throw e
       }
     }
 
-    let outputs
+    let out
     try {
-      outputs = await loadField(_doc.outputs, LoaderInstances.idmapoutputsarrayOfOperationOutputParameterLoader,
+      out = await loadField(_doc.out, LoaderInstances.uriunionOfarrayOfunionOfstrtypeOrWorkflowStepOutputLoaderTrueFalseNone,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
         __errors.push(
-          new ValidationException('the `outputs` field is not valid because: ', [e])
+          new ValidationException('the `out` field is not valid because: ', [e])
         )
       } else {
         throw e
@@ -279,15 +327,29 @@ export class Operation extends Saveable implements Internal.OperationProperties 
       }
     }
 
-    let cwlVersion
-    if ('cwlVersion' in _doc) {
+    let run
+    try {
+      run = await loadField(_doc.run, LoaderInstances.unionOfstrtypeOrCommandLineToolLoaderOrExpressionToolLoaderOrWorkflowLoaderOrOperationLoader,
+        baseuri, loadingOptions)
+    } catch (e) {
+      if (e instanceof ValidationException) {
+        __errors.push(
+          new ValidationException('the `run` field is not valid because: ', [e])
+        )
+      } else {
+        throw e
+      }
+    }
+
+    let when
+    if ('when' in _doc) {
       try {
-        cwlVersion = await loadField(_doc.cwlVersion, LoaderInstances.uriunionOfundefinedtypeOrCWLVersionLoaderFalseTrueNone,
+        when = await loadField(_doc.when, LoaderInstances.unionOfundefinedtypeOrExpressionLoader,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
           __errors.push(
-            new ValidationException('the `cwlVersion` field is not valid because: ', [e])
+            new ValidationException('the `when` field is not valid because: ', [e])
           )
         } else {
           throw e
@@ -295,15 +357,31 @@ export class Operation extends Saveable implements Internal.OperationProperties 
       }
     }
 
-    let intent
-    if ('intent' in _doc) {
+    let scatter
+    if ('scatter' in _doc) {
       try {
-        intent = await loadField(_doc.intent, LoaderInstances.uriunionOfundefinedtypeOrarrayOfstrtypeTrueFalseNone,
+        scatter = await loadField(_doc.scatter, LoaderInstances.uriunionOfundefinedtypeOrstrtypeOrarrayOfstrtypeFalseFalse0,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
           __errors.push(
-            new ValidationException('the `intent` field is not valid because: ', [e])
+            new ValidationException('the `scatter` field is not valid because: ', [e])
+          )
+        } else {
+          throw e
+        }
+      }
+    }
+
+    let scatterMethod
+    if ('scatterMethod' in _doc) {
+      try {
+        scatterMethod = await loadField(_doc.scatterMethod, LoaderInstances.uriunionOfundefinedtypeOrScatterMethodLoaderFalseTrueNone,
+          baseuri, loadingOptions)
+      } catch (e) {
+        if (e instanceof ValidationException) {
+          __errors.push(
+            new ValidationException('the `scatterMethod` field is not valid because: ', [e])
           )
         } else {
           throw e
@@ -313,14 +391,14 @@ export class Operation extends Saveable implements Internal.OperationProperties 
 
     const extensionFields: Dictionary<any> = {}
     for (const [key, value] of Object.entries(_doc)) {
-      if (!Operation.attr.has(key)) {
+      if (!WorkflowStep.attr.has(key)) {
         if ((key as string).includes(':')) {
           const ex = expandUrl(key, '', loadingOptions, false, false)
           extensionFields[ex] = value
         } else {
           __errors.push(
             new ValidationException(`invalid field ${key as string}, \
-            expected one of: \`id\`,\`label\`,\`doc\`,\`inputs\`,\`outputs\`,\`requirements\`,\`hints\`,\`cwlVersion\`,\`intent\`,\`class\``)
+            expected one of: \`id\`,\`label\`,\`doc\`,\`in\`,\`out\`,\`requirements\`,\`hints\`,\`run\`,\`when\`,\`scatter\`,\`scatterMethod\``)
           )
           break
         }
@@ -328,22 +406,23 @@ export class Operation extends Saveable implements Internal.OperationProperties 
     }
 
     if (__errors.length > 0) {
-      throw new ValidationException("Trying 'Operation'", __errors)
+      throw new ValidationException("Trying 'WorkflowStep'", __errors)
     }
 
-    const schema = new Operation({
+    const schema = new WorkflowStep({
       extensionFields: extensionFields,
       loadingOptions: loadingOptions,
       id: id,
       label: label,
       doc: doc,
-      inputs: inputs,
-      outputs: outputs,
+      in_: in_,
+      out: out,
       requirements: requirements,
       hints: hints,
-      cwlVersion: cwlVersion,
-      intent: intent,
-      class_: class_
+      run: run,
+      when: when,
+      scatter: scatter,
+      scatterMethod: scatterMethod
     })
     return schema
   }
@@ -363,14 +442,6 @@ export class Operation extends Saveable implements Internal.OperationProperties 
       }
     }
                 
-    if (this.class_ != null) {
-      const u = saveRelativeUri(this.class_, this.id, false,
-                                relativeUris, undefined)
-      if (u != null) {
-        r.class = u
-      }
-    }
-                
     if (this.label != null) {
       r.label = save(this.label, false, this.id, relativeUris)
     }
@@ -379,12 +450,16 @@ export class Operation extends Saveable implements Internal.OperationProperties 
       r.doc = save(this.doc, false, this.id, relativeUris)
     }
                 
-    if (this.inputs != null) {
-      r.inputs = save(this.inputs, false, this.id, relativeUris)
+    if (this.in_ != null) {
+      r.in = save(this.in_, false, this.id, relativeUris)
     }
                 
-    if (this.outputs != null) {
-      r.outputs = save(this.outputs, false, this.id, relativeUris)
+    if (this.out != null) {
+      const u = saveRelativeUri(this.out, this.id, true,
+                                relativeUris, undefined)
+      if (u != null) {
+        r.out = u
+      }
     }
                 
     if (this.requirements != null) {
@@ -395,19 +470,27 @@ export class Operation extends Saveable implements Internal.OperationProperties 
       r.hints = save(this.hints, false, this.id, relativeUris)
     }
                 
-    if (this.cwlVersion != null) {
-      const u = saveRelativeUri(this.cwlVersion, this.id, false,
-                                relativeUris, undefined)
+    if (this.run != null) {
+      r.run = save(this.run, false, this.id, relativeUris)
+    }
+                
+    if (this.when != null) {
+      r.when = save(this.when, false, this.id, relativeUris)
+    }
+                
+    if (this.scatter != null) {
+      const u = saveRelativeUri(this.scatter, this.id, false,
+                                relativeUris, 0)
       if (u != null) {
-        r.cwlVersion = u
+        r.scatter = u
       }
     }
                 
-    if (this.intent != null) {
-      const u = saveRelativeUri(this.intent, this.id, true,
+    if (this.scatterMethod != null) {
+      const u = saveRelativeUri(this.scatterMethod, this.id, false,
                                 relativeUris, undefined)
       if (u != null) {
-        r.intent = u
+        r.scatterMethod = u
       }
     }
                 
@@ -422,5 +505,5 @@ export class Operation extends Saveable implements Internal.OperationProperties 
     return r
   }
             
-  static attr: Set<string> = new Set(['id','label','doc','inputs','outputs','requirements','hints','cwlVersion','intent','class'])
+  static attr: Set<string> = new Set(['id','label','doc','in','out','requirements','hints','run','when','scatter','scatterMethod'])
 }

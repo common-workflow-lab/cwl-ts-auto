@@ -69,7 +69,7 @@ export class Directory extends Saveable implements Internal.DirectoryProperties 
   /**
    * Must be `Directory` to indicate this object describes a Directory.
    */
-  class_: string
+  class_: Internal.Directory_class
 
   /**
    * An IRI that identifies the directory resource.  This may be a relative
@@ -139,7 +139,7 @@ export class Directory extends Saveable implements Internal.DirectoryProperties 
   listing?: undefined | Array<Internal.File | Internal.Directory>
 
 
-  constructor ({loadingOptions, extensionFields, class_, location, path, basename, listing} : {loadingOptions?: LoadingOptions} & Internal.DirectoryProperties) {
+  constructor ({loadingOptions, extensionFields, class_ = Internal.Directory_class.DIRECTORY, location, path, basename, listing} : {loadingOptions?: LoadingOptions} & Internal.DirectoryProperties) {
     super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
     this.class_ = class_

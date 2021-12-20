@@ -16,25 +16,25 @@ import * as Internal from './util/internal'
 
 
 /**
- * Auto-generated class implementation for https://w3id.org/cwl/cwl#Operation
+ * Auto-generated class implementation for https://w3id.org/cwl/cwl#ExpressionTool
  *
- * This record describes an abstract operation.  It is a potential
- * step of a workflow that has not yet been bound to a concrete
- * implementation.  It specifies an input and output signature, but
- * does not provide enough information to be executed.  An
- * implementation (or other tooling) may provide a means of binding
- * an Operation to a concrete process (such as Workflow,
- * CommandLineTool, or ExpressionTool) with a compatible signature.
+ * An ExpressionTool is a type of Process object that can be run by itself
+ * or as a Workflow step. It executes a pure Javascript expression that has
+ * access to the same input parameters as a workflow. It is meant to be used
+ * sparingly as a way to isolate complex Javascript expressions that need to
+ * operate on input data and produce some result; perhaps just a
+ * rearrangement of the inputs. No Docker software container is required
+ * or allowed.
  * 
  */
-export class Operation extends Saveable implements Internal.OperationProperties {
+export class ExpressionTool extends Saveable implements Internal.ExpressionToolProperties {
   extensionFields?: Internal.Dictionary<any>
 
   /**
    * The unique identifier for this object.
    */
   id?: undefined | string
-  class_: Internal.Operation_class
+  class_: Internal.ExpressionTool_class
 
   /**
    * A short, human-readable label of this object.
@@ -60,14 +60,14 @@ export class Operation extends Saveable implements Internal.OperationProperties 
    * of expressions.
    * 
    */
-  inputs: Array<Internal.OperationInputParameter>
+  inputs: Array<Internal.WorkflowInputParameter>
 
   /**
    * Defines the parameters representing the output of the process.  May be
    * used to generate and/or validate the output object.
    * 
    */
-  outputs: Array<Internal.OperationOutputParameter>
+  outputs: Array<Internal.ExpressionToolOutputParameter>
 
   /**
    * Declares requirements that apply to either the runtime environment or the
@@ -114,8 +114,16 @@ export class Operation extends Saveable implements Internal.OperationProperties 
    */
   intent?: undefined | Array<string>
 
+  /**
+   * The expression to execute.  The expression must return a plain
+   * Javascript object which matches the output parameters of the
+   * ExpressionTool.
+   * 
+   */
+  expression: string
 
-  constructor ({loadingOptions, extensionFields, id, class_ = Internal.Operation_class.OPERATION, label, doc, inputs, outputs, requirements, hints, cwlVersion, intent} : {loadingOptions?: LoadingOptions} & Internal.OperationProperties) {
+
+  constructor ({loadingOptions, extensionFields, id, class_ = Internal.ExpressionTool_class.EXPRESSIONTOOL, label, doc, inputs, outputs, requirements, hints, cwlVersion, intent, expression} : {loadingOptions?: LoadingOptions} & Internal.ExpressionToolProperties) {
     super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
     this.id = id
@@ -128,16 +136,17 @@ export class Operation extends Saveable implements Internal.OperationProperties 
     this.hints = hints
     this.cwlVersion = cwlVersion
     this.intent = intent
+    this.expression = expression
   }
 
   /**
-   * Used to construct instances of {@link Operation }.
+   * Used to construct instances of {@link ExpressionTool }.
    *
    * @param __doc                           Document fragment to load this record object from.
    * @param baseuri                         Base URI to generate child document IDs against.
    * @param loadingOptions                  Context for loading URIs and populating objects.
    * @param docRoot                         ID at this position in the document (if available)
-   * @returns                               An instance of {@link Operation }
+   * @returns                               An instance of {@link ExpressionTool }
    * @throws {@link ValidationException}    If the document fragment is not a
    *                                        {@link Dictionary} or validation of fields fails.
    */
@@ -175,7 +184,7 @@ export class Operation extends Saveable implements Internal.OperationProperties 
             
     let class_
     try {
-      class_ = await loadField(_doc.class, LoaderInstances.uriOperation_classLoaderFalseTrueNone,
+      class_ = await loadField(_doc.class, LoaderInstances.uriExpressionTool_classLoaderFalseTrueNone,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
@@ -221,7 +230,7 @@ export class Operation extends Saveable implements Internal.OperationProperties 
 
     let inputs
     try {
-      inputs = await loadField(_doc.inputs, LoaderInstances.idmapinputsarrayOfOperationInputParameterLoader,
+      inputs = await loadField(_doc.inputs, LoaderInstances.idmapinputsarrayOfWorkflowInputParameterLoader,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
@@ -235,7 +244,7 @@ export class Operation extends Saveable implements Internal.OperationProperties 
 
     let outputs
     try {
-      outputs = await loadField(_doc.outputs, LoaderInstances.idmapoutputsarrayOfOperationOutputParameterLoader,
+      outputs = await loadField(_doc.outputs, LoaderInstances.idmapoutputsarrayOfExpressionToolOutputParameterLoader,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
@@ -311,16 +320,30 @@ export class Operation extends Saveable implements Internal.OperationProperties 
       }
     }
 
+    let expression
+    try {
+      expression = await loadField(_doc.expression, LoaderInstances.ExpressionLoader,
+        baseuri, loadingOptions)
+    } catch (e) {
+      if (e instanceof ValidationException) {
+        __errors.push(
+          new ValidationException('the `expression` field is not valid because: ', [e])
+        )
+      } else {
+        throw e
+      }
+    }
+
     const extensionFields: Dictionary<any> = {}
     for (const [key, value] of Object.entries(_doc)) {
-      if (!Operation.attr.has(key)) {
+      if (!ExpressionTool.attr.has(key)) {
         if ((key as string).includes(':')) {
           const ex = expandUrl(key, '', loadingOptions, false, false)
           extensionFields[ex] = value
         } else {
           __errors.push(
             new ValidationException(`invalid field ${key as string}, \
-            expected one of: \`id\`,\`label\`,\`doc\`,\`inputs\`,\`outputs\`,\`requirements\`,\`hints\`,\`cwlVersion\`,\`intent\`,\`class\``)
+            expected one of: \`id\`,\`label\`,\`doc\`,\`inputs\`,\`outputs\`,\`requirements\`,\`hints\`,\`cwlVersion\`,\`intent\`,\`class\`,\`expression\``)
           )
           break
         }
@@ -328,10 +351,10 @@ export class Operation extends Saveable implements Internal.OperationProperties 
     }
 
     if (__errors.length > 0) {
-      throw new ValidationException("Trying 'Operation'", __errors)
+      throw new ValidationException("Trying 'ExpressionTool'", __errors)
     }
 
-    const schema = new Operation({
+    const schema = new ExpressionTool({
       extensionFields: extensionFields,
       loadingOptions: loadingOptions,
       id: id,
@@ -343,7 +366,8 @@ export class Operation extends Saveable implements Internal.OperationProperties 
       hints: hints,
       cwlVersion: cwlVersion,
       intent: intent,
-      class_: class_
+      class_: class_,
+      expression: expression
     })
     return schema
   }
@@ -411,6 +435,10 @@ export class Operation extends Saveable implements Internal.OperationProperties 
       }
     }
                 
+    if (this.expression != null) {
+      r.expression = save(this.expression, false, this.id, relativeUris)
+    }
+                
     if (top) {
       if (this.loadingOptions.namespaces != null) {
         r.$namespaces = this.loadingOptions.namespaces
@@ -422,5 +450,5 @@ export class Operation extends Saveable implements Internal.OperationProperties 
     return r
   }
             
-  static attr: Set<string> = new Set(['id','label','doc','inputs','outputs','requirements','hints','cwlVersion','intent','class'])
+  static attr: Set<string> = new Set(['id','label','doc','inputs','outputs','requirements','hints','cwlVersion','intent','class','expression'])
 }

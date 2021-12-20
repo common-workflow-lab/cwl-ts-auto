@@ -1,0 +1,460 @@
+import {
+  _AnyLoader,
+  _ExpressionLoader,
+  _PrimitiveLoader,
+  _UnionLoader,
+  _RecordLoader,
+  _URILoader,
+  _ArrayLoader,
+  _EnumLoader,
+  _IdMapLoader,
+  _TypeDSLLoader,
+  _SecondaryDSLLoader,
+  TypeGuards,
+  SoftwarePackageProperties,
+  RecordSchemaProperties,
+  InplaceUpdateRequirement_class,
+  MultipleInputFeatureRequirementProperties,
+  SchemaDefRequirement_class,
+  NetworkAccess_class,
+  Directory,
+  CommandInputArraySchemaProperties,
+  WorkflowStepInputProperties,
+  CommandInputEnumSchema,
+  EnvVarRequirementProperties,
+  SecondaryFileSchemaProperties,
+  CWLVersion,
+  InplaceUpdateRequirementProperties,
+  OperationProperties,
+  RecordFieldProperties,
+  MultipleInputFeatureRequirement_class,
+  SubworkflowFeatureRequirement_class,
+  InputBindingProperties,
+  EnvVarRequirement,
+  OutputEnumSchema,
+  StepInputExpressionRequirement,
+  WorkflowInputParameterProperties,
+  CommandLineTool_class,
+  ResourceRequirement,
+  Operation,
+  CommandInputRecordField,
+  CommandInputArraySchema,
+  OperationOutputParameterProperties,
+  EnvVarRequirement_class,
+  ArraySchemaProperties,
+  InlineJavascriptRequirementProperties,
+  InplaceUpdateRequirement,
+  LoadListingRequirement_class,
+  InlineJavascriptRequirement_class,
+  ScatterFeatureRequirementProperties,
+  CommandOutputBinding,
+  CWLType,
+  CommandOutputRecordField,
+  InputBinding,
+  Dirent,
+  ShellCommandRequirement,
+  StepInputExpressionRequirementProperties,
+  SchemaDefRequirement,
+  ExpressionToolOutputParameterProperties,
+  ExpressionTool,
+  stderr,
+  ArraySchema,
+  LabeledProperties,
+  CommandOutputBindingProperties,
+  SoftwarePackage,
+  EnumSchemaProperties,
+  StepInputExpressionRequirement_class,
+  ScatterMethod,
+  WorkflowStepOutputProperties,
+  stdout,
+  File,
+  ScatterFeatureRequirement,
+  EnumSchema,
+  ShellCommandRequirement_class,
+  SecondaryFileSchema,
+  InputParameterProperties,
+  SoftwareRequirement_class,
+  WorkflowProperties,
+  InputFormatProperties,
+  CommandLineBindable,
+  CommandInputEnumSchemaProperties,
+  enum_d062602be0b4b8fd33e69e29a841317b6ab665bc,
+  FieldBaseProperties,
+  InputRecordFieldProperties,
+  CommandInputSchemaProperties,
+  CommandOutputParameter,
+  WorkflowStepOutput,
+  OperationOutputParameter,
+  OperationInputParameterProperties,
+  WorkflowOutputParameterProperties,
+  CommandOutputEnumSchema,
+  CommandOutputEnumSchemaProperties,
+  ExpressionToolProperties,
+  CommandOutputRecordSchemaProperties,
+  SubworkflowFeatureRequirementProperties,
+  LoadListingRequirementProperties,
+  OutputRecordSchemaProperties,
+  IdentifiedProperties,
+  LoadContentsProperties,
+  EnvironmentDefProperties,
+  ResourceRequirement_class,
+  enum_d961d79c225752b9fadb617367615ab176b47d77,
+  ProcessRequirementProperties,
+  SchemaDefRequirementProperties,
+  WorkReuseProperties,
+  enum_d9cba076fca539106791a4f46d198c7fcfbdb779,
+  InputRecordSchemaProperties,
+  WorkflowStep,
+  Operation_class,
+  NetworkAccess,
+  FileProperties,
+  DirentProperties,
+  InitialWorkDirRequirement_class,
+  ResourceRequirementProperties,
+  CommandOutputRecordSchema,
+  CommandOutputRecordFieldProperties,
+  OutputRecordFieldProperties,
+  PrimitiveType,
+  InputRecordSchema,
+  DockerRequirement,
+  CommandLineBindableProperties,
+  ParameterProperties,
+  SoftwareRequirement,
+  InputSchemaProperties,
+  PickValueMethod,
+  CommandInputRecordSchema,
+  SoftwareRequirementProperties,
+  WorkflowInputParameter,
+  CommandOutputParameterProperties,
+  stdin,
+  SinkProperties,
+  CommandOutputArraySchema,
+  WorkReuse_class,
+  RecordSchema,
+  File_class,
+  WorkflowStepInput,
+  OutputEnumSchemaProperties,
+  CommandInputRecordSchemaProperties,
+  EnvironmentDef,
+  OperationInputParameter,
+  MultipleInputFeatureRequirement,
+  CommandLineBinding,
+  DocumentedProperties,
+  CommandLineToolProperties,
+  OutputParameterProperties,
+  ToolTimeLimit_class,
+  Any,
+  DockerRequirementProperties,
+  LinkMergeMethod,
+  InputArraySchema,
+  OutputRecordSchema,
+  IOSchemaProperties,
+  DockerRequirement_class,
+  CommandOutputArraySchemaProperties,
+  ToolTimeLimitProperties,
+  Workflow,
+  ShellCommandRequirementProperties,
+  OutputArraySchemaProperties,
+  NetworkAccessProperties,
+  Expression,
+  ExpressionToolOutputParameter,
+  ExpressionTool_class,
+  RecordField,
+  DirectoryProperties,
+  CommandInputParameterProperties,
+  ScatterFeatureRequirement_class,
+  ToolTimeLimit,
+  ProcessProperties,
+  InputArraySchemaProperties,
+  Workflow_class,
+  InputRecordField,
+  InitialWorkDirRequirement,
+  SubworkflowFeatureRequirement,
+  LoadListingRequirement,
+  Directory_class,
+  CommandLineBindingProperties,
+  LoadListingEnum,
+  InlineJavascriptRequirement,
+  InputEnumSchemaProperties,
+  CommandLineTool,
+  WorkReuse,
+  OutputArraySchema,
+  InitialWorkDirRequirementProperties,
+  CommandInputParameter,
+  WorkflowOutputParameter,
+  InputEnumSchema,
+  CommandInputRecordFieldProperties,
+  OutputSchemaProperties,
+  OutputFormatProperties,
+  WorkflowStepProperties,
+  OutputRecordField
+} from './internal'
+
+export const strtype = new _PrimitiveLoader(TypeGuards.String);
+export const inttype = new _PrimitiveLoader(TypeGuards.Int);
+export const floattype = new _PrimitiveLoader(TypeGuards.Float);
+export const booltype = new _PrimitiveLoader(TypeGuards.Bool);
+export const undefinedtype = new _PrimitiveLoader(TypeGuards.Undefined);
+export const anyType = new _AnyLoader();
+export const PrimitiveTypeLoader = new _EnumLoader((Object.keys(PrimitiveType) as Array<keyof typeof PrimitiveType>).map(key => PrimitiveType[key]));
+export const AnyLoader = new _EnumLoader((Object.keys(Any) as Array<keyof typeof Any>).map(key => Any[key]));
+export const RecordFieldLoader = new _RecordLoader(RecordField.fromDoc);
+export const RecordSchemaLoader = new _RecordLoader(RecordSchema.fromDoc);
+export const EnumSchemaLoader = new _RecordLoader(EnumSchema.fromDoc);
+export const ArraySchemaLoader = new _RecordLoader(ArraySchema.fromDoc);
+export const CWLVersionLoader = new _EnumLoader((Object.keys(CWLVersion) as Array<keyof typeof CWLVersion>).map(key => CWLVersion[key]));
+export const CWLTypeLoader = new _EnumLoader((Object.keys(CWLType) as Array<keyof typeof CWLType>).map(key => CWLType[key]));
+export const FileLoader = new _RecordLoader(File.fromDoc);
+export const DirectoryLoader = new _RecordLoader(Directory.fromDoc);
+export const LoadListingEnumLoader = new _EnumLoader((Object.keys(LoadListingEnum) as Array<keyof typeof LoadListingEnum>).map(key => LoadListingEnum[key]));
+export const ExpressionLoader = new _ExpressionLoader();
+export const InputBindingLoader = new _RecordLoader(InputBinding.fromDoc);
+export const InputRecordFieldLoader = new _RecordLoader(InputRecordField.fromDoc);
+export const InputRecordSchemaLoader = new _RecordLoader(InputRecordSchema.fromDoc);
+export const InputEnumSchemaLoader = new _RecordLoader(InputEnumSchema.fromDoc);
+export const InputArraySchemaLoader = new _RecordLoader(InputArraySchema.fromDoc);
+export const OutputRecordFieldLoader = new _RecordLoader(OutputRecordField.fromDoc);
+export const OutputRecordSchemaLoader = new _RecordLoader(OutputRecordSchema.fromDoc);
+export const OutputEnumSchemaLoader = new _RecordLoader(OutputEnumSchema.fromDoc);
+export const OutputArraySchemaLoader = new _RecordLoader(OutputArraySchema.fromDoc);
+export const InlineJavascriptRequirementLoader = new _RecordLoader(InlineJavascriptRequirement.fromDoc);
+export const SchemaDefRequirementLoader = new _RecordLoader(SchemaDefRequirement.fromDoc);
+export const SecondaryFileSchemaLoader = new _RecordLoader(SecondaryFileSchema.fromDoc);
+export const LoadListingRequirementLoader = new _RecordLoader(LoadListingRequirement.fromDoc);
+export const EnvironmentDefLoader = new _RecordLoader(EnvironmentDef.fromDoc);
+export const CommandLineBindingLoader = new _RecordLoader(CommandLineBinding.fromDoc);
+export const CommandOutputBindingLoader = new _RecordLoader(CommandOutputBinding.fromDoc);
+export const CommandLineBindableLoader = new _RecordLoader(CommandLineBindable.fromDoc);
+export const CommandInputRecordFieldLoader = new _RecordLoader(CommandInputRecordField.fromDoc);
+export const CommandInputRecordSchemaLoader = new _RecordLoader(CommandInputRecordSchema.fromDoc);
+export const CommandInputEnumSchemaLoader = new _RecordLoader(CommandInputEnumSchema.fromDoc);
+export const CommandInputArraySchemaLoader = new _RecordLoader(CommandInputArraySchema.fromDoc);
+export const CommandOutputRecordFieldLoader = new _RecordLoader(CommandOutputRecordField.fromDoc);
+export const CommandOutputRecordSchemaLoader = new _RecordLoader(CommandOutputRecordSchema.fromDoc);
+export const CommandOutputEnumSchemaLoader = new _RecordLoader(CommandOutputEnumSchema.fromDoc);
+export const CommandOutputArraySchemaLoader = new _RecordLoader(CommandOutputArraySchema.fromDoc);
+export const CommandInputParameterLoader = new _RecordLoader(CommandInputParameter.fromDoc);
+export const CommandOutputParameterLoader = new _RecordLoader(CommandOutputParameter.fromDoc);
+export const stdinLoader = new _EnumLoader((Object.keys(stdin) as Array<keyof typeof stdin>).map(key => stdin[key]));
+export const stdoutLoader = new _EnumLoader((Object.keys(stdout) as Array<keyof typeof stdout>).map(key => stdout[key]));
+export const stderrLoader = new _EnumLoader((Object.keys(stderr) as Array<keyof typeof stderr>).map(key => stderr[key]));
+export const CommandLineToolLoader = new _RecordLoader(CommandLineTool.fromDoc);
+export const DockerRequirementLoader = new _RecordLoader(DockerRequirement.fromDoc);
+export const SoftwareRequirementLoader = new _RecordLoader(SoftwareRequirement.fromDoc);
+export const SoftwarePackageLoader = new _RecordLoader(SoftwarePackage.fromDoc);
+export const DirentLoader = new _RecordLoader(Dirent.fromDoc);
+export const InitialWorkDirRequirementLoader = new _RecordLoader(InitialWorkDirRequirement.fromDoc);
+export const EnvVarRequirementLoader = new _RecordLoader(EnvVarRequirement.fromDoc);
+export const ShellCommandRequirementLoader = new _RecordLoader(ShellCommandRequirement.fromDoc);
+export const ResourceRequirementLoader = new _RecordLoader(ResourceRequirement.fromDoc);
+export const WorkReuseLoader = new _RecordLoader(WorkReuse.fromDoc);
+export const NetworkAccessLoader = new _RecordLoader(NetworkAccess.fromDoc);
+export const InplaceUpdateRequirementLoader = new _RecordLoader(InplaceUpdateRequirement.fromDoc);
+export const ToolTimeLimitLoader = new _RecordLoader(ToolTimeLimit.fromDoc);
+export const ExpressionToolOutputParameterLoader = new _RecordLoader(ExpressionToolOutputParameter.fromDoc);
+export const WorkflowInputParameterLoader = new _RecordLoader(WorkflowInputParameter.fromDoc);
+export const ExpressionToolLoader = new _RecordLoader(ExpressionTool.fromDoc);
+export const LinkMergeMethodLoader = new _EnumLoader((Object.keys(LinkMergeMethod) as Array<keyof typeof LinkMergeMethod>).map(key => LinkMergeMethod[key]));
+export const PickValueMethodLoader = new _EnumLoader((Object.keys(PickValueMethod) as Array<keyof typeof PickValueMethod>).map(key => PickValueMethod[key]));
+export const WorkflowOutputParameterLoader = new _RecordLoader(WorkflowOutputParameter.fromDoc);
+export const WorkflowStepInputLoader = new _RecordLoader(WorkflowStepInput.fromDoc);
+export const WorkflowStepOutputLoader = new _RecordLoader(WorkflowStepOutput.fromDoc);
+export const ScatterMethodLoader = new _EnumLoader((Object.keys(ScatterMethod) as Array<keyof typeof ScatterMethod>).map(key => ScatterMethod[key]));
+export const WorkflowStepLoader = new _RecordLoader(WorkflowStep.fromDoc);
+export const WorkflowLoader = new _RecordLoader(Workflow.fromDoc);
+export const SubworkflowFeatureRequirementLoader = new _RecordLoader(SubworkflowFeatureRequirement.fromDoc);
+export const ScatterFeatureRequirementLoader = new _RecordLoader(ScatterFeatureRequirement.fromDoc);
+export const MultipleInputFeatureRequirementLoader = new _RecordLoader(MultipleInputFeatureRequirement.fromDoc);
+export const StepInputExpressionRequirementLoader = new _RecordLoader(StepInputExpressionRequirement.fromDoc);
+export const OperationInputParameterLoader = new _RecordLoader(OperationInputParameter.fromDoc);
+export const OperationOutputParameterLoader = new _RecordLoader(OperationOutputParameter.fromDoc);
+export const OperationLoader = new _RecordLoader(Operation.fromDoc);
+export const arrayOfstrtype = new _ArrayLoader([strtype]);
+export const unionOfundefinedtypeOrstrtypeOrarrayOfstrtype = new _UnionLoader([undefinedtype, strtype, arrayOfstrtype]);
+export const uristrtypeTrueFalseNone = new _URILoader(strtype, true, false, undefined);
+export const unionOfPrimitiveTypeLoaderOrRecordSchemaLoaderOrEnumSchemaLoaderOrArraySchemaLoaderOrstrtype = new _UnionLoader([PrimitiveTypeLoader, RecordSchemaLoader, EnumSchemaLoader, ArraySchemaLoader, strtype]);
+export const arrayOfunionOfPrimitiveTypeLoaderOrRecordSchemaLoaderOrEnumSchemaLoaderOrArraySchemaLoaderOrstrtype = new _ArrayLoader([unionOfPrimitiveTypeLoaderOrRecordSchemaLoaderOrEnumSchemaLoaderOrArraySchemaLoaderOrstrtype]);
+export const unionOfPrimitiveTypeLoaderOrRecordSchemaLoaderOrEnumSchemaLoaderOrArraySchemaLoaderOrstrtypeOrarrayOfunionOfPrimitiveTypeLoaderOrRecordSchemaLoaderOrEnumSchemaLoaderOrArraySchemaLoaderOrstrtype = new _UnionLoader([PrimitiveTypeLoader, RecordSchemaLoader, EnumSchemaLoader, ArraySchemaLoader, strtype, arrayOfunionOfPrimitiveTypeLoaderOrRecordSchemaLoaderOrEnumSchemaLoaderOrArraySchemaLoaderOrstrtype]);
+export const typedslunionOfPrimitiveTypeLoaderOrRecordSchemaLoaderOrEnumSchemaLoaderOrArraySchemaLoaderOrstrtypeOrarrayOfunionOfPrimitiveTypeLoaderOrRecordSchemaLoaderOrEnumSchemaLoaderOrArraySchemaLoaderOrstrtype2 = new _TypeDSLLoader(unionOfPrimitiveTypeLoaderOrRecordSchemaLoaderOrEnumSchemaLoaderOrArraySchemaLoaderOrstrtypeOrarrayOfunionOfPrimitiveTypeLoaderOrRecordSchemaLoaderOrEnumSchemaLoaderOrArraySchemaLoaderOrstrtype, 2);
+export const arrayOfRecordFieldLoader = new _ArrayLoader([RecordFieldLoader]);
+export const unionOfundefinedtypeOrarrayOfRecordFieldLoader = new _UnionLoader([undefinedtype, arrayOfRecordFieldLoader]);
+export const idmapfieldsunionOfundefinedtypeOrarrayOfRecordFieldLoader = new _IdMapLoader(unionOfundefinedtypeOrarrayOfRecordFieldLoader, 'name', 'type');
+export const enum_d9cba076fca539106791a4f46d198c7fcfbdb779Loader = new _EnumLoader((Object.keys(enum_d9cba076fca539106791a4f46d198c7fcfbdb779) as Array<keyof typeof enum_d9cba076fca539106791a4f46d198c7fcfbdb779>).map(key => enum_d9cba076fca539106791a4f46d198c7fcfbdb779[key]));
+export const typedslenum_d9cba076fca539106791a4f46d198c7fcfbdb779Loader2 = new _TypeDSLLoader(enum_d9cba076fca539106791a4f46d198c7fcfbdb779Loader, 2);
+export const uriarrayOfstrtypeTrueFalseNone = new _URILoader(arrayOfstrtype, true, false, undefined);
+export const enum_d961d79c225752b9fadb617367615ab176b47d77Loader = new _EnumLoader((Object.keys(enum_d961d79c225752b9fadb617367615ab176b47d77) as Array<keyof typeof enum_d961d79c225752b9fadb617367615ab176b47d77>).map(key => enum_d961d79c225752b9fadb617367615ab176b47d77[key]));
+export const typedslenum_d961d79c225752b9fadb617367615ab176b47d77Loader2 = new _TypeDSLLoader(enum_d961d79c225752b9fadb617367615ab176b47d77Loader, 2);
+export const enum_d062602be0b4b8fd33e69e29a841317b6ab665bcLoader = new _EnumLoader((Object.keys(enum_d062602be0b4b8fd33e69e29a841317b6ab665bc) as Array<keyof typeof enum_d062602be0b4b8fd33e69e29a841317b6ab665bc>).map(key => enum_d062602be0b4b8fd33e69e29a841317b6ab665bc[key]));
+export const typedslenum_d062602be0b4b8fd33e69e29a841317b6ab665bcLoader2 = new _TypeDSLLoader(enum_d062602be0b4b8fd33e69e29a841317b6ab665bcLoader, 2);
+export const File_classLoader = new _EnumLoader((Object.keys(File_class) as Array<keyof typeof File_class>).map(key => File_class[key]));
+export const uriFile_classLoaderFalseTrueNone = new _URILoader(File_classLoader, false, true, undefined);
+export const unionOfundefinedtypeOrstrtype = new _UnionLoader([undefinedtype, strtype]);
+export const uriunionOfundefinedtypeOrstrtypeFalseFalseNone = new _URILoader(unionOfundefinedtypeOrstrtype, false, false, undefined);
+export const unionOfundefinedtypeOrinttype = new _UnionLoader([undefinedtype, inttype]);
+export const unionOfFileLoaderOrDirectoryLoader = new _UnionLoader([FileLoader, DirectoryLoader]);
+export const arrayOfunionOfFileLoaderOrDirectoryLoader = new _ArrayLoader([unionOfFileLoaderOrDirectoryLoader]);
+export const unionOfundefinedtypeOrarrayOfunionOfFileLoaderOrDirectoryLoader = new _UnionLoader([undefinedtype, arrayOfunionOfFileLoaderOrDirectoryLoader]);
+export const secondaryfilesdslunionOfundefinedtypeOrarrayOfunionOfFileLoaderOrDirectoryLoader = new _SecondaryDSLLoader(unionOfundefinedtypeOrarrayOfunionOfFileLoaderOrDirectoryLoader);
+export const uriunionOfundefinedtypeOrstrtypeTrueFalseNone = new _URILoader(unionOfundefinedtypeOrstrtype, true, false, undefined);
+export const Directory_classLoader = new _EnumLoader((Object.keys(Directory_class) as Array<keyof typeof Directory_class>).map(key => Directory_class[key]));
+export const uriDirectory_classLoaderFalseTrueNone = new _URILoader(Directory_classLoader, false, true, undefined);
+export const unionOfundefinedtypeOrbooltype = new _UnionLoader([undefinedtype, booltype]);
+export const unionOfundefinedtypeOrLoadListingEnumLoader = new _UnionLoader([undefinedtype, LoadListingEnumLoader]);
+export const arrayOfSecondaryFileSchemaLoader = new _ArrayLoader([SecondaryFileSchemaLoader]);
+export const unionOfundefinedtypeOrSecondaryFileSchemaLoaderOrarrayOfSecondaryFileSchemaLoader = new _UnionLoader([undefinedtype, SecondaryFileSchemaLoader, arrayOfSecondaryFileSchemaLoader]);
+export const secondaryfilesdslunionOfundefinedtypeOrSecondaryFileSchemaLoaderOrarrayOfSecondaryFileSchemaLoader = new _SecondaryDSLLoader(unionOfundefinedtypeOrSecondaryFileSchemaLoaderOrarrayOfSecondaryFileSchemaLoader);
+export const unionOfundefinedtypeOrstrtypeOrarrayOfstrtypeOrExpressionLoader = new _UnionLoader([undefinedtype, strtype, arrayOfstrtype, ExpressionLoader]);
+export const uriunionOfundefinedtypeOrstrtypeOrarrayOfstrtypeOrExpressionLoaderTrueFalseNone = new _URILoader(unionOfundefinedtypeOrstrtypeOrarrayOfstrtypeOrExpressionLoader, true, false, undefined);
+export const unionOfundefinedtypeOrstrtypeOrExpressionLoader = new _UnionLoader([undefinedtype, strtype, ExpressionLoader]);
+export const uriunionOfundefinedtypeOrstrtypeOrExpressionLoaderTrueFalseNone = new _URILoader(unionOfundefinedtypeOrstrtypeOrExpressionLoader, true, false, undefined);
+export const unionOfCWLTypeLoaderOrInputRecordSchemaLoaderOrInputEnumSchemaLoaderOrInputArraySchemaLoaderOrstrtype = new _UnionLoader([CWLTypeLoader, InputRecordSchemaLoader, InputEnumSchemaLoader, InputArraySchemaLoader, strtype]);
+export const arrayOfunionOfCWLTypeLoaderOrInputRecordSchemaLoaderOrInputEnumSchemaLoaderOrInputArraySchemaLoaderOrstrtype = new _ArrayLoader([unionOfCWLTypeLoaderOrInputRecordSchemaLoaderOrInputEnumSchemaLoaderOrInputArraySchemaLoaderOrstrtype]);
+export const unionOfCWLTypeLoaderOrInputRecordSchemaLoaderOrInputEnumSchemaLoaderOrInputArraySchemaLoaderOrstrtypeOrarrayOfunionOfCWLTypeLoaderOrInputRecordSchemaLoaderOrInputEnumSchemaLoaderOrInputArraySchemaLoaderOrstrtype = new _UnionLoader([CWLTypeLoader, InputRecordSchemaLoader, InputEnumSchemaLoader, InputArraySchemaLoader, strtype, arrayOfunionOfCWLTypeLoaderOrInputRecordSchemaLoaderOrInputEnumSchemaLoaderOrInputArraySchemaLoaderOrstrtype]);
+export const typedslunionOfCWLTypeLoaderOrInputRecordSchemaLoaderOrInputEnumSchemaLoaderOrInputArraySchemaLoaderOrstrtypeOrarrayOfunionOfCWLTypeLoaderOrInputRecordSchemaLoaderOrInputEnumSchemaLoaderOrInputArraySchemaLoaderOrstrtype2 = new _TypeDSLLoader(unionOfCWLTypeLoaderOrInputRecordSchemaLoaderOrInputEnumSchemaLoaderOrInputArraySchemaLoaderOrstrtypeOrarrayOfunionOfCWLTypeLoaderOrInputRecordSchemaLoaderOrInputEnumSchemaLoaderOrInputArraySchemaLoaderOrstrtype, 2);
+export const arrayOfInputRecordFieldLoader = new _ArrayLoader([InputRecordFieldLoader]);
+export const unionOfundefinedtypeOrarrayOfInputRecordFieldLoader = new _UnionLoader([undefinedtype, arrayOfInputRecordFieldLoader]);
+export const idmapfieldsunionOfundefinedtypeOrarrayOfInputRecordFieldLoader = new _IdMapLoader(unionOfundefinedtypeOrarrayOfInputRecordFieldLoader, 'name', 'type');
+export const unionOfCWLTypeLoaderOrOutputRecordSchemaLoaderOrOutputEnumSchemaLoaderOrOutputArraySchemaLoaderOrstrtype = new _UnionLoader([CWLTypeLoader, OutputRecordSchemaLoader, OutputEnumSchemaLoader, OutputArraySchemaLoader, strtype]);
+export const arrayOfunionOfCWLTypeLoaderOrOutputRecordSchemaLoaderOrOutputEnumSchemaLoaderOrOutputArraySchemaLoaderOrstrtype = new _ArrayLoader([unionOfCWLTypeLoaderOrOutputRecordSchemaLoaderOrOutputEnumSchemaLoaderOrOutputArraySchemaLoaderOrstrtype]);
+export const unionOfCWLTypeLoaderOrOutputRecordSchemaLoaderOrOutputEnumSchemaLoaderOrOutputArraySchemaLoaderOrstrtypeOrarrayOfunionOfCWLTypeLoaderOrOutputRecordSchemaLoaderOrOutputEnumSchemaLoaderOrOutputArraySchemaLoaderOrstrtype = new _UnionLoader([CWLTypeLoader, OutputRecordSchemaLoader, OutputEnumSchemaLoader, OutputArraySchemaLoader, strtype, arrayOfunionOfCWLTypeLoaderOrOutputRecordSchemaLoaderOrOutputEnumSchemaLoaderOrOutputArraySchemaLoaderOrstrtype]);
+export const typedslunionOfCWLTypeLoaderOrOutputRecordSchemaLoaderOrOutputEnumSchemaLoaderOrOutputArraySchemaLoaderOrstrtypeOrarrayOfunionOfCWLTypeLoaderOrOutputRecordSchemaLoaderOrOutputEnumSchemaLoaderOrOutputArraySchemaLoaderOrstrtype2 = new _TypeDSLLoader(unionOfCWLTypeLoaderOrOutputRecordSchemaLoaderOrOutputEnumSchemaLoaderOrOutputArraySchemaLoaderOrstrtypeOrarrayOfunionOfCWLTypeLoaderOrOutputRecordSchemaLoaderOrOutputEnumSchemaLoaderOrOutputArraySchemaLoaderOrstrtype, 2);
+export const arrayOfOutputRecordFieldLoader = new _ArrayLoader([OutputRecordFieldLoader]);
+export const unionOfundefinedtypeOrarrayOfOutputRecordFieldLoader = new _UnionLoader([undefinedtype, arrayOfOutputRecordFieldLoader]);
+export const idmapfieldsunionOfundefinedtypeOrarrayOfOutputRecordFieldLoader = new _IdMapLoader(unionOfundefinedtypeOrarrayOfOutputRecordFieldLoader, 'name', 'type');
+export const unionOfundefinedtypeOranyType = new _UnionLoader([undefinedtype, anyType]);
+export const unionOfCommandInputParameterLoaderOrWorkflowInputParameterLoaderOrOperationInputParameterLoader = new _UnionLoader([CommandInputParameterLoader, WorkflowInputParameterLoader, OperationInputParameterLoader]);
+export const arrayOfunionOfCommandInputParameterLoaderOrWorkflowInputParameterLoaderOrOperationInputParameterLoader = new _ArrayLoader([unionOfCommandInputParameterLoaderOrWorkflowInputParameterLoaderOrOperationInputParameterLoader]);
+export const idmapinputsarrayOfunionOfCommandInputParameterLoaderOrWorkflowInputParameterLoaderOrOperationInputParameterLoader = new _IdMapLoader(arrayOfunionOfCommandInputParameterLoaderOrWorkflowInputParameterLoaderOrOperationInputParameterLoader, 'id', 'type');
+export const unionOfCommandOutputParameterLoaderOrExpressionToolOutputParameterLoaderOrWorkflowOutputParameterLoaderOrOperationOutputParameterLoader = new _UnionLoader([CommandOutputParameterLoader, ExpressionToolOutputParameterLoader, WorkflowOutputParameterLoader, OperationOutputParameterLoader]);
+export const arrayOfunionOfCommandOutputParameterLoaderOrExpressionToolOutputParameterLoaderOrWorkflowOutputParameterLoaderOrOperationOutputParameterLoader = new _ArrayLoader([unionOfCommandOutputParameterLoaderOrExpressionToolOutputParameterLoaderOrWorkflowOutputParameterLoaderOrOperationOutputParameterLoader]);
+export const idmapoutputsarrayOfunionOfCommandOutputParameterLoaderOrExpressionToolOutputParameterLoaderOrWorkflowOutputParameterLoaderOrOperationOutputParameterLoader = new _IdMapLoader(arrayOfunionOfCommandOutputParameterLoaderOrExpressionToolOutputParameterLoaderOrWorkflowOutputParameterLoaderOrOperationOutputParameterLoader, 'id', 'type');
+export const unionOfInlineJavascriptRequirementLoaderOrSchemaDefRequirementLoaderOrLoadListingRequirementLoaderOrDockerRequirementLoaderOrSoftwareRequirementLoaderOrInitialWorkDirRequirementLoaderOrEnvVarRequirementLoaderOrShellCommandRequirementLoaderOrResourceRequirementLoaderOrWorkReuseLoaderOrNetworkAccessLoaderOrInplaceUpdateRequirementLoaderOrToolTimeLimitLoaderOrSubworkflowFeatureRequirementLoaderOrScatterFeatureRequirementLoaderOrMultipleInputFeatureRequirementLoaderOrStepInputExpressionRequirementLoader = new _UnionLoader([InlineJavascriptRequirementLoader, SchemaDefRequirementLoader, LoadListingRequirementLoader, DockerRequirementLoader, SoftwareRequirementLoader, InitialWorkDirRequirementLoader, EnvVarRequirementLoader, ShellCommandRequirementLoader, ResourceRequirementLoader, WorkReuseLoader, NetworkAccessLoader, InplaceUpdateRequirementLoader, ToolTimeLimitLoader, SubworkflowFeatureRequirementLoader, ScatterFeatureRequirementLoader, MultipleInputFeatureRequirementLoader, StepInputExpressionRequirementLoader]);
+export const arrayOfunionOfInlineJavascriptRequirementLoaderOrSchemaDefRequirementLoaderOrLoadListingRequirementLoaderOrDockerRequirementLoaderOrSoftwareRequirementLoaderOrInitialWorkDirRequirementLoaderOrEnvVarRequirementLoaderOrShellCommandRequirementLoaderOrResourceRequirementLoaderOrWorkReuseLoaderOrNetworkAccessLoaderOrInplaceUpdateRequirementLoaderOrToolTimeLimitLoaderOrSubworkflowFeatureRequirementLoaderOrScatterFeatureRequirementLoaderOrMultipleInputFeatureRequirementLoaderOrStepInputExpressionRequirementLoader = new _ArrayLoader([unionOfInlineJavascriptRequirementLoaderOrSchemaDefRequirementLoaderOrLoadListingRequirementLoaderOrDockerRequirementLoaderOrSoftwareRequirementLoaderOrInitialWorkDirRequirementLoaderOrEnvVarRequirementLoaderOrShellCommandRequirementLoaderOrResourceRequirementLoaderOrWorkReuseLoaderOrNetworkAccessLoaderOrInplaceUpdateRequirementLoaderOrToolTimeLimitLoaderOrSubworkflowFeatureRequirementLoaderOrScatterFeatureRequirementLoaderOrMultipleInputFeatureRequirementLoaderOrStepInputExpressionRequirementLoader]);
+export const unionOfundefinedtypeOrarrayOfunionOfInlineJavascriptRequirementLoaderOrSchemaDefRequirementLoaderOrLoadListingRequirementLoaderOrDockerRequirementLoaderOrSoftwareRequirementLoaderOrInitialWorkDirRequirementLoaderOrEnvVarRequirementLoaderOrShellCommandRequirementLoaderOrResourceRequirementLoaderOrWorkReuseLoaderOrNetworkAccessLoaderOrInplaceUpdateRequirementLoaderOrToolTimeLimitLoaderOrSubworkflowFeatureRequirementLoaderOrScatterFeatureRequirementLoaderOrMultipleInputFeatureRequirementLoaderOrStepInputExpressionRequirementLoader = new _UnionLoader([undefinedtype, arrayOfunionOfInlineJavascriptRequirementLoaderOrSchemaDefRequirementLoaderOrLoadListingRequirementLoaderOrDockerRequirementLoaderOrSoftwareRequirementLoaderOrInitialWorkDirRequirementLoaderOrEnvVarRequirementLoaderOrShellCommandRequirementLoaderOrResourceRequirementLoaderOrWorkReuseLoaderOrNetworkAccessLoaderOrInplaceUpdateRequirementLoaderOrToolTimeLimitLoaderOrSubworkflowFeatureRequirementLoaderOrScatterFeatureRequirementLoaderOrMultipleInputFeatureRequirementLoaderOrStepInputExpressionRequirementLoader]);
+export const idmaprequirementsunionOfundefinedtypeOrarrayOfunionOfInlineJavascriptRequirementLoaderOrSchemaDefRequirementLoaderOrLoadListingRequirementLoaderOrDockerRequirementLoaderOrSoftwareRequirementLoaderOrInitialWorkDirRequirementLoaderOrEnvVarRequirementLoaderOrShellCommandRequirementLoaderOrResourceRequirementLoaderOrWorkReuseLoaderOrNetworkAccessLoaderOrInplaceUpdateRequirementLoaderOrToolTimeLimitLoaderOrSubworkflowFeatureRequirementLoaderOrScatterFeatureRequirementLoaderOrMultipleInputFeatureRequirementLoaderOrStepInputExpressionRequirementLoader = new _IdMapLoader(unionOfundefinedtypeOrarrayOfunionOfInlineJavascriptRequirementLoaderOrSchemaDefRequirementLoaderOrLoadListingRequirementLoaderOrDockerRequirementLoaderOrSoftwareRequirementLoaderOrInitialWorkDirRequirementLoaderOrEnvVarRequirementLoaderOrShellCommandRequirementLoaderOrResourceRequirementLoaderOrWorkReuseLoaderOrNetworkAccessLoaderOrInplaceUpdateRequirementLoaderOrToolTimeLimitLoaderOrSubworkflowFeatureRequirementLoaderOrScatterFeatureRequirementLoaderOrMultipleInputFeatureRequirementLoaderOrStepInputExpressionRequirementLoader, 'class', 'None');
+export const arrayOfanyType = new _ArrayLoader([anyType]);
+export const unionOfundefinedtypeOrarrayOfanyType = new _UnionLoader([undefinedtype, arrayOfanyType]);
+export const idmaphintsunionOfundefinedtypeOrarrayOfanyType = new _IdMapLoader(unionOfundefinedtypeOrarrayOfanyType, 'class', 'None');
+export const unionOfundefinedtypeOrCWLVersionLoader = new _UnionLoader([undefinedtype, CWLVersionLoader]);
+export const uriunionOfundefinedtypeOrCWLVersionLoaderFalseTrueNone = new _URILoader(unionOfundefinedtypeOrCWLVersionLoader, false, true, undefined);
+export const unionOfundefinedtypeOrarrayOfstrtype = new _UnionLoader([undefinedtype, arrayOfstrtype]);
+export const uriunionOfundefinedtypeOrarrayOfstrtypeTrueFalseNone = new _URILoader(unionOfundefinedtypeOrarrayOfstrtype, true, false, undefined);
+export const InlineJavascriptRequirement_classLoader = new _EnumLoader((Object.keys(InlineJavascriptRequirement_class) as Array<keyof typeof InlineJavascriptRequirement_class>).map(key => InlineJavascriptRequirement_class[key]));
+export const uriInlineJavascriptRequirement_classLoaderFalseTrueNone = new _URILoader(InlineJavascriptRequirement_classLoader, false, true, undefined);
+export const SchemaDefRequirement_classLoader = new _EnumLoader((Object.keys(SchemaDefRequirement_class) as Array<keyof typeof SchemaDefRequirement_class>).map(key => SchemaDefRequirement_class[key]));
+export const uriSchemaDefRequirement_classLoaderFalseTrueNone = new _URILoader(SchemaDefRequirement_classLoader, false, true, undefined);
+export const unionOfCommandInputRecordSchemaLoaderOrCommandInputEnumSchemaLoaderOrCommandInputArraySchemaLoader = new _UnionLoader([CommandInputRecordSchemaLoader, CommandInputEnumSchemaLoader, CommandInputArraySchemaLoader]);
+export const arrayOfunionOfCommandInputRecordSchemaLoaderOrCommandInputEnumSchemaLoaderOrCommandInputArraySchemaLoader = new _ArrayLoader([unionOfCommandInputRecordSchemaLoaderOrCommandInputEnumSchemaLoaderOrCommandInputArraySchemaLoader]);
+export const unionOfstrtypeOrExpressionLoader = new _UnionLoader([strtype, ExpressionLoader]);
+export const unionOfundefinedtypeOrbooltypeOrExpressionLoader = new _UnionLoader([undefinedtype, booltype, ExpressionLoader]);
+export const LoadListingRequirement_classLoader = new _EnumLoader((Object.keys(LoadListingRequirement_class) as Array<keyof typeof LoadListingRequirement_class>).map(key => LoadListingRequirement_class[key]));
+export const uriLoadListingRequirement_classLoaderFalseTrueNone = new _URILoader(LoadListingRequirement_classLoader, false, true, undefined);
+export const unionOfundefinedtypeOrinttypeOrExpressionLoader = new _UnionLoader([undefinedtype, inttype, ExpressionLoader]);
+export const unionOfundefinedtypeOrstrtypeOrExpressionLoaderOrarrayOfstrtype = new _UnionLoader([undefinedtype, strtype, ExpressionLoader, arrayOfstrtype]);
+export const unionOfundefinedtypeOrExpressionLoader = new _UnionLoader([undefinedtype, ExpressionLoader]);
+export const unionOfundefinedtypeOrCommandLineBindingLoader = new _UnionLoader([undefinedtype, CommandLineBindingLoader]);
+export const unionOfCWLTypeLoaderOrCommandInputRecordSchemaLoaderOrCommandInputEnumSchemaLoaderOrCommandInputArraySchemaLoaderOrstrtype = new _UnionLoader([CWLTypeLoader, CommandInputRecordSchemaLoader, CommandInputEnumSchemaLoader, CommandInputArraySchemaLoader, strtype]);
+export const arrayOfunionOfCWLTypeLoaderOrCommandInputRecordSchemaLoaderOrCommandInputEnumSchemaLoaderOrCommandInputArraySchemaLoaderOrstrtype = new _ArrayLoader([unionOfCWLTypeLoaderOrCommandInputRecordSchemaLoaderOrCommandInputEnumSchemaLoaderOrCommandInputArraySchemaLoaderOrstrtype]);
+export const unionOfCWLTypeLoaderOrCommandInputRecordSchemaLoaderOrCommandInputEnumSchemaLoaderOrCommandInputArraySchemaLoaderOrstrtypeOrarrayOfunionOfCWLTypeLoaderOrCommandInputRecordSchemaLoaderOrCommandInputEnumSchemaLoaderOrCommandInputArraySchemaLoaderOrstrtype = new _UnionLoader([CWLTypeLoader, CommandInputRecordSchemaLoader, CommandInputEnumSchemaLoader, CommandInputArraySchemaLoader, strtype, arrayOfunionOfCWLTypeLoaderOrCommandInputRecordSchemaLoaderOrCommandInputEnumSchemaLoaderOrCommandInputArraySchemaLoaderOrstrtype]);
+export const typedslunionOfCWLTypeLoaderOrCommandInputRecordSchemaLoaderOrCommandInputEnumSchemaLoaderOrCommandInputArraySchemaLoaderOrstrtypeOrarrayOfunionOfCWLTypeLoaderOrCommandInputRecordSchemaLoaderOrCommandInputEnumSchemaLoaderOrCommandInputArraySchemaLoaderOrstrtype2 = new _TypeDSLLoader(unionOfCWLTypeLoaderOrCommandInputRecordSchemaLoaderOrCommandInputEnumSchemaLoaderOrCommandInputArraySchemaLoaderOrstrtypeOrarrayOfunionOfCWLTypeLoaderOrCommandInputRecordSchemaLoaderOrCommandInputEnumSchemaLoaderOrCommandInputArraySchemaLoaderOrstrtype, 2);
+export const arrayOfCommandInputRecordFieldLoader = new _ArrayLoader([CommandInputRecordFieldLoader]);
+export const unionOfundefinedtypeOrarrayOfCommandInputRecordFieldLoader = new _UnionLoader([undefinedtype, arrayOfCommandInputRecordFieldLoader]);
+export const idmapfieldsunionOfundefinedtypeOrarrayOfCommandInputRecordFieldLoader = new _IdMapLoader(unionOfundefinedtypeOrarrayOfCommandInputRecordFieldLoader, 'name', 'type');
+export const unionOfCWLTypeLoaderOrCommandOutputRecordSchemaLoaderOrCommandOutputEnumSchemaLoaderOrCommandOutputArraySchemaLoaderOrstrtype = new _UnionLoader([CWLTypeLoader, CommandOutputRecordSchemaLoader, CommandOutputEnumSchemaLoader, CommandOutputArraySchemaLoader, strtype]);
+export const arrayOfunionOfCWLTypeLoaderOrCommandOutputRecordSchemaLoaderOrCommandOutputEnumSchemaLoaderOrCommandOutputArraySchemaLoaderOrstrtype = new _ArrayLoader([unionOfCWLTypeLoaderOrCommandOutputRecordSchemaLoaderOrCommandOutputEnumSchemaLoaderOrCommandOutputArraySchemaLoaderOrstrtype]);
+export const unionOfCWLTypeLoaderOrCommandOutputRecordSchemaLoaderOrCommandOutputEnumSchemaLoaderOrCommandOutputArraySchemaLoaderOrstrtypeOrarrayOfunionOfCWLTypeLoaderOrCommandOutputRecordSchemaLoaderOrCommandOutputEnumSchemaLoaderOrCommandOutputArraySchemaLoaderOrstrtype = new _UnionLoader([CWLTypeLoader, CommandOutputRecordSchemaLoader, CommandOutputEnumSchemaLoader, CommandOutputArraySchemaLoader, strtype, arrayOfunionOfCWLTypeLoaderOrCommandOutputRecordSchemaLoaderOrCommandOutputEnumSchemaLoaderOrCommandOutputArraySchemaLoaderOrstrtype]);
+export const typedslunionOfCWLTypeLoaderOrCommandOutputRecordSchemaLoaderOrCommandOutputEnumSchemaLoaderOrCommandOutputArraySchemaLoaderOrstrtypeOrarrayOfunionOfCWLTypeLoaderOrCommandOutputRecordSchemaLoaderOrCommandOutputEnumSchemaLoaderOrCommandOutputArraySchemaLoaderOrstrtype2 = new _TypeDSLLoader(unionOfCWLTypeLoaderOrCommandOutputRecordSchemaLoaderOrCommandOutputEnumSchemaLoaderOrCommandOutputArraySchemaLoaderOrstrtypeOrarrayOfunionOfCWLTypeLoaderOrCommandOutputRecordSchemaLoaderOrCommandOutputEnumSchemaLoaderOrCommandOutputArraySchemaLoaderOrstrtype, 2);
+export const unionOfundefinedtypeOrCommandOutputBindingLoader = new _UnionLoader([undefinedtype, CommandOutputBindingLoader]);
+export const arrayOfCommandOutputRecordFieldLoader = new _ArrayLoader([CommandOutputRecordFieldLoader]);
+export const unionOfundefinedtypeOrarrayOfCommandOutputRecordFieldLoader = new _UnionLoader([undefinedtype, arrayOfCommandOutputRecordFieldLoader]);
+export const idmapfieldsunionOfundefinedtypeOrarrayOfCommandOutputRecordFieldLoader = new _IdMapLoader(unionOfundefinedtypeOrarrayOfCommandOutputRecordFieldLoader, 'name', 'type');
+export const unionOfCWLTypeLoaderOrstdinLoaderOrCommandInputRecordSchemaLoaderOrCommandInputEnumSchemaLoaderOrCommandInputArraySchemaLoaderOrstrtypeOrarrayOfunionOfCWLTypeLoaderOrCommandInputRecordSchemaLoaderOrCommandInputEnumSchemaLoaderOrCommandInputArraySchemaLoaderOrstrtype = new _UnionLoader([CWLTypeLoader, stdinLoader, CommandInputRecordSchemaLoader, CommandInputEnumSchemaLoader, CommandInputArraySchemaLoader, strtype, arrayOfunionOfCWLTypeLoaderOrCommandInputRecordSchemaLoaderOrCommandInputEnumSchemaLoaderOrCommandInputArraySchemaLoaderOrstrtype]);
+export const typedslunionOfCWLTypeLoaderOrstdinLoaderOrCommandInputRecordSchemaLoaderOrCommandInputEnumSchemaLoaderOrCommandInputArraySchemaLoaderOrstrtypeOrarrayOfunionOfCWLTypeLoaderOrCommandInputRecordSchemaLoaderOrCommandInputEnumSchemaLoaderOrCommandInputArraySchemaLoaderOrstrtype2 = new _TypeDSLLoader(unionOfCWLTypeLoaderOrstdinLoaderOrCommandInputRecordSchemaLoaderOrCommandInputEnumSchemaLoaderOrCommandInputArraySchemaLoaderOrstrtypeOrarrayOfunionOfCWLTypeLoaderOrCommandInputRecordSchemaLoaderOrCommandInputEnumSchemaLoaderOrCommandInputArraySchemaLoaderOrstrtype, 2);
+export const unionOfCWLTypeLoaderOrstdoutLoaderOrstderrLoaderOrCommandOutputRecordSchemaLoaderOrCommandOutputEnumSchemaLoaderOrCommandOutputArraySchemaLoaderOrstrtypeOrarrayOfunionOfCWLTypeLoaderOrCommandOutputRecordSchemaLoaderOrCommandOutputEnumSchemaLoaderOrCommandOutputArraySchemaLoaderOrstrtype = new _UnionLoader([CWLTypeLoader, stdoutLoader, stderrLoader, CommandOutputRecordSchemaLoader, CommandOutputEnumSchemaLoader, CommandOutputArraySchemaLoader, strtype, arrayOfunionOfCWLTypeLoaderOrCommandOutputRecordSchemaLoaderOrCommandOutputEnumSchemaLoaderOrCommandOutputArraySchemaLoaderOrstrtype]);
+export const typedslunionOfCWLTypeLoaderOrstdoutLoaderOrstderrLoaderOrCommandOutputRecordSchemaLoaderOrCommandOutputEnumSchemaLoaderOrCommandOutputArraySchemaLoaderOrstrtypeOrarrayOfunionOfCWLTypeLoaderOrCommandOutputRecordSchemaLoaderOrCommandOutputEnumSchemaLoaderOrCommandOutputArraySchemaLoaderOrstrtype2 = new _TypeDSLLoader(unionOfCWLTypeLoaderOrstdoutLoaderOrstderrLoaderOrCommandOutputRecordSchemaLoaderOrCommandOutputEnumSchemaLoaderOrCommandOutputArraySchemaLoaderOrstrtypeOrarrayOfunionOfCWLTypeLoaderOrCommandOutputRecordSchemaLoaderOrCommandOutputEnumSchemaLoaderOrCommandOutputArraySchemaLoaderOrstrtype, 2);
+export const CommandLineTool_classLoader = new _EnumLoader((Object.keys(CommandLineTool_class) as Array<keyof typeof CommandLineTool_class>).map(key => CommandLineTool_class[key]));
+export const uriCommandLineTool_classLoaderFalseTrueNone = new _URILoader(CommandLineTool_classLoader, false, true, undefined);
+export const arrayOfCommandInputParameterLoader = new _ArrayLoader([CommandInputParameterLoader]);
+export const idmapinputsarrayOfCommandInputParameterLoader = new _IdMapLoader(arrayOfCommandInputParameterLoader, 'id', 'type');
+export const arrayOfCommandOutputParameterLoader = new _ArrayLoader([CommandOutputParameterLoader]);
+export const idmapoutputsarrayOfCommandOutputParameterLoader = new _IdMapLoader(arrayOfCommandOutputParameterLoader, 'id', 'type');
+export const unionOfstrtypeOrExpressionLoaderOrCommandLineBindingLoader = new _UnionLoader([strtype, ExpressionLoader, CommandLineBindingLoader]);
+export const arrayOfunionOfstrtypeOrExpressionLoaderOrCommandLineBindingLoader = new _ArrayLoader([unionOfstrtypeOrExpressionLoaderOrCommandLineBindingLoader]);
+export const unionOfundefinedtypeOrarrayOfunionOfstrtypeOrExpressionLoaderOrCommandLineBindingLoader = new _UnionLoader([undefinedtype, arrayOfunionOfstrtypeOrExpressionLoaderOrCommandLineBindingLoader]);
+export const arrayOfinttype = new _ArrayLoader([inttype]);
+export const unionOfundefinedtypeOrarrayOfinttype = new _UnionLoader([undefinedtype, arrayOfinttype]);
+export const DockerRequirement_classLoader = new _EnumLoader((Object.keys(DockerRequirement_class) as Array<keyof typeof DockerRequirement_class>).map(key => DockerRequirement_class[key]));
+export const uriDockerRequirement_classLoaderFalseTrueNone = new _URILoader(DockerRequirement_classLoader, false, true, undefined);
+export const SoftwareRequirement_classLoader = new _EnumLoader((Object.keys(SoftwareRequirement_class) as Array<keyof typeof SoftwareRequirement_class>).map(key => SoftwareRequirement_class[key]));
+export const uriSoftwareRequirement_classLoaderFalseTrueNone = new _URILoader(SoftwareRequirement_classLoader, false, true, undefined);
+export const arrayOfSoftwarePackageLoader = new _ArrayLoader([SoftwarePackageLoader]);
+export const idmappackagesarrayOfSoftwarePackageLoader = new _IdMapLoader(arrayOfSoftwarePackageLoader, 'package', 'specs');
+export const uriunionOfundefinedtypeOrarrayOfstrtypeFalseFalseNone = new _URILoader(unionOfundefinedtypeOrarrayOfstrtype, false, false, undefined);
+export const InitialWorkDirRequirement_classLoader = new _EnumLoader((Object.keys(InitialWorkDirRequirement_class) as Array<keyof typeof InitialWorkDirRequirement_class>).map(key => InitialWorkDirRequirement_class[key]));
+export const uriInitialWorkDirRequirement_classLoaderFalseTrueNone = new _URILoader(InitialWorkDirRequirement_classLoader, false, true, undefined);
+export const unionOfundefinedtypeOrDirentLoaderOrExpressionLoaderOrFileLoaderOrDirectoryLoaderOrarrayOfunionOfFileLoaderOrDirectoryLoader = new _UnionLoader([undefinedtype, DirentLoader, ExpressionLoader, FileLoader, DirectoryLoader, arrayOfunionOfFileLoaderOrDirectoryLoader]);
+export const arrayOfunionOfundefinedtypeOrDirentLoaderOrExpressionLoaderOrFileLoaderOrDirectoryLoaderOrarrayOfunionOfFileLoaderOrDirectoryLoader = new _ArrayLoader([unionOfundefinedtypeOrDirentLoaderOrExpressionLoaderOrFileLoaderOrDirectoryLoaderOrarrayOfunionOfFileLoaderOrDirectoryLoader]);
+export const unionOfExpressionLoaderOrarrayOfunionOfundefinedtypeOrDirentLoaderOrExpressionLoaderOrFileLoaderOrDirectoryLoaderOrarrayOfunionOfFileLoaderOrDirectoryLoader = new _UnionLoader([ExpressionLoader, arrayOfunionOfundefinedtypeOrDirentLoaderOrExpressionLoaderOrFileLoaderOrDirectoryLoaderOrarrayOfunionOfFileLoaderOrDirectoryLoader]);
+export const EnvVarRequirement_classLoader = new _EnumLoader((Object.keys(EnvVarRequirement_class) as Array<keyof typeof EnvVarRequirement_class>).map(key => EnvVarRequirement_class[key]));
+export const uriEnvVarRequirement_classLoaderFalseTrueNone = new _URILoader(EnvVarRequirement_classLoader, false, true, undefined);
+export const arrayOfEnvironmentDefLoader = new _ArrayLoader([EnvironmentDefLoader]);
+export const idmapenvDefarrayOfEnvironmentDefLoader = new _IdMapLoader(arrayOfEnvironmentDefLoader, 'envName', 'envValue');
+export const ShellCommandRequirement_classLoader = new _EnumLoader((Object.keys(ShellCommandRequirement_class) as Array<keyof typeof ShellCommandRequirement_class>).map(key => ShellCommandRequirement_class[key]));
+export const uriShellCommandRequirement_classLoaderFalseTrueNone = new _URILoader(ShellCommandRequirement_classLoader, false, true, undefined);
+export const ResourceRequirement_classLoader = new _EnumLoader((Object.keys(ResourceRequirement_class) as Array<keyof typeof ResourceRequirement_class>).map(key => ResourceRequirement_class[key]));
+export const uriResourceRequirement_classLoaderFalseTrueNone = new _URILoader(ResourceRequirement_classLoader, false, true, undefined);
+export const unionOfundefinedtypeOrinttypeOrfloattypeOrExpressionLoader = new _UnionLoader([undefinedtype, inttype, floattype, ExpressionLoader]);
+export const WorkReuse_classLoader = new _EnumLoader((Object.keys(WorkReuse_class) as Array<keyof typeof WorkReuse_class>).map(key => WorkReuse_class[key]));
+export const uriWorkReuse_classLoaderFalseTrueNone = new _URILoader(WorkReuse_classLoader, false, true, undefined);
+export const unionOfbooltypeOrExpressionLoader = new _UnionLoader([booltype, ExpressionLoader]);
+export const NetworkAccess_classLoader = new _EnumLoader((Object.keys(NetworkAccess_class) as Array<keyof typeof NetworkAccess_class>).map(key => NetworkAccess_class[key]));
+export const uriNetworkAccess_classLoaderFalseTrueNone = new _URILoader(NetworkAccess_classLoader, false, true, undefined);
+export const InplaceUpdateRequirement_classLoader = new _EnumLoader((Object.keys(InplaceUpdateRequirement_class) as Array<keyof typeof InplaceUpdateRequirement_class>).map(key => InplaceUpdateRequirement_class[key]));
+export const uriInplaceUpdateRequirement_classLoaderFalseTrueNone = new _URILoader(InplaceUpdateRequirement_classLoader, false, true, undefined);
+export const ToolTimeLimit_classLoader = new _EnumLoader((Object.keys(ToolTimeLimit_class) as Array<keyof typeof ToolTimeLimit_class>).map(key => ToolTimeLimit_class[key]));
+export const uriToolTimeLimit_classLoaderFalseTrueNone = new _URILoader(ToolTimeLimit_classLoader, false, true, undefined);
+export const unionOfinttypeOrExpressionLoader = new _UnionLoader([inttype, ExpressionLoader]);
+export const unionOfundefinedtypeOrInputBindingLoader = new _UnionLoader([undefinedtype, InputBindingLoader]);
+export const ExpressionTool_classLoader = new _EnumLoader((Object.keys(ExpressionTool_class) as Array<keyof typeof ExpressionTool_class>).map(key => ExpressionTool_class[key]));
+export const uriExpressionTool_classLoaderFalseTrueNone = new _URILoader(ExpressionTool_classLoader, false, true, undefined);
+export const arrayOfWorkflowInputParameterLoader = new _ArrayLoader([WorkflowInputParameterLoader]);
+export const idmapinputsarrayOfWorkflowInputParameterLoader = new _IdMapLoader(arrayOfWorkflowInputParameterLoader, 'id', 'type');
+export const arrayOfExpressionToolOutputParameterLoader = new _ArrayLoader([ExpressionToolOutputParameterLoader]);
+export const idmapoutputsarrayOfExpressionToolOutputParameterLoader = new _IdMapLoader(arrayOfExpressionToolOutputParameterLoader, 'id', 'type');
+export const uriunionOfundefinedtypeOrstrtypeOrarrayOfstrtypeFalseFalse0 = new _URILoader(unionOfundefinedtypeOrstrtypeOrarrayOfstrtype, false, false, 0);
+export const unionOfundefinedtypeOrLinkMergeMethodLoader = new _UnionLoader([undefinedtype, LinkMergeMethodLoader]);
+export const unionOfundefinedtypeOrPickValueMethodLoader = new _UnionLoader([undefinedtype, PickValueMethodLoader]);
+export const uriunionOfundefinedtypeOrstrtypeOrarrayOfstrtypeFalseFalse2 = new _URILoader(unionOfundefinedtypeOrstrtypeOrarrayOfstrtype, false, false, 2);
+export const arrayOfWorkflowStepInputLoader = new _ArrayLoader([WorkflowStepInputLoader]);
+export const idmapin_arrayOfWorkflowStepInputLoader = new _IdMapLoader(arrayOfWorkflowStepInputLoader, 'id', 'source');
+export const unionOfstrtypeOrWorkflowStepOutputLoader = new _UnionLoader([strtype, WorkflowStepOutputLoader]);
+export const arrayOfunionOfstrtypeOrWorkflowStepOutputLoader = new _ArrayLoader([unionOfstrtypeOrWorkflowStepOutputLoader]);
+export const unionOfarrayOfunionOfstrtypeOrWorkflowStepOutputLoader = new _UnionLoader([arrayOfunionOfstrtypeOrWorkflowStepOutputLoader]);
+export const uriunionOfarrayOfunionOfstrtypeOrWorkflowStepOutputLoaderTrueFalseNone = new _URILoader(unionOfarrayOfunionOfstrtypeOrWorkflowStepOutputLoader, true, false, undefined);
+export const unionOfstrtypeOrCommandLineToolLoaderOrExpressionToolLoaderOrWorkflowLoaderOrOperationLoader = new _UnionLoader([strtype, CommandLineToolLoader, ExpressionToolLoader, WorkflowLoader, OperationLoader]);
+export const unionOfundefinedtypeOrScatterMethodLoader = new _UnionLoader([undefinedtype, ScatterMethodLoader]);
+export const uriunionOfundefinedtypeOrScatterMethodLoaderFalseTrueNone = new _URILoader(unionOfundefinedtypeOrScatterMethodLoader, false, true, undefined);
+export const Workflow_classLoader = new _EnumLoader((Object.keys(Workflow_class) as Array<keyof typeof Workflow_class>).map(key => Workflow_class[key]));
+export const uriWorkflow_classLoaderFalseTrueNone = new _URILoader(Workflow_classLoader, false, true, undefined);
+export const arrayOfWorkflowOutputParameterLoader = new _ArrayLoader([WorkflowOutputParameterLoader]);
+export const idmapoutputsarrayOfWorkflowOutputParameterLoader = new _IdMapLoader(arrayOfWorkflowOutputParameterLoader, 'id', 'type');
+export const arrayOfWorkflowStepLoader = new _ArrayLoader([WorkflowStepLoader]);
+export const unionOfarrayOfWorkflowStepLoader = new _UnionLoader([arrayOfWorkflowStepLoader]);
+export const idmapstepsunionOfarrayOfWorkflowStepLoader = new _IdMapLoader(unionOfarrayOfWorkflowStepLoader, 'id', 'None');
+export const SubworkflowFeatureRequirement_classLoader = new _EnumLoader((Object.keys(SubworkflowFeatureRequirement_class) as Array<keyof typeof SubworkflowFeatureRequirement_class>).map(key => SubworkflowFeatureRequirement_class[key]));
+export const uriSubworkflowFeatureRequirement_classLoaderFalseTrueNone = new _URILoader(SubworkflowFeatureRequirement_classLoader, false, true, undefined);
+export const ScatterFeatureRequirement_classLoader = new _EnumLoader((Object.keys(ScatterFeatureRequirement_class) as Array<keyof typeof ScatterFeatureRequirement_class>).map(key => ScatterFeatureRequirement_class[key]));
+export const uriScatterFeatureRequirement_classLoaderFalseTrueNone = new _URILoader(ScatterFeatureRequirement_classLoader, false, true, undefined);
+export const MultipleInputFeatureRequirement_classLoader = new _EnumLoader((Object.keys(MultipleInputFeatureRequirement_class) as Array<keyof typeof MultipleInputFeatureRequirement_class>).map(key => MultipleInputFeatureRequirement_class[key]));
+export const uriMultipleInputFeatureRequirement_classLoaderFalseTrueNone = new _URILoader(MultipleInputFeatureRequirement_classLoader, false, true, undefined);
+export const StepInputExpressionRequirement_classLoader = new _EnumLoader((Object.keys(StepInputExpressionRequirement_class) as Array<keyof typeof StepInputExpressionRequirement_class>).map(key => StepInputExpressionRequirement_class[key]));
+export const uriStepInputExpressionRequirement_classLoaderFalseTrueNone = new _URILoader(StepInputExpressionRequirement_classLoader, false, true, undefined);
+export const Operation_classLoader = new _EnumLoader((Object.keys(Operation_class) as Array<keyof typeof Operation_class>).map(key => Operation_class[key]));
+export const uriOperation_classLoaderFalseTrueNone = new _URILoader(Operation_classLoader, false, true, undefined);
+export const arrayOfOperationInputParameterLoader = new _ArrayLoader([OperationInputParameterLoader]);
+export const idmapinputsarrayOfOperationInputParameterLoader = new _IdMapLoader(arrayOfOperationInputParameterLoader, 'id', 'type');
+export const arrayOfOperationOutputParameterLoader = new _ArrayLoader([OperationOutputParameterLoader]);
+export const idmapoutputsarrayOfOperationOutputParameterLoader = new _IdMapLoader(arrayOfOperationOutputParameterLoader, 'id', 'type');
+export const unionOfCommandLineToolLoaderOrExpressionToolLoaderOrWorkflowLoaderOrOperationLoader = new _UnionLoader([CommandLineToolLoader, ExpressionToolLoader, WorkflowLoader, OperationLoader]);
+export const arrayOfunionOfCommandLineToolLoaderOrExpressionToolLoaderOrWorkflowLoaderOrOperationLoader = new _ArrayLoader([unionOfCommandLineToolLoaderOrExpressionToolLoaderOrWorkflowLoaderOrOperationLoader]);
+export const unionOfCommandLineToolLoaderOrExpressionToolLoaderOrWorkflowLoaderOrOperationLoaderOrarrayOfunionOfCommandLineToolLoaderOrExpressionToolLoaderOrWorkflowLoaderOrOperationLoader = new _UnionLoader([CommandLineToolLoader, ExpressionToolLoader, WorkflowLoader, OperationLoader, arrayOfunionOfCommandLineToolLoaderOrExpressionToolLoaderOrWorkflowLoaderOrOperationLoader]);
