@@ -19,7 +19,7 @@ import * as Internal from './util/Internal'
 export interface WorkReuseProperties extends Internal.ProcessRequirementProperties {
                     
   extensionFields?: Internal.Dictionary<any>
-                    
+
   /**
    * Always 'WorkReuse'
    */

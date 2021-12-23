@@ -8,7 +8,7 @@ import * as Internal from './util/Internal'
 export interface ArraySchemaProperties  {
                     
   extensionFields?: Internal.Dictionary<any>
-                    
+
   /**
    * Defines the type of the array elements.
    */

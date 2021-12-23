@@ -8,7 +8,7 @@ import * as Internal from './util/Internal'
 export interface CommandOutputEnumSchemaProperties extends Internal.OutputEnumSchemaProperties {
                     
   extensionFields?: Internal.Dictionary<any>
-                    
+
   /**
    * The identifier for this type
    */

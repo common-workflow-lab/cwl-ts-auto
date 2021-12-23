@@ -118,7 +118,7 @@ import * as Internal from './util/Internal'
 export interface WorkflowStepInputProperties extends Internal.IdentifiedProperties, Internal.SinkProperties, Internal.LoadContentsProperties, Internal.LabeledProperties {
                     
   extensionFields?: Internal.Dictionary<any>
-                    
+
   /**
    * The unique identifier for this object.
    */

@@ -53,7 +53,7 @@ import * as Internal from './util/Internal'
 export interface DirectoryProperties  {
                     
   extensionFields?: Internal.Dictionary<any>
-                    
+
   /**
    * Must be `Directory` to indicate this object describes a Directory.
    */

@@ -8,7 +8,7 @@ import * as Internal from './util/Internal'
 export interface InputBindingProperties  {
                     
   extensionFields?: Internal.Dictionary<any>
-                    
+
   /**
    * Use of `loadContents` in `InputBinding` is deprecated.
    * Preserved for v1.0 backwards compatability.  Will be removed in

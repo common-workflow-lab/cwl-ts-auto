@@ -8,7 +8,7 @@ import * as Internal from './util/Internal'
 export interface CommandOutputRecordSchemaProperties extends Internal.OutputRecordSchemaProperties {
                     
   extensionFields?: Internal.Dictionary<any>
-                    
+
   /**
    * The identifier for this type
    */

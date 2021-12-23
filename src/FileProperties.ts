@@ -76,7 +76,7 @@ import * as Internal from './util/Internal'
 export interface FileProperties  {
                     
   extensionFields?: Internal.Dictionary<any>
-                    
+
   /**
    * Must be `File` to indicate this object describes a file.
    */

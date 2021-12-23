@@ -8,7 +8,7 @@ import * as Internal from './util/Internal'
 export interface CommandLineBindableProperties  {
                     
   extensionFields?: Internal.Dictionary<any>
-                    
+
   /**
    * Describes how to turn this object into command line arguments.
    */

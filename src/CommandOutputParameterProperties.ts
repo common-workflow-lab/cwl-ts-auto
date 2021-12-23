@@ -10,7 +10,7 @@ import * as Internal from './util/Internal'
 export interface CommandOutputParameterProperties extends Internal.OutputParameterProperties {
                     
   extensionFields?: Internal.Dictionary<any>
-                    
+
   /**
    * The unique identifier for this object.
    */

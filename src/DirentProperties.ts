@@ -18,7 +18,7 @@ import * as Internal from './util/Internal'
 export interface DirentProperties  {
                     
   extensionFields?: Internal.Dictionary<any>
-                    
+
   /**
    * The "target" name of the file or subdirectory.  If `entry` is
    * a File or Directory, the `entryname` field overrides the value

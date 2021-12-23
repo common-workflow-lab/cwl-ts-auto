@@ -8,7 +8,7 @@ import * as Internal from './util/Internal'
 export interface RecordSchemaProperties  {
                     
   extensionFields?: Internal.Dictionary<any>
-                    
+
   /**
    * Defines the fields of the record.
    */

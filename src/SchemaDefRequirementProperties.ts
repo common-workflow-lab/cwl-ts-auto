@@ -22,7 +22,7 @@ import * as Internal from './util/Internal'
 export interface SchemaDefRequirementProperties extends Internal.ProcessRequirementProperties {
                     
   extensionFields?: Internal.Dictionary<any>
-                    
+
   /**
    * Always 'SchemaDefRequirement'
    */

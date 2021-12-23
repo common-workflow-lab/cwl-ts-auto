@@ -8,7 +8,7 @@ import * as Internal from './util/Internal'
 export interface WorkflowInputParameterProperties extends Internal.InputParameterProperties {
                     
   extensionFields?: Internal.Dictionary<any>
-                    
+
   /**
    * The unique identifier for this object.
    */

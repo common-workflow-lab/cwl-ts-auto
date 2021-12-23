@@ -11,7 +11,7 @@ import * as Internal from './util/Internal'
 export interface OperationOutputParameterProperties extends Internal.OutputParameterProperties {
                     
   extensionFields?: Internal.Dictionary<any>
-                    
+
   /**
    * The unique identifier for this object.
    */

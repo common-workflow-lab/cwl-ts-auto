@@ -17,7 +17,7 @@ import * as Internal from './util/Internal'
 export interface OperationProperties extends Internal.ProcessProperties {
                     
   extensionFields?: Internal.Dictionary<any>
-                    
+
   /**
    * The unique identifier for this object.
    */

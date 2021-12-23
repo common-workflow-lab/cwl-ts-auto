@@ -89,7 +89,7 @@ import * as Internal from './util/Internal'
 export interface WorkflowStepProperties extends Internal.IdentifiedProperties, Internal.LabeledProperties, Internal.DocumentedProperties {
                     
   extensionFields?: Internal.Dictionary<any>
-                    
+
   /**
    * The unique identifier for this object.
    */

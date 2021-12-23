@@ -8,7 +8,7 @@ import * as Internal from './util/Internal'
 export interface SoftwarePackageProperties  {
                     
   extensionFields?: Internal.Dictionary<any>
-                    
+
   /**
    * The name of the software to be made available. If the name is
    * common, inconsistent, or otherwise ambiguous it should be combined with

@@ -13,7 +13,7 @@ import * as Internal from './util/Internal'
 export interface InlineJavascriptRequirementProperties extends Internal.ProcessRequirementProperties {
                     
   extensionFields?: Internal.Dictionary<any>
-                    
+
   /**
    * Always 'InlineJavascriptRequirement'
    */

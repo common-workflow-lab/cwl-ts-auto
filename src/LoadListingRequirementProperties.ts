@@ -12,7 +12,7 @@ import * as Internal from './util/Internal'
 export interface LoadListingRequirementProperties extends Internal.ProcessRequirementProperties {
                     
   extensionFields?: Internal.Dictionary<any>
-                    
+
   /**
    * Always 'LoadListingRequirement'
    */

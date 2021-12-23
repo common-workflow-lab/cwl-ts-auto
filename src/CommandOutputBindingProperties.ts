@@ -20,7 +20,7 @@ import * as Internal from './util/Internal'
 export interface CommandOutputBindingProperties extends Internal.LoadContentsProperties {
                     
   extensionFields?: Internal.Dictionary<any>
-                    
+
   /**
    * Only valid when `type: File` or is an array of `items: File`.
    * 

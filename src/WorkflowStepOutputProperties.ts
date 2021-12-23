@@ -18,7 +18,7 @@ import * as Internal from './util/Internal'
 export interface WorkflowStepOutputProperties extends Internal.IdentifiedProperties {
                     
   extensionFields?: Internal.Dictionary<any>
-                    
+
   /**
    * The unique identifier for this object.
    */

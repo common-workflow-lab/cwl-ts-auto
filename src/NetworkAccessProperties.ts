@@ -25,7 +25,7 @@ import * as Internal from './util/Internal'
 export interface NetworkAccessProperties extends Internal.ProcessRequirementProperties {
                     
   extensionFields?: Internal.Dictionary<any>
-                    
+
   /**
    * Always 'NetworkAccess'
    */

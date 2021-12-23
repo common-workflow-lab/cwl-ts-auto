@@ -40,7 +40,7 @@ import * as Internal from './util/Internal'
 export interface InplaceUpdateRequirementProperties extends Internal.ProcessRequirementProperties {
                     
   extensionFields?: Internal.Dictionary<any>
-                    
+
   /**
    * Always 'InplaceUpdateRequirement'
    */

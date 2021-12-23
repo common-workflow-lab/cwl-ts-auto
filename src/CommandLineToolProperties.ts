@@ -11,7 +11,7 @@ import * as Internal from './util/Internal'
 export interface CommandLineToolProperties extends Internal.ProcessProperties {
                     
   extensionFields?: Internal.Dictionary<any>
-                    
+
   /**
    * The unique identifier for this object.
    */

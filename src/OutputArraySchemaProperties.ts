@@ -8,7 +8,7 @@ import * as Internal from './util/Internal'
 export interface OutputArraySchemaProperties extends Internal.ArraySchemaProperties, Internal.OutputSchemaProperties {
                     
   extensionFields?: Internal.Dictionary<any>
-                    
+
   /**
    * The identifier for this type
    */

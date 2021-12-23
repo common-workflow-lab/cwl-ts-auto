@@ -35,7 +35,7 @@ import * as Internal from './util/Internal'
 export interface ResourceRequirementProperties extends Internal.ProcessRequirementProperties {
                     
   extensionFields?: Internal.Dictionary<any>
-                    
+
   /**
    * Always 'ResourceRequirement'
    */

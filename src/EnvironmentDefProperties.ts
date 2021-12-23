@@ -13,7 +13,7 @@ import * as Internal from './util/Internal'
 export interface EnvironmentDefProperties  {
                     
   extensionFields?: Internal.Dictionary<any>
-                    
+
   /**
    * The environment variable name
    */

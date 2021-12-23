@@ -8,7 +8,7 @@ import * as Internal from './util/Internal'
 export interface OutputRecordFieldProperties extends Internal.RecordFieldProperties, Internal.FieldBaseProperties, Internal.OutputFormatProperties {
                     
   extensionFields?: Internal.Dictionary<any>
-                    
+
   /**
    * The name of the field
    * 

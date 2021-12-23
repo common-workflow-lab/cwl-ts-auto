@@ -11,7 +11,7 @@ import * as Internal from './util/Internal'
 export interface InitialWorkDirRequirementProperties extends Internal.ProcessRequirementProperties {
                     
   extensionFields?: Internal.Dictionary<any>
-                    
+
   /**
    * InitialWorkDirRequirement
    */

@@ -8,7 +8,7 @@ import * as Internal from './util/Internal'
 export interface CommandInputArraySchemaProperties extends Internal.InputArraySchemaProperties, Internal.CommandInputSchemaProperties, Internal.CommandLineBindableProperties {
                     
   extensionFields?: Internal.Dictionary<any>
-                    
+
   /**
    * The identifier for this type
    */

@@ -10,7 +10,7 @@ import * as Internal from './util/Internal'
 export interface RecordFieldProperties extends Internal.DocumentedProperties {
                     
   extensionFields?: Internal.Dictionary<any>
-                    
+
   /**
    * The name of the field
    * 

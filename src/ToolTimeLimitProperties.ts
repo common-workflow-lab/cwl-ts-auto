@@ -17,7 +17,7 @@ import * as Internal from './util/Internal'
 export interface ToolTimeLimitProperties extends Internal.ProcessRequirementProperties {
                     
   extensionFields?: Internal.Dictionary<any>
-                    
+
   /**
    * Always 'ToolTimeLimit'
    */

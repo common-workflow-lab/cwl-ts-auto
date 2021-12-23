@@ -11,7 +11,7 @@ import * as Internal from './util/Internal'
 export interface EnumSchemaProperties  {
                     
   extensionFields?: Internal.Dictionary<any>
-                    
+
   /**
    * Defines the set of valid symbols.
    */

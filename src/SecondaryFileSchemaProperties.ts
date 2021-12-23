@@ -23,7 +23,7 @@ import * as Internal from './util/Internal'
 export interface SecondaryFileSchemaProperties  {
                     
   extensionFields?: Internal.Dictionary<any>
-                    
+
   /**
    * Provides a pattern or expression specifying files or directories that
    * should be included alongside the primary file.

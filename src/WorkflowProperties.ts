@@ -61,7 +61,7 @@ import * as Internal from './util/Internal'
 export interface WorkflowProperties extends Internal.ProcessProperties {
                     
   extensionFields?: Internal.Dictionary<any>
-                    
+
   /**
    * The unique identifier for this object.
    */
