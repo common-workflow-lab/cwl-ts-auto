@@ -1,0 +1,32 @@
+name: Continuous integration tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+concurrency:
+  group: build-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+env:
+  NODE_VERSION: 17.x
+
+jobs:
+
+  CI:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v1
+        with:
+           node-version: ${{ env.NODE_VERSION }}
+      - run: node --version
+      - run: npm install
+      - run: npm test
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2.1.0
+        with:
+          fail_ci_if_error: true
+          flags: unittests
