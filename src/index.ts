@@ -1,6 +1,7 @@
 export {
   loadDocument,
   loadDocumentByString,
+  ValidationException,
   ToolTimeLimit_class,
   WorkReuse_class,
   NetworkAccessProperties,
