@@ -1,0 +1,69 @@
+<!DOCTYPE html><html class="default"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>DirentProperties | cwl-ts-auto</title><meta name="description" content="Documentation for cwl-ts-auto"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script async src="../assets/search.js" id="search-script"></script></head><body><script>document.body.classList.add(localStorage.getItem("tsd-theme") || "os")</script><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base=".."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="../index.html" class="title">cwl-ts-auto</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label><input type="checkbox" id="tsd-filter-externals" checked/><label class="tsd-widget" for="tsd-filter-externals">Externals</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><ul class="tsd-breadcrumb"><li><a href="../modules.html">cwl-ts-auto</a></li><li><a href="DirentProperties.html">DirentProperties</a></li></ul><h1>Interface DirentProperties</h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><section class="tsd-panel tsd-comment"><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Auto-generated interface for <a href="https://w3id.org/cwl/cwl#Dirent">https://w3id.org/cwl/cwl#Dirent</a></p>
+</div><div><p>Define a file or subdirectory that must be staged to a particular
+place prior to executing the command line tool.  May be the result
+of executing an expression, such as building a configuration file
+from a template.</p>
+<p>Usually files are staged within the <a href="#Runtime_environment">designated output directory</a>.
+However, under certain circumstances, files may be staged at
+arbitrary locations, see discussion for <code>entryname</code>.</p>
+</div></div></section><section class="tsd-panel tsd-hierarchy"><h3>Hierarchy</h3><ul class="tsd-hierarchy"><li><span class="target">DirentProperties</span></li></ul></section><section class="tsd-panel"><h3>Implemented by</h3><ul class="tsd-hierarchy"><li><a href="../classes/Dirent.html" class="tsd-signature-type" data-tsd-kind="Class">Dirent</a></li></ul></section><section class="tsd-panel-group tsd-index-group"><h2>Index</h2><section class="tsd-panel tsd-index-panel"><div class="tsd-index-content"><section class="tsd-index-section "><h3>Properties</h3><ul class="tsd-index-list"><li class="tsd-kind-property tsd-parent-kind-interface"><a href="DirentProperties.html#entry" class="tsd-kind-icon">entry</a></li><li class="tsd-kind-property tsd-parent-kind-interface"><a href="DirentProperties.html#entryname" class="tsd-kind-icon">entryname</a></li><li class="tsd-kind-property tsd-parent-kind-interface"><a href="DirentProperties.html#extensionFields" class="tsd-kind-icon">extension<wbr/>Fields</a></li><li class="tsd-kind-property tsd-parent-kind-interface"><a href="DirentProperties.html#writable" class="tsd-kind-icon">writable</a></li></ul></section></div></section></section><section class="tsd-panel-group tsd-member-group "><h2>Properties</h2><section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface"><a id="entry" class="tsd-anchor"></a><h3>entry</h3><div class="tsd-signature tsd-kind-icon">entry<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/ZimmerA/cwl-ts-auto/blob/d707499/src/DirentProperties.ts#L74">src/DirentProperties.ts:74</a></li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>If the value is a string literal or an expression which evaluates to a
+string, a new text file must be created with the string as the file contents.</p>
+</div><div><p>If the value is an expression that evaluates to a <code>File</code> or
+<code>Directory</code> object, or an array of <code>File</code> or <code>Directory</code>
+objects, this indicates the referenced file or directory
+should be added to the designated output directory prior to
+executing the tool.</p>
+<p>If the value is an expression that evaluates to <code>null</code>,
+nothing is added to the designated output directory, the entry
+has no effect.</p>
+<p>If the value is an expression that evaluates to some other
+array, number, or object not consisting of <code>File</code> or
+<code>Directory</code> objects, a new file must be created with the value
+serialized to JSON text as the file contents.  The JSON
+serialization behavior should match the behavior of string
+interpolation of <a href="#Parameter_references">Parameter
+references</a>.</p>
+</div></div></section><section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface"><a id="entryname" class="tsd-anchor"></a><h3><span class="tsd-flag ts-flagOptional">Optional</span> entryname</h3><div class="tsd-signature tsd-kind-icon">entryname<span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/ZimmerA/cwl-ts-auto/blob/d707499/src/DirentProperties.ts#L49">src/DirentProperties.ts:49</a></li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The &quot;target&quot; name of the file or subdirectory.  If <code>entry</code> is
+a File or Directory, the <code>entryname</code> field overrides the value
+of <code>basename</code> of the File or Directory object.</p>
+</div><div><ul>
+<li>Required when <code>entry</code> evaluates to file contents only</li>
+<li>Optional when <code>entry</code> evaluates to a File or Directory object with a <code>basename</code></li>
+<li>Invalid when <code>entry</code> evaluates to an array of File or Directory objects.</li>
+</ul>
+<p>If <code>entryname</code> is a relative path, it specifies a name within
+the designated output directory.  A relative path starting
+with <code>../</code> or that resolves to location above the designated output directory is an error.</p>
+<p>If <code>entryname</code> is an absolute path (starts with a slash <code>/</code>)
+it is an error unless the following conditions are met:</p>
+<ul>
+<li><code>DockerRequirement</code> is present in <code>requirements</code></li>
+<li>The program is will run inside a software container
+  where, from the perspective of the program, the root
+  filesystem is not shared with any other user or
+  running program.</li>
+</ul>
+<p>In this case, and the above conditions are met, then
+<code>entryname</code> may specify the absolute path within the container
+where the file or directory must be placed.</p>
+</div></div></section><section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface"><a id="extensionFields" class="tsd-anchor"></a><h3><span class="tsd-flag ts-flagOptional">Optional</span> extension<wbr/>Fields</h3><div class="tsd-signature tsd-kind-icon">extension<wbr/>Fields<span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">Dictionary</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/ZimmerA/cwl-ts-auto/blob/d707499/src/DirentProperties.ts#L20">src/DirentProperties.ts:20</a></li></ul></aside></section><section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface"><a id="writable" class="tsd-anchor"></a><h3><span class="tsd-flag ts-flagOptional">Optional</span> writable</h3><div class="tsd-signature tsd-kind-icon">writable<span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span></div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/ZimmerA/cwl-ts-auto/blob/d707499/src/DirentProperties.ts#L100">src/DirentProperties.ts:100</a></li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>If true, the File or Directory (or array of Files or
+Directories) declared in <code>entry</code> must be writable by the tool.</p>
+</div><div><p>Changes to the file or directory must be isolated and not
+visible by any other CommandLineTool process.  This may be
+implemented by making a copy of the original file or
+directory.</p>
+<p>Disruptive changes to the referenced file or directory must not
+be allowed unless <code>InplaceUpdateRequirement.inplaceUpdate</code> is true.</p>
+<p>Default false (files and directories read-only by default).</p>
+<p>A directory marked as <code>writable: true</code> implies that all files and
+subdirectories are recursively writable as well.</p>
+<p>If <code>writable</code> is false, the file may be made available using a
+bind mount or file system link to avoid unnecessary copying of
+the input file.  Command line tools may receive an error on
+attempting to rename or delete files or directories that are
+not explicitly marked as writable.</p>
+</div></div></section></section></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class=""><a href="../modules.html">Exports</a></li></ul></nav><nav class="tsd-navigation secondary menu-sticky"><ul><li class="current tsd-kind-interface"><a href="DirentProperties.html" class="tsd-kind-icon">Dirent<wbr/>Properties</a><ul><li class="tsd-kind-property tsd-parent-kind-interface"><a href="DirentProperties.html#entry" class="tsd-kind-icon">entry</a></li><li class="tsd-kind-property tsd-parent-kind-interface"><a href="DirentProperties.html#entryname" class="tsd-kind-icon">entryname</a></li><li class="tsd-kind-property tsd-parent-kind-interface"><a href="DirentProperties.html#extensionFields" class="tsd-kind-icon">extension<wbr/>Fields</a></li><li class="tsd-kind-property tsd-parent-kind-interface"><a href="DirentProperties.html#writable" class="tsd-kind-icon">writable</a></li></ul></li></ul></nav></div></div></div><footer class="with-border-bottom"><div class="container"><h2>Legend</h2><div class="tsd-legend-group"><ul class="tsd-legend"><li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li><li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li><li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li><li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li></ul></div><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="container tsd-generator"><p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div><div class="overlay"></div><script src="../assets/main.js"></script></body></html>
