@@ -22,7 +22,7 @@ export interface ExpressionToolProperties extends Internal.ProcessProperties {
    * The unique identifier for this object.
    */
   id?: undefined | string
-  class_: Internal.ExpressionTool_class
+  class_?: Internal.ExpressionTool_class
 
   /**
    * A short, human-readable label of this object.

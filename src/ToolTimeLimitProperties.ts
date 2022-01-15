@@ -21,7 +21,7 @@ export interface ToolTimeLimitProperties extends Internal.ProcessRequirementProp
   /**
    * Always 'ToolTimeLimit'
    */
-  class_: Internal.ToolTimeLimit_class
+  class_?: Internal.ToolTimeLimit_class
 
   /**
    * The time limit, in seconds.  A time limit of zero means no

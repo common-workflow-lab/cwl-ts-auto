@@ -16,5 +16,5 @@ export interface MultipleInputFeatureRequirementProperties extends Internal.Proc
   /**
    * Always 'MultipleInputFeatureRequirement'
    */
-  class_: Internal.MultipleInputFeatureRequirement_class
+  class_?: Internal.MultipleInputFeatureRequirement_class
 }

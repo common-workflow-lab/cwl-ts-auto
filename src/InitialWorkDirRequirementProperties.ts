@@ -15,7 +15,7 @@ export interface InitialWorkDirRequirementProperties extends Internal.ProcessReq
   /**
    * InitialWorkDirRequirement
    */
-  class_: Internal.InitialWorkDirRequirement_class
+  class_?: Internal.InitialWorkDirRequirement_class
 
   /**
    * The list of files or subdirectories that must be staged prior

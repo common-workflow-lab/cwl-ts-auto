@@ -65,7 +65,7 @@ export interface DockerRequirementProperties extends Internal.ProcessRequirement
   /**
    * Always 'DockerRequirement'
    */
-  class_: Internal.DockerRequirement_class
+  class_?: Internal.DockerRequirement_class
 
   /**
    * Specify a Docker image to retrieve using `docker pull`. Can contain the

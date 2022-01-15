@@ -23,6 +23,6 @@ export interface WorkReuseProperties extends Internal.ProcessRequirementProperti
   /**
    * Always 'WorkReuse'
    */
-  class_: Internal.WorkReuse_class
+  class_?: Internal.WorkReuse_class
   enableReuse: boolean | string
 }

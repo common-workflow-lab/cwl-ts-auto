@@ -21,5 +21,5 @@ export interface ShellCommandRequirementProperties extends Internal.ProcessRequi
   /**
    * Always 'ShellCommandRequirement'
    */
-  class_: Internal.ShellCommandRequirement_class
+  class_?: Internal.ShellCommandRequirement_class
 }

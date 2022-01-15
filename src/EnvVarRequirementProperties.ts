@@ -16,7 +16,7 @@ export interface EnvVarRequirementProperties extends Internal.ProcessRequirement
   /**
    * Always 'EnvVarRequirement'
    */
-  class_: Internal.EnvVarRequirement_class
+  class_?: Internal.EnvVarRequirement_class
 
   /**
    * The list of environment variables.

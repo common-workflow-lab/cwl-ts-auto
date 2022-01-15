@@ -39,7 +39,7 @@ export interface ResourceRequirementProperties extends Internal.ProcessRequireme
   /**
    * Always 'ResourceRequirement'
    */
-  class_: Internal.ResourceRequirement_class
+  class_?: Internal.ResourceRequirement_class
 
   /**
    * Minimum reserved number of CPU cores (default is 1).

@@ -44,6 +44,6 @@ export interface InplaceUpdateRequirementProperties extends Internal.ProcessRequ
   /**
    * Always 'InplaceUpdateRequirement'
    */
-  class_: Internal.InplaceUpdateRequirement_class
+  class_?: Internal.InplaceUpdateRequirement_class
   inplaceUpdate: boolean
 }

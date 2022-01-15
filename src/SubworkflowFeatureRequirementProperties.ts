@@ -16,5 +16,5 @@ export interface SubworkflowFeatureRequirementProperties extends Internal.Proces
   /**
    * Always 'SubworkflowFeatureRequirement'
    */
-  class_: Internal.SubworkflowFeatureRequirement_class
+  class_?: Internal.SubworkflowFeatureRequirement_class
 }

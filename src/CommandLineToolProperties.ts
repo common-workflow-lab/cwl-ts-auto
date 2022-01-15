@@ -16,7 +16,7 @@ export interface CommandLineToolProperties extends Internal.ProcessProperties {
    * The unique identifier for this object.
    */
   id?: undefined | string
-  class_: Internal.CommandLineTool_class
+  class_?: Internal.CommandLineTool_class
 
   /**
    * A short, human-readable label of this object.
