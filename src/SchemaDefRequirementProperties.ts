@@ -26,7 +26,7 @@ export interface SchemaDefRequirementProperties extends Internal.ProcessRequirem
   /**
    * Always 'SchemaDefRequirement'
    */
-  class_: Internal.SchemaDefRequirement_class
+  class_?: Internal.SchemaDefRequirement_class
 
   /**
    * The list of type definitions.

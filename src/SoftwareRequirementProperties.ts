@@ -16,7 +16,7 @@ export interface SoftwareRequirementProperties extends Internal.ProcessRequireme
   /**
    * Always 'SoftwareRequirement'
    */
-  class_: Internal.SoftwareRequirement_class
+  class_?: Internal.SoftwareRequirement_class
 
   /**
    * The list of software to be configured.

@@ -17,7 +17,7 @@ export interface InlineJavascriptRequirementProperties extends Internal.ProcessR
   /**
    * Always 'InlineJavascriptRequirement'
    */
-  class_: Internal.InlineJavascriptRequirement_class
+  class_?: Internal.InlineJavascriptRequirement_class
 
   /**
    * Additional code fragments that will also be inserted

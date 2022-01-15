@@ -16,5 +16,5 @@ export interface StepInputExpressionRequirementProperties extends Internal.Proce
   /**
    * Always 'StepInputExpressionRequirement'
    */
-  class_: Internal.StepInputExpressionRequirement_class
+  class_?: Internal.StepInputExpressionRequirement_class
 }

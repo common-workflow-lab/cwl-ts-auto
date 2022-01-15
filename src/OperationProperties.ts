@@ -22,7 +22,7 @@ export interface OperationProperties extends Internal.ProcessProperties {
    * The unique identifier for this object.
    */
   id?: undefined | string
-  class_: Internal.Operation_class
+  class_?: Internal.Operation_class
 
   /**
    * A short, human-readable label of this object.

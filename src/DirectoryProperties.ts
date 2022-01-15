@@ -57,7 +57,7 @@ export interface DirectoryProperties  {
   /**
    * Must be `Directory` to indicate this object describes a Directory.
    */
-  class_: Internal.Directory_class
+  class_?: Internal.Directory_class
 
   /**
    * An IRI that identifies the directory resource.  This may be a relative

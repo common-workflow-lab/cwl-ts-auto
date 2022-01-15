@@ -29,6 +29,6 @@ export interface NetworkAccessProperties extends Internal.ProcessRequirementProp
   /**
    * Always 'NetworkAccess'
    */
-  class_: Internal.NetworkAccess_class
+  class_?: Internal.NetworkAccess_class
   networkAccess: boolean | string
 }

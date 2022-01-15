@@ -80,7 +80,7 @@ export interface FileProperties  {
   /**
    * Must be `File` to indicate this object describes a file.
    */
-  class_: Internal.File_class
+  class_?: Internal.File_class
 
   /**
    * An IRI that identifies the file resource.  This may be a relative

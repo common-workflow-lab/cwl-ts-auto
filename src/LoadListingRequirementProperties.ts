@@ -16,6 +16,6 @@ export interface LoadListingRequirementProperties extends Internal.ProcessRequir
   /**
    * Always 'LoadListingRequirement'
    */
-  class_: Internal.LoadListingRequirement_class
+  class_?: Internal.LoadListingRequirement_class
   loadListing?: undefined | Internal.LoadListingEnum
 }

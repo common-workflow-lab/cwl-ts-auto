@@ -16,5 +16,5 @@ export interface ScatterFeatureRequirementProperties extends Internal.ProcessReq
   /**
    * Always 'ScatterFeatureRequirement'
    */
-  class_: Internal.ScatterFeatureRequirement_class
+  class_?: Internal.ScatterFeatureRequirement_class
 }
