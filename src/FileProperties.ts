@@ -13,8 +13,8 @@ import * as Internal from './util/Internal'
  * a number of properties that provide metadata about the file.
  * 
  * The `location` property of a File is a URI that uniquely identifies the
- * file.  Implementations must support the file:// URI scheme and may support
- * other schemes such as http://.  The value of `location` may also be a
+ * file.  Implementations must support the `file://` URI scheme and may support
+ * other schemes such as `http://` and `https://`.  The value of `location` may also be a
  * relative reference, in which case it must be resolved relative to the URI
  * of the document it appears in.  Alternately to `location`, implementations
  * must also accept the `path` property on File, which must be a filesystem
@@ -207,7 +207,7 @@ export interface FileProperties  {
    * represents the file format, preferrably defined within an ontology.
    * If no ontology is available, file formats may be tested by exact match.
    * 
-   * Reasoning about format compatability must be done by checking that an
+   * Reasoning about format compatibility must be done by checking that an
    * input file format is the same, `owl:equivalentClass` or
    * `rdfs:subClassOf` the format required by the input parameter.
    * `owl:equivalentClass` is transitive with `rdfs:subClassOf`, e.g. if
