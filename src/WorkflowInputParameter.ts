@@ -148,7 +148,7 @@ export class WorkflowInputParameter extends Saveable implements Internal.Workflo
   type: Internal.CWLType | Internal.InputRecordSchema | Internal.InputEnumSchema | Internal.InputArraySchema | string | Array<Internal.CWLType | Internal.InputRecordSchema | Internal.InputEnumSchema | Internal.InputArraySchema | string>
 
   /**
-   * Deprecated.  Preserved for v1.0 backwards compatability.  Will be removed in
+   * Deprecated.  Preserved for v1.0 backwards compatibility.  Will be removed in
    * CWL v2.0.  Use `WorkflowInputParameter.loadContents` instead.
    * 
    */

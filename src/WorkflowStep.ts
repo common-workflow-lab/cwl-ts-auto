@@ -155,7 +155,8 @@ export class WorkflowStep extends Saveable implements Internal.WorkflowStepPrope
   hints?: undefined | Array<any>
 
   /**
-   * Specifies the process to run.
+   * Specifies the process to run.  If `run` is a string, it must be an absolute IRI
+   * or a relative path from the primary document.
    * 
    */
   run: string | Internal.CommandLineTool | Internal.ExpressionTool | Internal.Workflow | Internal.Operation
