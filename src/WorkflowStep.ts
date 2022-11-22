@@ -86,7 +86,7 @@ import * as Internal from './util/Internal'
  * Conditionals in CWL are an optional feature and are not required
  * to be implemented by all consumers of CWL documents.  An
  * implementation that does not support conditionals must return a
- * fatal error when attempting execute a workflow that uses
+ * fatal error when attempting to execute a workflow that uses
  * conditional constructs the implementation does not support.
  * 
  * # Subworkflows
@@ -330,7 +330,7 @@ export class WorkflowStep extends Saveable implements Internal.WorkflowStepPrope
 
     let run
     try {
-      run = await loadField(_doc.run, LoaderInstances.unionOfstrtypeOrCommandLineToolLoaderOrExpressionToolLoaderOrWorkflowLoaderOrOperationLoader,
+      run = await loadField(_doc.run, LoaderInstances.uriunionOfstrtypeOrCommandLineToolLoaderOrExpressionToolLoaderOrWorkflowLoaderOrOperationLoaderFalseFalseNone,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
@@ -472,7 +472,11 @@ export class WorkflowStep extends Saveable implements Internal.WorkflowStepPrope
     }
                 
     if (this.run != null) {
-      r.run = save(this.run, false, this.id, relativeUris)
+      const u = saveRelativeUri(this.run, this.id, false,
+                                relativeUris, undefined)
+      if (u != null) {
+        r.run = u
+      }
     }
                 
     if (this.when != null) {

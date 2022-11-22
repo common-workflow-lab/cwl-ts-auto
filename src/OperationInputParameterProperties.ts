@@ -89,7 +89,7 @@ export interface OperationInputParameterProperties extends Internal.InputParamet
    * 
    * This must be one or more IRIs of concept nodes
    * that represents file formats which are allowed as input to this
-   * parameter, preferrably defined within an ontology.  If no ontology is
+   * parameter, preferably defined within an ontology.  If no ontology is
    * available, file formats may be tested by exact match.
    * 
    */
@@ -130,7 +130,7 @@ export interface OperationInputParameterProperties extends Internal.InputParamet
    * (e.g. dependent `valueFrom` fields).
    * 
    */
-  default_?: undefined | any
+  default_?: undefined | Internal.File | Internal.Directory | any
 
   /**
    * Specify valid types of data that may be assigned to this parameter.

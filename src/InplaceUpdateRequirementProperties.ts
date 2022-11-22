@@ -21,7 +21,7 @@ import * as Internal from './util/Internal'
  * read-only in every step.
  * 
  * Workflow steps which modify a file must produce the modified file
- * as output.  Downstream steps which futher process the file must
+ * as output.  Downstream steps which further process the file must
  * use the output of previous steps, and not refer to a common input
  * (this is necessary for both ordering and correctness).
  * 

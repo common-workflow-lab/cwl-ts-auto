@@ -31,7 +31,7 @@ import * as Internal from './util/Internal'
  * may apply their own security policies to restrict what is
  * accessible by the tool.
  * 
- * Enabling network access does not imply a publically routable IP
+ * Enabling network access does not imply a publicly routable IP
  * address or the ability to accept inbound connections.
  * 
  */

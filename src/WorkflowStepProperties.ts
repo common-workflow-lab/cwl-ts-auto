@@ -73,7 +73,7 @@ import * as Internal from './util/Internal'
  * Conditionals in CWL are an optional feature and are not required
  * to be implemented by all consumers of CWL documents.  An
  * implementation that does not support conditionals must return a
- * fatal error when attempting execute a workflow that uses
+ * fatal error when attempting to execute a workflow that uses
  * conditional constructs the implementation does not support.
  * 
  * # Subworkflows

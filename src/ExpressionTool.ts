@@ -32,6 +32,10 @@ export class ExpressionTool extends Saveable implements Internal.ExpressionToolP
 
   /**
    * The unique identifier for this object.
+   * 
+   * Only useful for `$graph` at `Process` level. Should not be exposed
+   * to users in graphical or terminal user interfaces.
+   * 
    */
   id?: undefined | string
   class_: Internal.ExpressionTool_class
@@ -87,7 +91,7 @@ export class ExpressionTool extends Saveable implements Internal.ExpressionToolP
    * the implementation may report a warning.
    * 
    */
-  hints?: undefined | Array<any>
+  hints?: undefined | Array<Internal.InlineJavascriptRequirement | Internal.SchemaDefRequirement | Internal.LoadListingRequirement | Internal.DockerRequirement | Internal.SoftwareRequirement | Internal.InitialWorkDirRequirement | Internal.EnvVarRequirement | Internal.ShellCommandRequirement | Internal.ResourceRequirement | Internal.WorkReuse | Internal.NetworkAccess | Internal.InplaceUpdateRequirement | Internal.ToolTimeLimit | Internal.SubworkflowFeatureRequirement | Internal.ScatterFeatureRequirement | Internal.MultipleInputFeatureRequirement | Internal.StepInputExpressionRequirement | any>
 
   /**
    * CWL document version. Always required at the document root. Not
@@ -102,7 +106,7 @@ export class ExpressionTool extends Saveable implements Internal.ExpressionToolP
    * CommandLineTool, Workflow, or ExpressionTool.
    * 
    * If provided, then this must be an IRI of a concept node that
-   * represents the type of operation, preferrably defined within an ontology.
+   * represents the type of operation, preferably defined within an ontology.
    * 
    * For example, in the domain of bioinformatics, one can use an IRI from
    * the EDAM Ontology's [Operation concept nodes](http://edamontology.org/operation_0004),
@@ -275,7 +279,7 @@ export class ExpressionTool extends Saveable implements Internal.ExpressionToolP
     let hints
     if ('hints' in _doc) {
       try {
-        hints = await loadField(_doc.hints, LoaderInstances.idmaphintsunionOfundefinedtypeOrarrayOfanyType,
+        hints = await loadField(_doc.hints, LoaderInstances.idmaphintsunionOfundefinedtypeOrarrayOfunionOfInlineJavascriptRequirementLoaderOrSchemaDefRequirementLoaderOrLoadListingRequirementLoaderOrDockerRequirementLoaderOrSoftwareRequirementLoaderOrInitialWorkDirRequirementLoaderOrEnvVarRequirementLoaderOrShellCommandRequirementLoaderOrResourceRequirementLoaderOrWorkReuseLoaderOrNetworkAccessLoaderOrInplaceUpdateRequirementLoaderOrToolTimeLimitLoaderOrSubworkflowFeatureRequirementLoaderOrScatterFeatureRequirementLoaderOrMultipleInputFeatureRequirementLoaderOrStepInputExpressionRequirementLoaderOranyType,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
