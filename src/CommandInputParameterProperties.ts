@@ -88,7 +88,7 @@ export interface CommandInputParameterProperties extends Internal.InputParameter
    * 
    * This must be one or more IRIs of concept nodes
    * that represents file formats which are allowed as input to this
-   * parameter, preferrably defined within an ontology.  If no ontology is
+   * parameter, preferably defined within an ontology.  If no ontology is
    * available, file formats may be tested by exact match.
    * 
    */
@@ -129,7 +129,7 @@ export interface CommandInputParameterProperties extends Internal.InputParameter
    * (e.g. dependent `valueFrom` fields).
    * 
    */
-  default_?: undefined | any
+  default_?: undefined | Internal.File | Internal.Directory | any
 
   /**
    * Specify valid types of data that may be assigned to this parameter.
@@ -138,7 +138,7 @@ export interface CommandInputParameterProperties extends Internal.InputParameter
   type: Internal.CWLType | Internal.stdin | Internal.CommandInputRecordSchema | Internal.CommandInputEnumSchema | Internal.CommandInputArraySchema | string | Array<Internal.CWLType | Internal.CommandInputRecordSchema | Internal.CommandInputEnumSchema | Internal.CommandInputArraySchema | string>
 
   /**
-   * Describes how to turns the input parameters of a process into
+   * Describes how to turn the input parameters of a process into
    * command line arguments.
    * 
    */

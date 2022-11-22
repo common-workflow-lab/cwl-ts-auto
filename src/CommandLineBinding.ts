@@ -20,7 +20,7 @@ import * as Internal from './util/Internal'
  *
  * 
  * When listed under `inputBinding` in the input schema, the term
- * "value" refers to the the corresponding value in the input object.  For
+ * "value" refers to the corresponding value in the input object.  For
  * binding objects listed in `CommandLineTool.arguments`, the term "value"
  * refers to the effective value after evaluating `valueFrom`.
  * 
@@ -45,7 +45,7 @@ import * as Internal from './util/Internal'
  * 
  *   - **array**: If `itemSeparator` is specified, add `prefix` and the join
  *       the array into a single string with `itemSeparator` separating the
- *       items.  Otherwise first add `prefix`, then recursively process
+ *       items.  Otherwise, first add `prefix`, then recursively process
  *       individual elements.
  *       If the array is empty, it does not add anything to command line.
  * 
@@ -93,7 +93,7 @@ export class CommandLineBinding extends Saveable implements Internal.CommandLine
 
   /**
    * Join the array elements into a single string with the elements
-   * separated by by `itemSeparator`.
+   * separated by `itemSeparator`.
    * 
    */
   itemSeparator?: undefined | string

@@ -6,7 +6,7 @@ import * as Internal from './util/Internal'
  * Auto-generated interface for https://w3id.org/cwl/cwl#DockerRequirement
  *
  * Indicates that a workflow component should be run in a
- * [Docker](http://docker.com) or Docker-compatible (such as
+ * [Docker](https://docker.com) or Docker-compatible (such as
  * [Singularity](https://www.sylabs.io/) and [udocker](https://github.com/indigo-dc/udocker)) container environment and
  * specifies how to fetch or build the image.
  * 
@@ -76,7 +76,7 @@ export interface DockerRequirementProperties extends Internal.ProcessRequirement
   dockerPull?: undefined | string
 
   /**
-   * Specify a HTTP URL from which to download a Docker image using `docker load`.
+   * Specify an HTTP URL from which to download a Docker image using `docker load`.
    */
   dockerLoad?: undefined | string
 

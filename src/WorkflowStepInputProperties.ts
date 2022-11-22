@@ -9,7 +9,7 @@ import * as Internal from './util/Internal'
  * workflow inputs, or the outputs of other workflows steps) with the input
  * parameters of the process specified by the `run` field. Only input parameters
  * declared by the target process will be passed through at runtime to the process
- * though additonal parameters may be specified (for use within `valueFrom`
+ * though additional parameters may be specified (for use within `valueFrom`
  * expressions for instance) - unconnected or unused parameters do not represent an
  * error condition.
  * 
@@ -58,7 +58,7 @@ import * as Internal from './util/Internal'
  * 
  * # Picking non-null values among inbound data links
  * 
- * If present, `pickValue` specifies how to picking non-null values among inbound data links.
+ * If present, `pickValue` specifies how to pick non-null values among inbound data links.
  * 
  * `pickValue` is evaluated
  *   1. Once all source values from upstream step or parameters are available.
@@ -70,7 +70,7 @@ import * as Internal from './util/Internal'
  * steps may be connected to a single input (`source` is a list), and
  * skipped steps produce null values.
  * 
- * Static type checkers should check for type consistency after infering what the type
+ * Static type checkers should check for type consistency after inferring what the type
  * will be after `pickValue` is applied, just as they do currently for `linkMerge`.
  * 
  * * **first_non_null**
@@ -183,7 +183,7 @@ export interface WorkflowStepInputProperties extends Internal.IdentifiedProperti
    * default must be applied prior to scattering or evaluating `valueFrom`.
    * 
    */
-  default_?: undefined | any
+  default_?: undefined | Internal.File | Internal.Directory | any
 
   /**
    * To use valueFrom, [StepInputExpressionRequirement](#StepInputExpressionRequirement) must
@@ -193,7 +193,7 @@ export interface WorkflowStepInputProperties extends Internal.IdentifiedProperti
    * this input parameter.
    * 
    * If `valueFrom` is a parameter reference or expression, it must be
-   * evaluated to yield the actual value to be assiged to the input field.
+   * evaluated to yield the actual value to be assigned to the input field.
    * 
    * The `self` value in the parameter reference or expression must be
    * 1. `null` if there is no `source` field
