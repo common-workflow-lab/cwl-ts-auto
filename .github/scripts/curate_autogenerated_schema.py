@@ -2,6 +2,7 @@
 
 import json
 from copy import deepcopy
+from itertools import chain
 from pathlib import Path
 from typing import Dict, List, Any
 import sys
@@ -1111,12 +1112,62 @@ def fix_descriptions(schema_dict: Dict) -> Dict:
 
     # Iterate over all definitions and remove the 'Auto-generated' class implementation
     for schema_def_name, schema_def_dict in schema_dict.get("definitions", {}).items():
+        if "description" not in schema_def_dict:
+            continue
         schema_dict["definitions"][schema_def_name]["description"] = (
             schema_def_dict.get("description", "").split("\n\n", 1)[-1]
         )
 
     # Update top level description
     schema_dict["description"] = schema_dict.get("description", "").split("\n\n", 1)[-1]
+
+    return schema_dict
+
+
+def fix_additional_properties(schema_dict: Dict) -> Dict:
+    """
+    Fix the additionalProperties issues demonstrated in https://stoic-agnesi-d0ac4a.netlify.app/37
+    :param schema_dict:
+    :return:
+    """
+    # Always copy the input
+    schema_dict = deepcopy(schema_dict)
+
+    # Part 1, drop additionalProperties: false from Workflow, CommandLineTool and ExpressionTool definitions
+    for definition_key in ["Workflow", "CommandLineTool", "ExpressionTool", "CWLDocumentMetadata", "CWLGraph"]:
+        _ = schema_dict["definitions"][definition_key].pop("additionalProperties", None)
+
+    # Part 2
+    # For CWLFileorGraph definition, add in the collective set of properties keys defined under
+    # Workflow, CommandLineTool, ExpressionTool, $graph and CWLMetadata
+    # And for each property key set the value to true -
+    property_keys = []
+    for definition_key in ["Workflow", "CommandLineTool", "ExpressionTool", "CWLGraph", "CWLDocumentMetadata"]:
+        if "properties" not in schema_dict["definitions"][definition_key]:
+            continue
+        property_keys.append(list(schema_dict["definitions"][definition_key]["properties"].keys()))
+    property_keys = list(set(chain(*property_keys)))
+
+    schema_dict["definitions"]["CWLFileOrGraph"]["properties"] = dict(
+        map(
+            lambda property_key_iter: (property_key_iter, True),
+            property_keys
+        )
+    )
+
+    # Part 2a, copy over patternProperties
+    pattern_property_objects = {}
+    for definition_key in ["Workflow", "CommandLineTool", "ExpressionTool", "CWLGraph", "CWLDocumentMetadata"]:
+        if "patternProperties" not in schema_dict["definitions"][definition_key]:
+            continue
+        pattern_property_objects.update(
+            schema_dict["definitions"][definition_key]["patternProperties"]
+        )
+
+    schema_dict["definitions"]["CWLFileOrGraph"]["patternProperties"] = pattern_property_objects
+
+    # Make additionalProperties false to this top CWLDocumentMetadata
+    schema_dict["definitions"]["CWLFileOrGraph"]["additionalProperties"] = False
 
     return schema_dict
 
@@ -1165,6 +1216,10 @@ def main():
 
     # Update the schema to use 'if-else' for CommandlineTool and Expression
     schema_dict = add_cwl_file_and_graph(schema_dict)
+
+    # Fix additionalProperties issues
+    # https://stoic-agnesi-d0ac4a.netlify.app/37
+    schema_dict = fix_additional_properties(schema_dict)
 
     # Fix descriptions
     schema_dict = fix_descriptions(schema_dict)
