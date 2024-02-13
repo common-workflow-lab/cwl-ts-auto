@@ -8,7 +8,7 @@ from typing import Dict, List, Any
 import sys
 
 
-def remove_loading_options_from_schema(schema_dict: Any) -> Dict:
+def remove_loading_options_and_extension_fields_from_schema(schema_dict: Any) -> Dict:
     """
     Remove loadingOptions from schema recursively
     :param schema_dict:
@@ -22,15 +22,19 @@ def remove_loading_options_from_schema(schema_dict: Any) -> Dict:
             if isinstance(value, Dict):
                 if "loadingOptions" in value:
                     del value["loadingOptions"]
-                new_schema_dict[key] = remove_loading_options_from_schema(value)
+                if "extensionFields" in value:
+                    del value["extensionFields"]
+                new_schema_dict[key] = remove_loading_options_and_extension_fields_from_schema(value)
             elif isinstance(value, List):
                 if "loadingOptions" in value:
                     _ = value.pop(value.index("loadingOptions"))
-                new_schema_dict[key] = remove_loading_options_from_schema(value)
+                if "extensionFields" in value:
+                    _ = value.pop(value.index("extensionFields"))
+                new_schema_dict[key] = remove_loading_options_and_extension_fields_from_schema(value)
             else:
                 new_schema_dict[key] = value
     elif isinstance(schema_dict, List):
-        new_schema_dict = list(map(lambda value_iter: remove_loading_options_from_schema(value_iter), schema_dict))
+        new_schema_dict = list(map(lambda value_iter: remove_loading_options_and_extension_fields_from_schema(value_iter), schema_dict))
     else:
         # Item is a list of number
         new_schema_dict = schema_dict
@@ -337,8 +341,10 @@ def fix_named_maps(schema_dict: Dict, definition_key: str, property_name: str) -
     # This is important for hints
     if len(schema_dict["definitions"][definition_key]["properties"][property_name]["items"]) == 0:
         schema_dict["definitions"][definition_key]["properties"][property_name] = {
-            "description": schema_dict["definitions"][definition_key]["properties"][property_name].get("description",
-                                                                                                       ""),
+            "description": schema_dict["definitions"][definition_key]["properties"][property_name].get(
+                "description", ""
+            ),
+            "additionalProperties": False,
             "oneOf": [
                 {
                     "items": schema_dict["definitions"][definition_key]["properties"][property_name].get("items", {}),
@@ -361,8 +367,10 @@ def fix_named_maps(schema_dict: Dict, definition_key: str, property_name: str) -
     if (
             "anyOf" not in schema_dict["definitions"][definition_key]["properties"][property_name]["items"]
             or
-            not isinstance(schema_dict["definitions"][definition_key]["properties"][property_name]["items"]["anyOf"],
-                           List)
+            not isinstance(
+                schema_dict["definitions"][definition_key]["properties"][property_name]["items"]["anyOf"],
+                List
+            )
     ):
         raise ValueError(
             f"Schema does not contain an 'anyOf' key in '{definition_key}.properties.{property_name}.items' "
@@ -948,6 +956,10 @@ def add_cwl_metadata_to_schema(schema_dict: Dict) -> Dict:
                 "patternProperties": {
                     "^s:.*$": {
                         "type": "object"
+                    },
+                    # Or the full version
+                    "^https://schema.org/.*$": {
+                        "type": "object"
                     }
                 },
                 "additionalProperties": False,
@@ -998,7 +1010,7 @@ def rename_all_keys_with_trailing_underscore(schema_dict: Any) -> Dict:
     return new_schema_dict
 
 
-def add_cwl_file_and_graph(schema_dict: Dict) -> Dict:
+def add_cwl_file(schema_dict: Dict) -> Dict:
     """
     Large updates to the actual file body
 
@@ -1030,7 +1042,7 @@ def add_cwl_file_and_graph(schema_dict: Dict) -> Dict:
     # Update the schema to use 'if-else' for CommandlineTool and Expression
     schema_dict.update(
         {
-            "$ref": "#/definitions/CWLFileOrGraph",
+            "$ref": "#/definitions/CWLFile",
         }
     )
 
@@ -1040,18 +1052,71 @@ def add_cwl_file_and_graph(schema_dict: Dict) -> Dict:
             # Which is either a workflow, commandline tool or expression tool
             "CWLFile": {
                 "type": "object",
-                "oneOf": [
+                "additionalProperties": False,
+                "allOf": [
                     {
-                        "$ref": "#/definitions/Workflow"
+                        "oneOf": [
+                            {
+                                "$ref": "#/definitions/Workflow"
+                            },
+                            {
+                                "$ref": "#/definitions/CommandLineTool"
+                            },
+                            {
+                                "$ref": "#/definitions/ExpressionTool"
+                            }
+                        ]
                     },
                     {
-                        "$ref": "#/definitions/CommandLineTool"
-                    },
-                    {
-                        "$ref": "#/definitions/ExpressionTool"
+                        "oneOf": [
+                            {
+                                "$ref": "#/definitions/CWLDocumentMetadata"
+                            }
+                        ]
                     }
                 ]
-            },
+            }
+        }
+    )
+
+    return schema_dict
+
+
+def add_cwl_graph(schema_dict: Dict) -> Dict:
+    """
+    Large updates to the actual file body
+
+    Can come in two forms, File and Graph.
+
+    In File form, can be of type Workflow, ExpressionTool or CommandLineTool,
+    In Graph form, we have the $graph property which then has elements of type CWLFile
+
+    Both can have the metadata objects such as $namespaces and $schemas
+
+    We initialise both objects.
+
+    Then state that the file can be a file or a graph
+
+    :param schema_dict:
+    :return:
+    """
+    # Always deep copy the input
+    schema_dict = deepcopy(schema_dict)
+
+    # Assert $ref key
+    if "$ref" not in schema_dict:
+        raise ValueError("Schema does not contain a '$ref' key")
+
+    # Update the schema
+    schema_dict.update(
+        {
+            "$ref": "#/definitions/CWLGraphWithMetadata",
+        }
+    )
+
+    # Update definitions
+    schema_dict["definitions"].update(
+        {
             # Now create the graph option
             "CWLGraph": {
                 "type": "object",
@@ -1065,29 +1130,19 @@ def add_cwl_file_and_graph(schema_dict: Dict) -> Dict:
                     # Copy from Workflow
                     "cwlVersion": schema_dict["definitions"]["Workflow"]["properties"]["cwlVersion"]
                 },
-                "additionalProperties": False
+                "required": [
+                    "$graph"
+                ]
             },
-            # Now create the option to have either the file or graph based option
-            # Then include the metadata on top
-            # This is the top level object
-            "CWLFileOrGraph": {
+            "CWLGraphWithMetadata": {
+                "type": "object",
+                "additionalProperties": False,
                 "allOf": [
                     {
-                        "oneOf": [
-                            {
-                                "$ref": "#/definitions/CWLFile"
-                            },
-                            {
-                                "$ref": "#/definitions/CWLGraph"
-                            }
-                        ]
+                        "$ref": "#/definitions/CWLGraph"
                     },
                     {
-                        "oneOf": [
-                            {
-                                "$ref": "#/definitions/CWLDocumentMetadata"
-                            }
-                        ]
+                        "$ref": "#/definitions/CWLDocumentMetadata"
                     }
                 ]
             }
@@ -1124,7 +1179,7 @@ def fix_descriptions(schema_dict: Dict) -> Dict:
     return schema_dict
 
 
-def fix_additional_properties(schema_dict: Dict) -> Dict:
+def fix_additional_properties(schema_dict: Dict, top_definition: str, sub_definition_keys: List) -> Dict:
     """
     Fix the additionalProperties issues demonstrated in https://stoic-agnesi-d0ac4a.netlify.app/37
     :param schema_dict:
@@ -1134,7 +1189,7 @@ def fix_additional_properties(schema_dict: Dict) -> Dict:
     schema_dict = deepcopy(schema_dict)
 
     # Part 1, drop additionalProperties: false from Workflow, CommandLineTool and ExpressionTool definitions
-    for definition_key in ["Workflow", "CommandLineTool", "ExpressionTool", "CWLDocumentMetadata", "CWLGraph"]:
+    for definition_key in sub_definition_keys:
         _ = schema_dict["definitions"][definition_key].pop("additionalProperties", None)
 
     # Part 2
@@ -1142,13 +1197,13 @@ def fix_additional_properties(schema_dict: Dict) -> Dict:
     # Workflow, CommandLineTool, ExpressionTool, $graph and CWLMetadata
     # And for each property key set the value to true -
     property_keys = []
-    for definition_key in ["Workflow", "CommandLineTool", "ExpressionTool", "CWLGraph", "CWLDocumentMetadata"]:
+    for definition_key in sub_definition_keys:
         if "properties" not in schema_dict["definitions"][definition_key]:
             continue
         property_keys.append(list(schema_dict["definitions"][definition_key]["properties"].keys()))
     property_keys = list(set(chain(*property_keys)))
 
-    schema_dict["definitions"]["CWLFileOrGraph"]["properties"] = dict(
+    schema_dict["definitions"][top_definition]["properties"] = dict(
         map(
             lambda property_key_iter: (property_key_iter, True),
             property_keys
@@ -1157,17 +1212,17 @@ def fix_additional_properties(schema_dict: Dict) -> Dict:
 
     # Part 2a, copy over patternProperties
     pattern_property_objects = {}
-    for definition_key in ["Workflow", "CommandLineTool", "ExpressionTool", "CWLGraph", "CWLDocumentMetadata"]:
+    for definition_key in sub_definition_keys:
         if "patternProperties" not in schema_dict["definitions"][definition_key]:
             continue
         pattern_property_objects.update(
             schema_dict["definitions"][definition_key]["patternProperties"]
         )
 
-    schema_dict["definitions"]["CWLFileOrGraph"]["patternProperties"] = pattern_property_objects
+    schema_dict["definitions"][top_definition]["patternProperties"] = pattern_property_objects
 
     # Make additionalProperties false to this top CWLDocumentMetadata
-    schema_dict["definitions"]["CWLFileOrGraph"]["additionalProperties"] = False
+    schema_dict["definitions"][top_definition]["additionalProperties"] = False
 
     return schema_dict
 
@@ -1177,7 +1232,7 @@ def main():
     schema_dict = read_schema_in_from_file(Path(sys.argv[1]))
 
     # Remove loading options from schema
-    schema_dict = remove_loading_options_from_schema(schema_dict)
+    schema_dict = remove_loading_options_and_extension_fields_from_schema(schema_dict)
 
     # Rename all keys with trailing underscore
     schema_dict = rename_all_keys_with_trailing_underscore(schema_dict)
@@ -1215,11 +1270,7 @@ def main():
         schema_dict = fix_named_maps(schema_dict, "WorkflowStep", property_name)
 
     # Update the schema to use 'if-else' for CommandlineTool and Expression
-    schema_dict = add_cwl_file_and_graph(schema_dict)
-
-    # Fix additionalProperties issues
-    # https://stoic-agnesi-d0ac4a.netlify.app/37
-    schema_dict = fix_additional_properties(schema_dict)
+    schema_dict = add_cwl_file(schema_dict)
 
     # Fix descriptions
     schema_dict = fix_descriptions(schema_dict)
@@ -1227,8 +1278,27 @@ def main():
     # Remove workflow description from top object as this is now any workflow description
     _ = schema_dict.pop("description")
 
+    # Fix additionalProperties issues
+    # https://stoic-agnesi-d0ac4a.netlify.app/37
+    schema_dict = fix_additional_properties(
+        schema_dict,
+        "CWLFile",
+        ["Workflow", "CommandLineTool", "ExpressionTool", "CWLDocumentMetadata"]
+    )
+
     # Write out the new schema
     write_schema_out_to_file(schema_dict, Path(sys.argv[2]))
+
+    # Update with graph
+    schema_dict = add_cwl_graph(schema_dict)
+    schema_dict = fix_additional_properties(
+        schema_dict,
+        "CWLGraphWithMetadata",
+        ["Workflow", "CommandLineTool", "ExpressionTool", "CWLDocumentMetadata", "CWLFile", "CWLGraph"]
+    )
+
+    # Write out graph to the new schema
+    write_schema_out_to_file(schema_dict, Path(sys.argv[3]))
 
 
 if __name__ == "__main__":
