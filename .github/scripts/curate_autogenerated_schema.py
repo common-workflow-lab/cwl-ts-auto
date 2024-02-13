@@ -1227,6 +1227,44 @@ def fix_additional_properties(schema_dict: Dict, top_definition: str, sub_defini
     return schema_dict
 
 
+def fix_hints(schema_dict, definition_key):
+    """
+    Hints property should be the same as requirements for the given key
+    :param schema_dict:
+    :param definition_key:
+    :return:
+    """
+
+    # Always do a deepcopy on the input
+    schema_dict = deepcopy(schema_dict)
+
+    # Assert definitions key
+    assert_definitions_key(schema_dict)
+
+    # Confirm definitions key exists
+    if definition_key not in schema_dict["definitions"]:
+        raise ValueError(f"Schema does not contain an '{definition_key}' key in 'definitions'")
+
+    # Confirm that the definition_key has a properties key and the properties key is a dictionary
+    if (
+            "properties" not in schema_dict["definitions"][definition_key] or
+            not isinstance(schema_dict["definitions"][definition_key]["properties"], Dict)
+    ):
+        raise ValueError(
+            f"Schema does not contain a 'properties' key in '{definition_key}.definitions' "
+            "or 'properties' is not a dictionary"
+        )
+
+    # Confirm that properties has a requirements key
+    if "requirements" not in schema_dict["definitions"][definition_key]["properties"]:
+        raise ValueError(f"Schema does not contain an 'requirements' key in '{definition_key}.properties'")
+
+    # Copy requirements to hints
+    schema_dict["definitions"][definition_key]["properties"]["hints"] = schema_dict["definitions"][definition_key]["properties"]["requirements"]
+
+    return schema_dict
+
+
 def main():
     # Step 1 - read in existing schema
     schema_dict = read_schema_in_from_file(Path(sys.argv[1]))
@@ -1259,15 +1297,18 @@ def main():
 
         for property_name in ["requirements", "hints"]:
             # Add named maps for hints and requirements
-            # FIXME, only requirements, not sure if hints expand beyond requirements)
             schema_dict = fix_named_maps(schema_dict, definition_key, property_name)
 
     # Also fix for 'in' for WorkflowStep
     schema_dict = fix_unnamed_maps(schema_dict, "WorkflowStep", "in")
 
     # And named maps for WorkflowStep
-    for property_name in ["requirements", "hints"]:
+    for property_name in ["requirements"]:
         schema_dict = fix_named_maps(schema_dict, "WorkflowStep", property_name)
+
+    # Hints should map to requirements
+    for definition_key in ["Workflow", "ExpressionTool", "CommandLineTool", "Operation"]:
+        schema_dict = fix_hints(schema_dict, definition_key)
 
     # Update the schema to use 'if-else' for CommandlineTool and Expression
     schema_dict = add_cwl_file(schema_dict)
