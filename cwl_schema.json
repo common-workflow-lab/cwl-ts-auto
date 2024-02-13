@@ -530,20 +530,275 @@
                     "description": "A documentation string for this object, or an array of strings which should be concatenated."
                 },
                 "hints": {
-                    "description": "Declares hints applying to either the runtime environment or the\nworkflow engine that may be helpful in executing this process.  It is\nnot an error if an implementation cannot satisfy all hints, however\nthe implementation may report a warning.",
-                    "additionalProperties": false,
+                    "description": "Declares requirements that apply to either the runtime environment or the\nworkflow engine that must be met in order to execute this process.  If\nan implementation cannot satisfy all requirements, or a requirement is\nlisted which is not recognized by the implementation, it is a fatal\nerror and the implementation must not attempt to run the process,\nunless overridden at user option.",
                     "oneOf": [
                         {
-                            "items": {},
+                            "items": {
+                                "anyOf": [
+                                    {
+                                        "$ref": "#/definitions/InlineJavascriptRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/SchemaDefRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/LoadListingRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/DockerRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/SoftwareRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/InitialWorkDirRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/EnvVarRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/ShellCommandRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/ResourceRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/WorkReuse"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/NetworkAccess"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/InplaceUpdateRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/ToolTimeLimit"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/SubworkflowFeatureRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/ScatterFeatureRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/MultipleInputFeatureRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/StepInputExpressionRequirement"
+                                    }
+                                ]
+                            },
                             "type": "array"
                         },
                         {
                             "type": "object",
-                            "patternProperties": {
-                                "^[_a-zA-Z][a-zA-Z0-9_-]*$": {
-                                    "type": "object"
+                            "properties": {
+                                "InlineJavascriptRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/InlineJavascriptRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "SchemaDefRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/SchemaDefRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "LoadListingRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/LoadListingRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "DockerRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/DockerRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "SoftwareRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/SoftwareRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "InitialWorkDirRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/InitialWorkDirRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "EnvVarRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/EnvVarRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "ShellCommandRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/ShellCommandRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "ResourceRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/ResourceRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "WorkReuse": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/WorkReuseMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "NetworkAccess": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/NetworkAccessMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "InplaceUpdateRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/InplaceUpdateRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "ToolTimeLimit": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/ToolTimeLimitMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "SubworkflowFeatureRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/SubworkflowFeatureRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "ScatterFeatureRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/ScatterFeatureRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "MultipleInputFeatureRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/MultipleInputFeatureRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "StepInputExpressionRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/StepInputExpressionRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
                                 }
-                            }
+                            },
+                            "additionalProperties": false
                         }
                     ]
                 },
@@ -1517,20 +1772,275 @@
                     "type": "string"
                 },
                 "hints": {
-                    "description": "Declares hints applying to either the runtime environment or the\nworkflow engine that may be helpful in executing this process.  It is\nnot an error if an implementation cannot satisfy all hints, however\nthe implementation may report a warning.",
-                    "additionalProperties": false,
+                    "description": "Declares requirements that apply to either the runtime environment or the\nworkflow engine that must be met in order to execute this process.  If\nan implementation cannot satisfy all requirements, or a requirement is\nlisted which is not recognized by the implementation, it is a fatal\nerror and the implementation must not attempt to run the process,\nunless overridden at user option.",
                     "oneOf": [
                         {
-                            "items": {},
+                            "items": {
+                                "anyOf": [
+                                    {
+                                        "$ref": "#/definitions/InlineJavascriptRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/SchemaDefRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/LoadListingRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/DockerRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/SoftwareRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/InitialWorkDirRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/EnvVarRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/ShellCommandRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/ResourceRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/WorkReuse"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/NetworkAccess"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/InplaceUpdateRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/ToolTimeLimit"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/SubworkflowFeatureRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/ScatterFeatureRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/MultipleInputFeatureRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/StepInputExpressionRequirement"
+                                    }
+                                ]
+                            },
                             "type": "array"
                         },
                         {
                             "type": "object",
-                            "patternProperties": {
-                                "^[_a-zA-Z][a-zA-Z0-9_-]*$": {
-                                    "type": "object"
+                            "properties": {
+                                "InlineJavascriptRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/InlineJavascriptRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "SchemaDefRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/SchemaDefRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "LoadListingRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/LoadListingRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "DockerRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/DockerRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "SoftwareRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/SoftwareRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "InitialWorkDirRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/InitialWorkDirRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "EnvVarRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/EnvVarRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "ShellCommandRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/ShellCommandRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "ResourceRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/ResourceRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "WorkReuse": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/WorkReuseMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "NetworkAccess": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/NetworkAccessMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "InplaceUpdateRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/InplaceUpdateRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "ToolTimeLimit": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/ToolTimeLimitMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "SubworkflowFeatureRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/SubworkflowFeatureRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "ScatterFeatureRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/ScatterFeatureRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "MultipleInputFeatureRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/MultipleInputFeatureRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "StepInputExpressionRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/StepInputExpressionRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
                                 }
-                            }
+                            },
+                            "additionalProperties": false
                         }
                     ]
                 },
@@ -2574,20 +3084,275 @@
                     "description": "A documentation string for this object, or an array of strings which should be concatenated."
                 },
                 "hints": {
-                    "description": "Declares hints applying to either the runtime environment or the\nworkflow engine that may be helpful in executing this process.  It is\nnot an error if an implementation cannot satisfy all hints, however\nthe implementation may report a warning.",
-                    "additionalProperties": false,
+                    "description": "Declares requirements that apply to either the runtime environment or the\nworkflow engine that must be met in order to execute this process.  If\nan implementation cannot satisfy all requirements, or a requirement is\nlisted which is not recognized by the implementation, it is a fatal\nerror and the implementation must not attempt to run the process,\nunless overridden at user option.",
                     "oneOf": [
                         {
-                            "items": {},
+                            "items": {
+                                "anyOf": [
+                                    {
+                                        "$ref": "#/definitions/InlineJavascriptRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/SchemaDefRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/LoadListingRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/DockerRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/SoftwareRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/InitialWorkDirRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/EnvVarRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/ShellCommandRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/ResourceRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/WorkReuse"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/NetworkAccess"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/InplaceUpdateRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/ToolTimeLimit"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/SubworkflowFeatureRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/ScatterFeatureRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/MultipleInputFeatureRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/StepInputExpressionRequirement"
+                                    }
+                                ]
+                            },
                             "type": "array"
                         },
                         {
                             "type": "object",
-                            "patternProperties": {
-                                "^[_a-zA-Z][a-zA-Z0-9_-]*$": {
-                                    "type": "object"
+                            "properties": {
+                                "InlineJavascriptRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/InlineJavascriptRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "SchemaDefRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/SchemaDefRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "LoadListingRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/LoadListingRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "DockerRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/DockerRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "SoftwareRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/SoftwareRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "InitialWorkDirRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/InitialWorkDirRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "EnvVarRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/EnvVarRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "ShellCommandRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/ShellCommandRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "ResourceRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/ResourceRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "WorkReuse": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/WorkReuseMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "NetworkAccess": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/NetworkAccessMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "InplaceUpdateRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/InplaceUpdateRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "ToolTimeLimit": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/ToolTimeLimitMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "SubworkflowFeatureRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/SubworkflowFeatureRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "ScatterFeatureRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/ScatterFeatureRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "MultipleInputFeatureRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/MultipleInputFeatureRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "StepInputExpressionRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/StepInputExpressionRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
                                 }
-                            }
+                            },
+                            "additionalProperties": false
                         }
                     ]
                 },
@@ -3721,20 +4486,275 @@
                     "description": "A documentation string for this object, or an array of strings which should be concatenated."
                 },
                 "hints": {
-                    "description": "Declares hints applying to either the runtime environment or the\nworkflow engine that may be helpful in executing this process.  It is\nnot an error if an implementation cannot satisfy all hints, however\nthe implementation may report a warning.",
-                    "additionalProperties": false,
+                    "description": "Declares requirements that apply to either the runtime environment or the\nworkflow engine that must be met in order to execute this process.  If\nan implementation cannot satisfy all requirements, or a requirement is\nlisted which is not recognized by the implementation, it is a fatal\nerror and the implementation must not attempt to run the process,\nunless overridden at user option.",
                     "oneOf": [
                         {
-                            "items": {},
+                            "items": {
+                                "anyOf": [
+                                    {
+                                        "$ref": "#/definitions/InlineJavascriptRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/SchemaDefRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/LoadListingRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/DockerRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/SoftwareRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/InitialWorkDirRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/EnvVarRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/ShellCommandRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/ResourceRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/WorkReuse"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/NetworkAccess"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/InplaceUpdateRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/ToolTimeLimit"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/SubworkflowFeatureRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/ScatterFeatureRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/MultipleInputFeatureRequirement"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/StepInputExpressionRequirement"
+                                    }
+                                ]
+                            },
                             "type": "array"
                         },
                         {
                             "type": "object",
-                            "patternProperties": {
-                                "^[_a-zA-Z][a-zA-Z0-9_-]*$": {
-                                    "type": "object"
+                            "properties": {
+                                "InlineJavascriptRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/InlineJavascriptRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "SchemaDefRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/SchemaDefRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "LoadListingRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/LoadListingRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "DockerRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/DockerRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "SoftwareRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/SoftwareRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "InitialWorkDirRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/InitialWorkDirRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "EnvVarRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/EnvVarRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "ShellCommandRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/ShellCommandRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "ResourceRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/ResourceRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "WorkReuse": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/WorkReuseMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "NetworkAccess": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/NetworkAccessMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "InplaceUpdateRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/InplaceUpdateRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "ToolTimeLimit": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/ToolTimeLimitMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "SubworkflowFeatureRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/SubworkflowFeatureRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "ScatterFeatureRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/ScatterFeatureRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "MultipleInputFeatureRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/MultipleInputFeatureRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
+                                },
+                                "StepInputExpressionRequirement": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/StepInputExpressionRequirementMap"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false
+                                        }
+                                    ]
                                 }
-                            }
+                            },
+                            "additionalProperties": false
                         }
                     ]
                 },
@@ -4353,21 +5373,8 @@
                 },
                 "hints": {
                     "description": "Declares hints applying to either the runtime environment or the\nworkflow engine that may be helpful in executing this workflow step.  It is\nnot an error if an implementation cannot satisfy all hints, however\nthe implementation may report a warning.",
-                    "additionalProperties": false,
-                    "oneOf": [
-                        {
-                            "items": {},
-                            "type": "array"
-                        },
-                        {
-                            "type": "object",
-                            "patternProperties": {
-                                "^[_a-zA-Z][a-zA-Z0-9_-]*$": {
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    ]
+                    "items": {},
+                    "type": "array"
                 },
                 "id": {
                     "description": "The unique identifier for this object.",
@@ -5227,28 +6234,28 @@
                 }
             ],
             "properties": {
-                "arguments": true,
-                "temporaryFailCodes": true,
-                "baseCommand": true,
-                "$namespaces": true,
-                "requirements": true,
-                "inputs": true,
-                "class": true,
                 "permanentFailCodes": true,
-                "cwlVersion": true,
-                "$schemas": true,
-                "hints": true,
-                "intent": true,
-                "id": true,
-                "steps": true,
-                "stdout": true,
-                "successCodes": true,
-                "doc": true,
-                "outputs": true,
-                "stdin": true,
                 "label": true,
+                "temporaryFailCodes": true,
+                "intent": true,
                 "stderr": true,
-                "expression": true
+                "class": true,
+                "arguments": true,
+                "$schemas": true,
+                "stdin": true,
+                "outputs": true,
+                "cwlVersion": true,
+                "stdout": true,
+                "id": true,
+                "requirements": true,
+                "successCodes": true,
+                "baseCommand": true,
+                "expression": true,
+                "inputs": true,
+                "steps": true,
+                "doc": true,
+                "$namespaces": true,
+                "hints": true
             },
             "patternProperties": {
                 "^s:.*$": {
