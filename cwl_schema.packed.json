@@ -1,5 +1,5 @@
 {
-    "$ref": "#/definitions/CWLFile",
+    "$ref": "#/definitions/CWLGraphWithMetadata",
     "$schema": "http://json-schema.org/draft-07/schema#",
     "definitions": {
         "CommandInputArraySchema": {
@@ -5203,7 +5203,6 @@
         },
         "CWLFile": {
             "type": "object",
-            "additionalProperties": false,
             "allOf": [
                 {
                     "oneOf": [
@@ -5240,6 +5239,91 @@
                 "hints": true,
                 "intent": true,
                 "id": true,
+                "steps": true,
+                "stdout": true,
+                "successCodes": true,
+                "doc": true,
+                "outputs": true,
+                "stdin": true,
+                "label": true,
+                "stderr": true,
+                "expression": true
+            },
+            "patternProperties": {
+                "^s:.*$": {
+                    "type": "object"
+                },
+                "^https://schema.org/.*$": {
+                    "type": "object"
+                }
+            }
+        },
+        "CWLGraph": {
+            "type": "object",
+            "properties": {
+                "$graph": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CWLFile"
+                    }
+                },
+                "cwlVersion": {
+                    "description": "CWL document version. Always required at the document root. Not\nrequired for a Process embedded inside another Process.",
+                    "enum": [
+                        "draft-2",
+                        "draft-3",
+                        "draft-3.dev1",
+                        "draft-3.dev2",
+                        "draft-3.dev3",
+                        "draft-3.dev4",
+                        "draft-3.dev5",
+                        "draft-4.dev1",
+                        "draft-4.dev2",
+                        "draft-4.dev3",
+                        "v1.0",
+                        "v1.0.dev4",
+                        "v1.1",
+                        "v1.1.0-dev1",
+                        "v1.2",
+                        "v1.2.0-dev1",
+                        "v1.2.0-dev2",
+                        "v1.2.0-dev3",
+                        "v1.2.0-dev4",
+                        "v1.2.0-dev5"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "$graph"
+            ]
+        },
+        "CWLGraphWithMetadata": {
+            "type": "object",
+            "additionalProperties": false,
+            "allOf": [
+                {
+                    "$ref": "#/definitions/CWLGraph"
+                },
+                {
+                    "$ref": "#/definitions/CWLDocumentMetadata"
+                }
+            ],
+            "properties": {
+                "arguments": true,
+                "temporaryFailCodes": true,
+                "baseCommand": true,
+                "$namespaces": true,
+                "requirements": true,
+                "inputs": true,
+                "class": true,
+                "permanentFailCodes": true,
+                "cwlVersion": true,
+                "$schemas": true,
+                "hints": true,
+                "intent": true,
+                "id": true,
+                "$graph": true,
                 "steps": true,
                 "stdout": true,
                 "successCodes": true,
