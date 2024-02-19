@@ -48,6 +48,10 @@ jobs:
               cwl_schema.raw.json \
               cwl_schema.json \
               cwl_schema.packed.json
+      - name: Validate JSON Schema
+        run: |
+          python3 \
+            .github/scripts/validate_schema.py
       - name: Commit JSON Schema
         uses: EndBug/add-and-commit@v9
         env:

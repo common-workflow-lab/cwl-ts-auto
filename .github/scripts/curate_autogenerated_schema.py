@@ -34,7 +34,12 @@ def remove_loading_options_and_extension_fields_from_schema(schema_dict: Any) ->
             else:
                 new_schema_dict[key] = value
     elif isinstance(schema_dict, List):
-        new_schema_dict = list(map(lambda value_iter: remove_loading_options_and_extension_fields_from_schema(value_iter), schema_dict))
+        new_schema_dict = list(
+            map(
+                lambda value_iter: remove_loading_options_and_extension_fields_from_schema(value_iter),
+                schema_dict
+            )
+        )
     else:
         # Item is a list of number
         new_schema_dict = schema_dict
@@ -42,7 +47,13 @@ def remove_loading_options_and_extension_fields_from_schema(schema_dict: Any) ->
     return new_schema_dict
 
 
-def fix_unnamed_maps(schema_dict: Dict, definition_key: str, property_name: str):
+def fix_unnamed_maps(
+    schema_dict: Dict,
+    definition_key: str,
+    property_name: str,
+    allow_type_as_only_input: bool = False,
+    allow_type_array_as_only_input: bool = False,
+):
     """
     Inputs, Steps, Outputs etc. can use the id as the key.
 
@@ -107,6 +118,19 @@ def fix_unnamed_maps(schema_dict: Dict, definition_key: str, property_name: str)
     :param schema_dict:  The schema dictionary to update
     :param definition_key:  The definition key to update, one of Workflow, ExpressionTool, CommandlineTool
     :param property_name:  The property to update, one of inputs, outputs, steps
+    :param allow_type_as_only_input: Allow the type to be the only input, expected to match the 'type' input
+    :param allow_type_array_as_only_input:
+        Count lines test 4 - https://github.com/common-workflow-language/cwl-v1.2/blob/main/tests/count-lines4-wf.cwl
+        file1: [file1, file2] should be support even if I don't recommend this
+        Along with
+        Count lines test 12 - https://github.com/common-workflow-language/cwl-v1.2/blob/main/tests/count-lines12-wf.cwl
+        file1:
+          - type: array
+            items: File
+        file2:
+        - type: array
+            items: File
+        Ew!
     :return:
     """
 
@@ -137,7 +161,463 @@ def fix_unnamed_maps(schema_dict: Dict, definition_key: str, property_name: str)
     # Nest items and array key under oneOf array along with the patternProperties
     property_old = deepcopy(schema_dict["definitions"][definition_key]["properties"][property_name])
 
-    schema_dict["definitions"][definition_key]["properties"][property_name] = {
+    pattern_properties_regex_match_ref = property_old.get("items", {})
+
+    # Sometimes a user might have the following
+    # Which I wouldn't recommend btw
+    # outputs:
+    #   lit: File
+    if allow_type_as_only_input:
+        type_definition_key = property_old.get("items", {}).get("$ref").replace("#/definitions/", "")
+        if "type" in schema_dict["definitions"][type_definition_key]["properties"].keys():
+            pattern_properties_regex_match_ref = {
+                "oneOf": [
+                    {
+                        "$ref": property_old.get("items", {}).get("$ref")
+                    },
+                    schema_dict["definitions"][type_definition_key]["properties"]["type"]
+                ]
+            }
+        else:
+            pattern_properties_regex_match_ref = {
+                "oneOf": [
+                    {
+                        "$ref": property_old.get("items", {}).get("$ref")
+                    },
+                    {
+                        "type": "string"
+                    }
+                ]
+            }
+
+        # For situations where the type is defined by a either a single string or an array of items where
+        # Each element of the array is equivalent to the 'type' property
+        if allow_type_array_as_only_input:
+            pattern_properties_regex_match_ref["oneOf"].append(
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "$ref": f"#/definitions/{type_definition_key}"
+                            }
+                        ]
+                    }
+                }
+            )
+
+        # Re-initialise the definitions
+        schema_dict["definitions"][definition_key]["properties"][property_name] = {
+            "description": property_old.get("description", ""),
+            "oneOf": [
+                {
+                    "items": property_old.get("items", {}),
+                    "type": property_old.get("type", {})
+                },
+                {
+                    "patternProperties": {
+                        "^[_a-zA-Z][a-zA-Z0-9_-]*$": pattern_properties_regex_match_ref
+                    },
+                    "type": "object"
+                }
+            ]
+        }
+    else:
+        # For WorkflowStep, we just allow the patternProperties to match the property_old items type
+        # While the property itself is an object
+        # Re-initialise the definitions
+        schema_dict["definitions"][definition_key]["properties"][property_name] = {
+            "description": property_old.get("description", ""),
+            "oneOf": [
+                {
+                    "items": property_old.get("items", {}),
+                    "type": property_old.get("type", {})
+                },
+                {
+                    "patternProperties": {
+                        "^[_a-zA-Z][a-zA-Z0-9_-]*$": property_old.get("items", {})
+                    },
+                    "type": "object"
+                }
+            ]
+        }
+
+    return schema_dict
+
+
+def fix_secondary_file_schema(schema_dict: Dict) -> Dict:
+    """
+    SecondaryFileSchema should allow for a single string entry to represent the secondary file pattern
+    Although not recommended, it is allowed in the CWL spec
+
+    FROM
+
+    {
+        "SecondaryFileSchema": {
+            "additionalProperties": false,
+            "description": "Secondary files are specified using the following micro-DSL for secondary files:\n\n* If the value is a string, it is transformed to an object with two fields\n  `pattern` and `required`\n* By default, the value of `required` is `null`\n  (this indicates default behavior, which may be based on the context)\n* If the value ends with a question mark `?` the question mark is\n  stripped off and the value of the field `required` is set to `False`\n* The remaining value is assigned to the field `pattern`\n\nFor implementation details and examples, please see\n[this section](SchemaSalad.html#Domain_Specific_Language_for_secondary_files)\nin the Schema Salad specification.",
+            "properties": {
+                "pattern": {
+                    "description": "Provides a pattern or expression specifying files or directories that\nshould be included alongside the primary file.\n\nIf the value is an expression, the value of `self` in the\nexpression must be the primary input or output File object to\nwhich this binding applies.  The `basename`, `nameroot` and\n`nameext` fields must be present in `self`.  For\n`CommandLineTool` inputs the `location` field must also be\npresent.  For `CommandLineTool` outputs the `path` field must\nalso be present.  If secondary files were included on an input\nFile object as part of the Process invocation, they must also\nbe present in `secondaryFiles` on `self`.\n\nThe expression must return either: a filename string relative\nto the path to the primary File, a File or Directory object\n(`class: File` or `class: Directory`) with either `location`\n(for inputs) or `path` (for outputs) and `basename` fields\nset, or an array consisting of strings or File or Directory\nobjects as previously described.\n\nIt is legal to use `location` from a File or Directory object\npassed in as input, including `location` from secondary files\non `self`.  If an expression returns a File object with the\nsame `location` but a different `basename` as a secondary file\nthat was passed in, the expression result takes precedence.\nSetting the basename with an expression this way affects the\n`path` where the secondary file will be staged to in the\nCommandLineTool.\n\nThe expression may return \"null\" in which case there is no\nsecondary file from that expression.\n\nTo work on non-filename-preserving storage systems, portable\ntool descriptions should treat `location` as an\n[opaque identifier](#opaque-strings) and avoid constructing new\nvalues from `location`, but should construct relative references\nusing `basename` or `nameroot` instead, or propagate `location`\nfrom defined inputs.\n\nIf a value in `secondaryFiles` is a string that is not an expression,\nit specifies that the following pattern should be applied to the path\nof the primary file to yield a filename relative to the primary File:\n\n  1. If string ends with `?` character, remove the last `?` and mark\n    the resulting secondary file as optional.\n  2. If string begins with one or more caret `^` characters, for each\n    caret, remove the last file extension from the path (the last\n    period `.` and all following characters).  If there are no file\n    extensions, the path is unchanged.\n  3. Append the remainder of the string to the end of the file path.",
+                    "type": "string"
+                },
+                "required": {
+                    "description": "An implementation must not fail workflow execution if `required` is\nset to `false` and the expected secondary file does not exist.\nDefault value for `required` field is `true` for secondary files on\ninput and `false` for secondary files on output.",
+                    "type": [
+                        "string",
+                        "boolean"
+                    ]
+                }
+            },
+            "required": [
+                "pattern"
+            ],
+            "type": "object"
+        }
+    }
+
+    TO
+
+    {
+        "SecondaryFileSchema": {
+            "additionalProperties": false,
+            "description": "Secondary files are specified using the following micro-DSL for secondary files:\n\n* If the value is a string, it is transformed to an object with two fields\n  `pattern` and `required`\n* By default, the value of `required` is `null`\n  (this indicates default behavior, which may be based on the context)\n* If the value ends with a question mark `?` the question mark is\n  stripped off and the value of the field `required` is set to `False`\n* The remaining value is assigned to the field `pattern`\n\nFor implementation details and examples, please see\n[this section](SchemaSalad.html#Domain_Specific_Language_for_secondary_files)\nin the Schema Salad specification.",
+            "oneOf": [
+                {
+                    "properties": {
+                        "pattern": {
+                            "description": "Provides a pattern or expression specifying files or directories that\nshould be included alongside the primary file.\n\nIf the value is an expression, the value of `self` in the\nexpression must be the primary input or output File object to\nwhich this binding applies.  The `basename`, `nameroot` and\n`nameext` fields must be present in `self`.  For\n`CommandLineTool` inputs the `location` field must also be\npresent.  For `CommandLineTool` outputs the `path` field must\nalso be present.  If secondary files were included on an input\nFile object as part of the Process invocation, they must also\nbe present in `secondaryFiles` on `self`.\n\nThe expression must return either: a filename string relative\nto the path to the primary File, a File or Directory object\n(`class: File` or `class: Directory`) with either `location`\n(for inputs) or `path` (for outputs) and `basename` fields\nset, or an array consisting of strings or File or Directory\nobjects as previously described.\n\nIt is legal to use `location` from a File or Directory object\npassed in as input, including `location` from secondary files\non `self`.  If an expression returns a File object with the\nsame `location` but a different `basename` as a secondary file\nthat was passed in, the expression result takes precedence.\nSetting the basename with an expression this way affects the\n`path` where the secondary file will be staged to in the\nCommandLineTool.\n\nThe expression may return \"null\" in which case there is no\nsecondary file from that expression.\n\nTo work on non-filename-preserving storage systems, portable\ntool descriptions should treat `location` as an\n[opaque identifier](#opaque-strings) and avoid constructing new\nvalues from `location`, but should construct relative references\nusing `basename` or `nameroot` instead, or propagate `location`\nfrom defined inputs.\n\nIf a value in `secondaryFiles` is a string that is not an expression,\nit specifies that the following pattern should be applied to the path\nof the primary file to yield a filename relative to the primary File:\n\n  1. If string ends with `?` character, remove the last `?` and mark\n    the resulting secondary file as optional.\n  2. If string begins with one or more caret `^` characters, for each\n    caret, remove the last file extension from the path (the last\n    period `.` and all following characters).  If there are no file\n    extensions, the path is unchanged.\n  3. Append the remainder of the string to the end of the file path.",
+                            "type": "string"
+                        },
+                        "required": {
+                            "description": "An implementation must not fail workflow execution if `required` is\nset to `false` and the expected secondary file does not exist.\nDefault value for `required` field is `true` for secondary files on\ninput and `false` for secondary files on output.",
+                            "type": [
+                                "string",
+                                "boolean"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "pattern"
+                    ],
+                    "type": "object"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        }
+    }
+
+    :param schema_dict:
+    :return:
+    """
+
+    # Always do a deepcopy on the input
+    schema_dict = deepcopy(schema_dict)
+
+    # Confirm definitions key
+    assert_definitions_key(schema_dict)
+
+    # Confirm definition_key exists in definitions
+    if "SecondaryFileSchema" not in schema_dict["definitions"]:
+        raise ValueError("Schema does not contain an 'SecondaryFileSchema' key in 'definitions'")
+
+    # Confirm that the definition_key has a properties key and the properties key is a dictionary
+    if (
+            "properties" not in schema_dict["definitions"]["SecondaryFileSchema"] or
+            not isinstance(schema_dict["definitions"]["SecondaryFileSchema"]["properties"], Dict)
+    ):
+        raise ValueError(
+            "Schema does not contain a 'properties' key in 'SecondaryFileSchema.definitions' "
+            "or 'properties' is not a dictionary"
+        )
+
+    # Move 'properties', 'required' and 'type' under 'oneOf' array for the SecondaryFileSchema definition
+    # We also need to drop the additional properties to be under the oneOf object type
+    schema_dict["definitions"]["SecondaryFileSchema"] = {
+        "description": schema_dict["definitions"]["SecondaryFileSchema"]["description"],
+        "oneOf": [
+            {
+                "additionalProperties": schema_dict["definitions"]["SecondaryFileSchema"]["additionalProperties"],
+                "properties": schema_dict["definitions"]["SecondaryFileSchema"]["properties"],
+                "required": schema_dict["definitions"]["SecondaryFileSchema"]["required"],
+                "type": "object"
+            },
+            {
+                "type": "string"
+            }
+        ]
+    }
+
+    # Return the schema dictionary
+    return schema_dict
+
+
+def fix_record_field_maps(schema_dict: Dict, definition_key: str) -> Dict:
+    """
+    For each of the record field maps,
+    Duplicate the record field map but remove 'name' from the required list
+    And name the key InputRecordFieldMap
+
+    We also need to allow for the InputRecordField to be of type 'array' where each item represents the 'type'
+    We can pull this anyOf from the 'type' field from the InputRecordField
+
+    For example
+
+    FROM
+
+    {
+        "CommandInputRecordField": {
+            "additionalProperties": false,
+            "oneOf": [
+                {
+                    ...
+                    "required": [
+                        "name",
+                        "type"
+                    ],
+                    "type": "object"
+                },
+                {
+                    "type" "array",
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/definitions/InputRecordSchema"
+                            },
+                            {
+                                "$ref": "#/definitions/InputEnumSchema"
+                            },
+                            {
+                                "$ref": "#/definitions/InputArraySchema"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    }
+
+    TO
+
+
+    {
+        "CommandInputRecordField": {
+            "additionalProperties": false,
+            ...
+            "required": [
+                "name",
+                "type"
+            ],
+            "type": "object"
+        },
+        "CommandInputRecordFieldMap": {
+            "additionalProperties": false,
+            ...
+            "required": [
+                "type"
+            ],
+            "type": "object"
+        }
+    }
+
+
+    :param schema_dict:
+    :param definition_key:
+    :return:
+    """
+
+    # Always do a deepcopy on the input
+    schema_dict = deepcopy(schema_dict)
+
+    # Confirm definitions key
+    assert_definitions_key(schema_dict)
+
+    # Confirm definition_key exists in definitions
+    if definition_key not in schema_dict["definitions"]:
+        raise ValueError(f"Schema does not contain an '{definition_key}' key in 'definitions'")
+
+    # Confirm that the definition_key has a required key and the required key is an array
+    if (
+            "required" not in schema_dict["definitions"][definition_key] or
+            not isinstance(schema_dict["definitions"][definition_key]["required"], List)
+    ):
+        raise ValueError(
+            f"Schema does not contain a 'required' key in '{definition_key}.definitions' "
+            "or 'required' is not a list"
+        )
+
+    # Update the record field type to be of the array type where each item represents the 'type'
+    schema_dict["definitions"][definition_key] = {
+        "description": schema_dict["definitions"][definition_key].get("description", ""),
+        "oneOf": [
+            {
+                **{
+                    key: value
+                    for key, value in schema_dict["definitions"][definition_key].items()
+                    if key not in ["description"]
+                }
+            },
+            {
+                "type": "array",
+                "items": schema_dict["definitions"][definition_key]["properties"].get("type", {})
+            }
+        ]
+    }
+
+    # Create the new key in the definitions with the Map suffix and remove the 'name' from the required list
+    schema_dict["definitions"][definition_key + "Map"] = {
+        "description": schema_dict["definitions"][definition_key].get("description", ""),
+        "oneOf": [
+            {
+                **{
+                    key: value
+                    for key, value in schema_dict["definitions"][definition_key]["oneOf"][0].items()
+                    if key not in ["description", "required"]
+                },
+                "required": list(
+                    filter(
+                        lambda required_iter: required_iter != "name",
+                        schema_dict["definitions"][definition_key]["oneOf"][0].get("required", [])
+                    )
+                )
+            },
+            {
+                "type": "array",
+                "items": schema_dict["definitions"][definition_key]["oneOf"][0]["properties"].get("type", {})
+            },
+            {
+                # In situations where the type is defined by a single string
+                # Again, wouldn't recommend this. But it is allowed in the CWL spec
+                "type": "string"
+            }
+        ]
+    }
+
+    # Return the updated schema
+    return schema_dict
+
+
+def fix_schema_field_maps(schema_dict: Dict, definition_key: str, record_reference: str) -> Dict:
+    """
+    Update the schema field to allow for mapped fields - that use the name as the key
+
+    From:
+
+    {
+        "CommandInputRecordSchema": {
+            "additionalProperties": false,
+            "description": "Auto-generated class implementation for https://w3id.org/cwl/cwl#CommandInputRecordSchema",
+            "properties": {
+                ...
+                "fields": {
+                    "description": "Defines the fields of the record.",
+                    "items": {
+                        "$ref": "#/definitions/CommandInputRecordField"
+                    },
+                    "type": "array"
+                },
+                ...
+            },
+            "required": [
+                "type"
+            ],
+            "type": "object"
+        }
+    }
+
+    TO
+
+    {
+        "CommandInputRecordSchema": {
+            "additionalProperties": false,
+            "description": "Auto-generated class implementation for https://w3id.org/cwl/cwl#CommandInputRecordSchema",
+            "properties": {
+                ...
+                "fields": {
+                    "description": "Defines the fields of the record.",
+                    "oneOf": [
+                        {
+                            "items": {
+                                "$ref": "#/definitions/CommandInputRecordField"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "patternProperties": {
+                                "^[_a-zA-Z][a-zA-Z0-9_-]*$": {
+                                    "$ref": "#/definitions/CommandInputRecordFieldMap"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    ]
+
+                },
+                ...
+            },
+            "required": [
+                "type"
+            ],
+            "type": "object"
+        }
+    }
+
+    :param schema_dict:  The schema dict
+    :param definition_key:  One of CommandInputRecordSchema or InputRecordSchema
+    :param record_reference:  One of CommandInputRecordFieldMap or InputRecordFieldMap
+    :return:
+    """
+
+    # Always do a deepcopy on the input
+    schema_dict = deepcopy(schema_dict)
+
+    # Confirm definitions key
+    assert_definitions_key(schema_dict)
+
+    # Confirm definition_key exists in definitions
+    if definition_key not in schema_dict["definitions"]:
+        raise ValueError(f"Schema does not contain an '{definition_key}' key in 'definitions'")
+
+    # Confirm that the definition_key has a properties key and the properties key is a dictionary
+    if (
+            "properties" not in schema_dict["definitions"][definition_key] or
+            not isinstance(schema_dict["definitions"][definition_key]["properties"], Dict)
+    ):
+        raise ValueError(
+            f"Schema does not contain a 'properties' key in '{definition_key}.definitions' "
+            "or 'properties' is not a dictionary"
+        )
+
+    # Confirm that properties has a fields key
+    if "fields" not in schema_dict["definitions"][definition_key]["properties"]:
+        raise ValueError(f"Schema does not contain an 'fields' key in '{definition_key}.properties'")
+
+    # Confirm that fields is of type array and has an items key
+    if (
+            "type" not in schema_dict["definitions"][definition_key]["properties"]["fields"]
+            or
+            not schema_dict["definitions"][definition_key]["properties"]["fields"]["type"] == "array"
+            or
+            "items" not in schema_dict["definitions"][definition_key]["properties"]["fields"]
+    ):
+        raise ValueError(
+            f"Schema does not contain an 'fields' key in '{definition_key}.properties' "
+            "of type array with an 'items' key"
+        )
+
+    # Nest items and array key under oneOf array along with the patternProperties
+    property_old = deepcopy(schema_dict["definitions"][definition_key]["properties"]["fields"])
+
+    # Re-initialise the definitions
+    schema_dict["definitions"][definition_key]["properties"]["fields"] = {
         "description": property_old.get("description", ""),
         "oneOf": [
             {
@@ -146,13 +626,20 @@ def fix_unnamed_maps(schema_dict: Dict, definition_key: str, property_name: str)
             },
             {
                 "patternProperties": {
-                    "^[_a-zA-Z][a-zA-Z0-9_-]*$": property_old.get("items", {})
+                    "^[_a-zA-Z][a-zA-Z0-9_-]*$": {
+                        "$ref": f"#/definitions/{record_reference}Map"
+                    }
                 },
                 "type": "object"
             }
         ]
     }
 
+    # Set the additionalProperties to false since we nest through reference classes
+    # Additional properties is set to false in subclasses - resolves https://stoic-agnesi-d0ac4a.netlify.app/37
+    # _ = schema_dict["definitions"][definition_key].pop("additionalProperties", None)
+
+    # Return the updated schema
     return schema_dict
 
 
@@ -384,7 +871,18 @@ def fix_named_maps(schema_dict: Dict, definition_key: str, property_name: str) -
         "description": property_old.get("description", ""),
         "oneOf": [
             {
-                "items": property_old.get("items", {}),
+                "items": {
+                    "anyOf": (
+                        # prepend $import to the list of possible items
+                        # https://github.com/common-workflow-language/cwl-v1.2/blob/main/tests/schemadef-wf.cwl
+                            [
+                                {
+                                    "$ref": "#/definitions/CWLImportManual"
+                                }
+                            ] +
+                            property_old.get("items")["anyOf"]
+                    )
+                },
                 "type": property_old.get("type", {})
             },
             {
@@ -915,6 +1413,139 @@ def fix_schema_def_requirement(schema_dict: Dict) -> Dict:
     return schema_dict
 
 
+def fix_env_var_requirement(schema_dict: Dict) -> Dict:
+    """
+    Go from
+
+    FROM
+    {
+        "EnvVarRequirement": {
+            "additionalProperties": false,
+            "description": "Define a list of environment variables which will be set in the\nexecution environment of the tool.  See `EnvironmentDef` for details.",
+            "properties": {
+                "class": {
+                    "const": "EnvVarRequirement",
+                    "description": "Always 'EnvVarRequirement'",
+                    "type": "string"
+                },
+                "envDef": {
+                    "description": "The list of environment variables.",
+                    "items": {
+                        "$ref": "#/definitions/EnvironmentDef"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "class",
+                "envDef"
+            ],
+            "type": "object"
+        }
+    }
+
+    TO
+    {
+        "EnvVarRequirement": {
+            "additionalProperties": false,
+            "description": "Define a list of environment variables which will be set in the\nexecution environment of the tool.  See `EnvironmentDef` for details.",
+            "properties": {
+                "class": {
+                    "const": "EnvVarRequirement",
+                    "description": "Always 'EnvVarRequirement'",
+                    "type": "string"
+                },
+                "envDef": {
+                    "description": "The list of environment variables.",
+                    "oneOf": [
+                        {
+                            "items": {
+                                "$ref": "#/definitions/EnvironmentDef"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "patternProperties": {
+                                "^[_a-zA-Z][a-zA-Z0-9_-]*$": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            "required": [
+                "class",
+                "envDef"
+            ],
+            "type": "object"
+        }
+    }
+
+
+    :param schema_dict:
+    :return:
+    """
+
+    # Always do a deepcopy on the input
+    schema_dict = deepcopy(schema_dict)
+
+    # Confirm definitions key
+    assert_definitions_key(schema_dict)
+
+    # Confirm EnvVarRequirement exists in definitions
+    if "EnvVarRequirement" not in schema_dict["definitions"]:
+        raise ValueError("Schema does not contain an 'EnvVarRequirement' key in 'definitions'")
+
+    # Confirm that the EnvVarRequirement has a properties key and the properties key is a dictionary
+    if (
+            "properties" not in schema_dict["definitions"]["EnvVarRequirement"] or
+            not isinstance(schema_dict["definitions"]["EnvVarRequirement"]["properties"], Dict)
+    ):
+        raise ValueError(
+            "Schema does not contain a 'properties' key in 'EnvVarRequirement.definitions' "
+            "or 'properties' is not a dictionary"
+        )
+
+    # Confirm that properties has a envDef key
+    if "envDef" not in schema_dict["definitions"]["EnvVarRequirement"]["properties"]:
+        raise ValueError("Schema does not contain an 'envDef' key in 'EnvVarRequirement.properties'")
+
+    # Confirm that envDef is of type array and has an items key
+    if (
+            "type" not in schema_dict["definitions"]["EnvVarRequirement"]["properties"]["envDef"]
+            or
+            not schema_dict["definitions"]["EnvVarRequirement"]["properties"]["envDef"]["type"] == "array"
+            or
+            "items" not in schema_dict["definitions"]["EnvVarRequirement"]["properties"]["envDef"]
+    ):
+        raise ValueError(
+            "Schema does not contain an 'envDef' key in 'EnvVarRequirement.properties' "
+            "of type array with an 'items' key"
+        )
+
+    # Allow for patternProperties in the envDef array by updating the envDef to be a oneOf array
+    schema_dict["definitions"]["EnvVarRequirement"]["properties"]["envDef"] = {
+        "description": schema_dict["definitions"]["EnvVarRequirement"]["properties"]["envDef"].get("description", ""),
+        "oneOf": [
+            {
+                "items": schema_dict["definitions"]["EnvVarRequirement"]["properties"]["envDef"].get("items", {}),
+                "type": schema_dict["definitions"]["EnvVarRequirement"]["properties"]["envDef"].get("type", {})
+            },
+            {
+                "patternProperties": {
+                    "^[_a-zA-Z][a-zA-Z0-9_-]*$": {
+                        "type": "string"
+                    }
+                }
+            }
+        ]
+    }
+
+    # Return schema dict
+    return schema_dict
+
+
 def add_cwl_metadata_to_schema(schema_dict: Dict) -> Dict:
     """
     Add in the CWL metadata to the schema
@@ -959,6 +1590,14 @@ def add_cwl_metadata_to_schema(schema_dict: Dict) -> Dict:
                     },
                     # Or the full version
                     "^https://schema.org/.*$": {
+                        "type": "object"
+                    },
+                    # dct terms should also be permitted
+                    # see https://github.com/common-workflow-language/cwl-v1.2/blob/main/tests/metadata.cwl
+                    "^dct:.*$": {
+                        "type": "object"
+                    },
+                    "^http://purl.org/dc/terms/.*$": {
                         "type": "object"
                     }
                 },
@@ -1260,7 +1899,8 @@ def fix_hints(schema_dict, definition_key):
         raise ValueError(f"Schema does not contain an 'requirements' key in '{definition_key}.properties'")
 
     # Copy requirements to hints
-    schema_dict["definitions"][definition_key]["properties"]["hints"] = schema_dict["definitions"][definition_key]["properties"]["requirements"]
+    schema_dict["definitions"][definition_key]["properties"]["hints"] = \
+    schema_dict["definitions"][definition_key]["properties"]["requirements"]
 
     return schema_dict
 
@@ -1287,20 +1927,70 @@ def main():
     # Allow SchemaDefRequirement.types array to be $import type
     schema_dict = fix_schema_def_requirement(schema_dict)
 
+    # Fix EnvVarRequirement.envDef array to allow for string type not just array type
+    schema_dict = fix_env_var_requirement(schema_dict)
+
+    # Fix secondaryfile schema
+    schema_dict = fix_secondary_file_schema(schema_dict)
+
+    # Fix record fields
+    for record_field_definition_key in (
+            [
+                "CommandInputRecordField", "InputRecordField",
+                "CommandOutputRecordField", "OutputRecordField"
+            ]
+    ):
+        schema_dict = fix_record_field_maps(schema_dict, record_field_definition_key)
+
+    # Fix schema fields
+    for schema_field_definition_key in (
+            [
+                "CommandInputRecordSchema", "InputRecordSchema",
+                "CommandOutputRecordSchema", "OutputRecordSchema",
+            ]
+    ):
+        schema_dict = fix_schema_field_maps(
+            schema_dict,
+            schema_field_definition_key,
+            schema_field_definition_key.replace("Schema", "Field")
+        )
+
     # Add unnamed maps for inputs, outputs, and steps
     for definition_key in ["Workflow", "ExpressionTool", "CommandLineTool", "Operation"]:
         for property_name in ["inputs", "outputs", "steps"]:
             # Only Workflow has the steps property
             if not definition_key == "Workflow" and property_name == "steps":
                 continue
-            schema_dict = fix_unnamed_maps(schema_dict, definition_key, property_name)
+            if property_name == 'steps':
+                # Step items must be objects
+                schema_dict = fix_unnamed_maps(
+                    schema_dict,
+                    definition_key,
+                    property_name,
+                    allow_type_as_only_input=False
+                )
+            else:
+                # Inputs / Outputs can allow for type to be the only attribute in the patternProperties
+                schema_dict = fix_unnamed_maps(
+                    schema_dict,
+                    definition_key,
+                    property_name,
+                    allow_type_as_only_input=True,
+                    allow_type_array_as_only_input=True
+                )
 
         for property_name in ["requirements", "hints"]:
             # Add named maps for hints and requirements
             schema_dict = fix_named_maps(schema_dict, definition_key, property_name)
 
     # Also fix for 'in' for WorkflowStep
-    schema_dict = fix_unnamed_maps(schema_dict, "WorkflowStep", "in")
+    schema_dict = fix_unnamed_maps(
+        schema_dict,
+        "WorkflowStep",
+        "in",
+        allow_type_as_only_input=True,
+        allow_type_array_as_only_input=True
+    )
 
     # And named maps for WorkflowStep
     for property_name in ["requirements"]:
