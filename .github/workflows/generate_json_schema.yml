@@ -35,6 +35,8 @@ jobs:
           python-version: ${{ env.PYTHON_VERSION }}
       - name: Install TypeScript JSON Schema
         run: npm install typescript-json-schema@${{ env.TYPESCRIPT_JSON_SCHEMA_VERSION }}
+      - name: Install JSON Schema
+        run: pip install jsonschema
       - name: Run TypeScript JSON Schema on Workflow object
         run: |
           npx typescript-json-schema \
