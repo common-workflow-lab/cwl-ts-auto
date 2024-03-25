@@ -6728,28 +6728,28 @@ definitions:
       - oneOf:
           - $ref: '#/definitions/CWLDocumentMetadata'
     properties:
-      successCodes: true
-      id: true
-      baseCommand: true
-      expression: true
-      stdin: true
-      doc: true
+      permanentFailCodes: true
+      cwlVersion: true
+      $namespaces: true
       stdout: true
       stderr: true
-      class: true
-      $schemas: true
-      arguments: true
-      temporaryFailCodes: true
-      requirements: true
-      inputs: true
-      $namespaces: true
-      permanentFailCodes: true
-      steps: true
       outputs: true
-      label: true
-      cwlVersion: true
+      $schemas: true
       hints: true
+      baseCommand: true
+      id: true
+      successCodes: true
+      expression: true
+      steps: true
+      class: true
+      stdin: true
+      label: true
+      requirements: true
       intent: true
+      temporaryFailCodes: true
+      arguments: true
+      doc: true
+      inputs: true
     patternProperties:
       ^\w+:.*$:
         type: object
@@ -6800,29 +6800,29 @@ definitions:
           - $ref: '#/definitions/CWLFile'
       - $ref: '#/definitions/CWLDocumentMetadata'
     properties:
-      successCodes: true
-      id: true
-      baseCommand: true
-      expression: true
-      stdin: true
-      doc: true
+      permanentFailCodes: true
+      cwlVersion: true
+      $namespaces: true
       stdout: true
       stderr: true
-      class: true
-      $schemas: true
-      arguments: true
-      $graph: true
-      temporaryFailCodes: true
-      requirements: true
-      inputs: true
-      $namespaces: true
-      permanentFailCodes: true
-      steps: true
       outputs: true
-      label: true
-      cwlVersion: true
+      $schemas: true
       hints: true
+      $graph: true
+      baseCommand: true
+      id: true
+      successCodes: true
+      expression: true
+      steps: true
+      class: true
+      stdin: true
+      label: true
+      requirements: true
       intent: true
+      temporaryFailCodes: true
+      arguments: true
+      doc: true
+      inputs: true
     patternProperties:
       ^\w+:.*$:
         type: object
