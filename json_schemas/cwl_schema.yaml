@@ -6728,28 +6728,28 @@ definitions:
       - oneOf:
           - $ref: '#/definitions/CWLDocumentMetadata'
     properties:
-      permanentFailCodes: true
-      cwlVersion: true
-      $namespaces: true
-      stdout: true
-      stderr: true
-      outputs: true
-      $schemas: true
-      hints: true
-      baseCommand: true
-      id: true
       successCodes: true
+      inputs: true
+      stdout: true
+      baseCommand: true
+      outputs: true
+      doc: true
+      intent: true
       expression: true
+      hints: true
+      $namespaces: true
+      stdin: true
+      arguments: true
+      $schemas: true
+      stderr: true
+      cwlVersion: true
+      permanentFailCodes: true
+      temporaryFailCodes: true
+      id: true
+      requirements: true
       steps: true
       class: true
-      stdin: true
       label: true
-      requirements: true
-      intent: true
-      temporaryFailCodes: true
-      arguments: true
-      doc: true
-      inputs: true
     patternProperties:
       ^\w+:.*$:
         type: object
@@ -6800,29 +6800,29 @@ definitions:
           - $ref: '#/definitions/CWLFile'
       - $ref: '#/definitions/CWLDocumentMetadata'
     properties:
-      permanentFailCodes: true
-      cwlVersion: true
-      $namespaces: true
-      stdout: true
-      stderr: true
-      outputs: true
-      $schemas: true
-      hints: true
-      $graph: true
-      baseCommand: true
-      id: true
       successCodes: true
+      inputs: true
+      stdout: true
+      baseCommand: true
+      outputs: true
+      doc: true
+      intent: true
       expression: true
+      hints: true
+      $namespaces: true
+      stdin: true
+      arguments: true
+      $schemas: true
+      stderr: true
+      cwlVersion: true
+      permanentFailCodes: true
+      temporaryFailCodes: true
+      id: true
+      requirements: true
+      $graph: true
       steps: true
       class: true
-      stdin: true
       label: true
-      requirements: true
-      intent: true
-      temporaryFailCodes: true
-      arguments: true
-      doc: true
-      inputs: true
     patternProperties:
       ^\w+:.*$:
         type: object
