@@ -6728,28 +6728,28 @@ definitions:
       - oneOf:
           - $ref: '#/definitions/CWLDocumentMetadata'
     properties:
-      inputs: true
-      stdin: true
-      baseCommand: true
-      permanentFailCodes: true
-      successCodes: true
-      stderr: true
-      cwlVersion: true
-      outputs: true
-      expression: true
-      $namespaces: true
-      label: true
-      doc: true
-      intent: true
-      temporaryFailCodes: true
-      $schemas: true
-      hints: true
-      steps: true
-      id: true
-      stdout: true
-      class: true
-      requirements: true
       arguments: true
+      hints: true
+      id: true
+      successCodes: true
+      expression: true
+      cwlVersion: true
+      permanentFailCodes: true
+      stderr: true
+      stdout: true
+      label: true
+      outputs: true
+      baseCommand: true
+      temporaryFailCodes: true
+      class: true
+      $namespaces: true
+      steps: true
+      requirements: true
+      stdin: true
+      inputs: true
+      doc: true
+      $schemas: true
+      intent: true
     patternProperties:
       ^\w+:.*$:
         type: object
@@ -6800,29 +6800,29 @@ definitions:
           - $ref: '#/definitions/CWLFile'
       - $ref: '#/definitions/CWLDocumentMetadata'
     properties:
-      inputs: true
-      stdin: true
-      baseCommand: true
-      permanentFailCodes: true
-      successCodes: true
-      stderr: true
-      cwlVersion: true
-      outputs: true
-      expression: true
-      $namespaces: true
-      $graph: true
-      label: true
-      doc: true
-      intent: true
-      temporaryFailCodes: true
-      $schemas: true
-      hints: true
-      steps: true
-      id: true
-      stdout: true
-      class: true
-      requirements: true
       arguments: true
+      hints: true
+      id: true
+      successCodes: true
+      expression: true
+      cwlVersion: true
+      permanentFailCodes: true
+      $graph: true
+      stderr: true
+      stdout: true
+      label: true
+      outputs: true
+      baseCommand: true
+      temporaryFailCodes: true
+      class: true
+      $namespaces: true
+      steps: true
+      requirements: true
+      stdin: true
+      inputs: true
+      doc: true
+      $schemas: true
+      intent: true
     patternProperties:
       ^\w+:.*$:
         type: object
