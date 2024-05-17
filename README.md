@@ -92,3 +92,14 @@ https://common-workflow-lab.github.io/cwl-ts-auto/
 
 ## Limitations
 cwl-ts-auto only supports the CWL v1.2 syntax. Other documents have to be upgraded using the [cwl-upgrader](https://pypi.org/project/cwl-upgrader/)
+
+## Running and debugging tests
+To run tests, install npm and run `npm test`, which launches mocha as defined
+in `package.json`.  Additional options to mocha can be passed afer `--`. To run
+a single test run `run npm test -- --grep $my_test_id`. It is occasionally
+helpful to pass `--allow-uncaught` to mocha to get a better handle on failing
+test assertions. To debug a test using the chrome inspector insert a
+breakpoint anywhere in code called by the test. Breakpoints are using the
+`debugger;` instruction. Open chrome and navigate to `chrome://inspect`, then
+run `npm test -- --grep valid_cond_wf_003_1_nojs --inspect --debug-brk`, switch
+back to chrome and click inspect.
