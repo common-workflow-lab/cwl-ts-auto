@@ -5,7 +5,7 @@ on:
   push:
     branches: [ main ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, '!dependabot/**' ]
 
 env:
   NODE_VERSION: 20.x
