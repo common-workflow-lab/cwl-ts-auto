@@ -6728,28 +6728,28 @@ definitions:
       - oneOf:
           - $ref: '#/definitions/CWLDocumentMetadata'
     properties:
-      stdin: true
-      inputs: true
-      class: true
-      stderr: true
-      expression: true
-      label: true
-      id: true
-      temporaryFailCodes: true
-      permanentFailCodes: true
-      stdout: true
-      doc: true
-      arguments: true
-      hints: true
       $namespaces: true
+      temporaryFailCodes: true
+      $schemas: true
+      label: true
+      successCodes: true
       requirements: true
-      intent: true
       cwlVersion: true
+      intent: true
+      steps: true
+      stdout: true
+      inputs: true
+      stderr: true
       baseCommand: true
       outputs: true
-      $schemas: true
-      successCodes: true
-      steps: true
+      arguments: true
+      class: true
+      stdin: true
+      id: true
+      doc: true
+      expression: true
+      permanentFailCodes: true
+      hints: true
     patternProperties:
       ^\w+:.*$:
         type: object
@@ -6800,29 +6800,29 @@ definitions:
           - $ref: '#/definitions/CWLFile'
       - $ref: '#/definitions/CWLDocumentMetadata'
     properties:
-      stdin: true
-      inputs: true
-      class: true
-      stderr: true
-      expression: true
-      label: true
-      id: true
-      temporaryFailCodes: true
-      permanentFailCodes: true
-      stdout: true
-      doc: true
-      arguments: true
-      hints: true
       $namespaces: true
-      requirements: true
-      intent: true
-      cwlVersion: true
-      $graph: true
-      baseCommand: true
-      outputs: true
+      temporaryFailCodes: true
       $schemas: true
+      label: true
       successCodes: true
+      requirements: true
+      cwlVersion: true
+      intent: true
       steps: true
+      stdout: true
+      inputs: true
+      stderr: true
+      baseCommand: true
+      $graph: true
+      outputs: true
+      arguments: true
+      class: true
+      stdin: true
+      id: true
+      doc: true
+      expression: true
+      permanentFailCodes: true
+      hints: true
     patternProperties:
       ^\w+:.*$:
         type: object
