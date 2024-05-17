@@ -940,7 +940,7 @@
                     ]
                 },
                 "intent": {
-                    "description": "An identifier for the type of computational operation, of this Process.\nEspecially useful for \"class: Operation\", but can also be used for\nCommandLineTool, Workflow, or ExpressionTool.\n\nIf provided, then this must be an IRI of a concept node that\nrepresents the type of operation, preferably defined within an ontology.\n\nFor example, in the domain of bioinformatics, one can use an IRI from\nthe EDAM Ontology's [Operation concept nodes](http://edamontology.org/operation_0004),\nlike [Alignment](http://edamontology.org/operation_2928),\nor [Clustering](http://edamontology.org/operation_3432); or a more\nspecific Operation concept like\n[Split read mapping](http://edamontology.org/operation_3199).",
+                    "description": "An identifier for the type of computational operation, of this Process.\nEspecially useful for [`Operation`](Workflow.html#Operation), but can also be used for\n[`CommandLineTool`](CommandLineTool.html#CommandLineTool),\n[`Workflow`](Workflow.html#Workflow), or [ExpressionTool](Workflow.html#ExpressionTool).\n\nIf provided, then this must be an IRI of a concept node that\nrepresents the type of operation, preferably defined within an ontology.\n\nFor example, in the domain of bioinformatics, one can use an IRI from\nthe EDAM Ontology's [Operation concept nodes](http://edamontology.org/operation_0004),\nlike [Alignment](http://edamontology.org/operation_2928),\nor [Clustering](http://edamontology.org/operation_3432); or a more\nspecific Operation concept like\n[Split read mapping](http://edamontology.org/operation_3199).",
                     "items": {
                         "type": "string"
                     },
@@ -1806,7 +1806,7 @@
         },
         "Directory": {
             "additionalProperties": false,
-            "description": "Represents a directory to present to a command line tool.\n\nDirectories are represented as objects with `class` of `Directory`.  Directory objects have\na number of properties that provide metadata about the directory.\n\nThe `location` property of a Directory is a URI that uniquely identifies\nthe directory.  Implementations must support the file:// URI scheme and may\nsupport other schemes such as http://.  Alternately to `location`,\nimplementations must also accept the `path` property on Directory, which\nmust be a filesystem path available on the same host as the CWL runner (for\ninputs) or the runtime environment of a command line tool execution (for\ncommand line tool outputs).\n\nA Directory object may have a `listing` field.  This is a list of File and\nDirectory objects that are contained in the Directory.  For each entry in\n`listing`, the `basename` property defines the name of the File or\nSubdirectory when staged to disk.  If `listing` is not provided, the\nimplementation must have some way of fetching the Directory listing at\nruntime based on the `location` field.\n\nIf a Directory does not have `location`, it is a Directory literal.  A\nDirectory literal must provide `listing`.  Directory literals must be\ncreated on disk at runtime as needed.\n\nThe resources in a Directory literal do not need to have any implied\nrelationship in their `location`.  For example, a Directory listing may\ncontain two files located on different hosts.  It is the responsibility of\nthe runtime to ensure that those files are staged to disk appropriately.\nSecondary files associated with files in `listing` must also be staged to\nthe same Directory.\n\nWhen executing a CommandLineTool, Directories must be recursively staged\nfirst and have local values of `path` assigned.\n\nDirectory objects in CommandLineTool output must provide either a\n`location` URI or a `path` property in the context of the tool execution\nruntime (local to the compute node, or within the executing container).\n\nAn ExpressionTool may forward file references from input to output by using\nthe same value for `location`.\n\nName conflicts (the same `basename` appearing multiple times in `listing`\nor in any entry in `secondaryFiles` in the listing) is a fatal error.",
+            "description": "Represents a directory to present to a command line tool.\n\nDirectories are represented as objects with `class` of `Directory`.  Directory objects have\na number of properties that provide metadata about the directory.\n\nThe `location` property of a Directory is a IRI that uniquely identifies\nthe directory.  Implementations must support the file:// IRI scheme and may\nsupport other schemes such as http://.  Alternately to `location`,\nimplementations must also accept the `path` property on Directory, which\nmust be a filesystem path available on the same host as the CWL runner (for\ninputs) or the runtime environment of a command line tool execution (for\ncommand line tool outputs).\n\nA Directory object may have a `listing` field.  This is a list of File and\nDirectory objects that are contained in the Directory.  For each entry in\n`listing`, the `basename` property defines the name of the File or\nSubdirectory when staged to disk.  If `listing` is not provided, the\nimplementation must have some way of fetching the Directory listing at\nruntime based on the `location` field.\n\nIf a Directory does not have `location`, it is a Directory literal.  A\nDirectory literal must provide `listing`.  Directory literals must be\ncreated on disk at runtime as needed.\n\nThe resources in a Directory literal do not need to have any implied\nrelationship in their `location`.  For example, a Directory listing may\ncontain two files located on different hosts.  It is the responsibility of\nthe runtime to ensure that those files are staged to disk appropriately.\nSecondary files associated with files in `listing` must also be staged to\nthe same Directory.\n\nWhen executing a CommandLineTool, Directories must be recursively staged\nfirst and have local values of `path` assigned.\n\nDirectory objects in CommandLineTool output must provide either a\n`location` IRI or a `path` property in the context of the tool execution\nruntime (local to the compute node, or within the executing container).\n\nAn ExpressionTool may forward file references from input to output by using\nthe same value for `location`.\n\nName conflicts (the same `basename` appearing multiple times in `listing`\nor in any entry in `secondaryFiles` in the listing) is a fatal error.",
             "properties": {
                 "basename": {
                     "description": "The base name of the directory, that is, the name of the file without any\nleading directory path.  The base name must not contain a slash `/`.\n\nIf not provided, the implementation must set this field based on the\n`location` field by taking the final path component after parsing\n`location` as an IRI.  If `basename` is provided, it is not required to\nmatch the value from `location`.\n\nWhen this file is made available to a CommandLineTool, it must be named\nwith `basename`, i.e. the final component of the `path` field must match\n`basename`.",
@@ -1822,10 +1822,10 @@
                     "items": {
                         "anyOf": [
                             {
-                                "$ref": "#/definitions/File"
+                                "$ref": "#/definitions/Directory"
                             },
                             {
-                                "$ref": "#/definitions/Directory"
+                                "$ref": "#/definitions/File"
                             }
                         ]
                     },
@@ -2376,7 +2376,7 @@
                     ]
                 },
                 "intent": {
-                    "description": "An identifier for the type of computational operation, of this Process.\nEspecially useful for \"class: Operation\", but can also be used for\nCommandLineTool, Workflow, or ExpressionTool.\n\nIf provided, then this must be an IRI of a concept node that\nrepresents the type of operation, preferably defined within an ontology.\n\nFor example, in the domain of bioinformatics, one can use an IRI from\nthe EDAM Ontology's [Operation concept nodes](http://edamontology.org/operation_0004),\nlike [Alignment](http://edamontology.org/operation_2928),\nor [Clustering](http://edamontology.org/operation_3432); or a more\nspecific Operation concept like\n[Split read mapping](http://edamontology.org/operation_3199).",
+                    "description": "An identifier for the type of computational operation, of this Process.\nEspecially useful for [`Operation`](Workflow.html#Operation), but can also be used for\n[`CommandLineTool`](CommandLineTool.html#CommandLineTool),\n[`Workflow`](Workflow.html#Workflow), or [ExpressionTool](Workflow.html#ExpressionTool).\n\nIf provided, then this must be an IRI of a concept node that\nrepresents the type of operation, preferably defined within an ontology.\n\nFor example, in the domain of bioinformatics, one can use an IRI from\nthe EDAM Ontology's [Operation concept nodes](http://edamontology.org/operation_0004),\nlike [Alignment](http://edamontology.org/operation_2928),\nor [Clustering](http://edamontology.org/operation_3432); or a more\nspecific Operation concept like\n[Split read mapping](http://edamontology.org/operation_3199).",
                     "items": {
                         "type": "string"
                     },
@@ -2436,7 +2436,7 @@
                                                     "type": "string"
                                                 }
                                             ],
-                                            "description": "Specify valid types of data that may be assigned to this parameter."
+                                            "description": "Specify valid types of data that may be assigned to this parameter.\nNote that this field just acts as a hint, as the outputs of an\nExpressionTool process are always considered valid."
                                         },
                                         {
                                             "type": "array",
@@ -2828,7 +2828,7 @@
                             "type": "string"
                         }
                     ],
-                    "description": "Specify valid types of data that may be assigned to this parameter."
+                    "description": "Specify valid types of data that may be assigned to this parameter.\nNote that this field just acts as a hint, as the outputs of an\nExpressionTool process are always considered valid."
                 }
             },
             "required": [
@@ -2845,7 +2845,7 @@
         },
         "File": {
             "additionalProperties": false,
-            "description": "Represents a file (or group of files when `secondaryFiles` is provided) that\nwill be accessible by tools using standard POSIX file system call API such as\nopen(2) and read(2).\n\nFiles are represented as objects with `class` of `File`.  File objects have\na number of properties that provide metadata about the file.\n\nThe `location` property of a File is a URI that uniquely identifies the\nfile.  Implementations must support the `file://` URI scheme and may support\nother schemes such as `http://` and `https://`.  The value of `location` may also be a\nrelative reference, in which case it must be resolved relative to the URI\nof the document it appears in.  Alternately to `location`, implementations\nmust also accept the `path` property on File, which must be a filesystem\npath available on the same host as the CWL runner (for inputs) or the\nruntime environment of a command line tool execution (for command line tool\noutputs).\n\nIf no `location` or `path` is specified, a file object must specify\n`contents` with the UTF-8 text content of the file.  This is a \"file\nliteral\".  File literals do not correspond to external resources, but are\ncreated on disk with `contents` with when needed for executing a tool.\nWhere appropriate, expressions can return file literals to define new files\non a runtime.  The maximum size of `contents` is 64 kilobytes.\n\nThe `basename` property defines the filename on disk where the file is\nstaged.  This may differ from the resource name.  If not provided,\n`basename` must be computed from the last path part of `location` and made\navailable to expressions.\n\nThe `secondaryFiles` property is a list of File or Directory objects that\nmust be staged in the same directory as the primary file.  It is an error\nfor file names to be duplicated in `secondaryFiles`.\n\nThe `size` property is the size in bytes of the File.  It must be computed\nfrom the resource and made available to expressions.  The `checksum` field\ncontains a cryptographic hash of the file content for use it verifying file\ncontents.  Implementations may, at user option, enable or disable\ncomputation of the `checksum` field for performance or other reasons.\nHowever, the ability to compute output checksums is required to pass the\nCWL conformance test suite.\n\nWhen executing a CommandLineTool, the files and secondary files may be\nstaged to an arbitrary directory, but must use the value of `basename` for\nthe filename.  The `path` property must be file path in the context of the\ntool execution runtime (local to the compute node, or within the executing\ncontainer).  All computed properties should be available to expressions.\nFile literals also must be staged and `path` must be set.\n\nWhen collecting CommandLineTool outputs, `glob` matching returns file paths\n(with the `path` property) and the derived properties. This can all be\nmodified by `outputEval`.  Alternately, if the file `cwl.output.json` is\npresent in the output, `outputBinding` is ignored.\n\nFile objects in the output must provide either a `location` URI or a `path`\nproperty in the context of the tool execution runtime (local to the compute\nnode, or within the executing container).\n\nWhen evaluating an ExpressionTool, file objects must be referenced via\n`location` (the expression tool does not have access to files on disk so\n`path` is meaningless) or as file literals.  It is legal to return a file\nobject with an existing `location` but a different `basename`.  The\n`loadContents` field of ExpressionTool inputs behaves the same as on\nCommandLineTool inputs, however it is not meaningful on the outputs.\n\nAn ExpressionTool may forward file references from input to output by using\nthe same value for `location`.",
+            "description": "Represents a file (or group of files when `secondaryFiles` is provided) that\nwill be accessible by tools using standard POSIX file system call API such as\nopen(2) and read(2).\n\nFiles are represented as objects with `class` of `File`.  File objects have\na number of properties that provide metadata about the file.\n\nThe `location` property of a File is a IRI that uniquely identifies the\nfile.  Implementations must support the `file://` IRI scheme and may support\nother schemes such as `http://` and `https://`.  The value of `location` may also be a\nrelative reference, in which case it must be resolved relative to the IRI\nof the document it appears in.  Alternately to `location`, implementations\nmust also accept the `path` property on File, which must be a filesystem\npath available on the same host as the CWL runner (for inputs) or the\nruntime environment of a command line tool execution (for command line tool\noutputs).\n\nIf no `location` or `path` is specified, a file object must specify\n`contents` with the UTF-8 text content of the file.  This is a \"file\nliteral\".  File literals do not correspond to external resources, but are\ncreated on disk with `contents` with when needed for executing a tool.\nWhere appropriate, expressions can return file literals to define new files\non a runtime.  The maximum size of `contents` is 64 kilobytes.\n\nThe `basename` property defines the filename on disk where the file is\nstaged.  This may differ from the resource name.  If not provided,\n`basename` must be computed from the last path part of `location` and made\navailable to expressions.\n\nThe `secondaryFiles` property is a list of File or Directory objects that\nmust be staged in the same directory as the primary file.  It is an error\nfor file names to be duplicated in `secondaryFiles`.\n\nThe `size` property is the size in bytes of the File.  It must be computed\nfrom the resource and made available to expressions.  The `checksum` field\ncontains a cryptographic hash of the file content for use it verifying file\ncontents.  Implementations may, at user option, enable or disable\ncomputation of the `checksum` field for performance or other reasons.\nHowever, the ability to compute output checksums is required to pass the\nCWL conformance test suite.\n\nWhen executing a CommandLineTool, the files and secondary files may be\nstaged to an arbitrary directory, but must use the value of `basename` for\nthe filename.  The `path` property must be file path in the context of the\ntool execution runtime (local to the compute node, or within the executing\ncontainer).  All computed properties should be available to expressions.\nFile literals also must be staged and `path` must be set.\n\nWhen collecting CommandLineTool outputs, `glob` matching returns file paths\n(with the `path` property) and the derived properties. This can all be\nmodified by `outputEval`.  Alternately, if the file `cwl.output.json` is\npresent in the output, `outputBinding` is ignored.\n\nFile objects in the output must provide either a `location` IRI or a `path`\nproperty in the context of the tool execution runtime (local to the compute\nnode, or within the executing container).\n\nWhen evaluating an ExpressionTool, file objects must be referenced via\n`location` (the expression tool does not have access to files on disk so\n`path` is meaningless) or as file literals.  It is legal to return a file\nobject with an existing `location` but a different `basename`.  The\n`loadContents` field of ExpressionTool inputs behaves the same as on\nCommandLineTool inputs, however it is not meaningful on the outputs.\n\nAn ExpressionTool may forward file references from input to output by using\nthe same value for `location`.",
             "properties": {
                 "basename": {
                     "description": "The base name of the file, that is, the name of the file without any\nleading directory path.  The base name must not contain a slash `/`.\n\nIf not provided, the implementation must set this field based on the\n`location` field by taking the final path component after parsing\n`location` as an IRI.  If `basename` is provided, it is not required to\nmatch the value from `location`.\n\nWhen this file is made available to a CommandLineTool, it must be named\nwith `basename`, i.e. the final component of the `path` field must match\n`basename`.",
@@ -2893,10 +2893,10 @@
                     "items": {
                         "anyOf": [
                             {
-                                "$ref": "#/definitions/File"
+                                "$ref": "#/definitions/Directory"
                             },
                             {
-                                "$ref": "#/definitions/Directory"
+                                "$ref": "#/definitions/File"
                             }
                         ]
                     },
@@ -2929,10 +2929,10 @@
                                     {
                                         "anyOf": [
                                             {
-                                                "$ref": "#/definitions/File"
+                                                "$ref": "#/definitions/Directory"
                                             },
                                             {
-                                                "$ref": "#/definitions/Directory"
+                                                "$ref": "#/definitions/File"
                                             },
                                             {
                                                 "items": {
@@ -2940,10 +2940,10 @@
                                                         {
                                                             "anyOf": [
                                                                 {
-                                                                    "$ref": "#/definitions/File"
+                                                                    "$ref": "#/definitions/Directory"
                                                                 },
                                                                 {
-                                                                    "$ref": "#/definitions/Directory"
+                                                                    "$ref": "#/definitions/File"
                                                                 }
                                                             ]
                                                         },
@@ -3408,6 +3408,9 @@
         "LoadingOptions": {
             "additionalProperties": false,
             "properties": {
+                "container": {
+                    "type": "string"
+                },
                 "copyFrom": {
                     "$ref": "#/definitions/LoadingOptions"
                 },
@@ -3422,6 +3425,9 @@
                 },
                 "namespaces": {
                     "$ref": "#/definitions/Dictionary<string>"
+                },
+                "noLinkCheck": {
+                    "type": "boolean"
                 },
                 "originalDoc": {},
                 "rvocab": {
@@ -3884,7 +3890,7 @@
                     ]
                 },
                 "intent": {
-                    "description": "An identifier for the type of computational operation, of this Process.\nEspecially useful for \"class: Operation\", but can also be used for\nCommandLineTool, Workflow, or ExpressionTool.\n\nIf provided, then this must be an IRI of a concept node that\nrepresents the type of operation, preferably defined within an ontology.\n\nFor example, in the domain of bioinformatics, one can use an IRI from\nthe EDAM Ontology's [Operation concept nodes](http://edamontology.org/operation_0004),\nlike [Alignment](http://edamontology.org/operation_2928),\nor [Clustering](http://edamontology.org/operation_3432); or a more\nspecific Operation concept like\n[Split read mapping](http://edamontology.org/operation_3199).",
+                    "description": "An identifier for the type of computational operation, of this Process.\nEspecially useful for [`Operation`](Workflow.html#Operation), but can also be used for\n[`CommandLineTool`](CommandLineTool.html#CommandLineTool),\n[`Workflow`](Workflow.html#Workflow), or [ExpressionTool](Workflow.html#ExpressionTool).\n\nIf provided, then this must be an IRI of a concept node that\nrepresents the type of operation, preferably defined within an ontology.\n\nFor example, in the domain of bioinformatics, one can use an IRI from\nthe EDAM Ontology's [Operation concept nodes](http://edamontology.org/operation_0004),\nlike [Alignment](http://edamontology.org/operation_2928),\nor [Clustering](http://edamontology.org/operation_3432); or a more\nspecific Operation concept like\n[Split read mapping](http://edamontology.org/operation_3199).",
                     "items": {
                         "type": "string"
                     },
@@ -4785,7 +4791,7 @@
                     ]
                 },
                 "coresMin": {
-                    "description": "Minimum reserved number of CPU cores (default is 1).\n\nMay be a fractional value to indicate to a scheduling\nalgorithm that one core can be allocated to multiple\njobs. For example, a value of 0.25 indicates that up to 4\njobs may run in parallel on 1 core.  A value of 1.25 means\nthat up to 3 jobs can run on a 4 core system (4/1.25 \u2248 3).\n\nProcesses can only share a core allocation if the sum of each\nof their `ramMax`, `tmpdirMax`, and `outdirMax` requests also\ndo not exceed the capacity of the node.\n\nProcesses sharing a core must have the same level of isolation\n(typically a container or VM) that they would normally.\n\nThe reported number of CPU cores reserved for the process,\nwhich is available to expressions on the CommandLineTool as\n`runtime.cores`, must be a non-zero integer, and may be\ncalculated by rounding up the cores request to the next whole\nnumber.\n\nScheduling systems may allocate fractional CPU resources by\nsetting quotas or scheduling weights.  Scheduling systems that\ndo not support fractional CPUs may round up the request to the\nnext whole number.",
+                    "description": "Minimum reserved number of CPU cores (default is 1).\n\nMay be a fractional value to indicate to a scheduling\nalgorithm that one core can be allocated to multiple\njobs. For example, a value of 0.25 indicates that up to 4\njobs may run in parallel on 1 core.  A value of 1.25 means\nthat up to 3 jobs can run on a 4 core system (4/1.25 \u2248 3).\n\nProcesses can only share a core allocation if the sum of each\nof their `ramMax`, `tmpdirMax`, and `outdirMax` requests also\ndo not exceed the capacity of the node.\n\nProcesses sharing a core must have the same level of isolation\n(typically a container or VM) that they would normally have.\n\nThe reported number of CPU cores reserved for the process,\nwhich is available to expressions on the CommandLineTool as\n`runtime.cores`, must be a non-zero integer, and may be\ncalculated by rounding up the cores request to the next whole\nnumber.\n\nScheduling systems may allocate fractional CPU resources by\nsetting quotas or scheduling weights.  Scheduling systems that\ndo not support fractional CPUs may round up the request to the\nnext whole number.",
                     "type": [
                         "string",
                         "number"
@@ -4927,7 +4933,7 @@
         },
         "ShellCommandRequirement": {
             "additionalProperties": false,
-            "description": "Modify the behavior of CommandLineTool to generate a single string\ncontaining a shell command line.  Each item in the `arguments` list must\nbe joined into a string separated by single spaces and quoted to prevent\nintepretation by the shell, unless `CommandLineBinding` for that argument\ncontains `shellQuote: false`.  If `shellQuote: false` is specified, the\nargument is joined into the command string without quoting, which allows\nthe use of shell metacharacters such as `|` for pipes.",
+            "description": "Modify the behavior of CommandLineTool to generate a single string\ncontaining a shell command line.  Each item in the `arguments` list must\nbe joined into a string separated by single spaces and quoted to prevent\ninterpretation by the shell, unless `CommandLineBinding` for that argument\ncontains `shellQuote: false`.  If `shellQuote: false` is specified, the\nargument is joined into the command string without quoting, which allows\nthe use of shell metacharacters such as `|` for pipes.",
             "properties": {
                 "class": {
                     "const": "ShellCommandRequirement",
@@ -5483,7 +5489,7 @@
                     ]
                 },
                 "intent": {
-                    "description": "An identifier for the type of computational operation, of this Process.\nEspecially useful for \"class: Operation\", but can also be used for\nCommandLineTool, Workflow, or ExpressionTool.\n\nIf provided, then this must be an IRI of a concept node that\nrepresents the type of operation, preferably defined within an ontology.\n\nFor example, in the domain of bioinformatics, one can use an IRI from\nthe EDAM Ontology's [Operation concept nodes](http://edamontology.org/operation_0004),\nlike [Alignment](http://edamontology.org/operation_2928),\nor [Clustering](http://edamontology.org/operation_3432); or a more\nspecific Operation concept like\n[Split read mapping](http://edamontology.org/operation_3199).",
+                    "description": "An identifier for the type of computational operation, of this Process.\nEspecially useful for [`Operation`](Workflow.html#Operation), but can also be used for\n[`CommandLineTool`](CommandLineTool.html#CommandLineTool),\n[`Workflow`](Workflow.html#Workflow), or [ExpressionTool](Workflow.html#ExpressionTool).\n\nIf provided, then this must be an IRI of a concept node that\nrepresents the type of operation, preferably defined within an ontology.\n\nFor example, in the domain of bioinformatics, one can use an IRI from\nthe EDAM Ontology's [Operation concept nodes](http://edamontology.org/operation_0004),\nlike [Alignment](http://edamontology.org/operation_2928),\nor [Clustering](http://edamontology.org/operation_3432); or a more\nspecific Operation concept like\n[Split read mapping](http://edamontology.org/operation_3199).",
                     "items": {
                         "type": "string"
                     },
@@ -6115,7 +6121,7 @@
         },
         "WorkflowStep": {
             "additionalProperties": false,
-            "description": "A workflow step is an executable element of a workflow.  It specifies the\nunderlying process implementation (such as `CommandLineTool` or another\n`Workflow`) in the `run` field and connects the input and output parameters\nof the underlying process to workflow parameters.\n\n# Scatter/gather\n\nTo use scatter/gather,\n[ScatterFeatureRequirement](#ScatterFeatureRequirement) must be specified\nin the workflow or workflow step requirements.\n\nA \"scatter\" operation specifies that the associated workflow step or\nsubworkflow should execute separately over a list of input elements.  Each\njob making up a scatter operation is independent and may be executed\nconcurrently.\n\nThe `scatter` field specifies one or more input parameters which will be\nscattered.  An input parameter may be listed more than once.  The declared\ntype of each input parameter is implicitly becomes an array of items of the\ninput parameter type.  If a parameter is listed more than once, it becomes\na nested array.  As a result, upstream parameters which are connected to\nscattered parameters must be arrays.\n\nAll output parameter types are also implicitly wrapped in arrays.  Each job\nin the scatter results in an entry in the output array.\n\nIf any scattered parameter runtime value is an empty array, all outputs are\nset to empty arrays and no work is done for the step, according to\napplicable scattering rules.\n\nIf `scatter` declares more than one input parameter, `scatterMethod`\ndescribes how to decompose the input into a discrete set of jobs.\n\n  * **dotproduct** specifies that each of the input arrays are aligned and one\n      element taken from each array to construct each job.  It is an error\n      if all input arrays are not the same length.\n\n  * **nested_crossproduct** specifies the Cartesian product of the inputs,\n      producing a job for every combination of the scattered inputs.  The\n      output must be nested arrays for each level of scattering, in the\n      order that the input arrays are listed in the `scatter` field.\n\n  * **flat_crossproduct** specifies the Cartesian product of the inputs,\n      producing a job for every combination of the scattered inputs.  The\n      output arrays must be flattened to a single level, but otherwise listed in the\n      order that the input arrays are listed in the `scatter` field.\n\n# Conditional execution (Optional)\n\nConditional execution makes execution of a step conditional on an\nexpression.  A step that is not executed is \"skipped\".  A skipped\nstep produces `null` for all output parameters.\n\nThe condition is evaluated after `scatter`, using the input object\nof each individual scatter job.  This means over a set of scatter\njobs, some may be executed and some may be skipped.  When the\nresults are gathered, skipped steps must be `null` in the output\narrays.\n\nThe `when` field controls conditional execution.  This is an\nexpression that must be evaluated with `inputs` bound to the step\ninput object (or individual scatter job), and returns a boolean\nvalue.  It is an error if this expression returns a value other\nthan `true` or `false`.\n\nConditionals in CWL are an optional feature and are not required\nto be implemented by all consumers of CWL documents.  An\nimplementation that does not support conditionals must return a\nfatal error when attempting to execute a workflow that uses\nconditional constructs the implementation does not support.\n\n# Subworkflows\n\nTo specify a nested workflow as part of a workflow step,\n[SubworkflowFeatureRequirement](#SubworkflowFeatureRequirement) must be\nspecified in the workflow or workflow step requirements.\n\nIt is a fatal error if a workflow directly or indirectly invokes itself as\na subworkflow (recursive workflows are not allowed).",
+            "description": "A workflow step is an executable element of a workflow.  It specifies the\nunderlying process implementation (such as `CommandLineTool` or another\n`Workflow`) in the `run` field and connects the input and output parameters\nof the underlying process to workflow parameters.\n\n# Scatter/gather\n\nTo use scatter/gather,\n[ScatterFeatureRequirement](#ScatterFeatureRequirement) must be specified\nin the workflow or workflow step requirements.\n\nA \"scatter\" operation specifies that the associated workflow step or\nsubworkflow should execute separately over a list of input elements.  Each\njob making up a scatter operation is independent and may be executed\nconcurrently.\n\nThe `scatter` field specifies one or more input parameters which will be\nscattered.  An input parameter may be listed more than once.  The declared\ntype of each input parameter implicitly becomes an array of items of the\ninput parameter type.  If a parameter is listed more than once, it becomes\na nested array.  As a result, upstream parameters which are connected to\nscattered parameters must be arrays.\n\nAll output parameter types are also implicitly wrapped in arrays.  Each job\nin the scatter results in an entry in the output array.\n\nIf any scattered parameter runtime value is an empty array, all outputs are\nset to empty arrays and no work is done for the step, according to\napplicable scattering rules.\n\nIf `scatter` declares more than one input parameter, `scatterMethod`\ndescribes how to decompose the input into a discrete set of jobs.\n\n  * **dotproduct** specifies that each of the input arrays are aligned and one\n      element taken from each array to construct each job.  It is an error\n      if all input arrays are not the same length.\n\n  * **nested_crossproduct** specifies the Cartesian product of the inputs,\n      producing a job for every combination of the scattered inputs.  The\n      output must be nested arrays for each level of scattering, in the\n      order that the input arrays are listed in the `scatter` field.\n\n  * **flat_crossproduct** specifies the Cartesian product of the inputs,\n      producing a job for every combination of the scattered inputs.  The\n      output arrays must be flattened to a single level, but otherwise listed in the\n      order that the input arrays are listed in the `scatter` field.\n\n# Conditional execution (Optional)\n\nConditional execution makes execution of a step conditional on an\nexpression.  A step that is not executed is \"skipped\".  A skipped\nstep produces `null` for all output parameters.\n\nThe condition is evaluated after `scatter`, using the input object\nof each individual scatter job.  This means over a set of scatter\njobs, some may be executed and some may be skipped.  When the\nresults are gathered, skipped steps must be `null` in the output\narrays.\n\nThe `when` field controls conditional execution.  This is an\nexpression that must be evaluated with `inputs` bound to the step\ninput object (or individual scatter job), and returns a boolean\nvalue.  It is an error if this expression returns a value other\nthan `true` or `false`.\n\nConditionals in CWL are an optional feature and are not required\nto be implemented by all consumers of CWL documents.  An\nimplementation that does not support conditionals must return a\nfatal error when attempting to execute a workflow that uses\nconditional constructs the implementation does not support.\n\n# Subworkflows\n\nTo specify a nested workflow as part of a workflow step,\n[SubworkflowFeatureRequirement](#SubworkflowFeatureRequirement) must be\nspecified in the workflow or workflow step requirements.\n\nIt is a fatal error if a workflow directly or indirectly invokes itself as\na subworkflow (recursive workflows are not allowed).",
             "properties": {
                 "doc": {
                     "anyOf": [
@@ -7409,10 +7415,10 @@
                                     {
                                         "anyOf": [
                                             {
-                                                "$ref": "#/definitions/File"
+                                                "$ref": "#/definitions/Directory"
                                             },
                                             {
-                                                "$ref": "#/definitions/Directory"
+                                                "$ref": "#/definitions/File"
                                             },
                                             {
                                                 "items": {
@@ -7420,10 +7426,10 @@
                                                         {
                                                             "anyOf": [
                                                                 {
-                                                                    "$ref": "#/definitions/File"
+                                                                    "$ref": "#/definitions/Directory"
                                                                 },
                                                                 {
-                                                                    "$ref": "#/definitions/Directory"
+                                                                    "$ref": "#/definitions/File"
                                                                 }
                                                             ]
                                                         },
@@ -7506,7 +7512,7 @@
             "type": "object",
             "properties": {},
             "required": [],
-            "description": "Modify the behavior of CommandLineTool to generate a single string\ncontaining a shell command line.  Each item in the `arguments` list must\nbe joined into a string separated by single spaces and quoted to prevent\nintepretation by the shell, unless `CommandLineBinding` for that argument\ncontains `shellQuote: false`.  If `shellQuote: false` is specified, the\nargument is joined into the command string without quoting, which allows\nthe use of shell metacharacters such as `|` for pipes."
+            "description": "Modify the behavior of CommandLineTool to generate a single string\ncontaining a shell command line.  Each item in the `arguments` list must\nbe joined into a string separated by single spaces and quoted to prevent\ninterpretation by the shell, unless `CommandLineBinding` for that argument\ncontains `shellQuote: false`.  If `shellQuote: false` is specified, the\nargument is joined into the command string without quoting, which allows\nthe use of shell metacharacters such as `|` for pipes."
         },
         "ResourceRequirementMap": {
             "type": "object",
@@ -7519,7 +7525,7 @@
                     ]
                 },
                 "coresMin": {
-                    "description": "Minimum reserved number of CPU cores (default is 1).\n\nMay be a fractional value to indicate to a scheduling\nalgorithm that one core can be allocated to multiple\njobs. For example, a value of 0.25 indicates that up to 4\njobs may run in parallel on 1 core.  A value of 1.25 means\nthat up to 3 jobs can run on a 4 core system (4/1.25 \u2248 3).\n\nProcesses can only share a core allocation if the sum of each\nof their `ramMax`, `tmpdirMax`, and `outdirMax` requests also\ndo not exceed the capacity of the node.\n\nProcesses sharing a core must have the same level of isolation\n(typically a container or VM) that they would normally.\n\nThe reported number of CPU cores reserved for the process,\nwhich is available to expressions on the CommandLineTool as\n`runtime.cores`, must be a non-zero integer, and may be\ncalculated by rounding up the cores request to the next whole\nnumber.\n\nScheduling systems may allocate fractional CPU resources by\nsetting quotas or scheduling weights.  Scheduling systems that\ndo not support fractional CPUs may round up the request to the\nnext whole number.",
+                    "description": "Minimum reserved number of CPU cores (default is 1).\n\nMay be a fractional value to indicate to a scheduling\nalgorithm that one core can be allocated to multiple\njobs. For example, a value of 0.25 indicates that up to 4\njobs may run in parallel on 1 core.  A value of 1.25 means\nthat up to 3 jobs can run on a 4 core system (4/1.25 \u2248 3).\n\nProcesses can only share a core allocation if the sum of each\nof their `ramMax`, `tmpdirMax`, and `outdirMax` requests also\ndo not exceed the capacity of the node.\n\nProcesses sharing a core must have the same level of isolation\n(typically a container or VM) that they would normally have.\n\nThe reported number of CPU cores reserved for the process,\nwhich is available to expressions on the CommandLineTool as\n`runtime.cores`, must be a non-zero integer, and may be\ncalculated by rounding up the cores request to the next whole\nnumber.\n\nScheduling systems may allocate fractional CPU resources by\nsetting quotas or scheduling weights.  Scheduling systems that\ndo not support fractional CPUs may round up the request to the\nnext whole number.",
                     "type": [
                         "string",
                         "number"
@@ -7678,28 +7684,28 @@
                 }
             ],
             "properties": {
+                "id": true,
+                "$namespaces": true,
+                "steps": true,
+                "class": true,
+                "stderr": true,
+                "requirements": true,
+                "hints": true,
+                "arguments": true,
+                "expression": true,
+                "temporaryFailCodes": true,
+                "inputs": true,
+                "intent": true,
+                "stdout": true,
+                "baseCommand": true,
+                "cwlVersion": true,
+                "$schemas": true,
+                "doc": true,
                 "successCodes": true,
                 "outputs": true,
-                "class": true,
-                "$schemas": true,
-                "hints": true,
                 "permanentFailCodes": true,
-                "stdin": true,
-                "expression": true,
-                "steps": true,
-                "arguments": true,
-                "intent": true,
-                "requirements": true,
-                "$namespaces": true,
-                "cwlVersion": true,
-                "stderr": true,
-                "temporaryFailCodes": true,
-                "baseCommand": true,
-                "id": true,
-                "inputs": true,
                 "label": true,
-                "stdout": true,
-                "doc": true
+                "stdin": true
             },
             "patternProperties": {
                 "^\\w+:.*$": {
@@ -7770,29 +7776,29 @@
                 }
             ],
             "properties": {
+                "id": true,
+                "$namespaces": true,
+                "steps": true,
+                "class": true,
+                "stderr": true,
+                "requirements": true,
+                "hints": true,
+                "arguments": true,
+                "expression": true,
+                "temporaryFailCodes": true,
+                "inputs": true,
+                "$graph": true,
+                "intent": true,
+                "stdout": true,
+                "baseCommand": true,
+                "cwlVersion": true,
+                "$schemas": true,
+                "doc": true,
                 "successCodes": true,
                 "outputs": true,
-                "class": true,
-                "$schemas": true,
-                "hints": true,
                 "permanentFailCodes": true,
-                "stdin": true,
-                "expression": true,
-                "steps": true,
-                "arguments": true,
-                "intent": true,
-                "requirements": true,
-                "$namespaces": true,
-                "cwlVersion": true,
-                "stderr": true,
-                "temporaryFailCodes": true,
-                "$graph": true,
-                "baseCommand": true,
-                "id": true,
-                "inputs": true,
                 "label": true,
-                "stdout": true,
-                "doc": true
+                "stdin": true
             },
             "patternProperties": {
                 "^\\w+:.*$": {
