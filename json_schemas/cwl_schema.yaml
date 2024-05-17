@@ -6742,28 +6742,28 @@ definitions:
       - oneOf:
           - $ref: '#/definitions/CWLDocumentMetadata'
     properties:
-      id: true
-      $namespaces: true
-      steps: true
-      class: true
-      stderr: true
-      requirements: true
-      hints: true
-      arguments: true
       expression: true
-      temporaryFailCodes: true
-      inputs: true
-      intent: true
-      stdout: true
-      baseCommand: true
-      cwlVersion: true
-      $schemas: true
-      doc: true
-      successCodes: true
       outputs: true
       permanentFailCodes: true
+      successCodes: true
+      baseCommand: true
+      $namespaces: true
+      id: true
       label: true
+      stdout: true
+      requirements: true
+      inputs: true
+      intent: true
+      $schemas: true
       stdin: true
+      steps: true
+      cwlVersion: true
+      stderr: true
+      doc: true
+      hints: true
+      class: true
+      temporaryFailCodes: true
+      arguments: true
     patternProperties:
       ^\w+:.*$:
         type: object
@@ -6814,29 +6814,29 @@ definitions:
           - $ref: '#/definitions/CWLFile'
       - $ref: '#/definitions/CWLDocumentMetadata'
     properties:
-      id: true
-      $namespaces: true
-      steps: true
-      class: true
-      stderr: true
-      requirements: true
-      hints: true
-      arguments: true
       expression: true
-      temporaryFailCodes: true
-      inputs: true
-      $graph: true
-      intent: true
-      stdout: true
-      baseCommand: true
-      cwlVersion: true
-      $schemas: true
-      doc: true
-      successCodes: true
       outputs: true
       permanentFailCodes: true
+      successCodes: true
+      baseCommand: true
+      $graph: true
+      $namespaces: true
+      id: true
       label: true
+      stdout: true
+      requirements: true
+      inputs: true
+      intent: true
+      $schemas: true
       stdin: true
+      steps: true
+      cwlVersion: true
+      stderr: true
+      doc: true
+      hints: true
+      class: true
+      temporaryFailCodes: true
+      arguments: true
     patternProperties:
       ^\w+:.*$:
         type: object
