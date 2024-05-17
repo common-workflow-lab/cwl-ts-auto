@@ -25,10 +25,10 @@ import * as Internal from './util/Internal'
  * Files are represented as objects with `class` of `File`.  File objects have
  * a number of properties that provide metadata about the file.
  * 
- * The `location` property of a File is a URI that uniquely identifies the
- * file.  Implementations must support the `file://` URI scheme and may support
+ * The `location` property of a File is a IRI that uniquely identifies the
+ * file.  Implementations must support the `file://` IRI scheme and may support
  * other schemes such as `http://` and `https://`.  The value of `location` may also be a
- * relative reference, in which case it must be resolved relative to the URI
+ * relative reference, in which case it must be resolved relative to the IRI
  * of the document it appears in.  Alternately to `location`, implementations
  * must also accept the `path` property on File, which must be a filesystem
  * path available on the same host as the CWL runner (for inputs) or the
@@ -71,7 +71,7 @@ import * as Internal from './util/Internal'
  * modified by `outputEval`.  Alternately, if the file `cwl.output.json` is
  * present in the output, `outputBinding` is ignored.
  * 
- * File objects in the output must provide either a `location` URI or a `path`
+ * File objects in the output must provide either a `location` IRI or a `path`
  * property in the context of the tool execution runtime (local to the compute
  * node, or within the executing container).
  * 
@@ -295,7 +295,7 @@ export class File extends Saveable implements Internal.FileProperties {
             
     let class_
     try {
-      class_ = await loadField(_doc.class, LoaderInstances.uriFile_classLoaderFalseTrueNone,
+      class_ = await loadField(_doc.class, LoaderInstances.uriFile_classLoaderFalseTrueNoneNone,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
@@ -310,7 +310,7 @@ export class File extends Saveable implements Internal.FileProperties {
     let location
     if ('location' in _doc) {
       try {
-        location = await loadField(_doc.location, LoaderInstances.uriunionOfundefinedtypeOrstrtypeFalseFalseNone,
+        location = await loadField(_doc.location, LoaderInstances.uriunionOfundefinedtypeOrstrtypeFalseFalseNoneNone,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
@@ -326,7 +326,7 @@ export class File extends Saveable implements Internal.FileProperties {
     let path
     if ('path' in _doc) {
       try {
-        path = await loadField(_doc.path, LoaderInstances.uriunionOfundefinedtypeOrstrtypeFalseFalseNone,
+        path = await loadField(_doc.path, LoaderInstances.uriunionOfundefinedtypeOrstrtypeFalseFalseNoneNone,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
@@ -454,7 +454,7 @@ export class File extends Saveable implements Internal.FileProperties {
     let format
     if ('format' in _doc) {
       try {
-        format = await loadField(_doc.format, LoaderInstances.uriunionOfundefinedtypeOrstrtypeTrueFalseNone,
+        format = await loadField(_doc.format, LoaderInstances.uriunionOfundefinedtypeOrstrtypeTrueFalseNoneTrue,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {

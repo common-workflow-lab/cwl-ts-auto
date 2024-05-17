@@ -35,10 +35,12 @@ export class RecordField extends Saveable implements Internal.RecordFieldPropert
   doc?: undefined | string | Array<string>
 
   /**
-   * The field type
+   * The field type. If it is an array, it indicates
+   * that the field type is a union type of its elements.
+   * Its elements may be duplicated.
    * 
    */
-  type: Internal.PrimitiveType | Internal.RecordSchema | Internal.EnumSchema | Internal.ArraySchema | string | Array<Internal.PrimitiveType | Internal.RecordSchema | Internal.EnumSchema | Internal.ArraySchema | string>
+  type: Internal.PrimitiveType | Internal.RecordSchema | Internal.EnumSchema | Internal.ArraySchema | Internal.MapSchema | Internal.UnionSchema | string | Array<Internal.PrimitiveType | Internal.RecordSchema | Internal.EnumSchema | Internal.ArraySchema | Internal.MapSchema | Internal.UnionSchema | string>
 
 
   constructor ({loadingOptions, extensionFields, name, doc, type} : {loadingOptions?: LoadingOptions} & Internal.RecordFieldProperties) {
@@ -68,7 +70,7 @@ export class RecordField extends Saveable implements Internal.RecordFieldPropert
     let name
     if ('name' in _doc) {
       try {
-        name = await loadField(_doc.name, LoaderInstances.uristrtypeTrueFalseNone,
+        name = await loadField(_doc.name, LoaderInstances.uristrtypeTrueFalseNoneNone,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
@@ -110,7 +112,7 @@ export class RecordField extends Saveable implements Internal.RecordFieldPropert
 
     let type
     try {
-      type = await loadField(_doc.type, LoaderInstances.typedslunionOfPrimitiveTypeLoaderOrRecordSchemaLoaderOrEnumSchemaLoaderOrArraySchemaLoaderOrstrtypeOrarrayOfunionOfPrimitiveTypeLoaderOrRecordSchemaLoaderOrEnumSchemaLoaderOrArraySchemaLoaderOrstrtype2,
+      type = await loadField(_doc.type, LoaderInstances.typedslunionOfPrimitiveTypeLoaderOrRecordSchemaLoaderOrEnumSchemaLoaderOrArraySchemaLoaderOrMapSchemaLoaderOrUnionSchemaLoaderOrstrtypeOrarrayOfunionOfPrimitiveTypeLoaderOrRecordSchemaLoaderOrEnumSchemaLoaderOrArraySchemaLoaderOrMapSchemaLoaderOrUnionSchemaLoaderOrstrtype2,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {

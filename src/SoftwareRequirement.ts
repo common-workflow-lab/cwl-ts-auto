@@ -61,7 +61,7 @@ export class SoftwareRequirement extends Saveable implements Internal.SoftwareRe
             
     let class_
     try {
-      class_ = await loadField(_doc.class, LoaderInstances.uriSoftwareRequirement_classLoaderFalseTrueNone,
+      class_ = await loadField(_doc.class, LoaderInstances.uriSoftwareRequirement_classLoaderFalseTrueNoneNone,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {

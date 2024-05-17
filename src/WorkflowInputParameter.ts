@@ -139,7 +139,7 @@ export class WorkflowInputParameter extends Saveable implements Internal.Workflo
    * (e.g. dependent `valueFrom` fields).
    * 
    */
-  default_?: undefined | Internal.File | Internal.Directory | any
+  default_?: undefined | any
 
   /**
    * Specify valid types of data that may be assigned to this parameter.
@@ -190,7 +190,7 @@ export class WorkflowInputParameter extends Saveable implements Internal.Workflo
     let id
     if ('id' in _doc) {
       try {
-        id = await loadField(_doc.id, LoaderInstances.uriunionOfundefinedtypeOrstrtypeTrueFalseNone,
+        id = await loadField(_doc.id, LoaderInstances.uriunionOfundefinedtypeOrstrtypeTrueFalseNoneNone,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
@@ -281,7 +281,7 @@ export class WorkflowInputParameter extends Saveable implements Internal.Workflo
     let format
     if ('format' in _doc) {
       try {
-        format = await loadField(_doc.format, LoaderInstances.uriunionOfundefinedtypeOrstrtypeOrarrayOfstrtypeOrExpressionLoaderTrueFalseNone,
+        format = await loadField(_doc.format, LoaderInstances.uriunionOfundefinedtypeOrstrtypeOrarrayOfstrtypeOrExpressionLoaderTrueFalseNoneTrue,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
@@ -329,7 +329,7 @@ export class WorkflowInputParameter extends Saveable implements Internal.Workflo
     let default_
     if ('default' in _doc) {
       try {
-        default_ = await loadField(_doc.default, LoaderInstances.unionOfundefinedtypeOrFileLoaderOrDirectoryLoaderOranyType,
+        default_ = await loadField(_doc.default, LoaderInstances.unionOfundefinedtypeOrCWLObjectTypeLoader,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {

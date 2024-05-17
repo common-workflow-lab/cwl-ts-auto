@@ -29,7 +29,7 @@ export class RecordSchema extends Saveable implements Internal.RecordSchemaPrope
   /**
    * Must be `record`
    */
-  type: Internal.enum_d9cba076fca539106791a4f46d198c7fcfbdb779
+  type: Internal.Record_name
 
 
   constructor ({loadingOptions, extensionFields, fields, type} : {loadingOptions?: LoadingOptions} & Internal.RecordSchemaProperties) {
@@ -73,7 +73,7 @@ export class RecordSchema extends Saveable implements Internal.RecordSchemaPrope
 
     let type
     try {
-      type = await loadField(_doc.type, LoaderInstances.typedslenum_d9cba076fca539106791a4f46d198c7fcfbdb779Loader2,
+      type = await loadField(_doc.type, LoaderInstances.typedslRecord_nameLoader2,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {

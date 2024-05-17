@@ -55,7 +55,7 @@ export class ScatterFeatureRequirement extends Saveable implements Internal.Scat
             
     let class_
     try {
-      class_ = await loadField(_doc.class, LoaderInstances.uriScatterFeatureRequirement_classLoaderFalseTrueNone,
+      class_ = await loadField(_doc.class, LoaderInstances.uriScatterFeatureRequirement_classLoaderFalseTrueNoneNone,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {

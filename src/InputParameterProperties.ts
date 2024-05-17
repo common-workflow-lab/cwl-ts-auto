@@ -125,5 +125,5 @@ export interface InputParameterProperties extends Internal.ParameterProperties, 
    * (e.g. dependent `valueFrom` fields).
    * 
    */
-  default_?: undefined | Internal.File | Internal.Directory | any
+  default_?: undefined | any
 }

@@ -34,7 +34,7 @@ export class OutputEnumSchema extends Saveable implements Internal.OutputEnumSch
   /**
    * Must be `enum`
    */
-  type: Internal.enum_d961d79c225752b9fadb617367615ab176b47d77
+  type: Internal.Enum_name
 
   /**
    * A short, human-readable label of this object.
@@ -76,7 +76,7 @@ export class OutputEnumSchema extends Saveable implements Internal.OutputEnumSch
     let name
     if ('name' in _doc) {
       try {
-        name = await loadField(_doc.name, LoaderInstances.uriunionOfundefinedtypeOrstrtypeTrueFalseNone,
+        name = await loadField(_doc.name, LoaderInstances.uriunionOfundefinedtypeOrstrtypeTrueFalseNoneNone,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
@@ -102,7 +102,7 @@ export class OutputEnumSchema extends Saveable implements Internal.OutputEnumSch
             
     let symbols
     try {
-      symbols = await loadField(_doc.symbols, LoaderInstances.uriarrayOfstrtypeTrueFalseNone,
+      symbols = await loadField(_doc.symbols, LoaderInstances.uriarrayOfstrtypeTrueFalseNoneNone,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
@@ -116,7 +116,7 @@ export class OutputEnumSchema extends Saveable implements Internal.OutputEnumSch
 
     let type
     try {
-      type = await loadField(_doc.type, LoaderInstances.typedslenum_d961d79c225752b9fadb617367615ab176b47d77Loader2,
+      type = await loadField(_doc.type, LoaderInstances.typedslEnum_nameLoader2,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
@@ -169,7 +169,7 @@ export class OutputEnumSchema extends Saveable implements Internal.OutputEnumSch
         } else {
           __errors.push(
             new ValidationException(`invalid field ${key as string}, \
-            expected one of: \`symbols\`,\`type\`,\`label\`,\`doc\`,\`name\``)
+            expected one of: \`name\`,\`symbols\`,\`type\`,\`label\`,\`doc\``)
           )
           break
         }
@@ -183,11 +183,11 @@ export class OutputEnumSchema extends Saveable implements Internal.OutputEnumSch
     const schema = new OutputEnumSchema({
       extensionFields: extensionFields,
       loadingOptions: loadingOptions,
+      name: name,
       symbols: symbols,
       type: type,
       label: label,
-      doc: doc,
-      name: name
+      doc: doc
     })
     return schema
   }
@@ -238,5 +238,5 @@ export class OutputEnumSchema extends Saveable implements Internal.OutputEnumSch
     return r
   }
             
-  static attr: Set<string> = new Set(['symbols','type','label','doc','name'])
+  static attr: Set<string> = new Set(['name','symbols','type','label','doc'])
 }

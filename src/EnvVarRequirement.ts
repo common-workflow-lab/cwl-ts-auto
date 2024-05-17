@@ -61,7 +61,7 @@ export class EnvVarRequirement extends Saveable implements Internal.EnvVarRequir
             
     let class_
     try {
-      class_ = await loadField(_doc.class, LoaderInstances.uriEnvVarRequirement_classLoaderFalseTrueNone,
+      class_ = await loadField(_doc.class, LoaderInstances.uriEnvVarRequirement_classLoaderFalseTrueNoneNone,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {

@@ -102,8 +102,9 @@ export class ExpressionTool extends Saveable implements Internal.ExpressionToolP
 
   /**
    * An identifier for the type of computational operation, of this Process.
-   * Especially useful for "class: Operation", but can also be used for
-   * CommandLineTool, Workflow, or ExpressionTool.
+   * Especially useful for [`Operation`](Workflow.html#Operation), but can also be used for
+   * [`CommandLineTool`](CommandLineTool.html#CommandLineTool),
+   * [`Workflow`](Workflow.html#Workflow), or [ExpressionTool](Workflow.html#ExpressionTool).
    * 
    * If provided, then this must be an IRI of a concept node that
    * represents the type of operation, preferably defined within an ontology.
@@ -162,7 +163,7 @@ export class ExpressionTool extends Saveable implements Internal.ExpressionToolP
     let id
     if ('id' in _doc) {
       try {
-        id = await loadField(_doc.id, LoaderInstances.uriunionOfundefinedtypeOrstrtypeTrueFalseNone,
+        id = await loadField(_doc.id, LoaderInstances.uriunionOfundefinedtypeOrstrtypeTrueFalseNoneNone,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
@@ -188,7 +189,7 @@ export class ExpressionTool extends Saveable implements Internal.ExpressionToolP
             
     let class_
     try {
-      class_ = await loadField(_doc.class, LoaderInstances.uriExpressionTool_classLoaderFalseTrueNone,
+      class_ = await loadField(_doc.class, LoaderInstances.uriExpressionTool_classLoaderFalseTrueNoneNone,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
@@ -295,7 +296,7 @@ export class ExpressionTool extends Saveable implements Internal.ExpressionToolP
     let cwlVersion
     if ('cwlVersion' in _doc) {
       try {
-        cwlVersion = await loadField(_doc.cwlVersion, LoaderInstances.uriunionOfundefinedtypeOrCWLVersionLoaderFalseTrueNone,
+        cwlVersion = await loadField(_doc.cwlVersion, LoaderInstances.uriunionOfundefinedtypeOrCWLVersionLoaderFalseTrueNoneNone,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
@@ -311,7 +312,7 @@ export class ExpressionTool extends Saveable implements Internal.ExpressionToolP
     let intent
     if ('intent' in _doc) {
       try {
-        intent = await loadField(_doc.intent, LoaderInstances.uriunionOfundefinedtypeOrarrayOfstrtypeTrueFalseNone,
+        intent = await loadField(_doc.intent, LoaderInstances.uriunionOfundefinedtypeOrarrayOfstrtypeTrueFalseNoneNone,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {

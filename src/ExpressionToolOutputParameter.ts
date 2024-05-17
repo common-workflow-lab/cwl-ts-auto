@@ -104,6 +104,8 @@ export class ExpressionToolOutputParameter extends Saveable implements Internal.
 
   /**
    * Specify valid types of data that may be assigned to this parameter.
+   * Note that this field just acts as a hint, as the outputs of an
+   * ExpressionTool process are always considered valid.
    * 
    */
   type: Internal.CWLType | Internal.OutputRecordSchema | Internal.OutputEnumSchema | Internal.OutputArraySchema | string | Array<Internal.CWLType | Internal.OutputRecordSchema | Internal.OutputEnumSchema | Internal.OutputArraySchema | string>
@@ -140,7 +142,7 @@ export class ExpressionToolOutputParameter extends Saveable implements Internal.
     let id
     if ('id' in _doc) {
       try {
-        id = await loadField(_doc.id, LoaderInstances.uriunionOfundefinedtypeOrstrtypeTrueFalseNone,
+        id = await loadField(_doc.id, LoaderInstances.uriunionOfundefinedtypeOrstrtypeTrueFalseNoneNone,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
@@ -231,7 +233,7 @@ export class ExpressionToolOutputParameter extends Saveable implements Internal.
     let format
     if ('format' in _doc) {
       try {
-        format = await loadField(_doc.format, LoaderInstances.uriunionOfundefinedtypeOrstrtypeOrExpressionLoaderTrueFalseNone,
+        format = await loadField(_doc.format, LoaderInstances.uriunionOfundefinedtypeOrstrtypeOrExpressionLoaderTrueFalseNoneTrue,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {

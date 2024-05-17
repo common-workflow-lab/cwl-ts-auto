@@ -23,8 +23,10 @@ export interface RecordFieldProperties extends Internal.DocumentedProperties {
   doc?: undefined | string | Array<string>
 
   /**
-   * The field type
+   * The field type. If it is an array, it indicates
+   * that the field type is a union type of its elements.
+   * Its elements may be duplicated.
    * 
    */
-  type: Internal.PrimitiveType | Internal.RecordSchema | Internal.EnumSchema | Internal.ArraySchema | string | Array<Internal.PrimitiveType | Internal.RecordSchema | Internal.EnumSchema | Internal.ArraySchema | string>
+  type: Internal.PrimitiveType | Internal.RecordSchema | Internal.EnumSchema | Internal.ArraySchema | Internal.MapSchema | Internal.UnionSchema | string | Array<Internal.PrimitiveType | Internal.RecordSchema | Internal.EnumSchema | Internal.ArraySchema | Internal.MapSchema | Internal.UnionSchema | string>
 }

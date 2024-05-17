@@ -149,7 +149,7 @@ export class DockerRequirement extends Saveable implements Internal.DockerRequir
             
     let class_
     try {
-      class_ = await loadField(_doc.class, LoaderInstances.uriDockerRequirement_classLoaderFalseTrueNone,
+      class_ = await loadField(_doc.class, LoaderInstances.uriDockerRequirement_classLoaderFalseTrueNoneNone,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {

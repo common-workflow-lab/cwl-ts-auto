@@ -143,7 +143,7 @@ export class OperationOutputParameter extends Saveable implements Internal.Opera
     let id
     if ('id' in _doc) {
       try {
-        id = await loadField(_doc.id, LoaderInstances.uriunionOfundefinedtypeOrstrtypeTrueFalseNone,
+        id = await loadField(_doc.id, LoaderInstances.uriunionOfundefinedtypeOrstrtypeTrueFalseNoneNone,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
@@ -234,7 +234,7 @@ export class OperationOutputParameter extends Saveable implements Internal.Opera
     let format
     if ('format' in _doc) {
       try {
-        format = await loadField(_doc.format, LoaderInstances.uriunionOfundefinedtypeOrstrtypeOrExpressionLoaderTrueFalseNone,
+        format = await loadField(_doc.format, LoaderInstances.uriunionOfundefinedtypeOrstrtypeOrExpressionLoaderTrueFalseNoneTrue,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {

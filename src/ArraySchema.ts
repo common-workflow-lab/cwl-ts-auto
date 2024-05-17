@@ -24,12 +24,12 @@ export class ArraySchema extends Saveable implements Internal.ArraySchemaPropert
   /**
    * Defines the type of the array elements.
    */
-  items: Internal.PrimitiveType | Internal.RecordSchema | Internal.EnumSchema | Internal.ArraySchema | string | Array<Internal.PrimitiveType | Internal.RecordSchema | Internal.EnumSchema | Internal.ArraySchema | string>
+  items: Internal.PrimitiveType | Internal.RecordSchema | Internal.EnumSchema | Internal.ArraySchema | Internal.MapSchema | Internal.UnionSchema | string | Array<Internal.PrimitiveType | Internal.RecordSchema | Internal.EnumSchema | Internal.ArraySchema | Internal.MapSchema | Internal.UnionSchema | string>
 
   /**
    * Must be `array`
    */
-  type: Internal.enum_d062602be0b4b8fd33e69e29a841317b6ab665bc
+  type: Internal.Array_name
 
 
   constructor ({loadingOptions, extensionFields, items, type} : {loadingOptions?: LoadingOptions} & Internal.ArraySchemaProperties) {
@@ -57,7 +57,7 @@ export class ArraySchema extends Saveable implements Internal.ArraySchemaPropert
             
     let items
     try {
-      items = await loadField(_doc.items, LoaderInstances.typedslunionOfPrimitiveTypeLoaderOrRecordSchemaLoaderOrEnumSchemaLoaderOrArraySchemaLoaderOrstrtypeOrarrayOfunionOfPrimitiveTypeLoaderOrRecordSchemaLoaderOrEnumSchemaLoaderOrArraySchemaLoaderOrstrtype2,
+      items = await loadField(_doc.items, LoaderInstances.uriunionOfPrimitiveTypeLoaderOrRecordSchemaLoaderOrEnumSchemaLoaderOrArraySchemaLoaderOrMapSchemaLoaderOrUnionSchemaLoaderOrstrtypeOrarrayOfunionOfPrimitiveTypeLoaderOrRecordSchemaLoaderOrEnumSchemaLoaderOrArraySchemaLoaderOrMapSchemaLoaderOrUnionSchemaLoaderOrstrtypeFalseTrue2None,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
@@ -71,7 +71,7 @@ export class ArraySchema extends Saveable implements Internal.ArraySchemaPropert
 
     let type
     try {
-      type = await loadField(_doc.type, LoaderInstances.typedslenum_d062602be0b4b8fd33e69e29a841317b6ab665bcLoader2,
+      type = await loadField(_doc.type, LoaderInstances.typedslArray_nameLoader2,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
@@ -120,7 +120,11 @@ export class ArraySchema extends Saveable implements Internal.ArraySchemaPropert
     }
 
     if (this.items != null) {
-      r.items = save(this.items, false, baseUrl, relativeUris)
+      const u = saveRelativeUri(this.items, baseUrl, false,
+                                relativeUris, 2)
+      if (u != null) {
+        r.items = u
+      }
     }
                 
     if (this.type != null) {

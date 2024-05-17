@@ -22,7 +22,7 @@ export interface CommandInputEnumSchemaProperties extends Internal.InputEnumSche
   /**
    * Must be `enum`
    */
-  type: Internal.enum_d961d79c225752b9fadb617367615ab176b47d77
+  type: Internal.Enum_name
 
   /**
    * A short, human-readable label of this object.

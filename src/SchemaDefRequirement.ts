@@ -71,7 +71,7 @@ export class SchemaDefRequirement extends Saveable implements Internal.SchemaDef
             
     let class_
     try {
-      class_ = await loadField(_doc.class, LoaderInstances.uriSchemaDefRequirement_classLoaderFalseTrueNone,
+      class_ = await loadField(_doc.class, LoaderInstances.uriSchemaDefRequirement_classLoaderFalseTrueNoneNone,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
