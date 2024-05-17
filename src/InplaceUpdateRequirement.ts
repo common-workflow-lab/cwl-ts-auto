@@ -85,7 +85,7 @@ export class InplaceUpdateRequirement extends Saveable implements Internal.Inpla
             
     let class_
     try {
-      class_ = await loadField(_doc.class, LoaderInstances.uriInplaceUpdateRequirement_classLoaderFalseTrueNone,
+      class_ = await loadField(_doc.class, LoaderInstances.uriInplaceUpdateRequirement_classLoaderFalseTrueNoneNone,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {

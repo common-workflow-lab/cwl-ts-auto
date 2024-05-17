@@ -23,8 +23,8 @@ import * as Internal from './util/Internal'
  * Directories are represented as objects with `class` of `Directory`.  Directory objects have
  * a number of properties that provide metadata about the directory.
  * 
- * The `location` property of a Directory is a URI that uniquely identifies
- * the directory.  Implementations must support the file:// URI scheme and may
+ * The `location` property of a Directory is a IRI that uniquely identifies
+ * the directory.  Implementations must support the file:// IRI scheme and may
  * support other schemes such as http://.  Alternately to `location`,
  * implementations must also accept the `path` property on Directory, which
  * must be a filesystem path available on the same host as the CWL runner (for
@@ -53,7 +53,7 @@ import * as Internal from './util/Internal'
  * first and have local values of `path` assigned.
  * 
  * Directory objects in CommandLineTool output must provide either a
- * `location` URI or a `path` property in the context of the tool execution
+ * `location` IRI or a `path` property in the context of the tool execution
  * runtime (local to the compute node, or within the executing container).
  * 
  * An ExpressionTool may forward file references from input to output by using
@@ -167,7 +167,7 @@ export class Directory extends Saveable implements Internal.DirectoryProperties 
             
     let class_
     try {
-      class_ = await loadField(_doc.class, LoaderInstances.uriDirectory_classLoaderFalseTrueNone,
+      class_ = await loadField(_doc.class, LoaderInstances.uriDirectory_classLoaderFalseTrueNoneNone,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
@@ -182,7 +182,7 @@ export class Directory extends Saveable implements Internal.DirectoryProperties 
     let location
     if ('location' in _doc) {
       try {
-        location = await loadField(_doc.location, LoaderInstances.uriunionOfundefinedtypeOrstrtypeFalseFalseNone,
+        location = await loadField(_doc.location, LoaderInstances.uriunionOfundefinedtypeOrstrtypeFalseFalseNoneNone,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
@@ -198,7 +198,7 @@ export class Directory extends Saveable implements Internal.DirectoryProperties 
     let path
     if ('path' in _doc) {
       try {
-        path = await loadField(_doc.path, LoaderInstances.uriunionOfundefinedtypeOrstrtypeFalseFalseNone,
+        path = await loadField(_doc.path, LoaderInstances.uriunionOfundefinedtypeOrstrtypeFalseFalseNoneNone,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {

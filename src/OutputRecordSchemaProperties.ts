@@ -5,7 +5,7 @@ import * as Internal from './util/Internal'
 /**
  * Auto-generated interface for https://w3id.org/cwl/cwl#OutputRecordSchema
  */
-export interface OutputRecordSchemaProperties extends Internal.RecordSchemaProperties, Internal.OutputSchemaProperties {
+export interface OutputRecordSchemaProperties extends Internal.CWLRecordSchemaProperties, Internal.OutputSchemaProperties {
                     
   extensionFields?: Internal.Dictionary<any>
 
@@ -22,7 +22,7 @@ export interface OutputRecordSchemaProperties extends Internal.RecordSchemaPrope
   /**
    * Must be `record`
    */
-  type: Internal.enum_d9cba076fca539106791a4f46d198c7fcfbdb779
+  type: Internal.Record_name
 
   /**
    * A short, human-readable label of this object.

@@ -55,7 +55,7 @@ export class SubworkflowFeatureRequirement extends Saveable implements Internal.
             
     let class_
     try {
-      class_ = await loadField(_doc.class, LoaderInstances.uriSubworkflowFeatureRequirement_classLoaderFalseTrueNone,
+      class_ = await loadField(_doc.class, LoaderInstances.uriSubworkflowFeatureRequirement_classLoaderFalseTrueNoneNone,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {

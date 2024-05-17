@@ -84,7 +84,7 @@ export class InitialWorkDirRequirement extends Saveable implements Internal.Init
             
     let class_
     try {
-      class_ = await loadField(_doc.class, LoaderInstances.uriInitialWorkDirRequirement_classLoaderFalseTrueNone,
+      class_ = await loadField(_doc.class, LoaderInstances.uriInitialWorkDirRequirement_classLoaderFalseTrueNoneNone,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {

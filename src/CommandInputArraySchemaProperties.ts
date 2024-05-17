@@ -22,7 +22,7 @@ export interface CommandInputArraySchemaProperties extends Internal.InputArraySc
   /**
    * Must be `array`
    */
-  type: Internal.enum_d062602be0b4b8fd33e69e29a841317b6ab665bc
+  type: Internal.Array_name
 
   /**
    * A short, human-readable label of this object.

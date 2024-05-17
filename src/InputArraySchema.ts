@@ -34,7 +34,7 @@ export class InputArraySchema extends Saveable implements Internal.InputArraySch
   /**
    * Must be `array`
    */
-  type: Internal.enum_d062602be0b4b8fd33e69e29a841317b6ab665bc
+  type: Internal.Array_name
 
   /**
    * A short, human-readable label of this object.
@@ -76,7 +76,7 @@ export class InputArraySchema extends Saveable implements Internal.InputArraySch
     let name
     if ('name' in _doc) {
       try {
-        name = await loadField(_doc.name, LoaderInstances.uriunionOfundefinedtypeOrstrtypeTrueFalseNone,
+        name = await loadField(_doc.name, LoaderInstances.uriunionOfundefinedtypeOrstrtypeTrueFalseNoneNone,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
@@ -102,7 +102,7 @@ export class InputArraySchema extends Saveable implements Internal.InputArraySch
             
     let items
     try {
-      items = await loadField(_doc.items, LoaderInstances.typedslunionOfCWLTypeLoaderOrInputRecordSchemaLoaderOrInputEnumSchemaLoaderOrInputArraySchemaLoaderOrstrtypeOrarrayOfunionOfCWLTypeLoaderOrInputRecordSchemaLoaderOrInputEnumSchemaLoaderOrInputArraySchemaLoaderOrstrtype2,
+      items = await loadField(_doc.items, LoaderInstances.uriunionOfCWLTypeLoaderOrInputRecordSchemaLoaderOrInputEnumSchemaLoaderOrInputArraySchemaLoaderOrstrtypeOrarrayOfunionOfCWLTypeLoaderOrInputRecordSchemaLoaderOrInputEnumSchemaLoaderOrInputArraySchemaLoaderOrstrtypeFalseTrue2None,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
@@ -116,7 +116,7 @@ export class InputArraySchema extends Saveable implements Internal.InputArraySch
 
     let type
     try {
-      type = await loadField(_doc.type, LoaderInstances.typedslenum_d062602be0b4b8fd33e69e29a841317b6ab665bcLoader2,
+      type = await loadField(_doc.type, LoaderInstances.typedslArray_nameLoader2,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
@@ -208,7 +208,11 @@ export class InputArraySchema extends Saveable implements Internal.InputArraySch
     }
                 
     if (this.items != null) {
-      r.items = save(this.items, false, this.name, relativeUris)
+      const u = saveRelativeUri(this.items, this.name, false,
+                                relativeUris, 2)
+      if (u != null) {
+        r.items = u
+      }
     }
                 
     if (this.type != null) {

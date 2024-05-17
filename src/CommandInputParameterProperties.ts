@@ -129,7 +129,7 @@ export interface CommandInputParameterProperties extends Internal.InputParameter
    * (e.g. dependent `valueFrom` fields).
    * 
    */
-  default_?: undefined | Internal.File | Internal.Directory | any
+  default_?: undefined | any
 
   /**
    * Specify valid types of data that may be assigned to this parameter.

@@ -23,6 +23,7 @@ import * as Internal from './util/Internal'
  */
 export class EnumSchema extends Saveable implements Internal.EnumSchemaProperties {
   extensionFields?: Internal.Dictionary<any>
+  name?: undefined | string
 
   /**
    * Defines the set of valid symbols.
@@ -32,12 +33,13 @@ export class EnumSchema extends Saveable implements Internal.EnumSchemaPropertie
   /**
    * Must be `enum`
    */
-  type: Internal.enum_d961d79c225752b9fadb617367615ab176b47d77
+  type: Internal.Enum_name
 
 
-  constructor ({loadingOptions, extensionFields, symbols, type} : {loadingOptions?: LoadingOptions} & Internal.EnumSchemaProperties) {
+  constructor ({loadingOptions, extensionFields, name, symbols, type} : {loadingOptions?: LoadingOptions} & Internal.EnumSchemaProperties) {
     super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
+    this.name = name
     this.symbols = symbols
     this.type = type
   }
@@ -58,9 +60,36 @@ export class EnumSchema extends Saveable implements Internal.EnumSchemaPropertie
     const _doc = Object.assign({}, __doc)
     const __errors: ValidationException[] = []
             
+    let name
+    if ('name' in _doc) {
+      try {
+        name = await loadField(_doc.name, LoaderInstances.uriunionOfundefinedtypeOrstrtypeTrueFalseNoneNone,
+          baseuri, loadingOptions)
+      } catch (e) {
+        if (e instanceof ValidationException) {
+          __errors.push(
+            new ValidationException('the `name` field is not valid because: ', [e])
+          )
+        } else {
+          throw e
+        }
+      }
+    }
+
+    const originalnameIsUndefined = (name === undefined)
+    if (originalnameIsUndefined ) {
+      if (docRoot != null) {
+        name = docRoot
+      } else {
+        name = "_" + uuidv4()
+      }
+    } else {
+      baseuri = name as string
+    }
+            
     let symbols
     try {
-      symbols = await loadField(_doc.symbols, LoaderInstances.uriarrayOfstrtypeTrueFalseNone,
+      symbols = await loadField(_doc.symbols, LoaderInstances.uriarrayOfstrtypeTrueFalseNoneNone,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
@@ -74,7 +103,7 @@ export class EnumSchema extends Saveable implements Internal.EnumSchemaPropertie
 
     let type
     try {
-      type = await loadField(_doc.type, LoaderInstances.typedslenum_d961d79c225752b9fadb617367615ab176b47d77Loader2,
+      type = await loadField(_doc.type, LoaderInstances.typedslEnum_nameLoader2,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
@@ -95,7 +124,7 @@ export class EnumSchema extends Saveable implements Internal.EnumSchemaPropertie
         } else {
           __errors.push(
             new ValidationException(`invalid field ${key as string}, \
-            expected one of: \`symbols\`,\`type\``)
+            expected one of: \`name\`,\`symbols\`,\`type\``)
           )
           break
         }
@@ -109,6 +138,7 @@ export class EnumSchema extends Saveable implements Internal.EnumSchemaPropertie
     const schema = new EnumSchema({
       extensionFields: extensionFields,
       loadingOptions: loadingOptions,
+      name: name,
       symbols: symbols,
       type: type
     })
@@ -122,8 +152,16 @@ export class EnumSchema extends Saveable implements Internal.EnumSchemaPropertie
       r[prefixUrl(ef, this.loadingOptions.vocab)] = this.extensionFields.ef
     }
 
+    if (this.name != null) {
+      const u = saveRelativeUri(this.name, baseUrl, true,
+                                relativeUris, undefined)
+      if (u != null) {
+        r.name = u
+      }
+    }
+                
     if (this.symbols != null) {
-      const u = saveRelativeUri(this.symbols, baseUrl, true,
+      const u = saveRelativeUri(this.symbols, this.name, true,
                                 relativeUris, undefined)
       if (u != null) {
         r.symbols = u
@@ -131,7 +169,7 @@ export class EnumSchema extends Saveable implements Internal.EnumSchemaPropertie
     }
                 
     if (this.type != null) {
-      r.type = save(this.type, false, baseUrl, relativeUris)
+      r.type = save(this.type, false, this.name, relativeUris)
     }
                 
     if (top) {
@@ -145,5 +183,5 @@ export class EnumSchema extends Saveable implements Internal.EnumSchemaPropertie
     return r
   }
             
-  static attr: Set<string> = new Set(['symbols','type'])
+  static attr: Set<string> = new Set(['name','symbols','type'])
 }

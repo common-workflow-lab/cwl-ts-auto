@@ -36,7 +36,7 @@ import * as Internal from './util/Internal'
  * 
  * The `scatter` field specifies one or more input parameters which will be
  * scattered.  An input parameter may be listed more than once.  The declared
- * type of each input parameter is implicitly becomes an array of items of the
+ * type of each input parameter implicitly becomes an array of items of the
  * input parameter type.  If a parameter is listed more than once, it becomes
  * a nested array.  As a result, upstream parameters which are connected to
  * scattered parameters must be arrays.
@@ -212,7 +212,7 @@ export class WorkflowStep extends Saveable implements Internal.WorkflowStepPrope
     let id
     if ('id' in _doc) {
       try {
-        id = await loadField(_doc.id, LoaderInstances.uriunionOfundefinedtypeOrstrtypeTrueFalseNone,
+        id = await loadField(_doc.id, LoaderInstances.uriunionOfundefinedtypeOrstrtypeTrueFalseNoneNone,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
@@ -284,7 +284,7 @@ export class WorkflowStep extends Saveable implements Internal.WorkflowStepPrope
 
     let out
     try {
-      out = await loadField(_doc.out, LoaderInstances.uriunionOfarrayOfunionOfstrtypeOrWorkflowStepOutputLoaderTrueFalseNone,
+      out = await loadField(_doc.out, LoaderInstances.uriunionOfarrayOfunionOfstrtypeOrWorkflowStepOutputLoaderTrueFalseNoneNone,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
@@ -330,7 +330,7 @@ export class WorkflowStep extends Saveable implements Internal.WorkflowStepPrope
 
     let run
     try {
-      run = await loadField(_doc.run, LoaderInstances.uriunionOfstrtypeOrCommandLineToolLoaderOrExpressionToolLoaderOrWorkflowLoaderOrOperationLoaderFalseFalseNone,
+      run = await loadField(_doc.run, LoaderInstances.uriunionOfstrtypeOrCommandLineToolLoaderOrExpressionToolLoaderOrWorkflowLoaderOrOperationLoaderFalseFalseNoneNone,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
@@ -361,7 +361,7 @@ export class WorkflowStep extends Saveable implements Internal.WorkflowStepPrope
     let scatter
     if ('scatter' in _doc) {
       try {
-        scatter = await loadField(_doc.scatter, LoaderInstances.uriunionOfundefinedtypeOrstrtypeOrarrayOfstrtypeFalseFalse0,
+        scatter = await loadField(_doc.scatter, LoaderInstances.uriunionOfundefinedtypeOrstrtypeOrarrayOfstrtypeFalseFalse0None,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
@@ -377,7 +377,7 @@ export class WorkflowStep extends Saveable implements Internal.WorkflowStepPrope
     let scatterMethod
     if ('scatterMethod' in _doc) {
       try {
-        scatterMethod = await loadField(_doc.scatterMethod, LoaderInstances.uriunionOfundefinedtypeOrScatterMethodLoaderFalseTrueNone,
+        scatterMethod = await loadField(_doc.scatterMethod, LoaderInstances.uriunionOfundefinedtypeOrScatterMethodLoaderFalseTrueNoneNone,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {

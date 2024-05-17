@@ -64,7 +64,7 @@ export class WorkReuse extends Saveable implements Internal.WorkReuseProperties 
             
     let class_
     try {
-      class_ = await loadField(_doc.class, LoaderInstances.uriWorkReuse_classLoaderFalseTrueNone,
+      class_ = await loadField(_doc.class, LoaderInstances.uriWorkReuse_classLoaderFalseTrueNoneNone,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {

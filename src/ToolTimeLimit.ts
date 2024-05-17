@@ -68,7 +68,7 @@ export class ToolTimeLimit extends Saveable implements Internal.ToolTimeLimitPro
             
     let class_
     try {
-      class_ = await loadField(_doc.class, LoaderInstances.uriToolTimeLimit_classLoaderFalseTrueNone,
+      class_ = await loadField(_doc.class, LoaderInstances.uriToolTimeLimit_classLoaderFalseTrueNoneNone,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {

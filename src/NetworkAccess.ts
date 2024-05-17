@@ -70,7 +70,7 @@ export class NetworkAccess extends Saveable implements Internal.NetworkAccessPro
             
     let class_
     try {
-      class_ = await loadField(_doc.class, LoaderInstances.uriNetworkAccess_classLoaderFalseTrueNone,
+      class_ = await loadField(_doc.class, LoaderInstances.uriNetworkAccess_classLoaderFalseTrueNoneNone,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {

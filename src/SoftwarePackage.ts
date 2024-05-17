@@ -140,7 +140,7 @@ export class SoftwarePackage extends Saveable implements Internal.SoftwarePackag
     let specs
     if ('specs' in _doc) {
       try {
-        specs = await loadField(_doc.specs, LoaderInstances.uriunionOfundefinedtypeOrarrayOfstrtypeFalseFalseNone,
+        specs = await loadField(_doc.specs, LoaderInstances.uriunionOfundefinedtypeOrarrayOfstrtypeFalseFalseNoneTrue,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {

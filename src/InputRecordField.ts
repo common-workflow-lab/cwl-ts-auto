@@ -173,7 +173,7 @@ export class InputRecordField extends Saveable implements Internal.InputRecordFi
     let name
     if ('name' in _doc) {
       try {
-        name = await loadField(_doc.name, LoaderInstances.uristrtypeTrueFalseNone,
+        name = await loadField(_doc.name, LoaderInstances.uristrtypeTrueFalseNoneNone,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
@@ -278,7 +278,7 @@ export class InputRecordField extends Saveable implements Internal.InputRecordFi
     let format
     if ('format' in _doc) {
       try {
-        format = await loadField(_doc.format, LoaderInstances.uriunionOfundefinedtypeOrstrtypeOrarrayOfstrtypeOrExpressionLoaderTrueFalseNone,
+        format = await loadField(_doc.format, LoaderInstances.uriunionOfundefinedtypeOrstrtypeOrarrayOfstrtypeOrExpressionLoaderTrueFalseNoneTrue,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {

@@ -57,7 +57,7 @@ export class LoadListingRequirement extends Saveable implements Internal.LoadLis
             
     let class_
     try {
-      class_ = await loadField(_doc.class, LoaderInstances.uriLoadListingRequirement_classLoaderFalseTrueNone,
+      class_ = await loadField(_doc.class, LoaderInstances.uriLoadListingRequirement_classLoaderFalseTrueNoneNone,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {

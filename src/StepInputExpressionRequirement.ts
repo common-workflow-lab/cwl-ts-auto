@@ -55,7 +55,7 @@ export class StepInputExpressionRequirement extends Saveable implements Internal
             
     let class_
     try {
-      class_ = await loadField(_doc.class, LoaderInstances.uriStepInputExpressionRequirement_classLoaderFalseTrueNone,
+      class_ = await loadField(_doc.class, LoaderInstances.uriStepInputExpressionRequirement_classLoaderFalseTrueNoneNone,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {

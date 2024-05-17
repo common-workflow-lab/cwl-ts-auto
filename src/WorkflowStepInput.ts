@@ -195,7 +195,7 @@ export class WorkflowStepInput extends Saveable implements Internal.WorkflowStep
    * default must be applied prior to scattering or evaluating `valueFrom`.
    * 
    */
-  default_?: undefined | Internal.File | Internal.Directory | any
+  default_?: undefined | any
 
   /**
    * To use valueFrom, [StepInputExpressionRequirement](#StepInputExpressionRequirement) must
@@ -258,7 +258,7 @@ export class WorkflowStepInput extends Saveable implements Internal.WorkflowStep
     let id
     if ('id' in _doc) {
       try {
-        id = await loadField(_doc.id, LoaderInstances.uriunionOfundefinedtypeOrstrtypeTrueFalseNone,
+        id = await loadField(_doc.id, LoaderInstances.uriunionOfundefinedtypeOrstrtypeTrueFalseNoneNone,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
@@ -285,7 +285,7 @@ export class WorkflowStepInput extends Saveable implements Internal.WorkflowStep
     let source
     if ('source' in _doc) {
       try {
-        source = await loadField(_doc.source, LoaderInstances.uriunionOfundefinedtypeOrstrtypeOrarrayOfstrtypeFalseFalse2,
+        source = await loadField(_doc.source, LoaderInstances.uriunionOfundefinedtypeOrstrtypeOrarrayOfstrtypeFalseFalse2None,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
@@ -381,7 +381,7 @@ export class WorkflowStepInput extends Saveable implements Internal.WorkflowStep
     let default_
     if ('default' in _doc) {
       try {
-        default_ = await loadField(_doc.default, LoaderInstances.unionOfundefinedtypeOrFileLoaderOrDirectoryLoaderOranyType,
+        default_ = await loadField(_doc.default, LoaderInstances.unionOfundefinedtypeOrCWLObjectTypeLoader,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {

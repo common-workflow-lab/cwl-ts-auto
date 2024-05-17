@@ -183,7 +183,7 @@ export interface WorkflowStepInputProperties extends Internal.IdentifiedProperti
    * default must be applied prior to scattering or evaluating `valueFrom`.
    * 
    */
-  default_?: undefined | Internal.File | Internal.Directory | any
+  default_?: undefined | any
 
   /**
    * To use valueFrom, [StepInputExpressionRequirement](#StepInputExpressionRequirement) must

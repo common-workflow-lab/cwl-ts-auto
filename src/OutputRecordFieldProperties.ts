@@ -5,7 +5,7 @@ import * as Internal from './util/Internal'
 /**
  * Auto-generated interface for https://w3id.org/cwl/cwl#OutputRecordField
  */
-export interface OutputRecordFieldProperties extends Internal.RecordFieldProperties, Internal.FieldBaseProperties, Internal.OutputFormatProperties {
+export interface OutputRecordFieldProperties extends Internal.CWLRecordFieldProperties, Internal.FieldBaseProperties, Internal.OutputFormatProperties {
                     
   extensionFields?: Internal.Dictionary<any>
 

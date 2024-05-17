@@ -21,7 +21,7 @@ import * as Internal from './util/Internal'
  * Modify the behavior of CommandLineTool to generate a single string
  * containing a shell command line.  Each item in the `arguments` list must
  * be joined into a string separated by single spaces and quoted to prevent
- * intepretation by the shell, unless `CommandLineBinding` for that argument
+ * interpretation by the shell, unless `CommandLineBinding` for that argument
  * contains `shellQuote: false`.  If `shellQuote: false` is specified, the
  * argument is joined into the command string without quoting, which allows
  * the use of shell metacharacters such as `|` for pipes.
@@ -60,7 +60,7 @@ export class ShellCommandRequirement extends Saveable implements Internal.ShellC
             
     let class_
     try {
-      class_ = await loadField(_doc.class, LoaderInstances.uriShellCommandRequirement_classLoaderFalseTrueNone,
+      class_ = await loadField(_doc.class, LoaderInstances.uriShellCommandRequirement_classLoaderFalseTrueNoneNone,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {

@@ -12,10 +12,10 @@ export interface ArraySchemaProperties  {
   /**
    * Defines the type of the array elements.
    */
-  items: Internal.PrimitiveType | Internal.RecordSchema | Internal.EnumSchema | Internal.ArraySchema | string | Array<Internal.PrimitiveType | Internal.RecordSchema | Internal.EnumSchema | Internal.ArraySchema | string>
+  items: Internal.PrimitiveType | Internal.RecordSchema | Internal.EnumSchema | Internal.ArraySchema | Internal.MapSchema | Internal.UnionSchema | string | Array<Internal.PrimitiveType | Internal.RecordSchema | Internal.EnumSchema | Internal.ArraySchema | Internal.MapSchema | Internal.UnionSchema | string>
 
   /**
    * Must be `array`
    */
-  type: Internal.enum_d062602be0b4b8fd33e69e29a841317b6ab665bc
+  type: Internal.Array_name
 }

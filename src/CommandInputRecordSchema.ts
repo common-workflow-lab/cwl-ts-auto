@@ -34,7 +34,7 @@ export class CommandInputRecordSchema extends Saveable implements Internal.Comma
   /**
    * Must be `record`
    */
-  type: Internal.enum_d9cba076fca539106791a4f46d198c7fcfbdb779
+  type: Internal.Record_name
 
   /**
    * A short, human-readable label of this object.
@@ -82,7 +82,7 @@ export class CommandInputRecordSchema extends Saveable implements Internal.Comma
     let name
     if ('name' in _doc) {
       try {
-        name = await loadField(_doc.name, LoaderInstances.uriunionOfundefinedtypeOrstrtypeTrueFalseNone,
+        name = await loadField(_doc.name, LoaderInstances.uriunionOfundefinedtypeOrstrtypeTrueFalseNoneNone,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
@@ -124,7 +124,7 @@ export class CommandInputRecordSchema extends Saveable implements Internal.Comma
 
     let type
     try {
-      type = await loadField(_doc.type, LoaderInstances.typedslenum_d9cba076fca539106791a4f46d198c7fcfbdb779Loader2,
+      type = await loadField(_doc.type, LoaderInstances.typedslRecord_nameLoader2,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {

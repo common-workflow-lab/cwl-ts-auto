@@ -65,7 +65,7 @@ export class InlineJavascriptRequirement extends Saveable implements Internal.In
             
     let class_
     try {
-      class_ = await loadField(_doc.class, LoaderInstances.uriInlineJavascriptRequirement_classLoaderFalseTrueNone,
+      class_ = await loadField(_doc.class, LoaderInstances.uriInlineJavascriptRequirement_classLoaderFalseTrueNoneNone,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {

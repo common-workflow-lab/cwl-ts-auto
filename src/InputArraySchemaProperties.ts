@@ -5,7 +5,7 @@ import * as Internal from './util/Internal'
 /**
  * Auto-generated interface for https://w3id.org/cwl/cwl#InputArraySchema
  */
-export interface InputArraySchemaProperties extends Internal.ArraySchemaProperties, Internal.InputSchemaProperties {
+export interface InputArraySchemaProperties extends Internal.CWLArraySchemaProperties, Internal.InputSchemaProperties {
                     
   extensionFields?: Internal.Dictionary<any>
 
@@ -22,7 +22,7 @@ export interface InputArraySchemaProperties extends Internal.ArraySchemaProperti
   /**
    * Must be `array`
    */
-  type: Internal.enum_d062602be0b4b8fd33e69e29a841317b6ab665bc
+  type: Internal.Array_name
 
   /**
    * A short, human-readable label of this object.
