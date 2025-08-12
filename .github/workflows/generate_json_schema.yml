@@ -22,9 +22,9 @@ jobs:
     steps:
       # From https://github.com/EndBug/add-and-commit?tab=readme-ov-file#working-with-prs
       - if: github.event_name != 'pull_request'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - if: github.event_name == 'pull_request'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: ${{ github.event.pull_request.head.repo.full_name }}
           ref: ${{ github.event.pull_request.head.ref }}
