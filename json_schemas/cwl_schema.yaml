@@ -6742,28 +6742,28 @@ definitions:
       - oneOf:
           - $ref: '#/definitions/CWLDocumentMetadata'
     properties:
-      expression: true
-      cwlVersion: true
-      $schemas: true
-      intent: true
-      steps: true
-      stderr: true
-      label: true
-      permanentFailCodes: true
-      temporaryFailCodes: true
-      stdin: true
-      outputs: true
-      $namespaces: true
-      class: true
-      doc: true
-      requirements: true
-      hints: true
       baseCommand: true
-      successCodes: true
-      stdout: true
-      id: true
-      arguments: true
+      doc: true
       inputs: true
+      stdin: true
+      class: true
+      expression: true
+      label: true
+      hints: true
+      cwlVersion: true
+      outputs: true
+      temporaryFailCodes: true
+      arguments: true
+      successCodes: true
+      id: true
+      intent: true
+      stderr: true
+      $namespaces: true
+      stdout: true
+      permanentFailCodes: true
+      steps: true
+      $schemas: true
+      requirements: true
     patternProperties:
       ^\w+:.*$:
         type: object
@@ -6814,29 +6814,29 @@ definitions:
           - $ref: '#/definitions/CWLFile'
       - $ref: '#/definitions/CWLDocumentMetadata'
     properties:
-      expression: true
-      cwlVersion: true
-      $schemas: true
-      intent: true
-      steps: true
-      stderr: true
-      label: true
-      permanentFailCodes: true
-      temporaryFailCodes: true
-      stdin: true
-      outputs: true
-      $namespaces: true
-      class: true
-      doc: true
-      $graph: true
-      requirements: true
-      hints: true
       baseCommand: true
-      successCodes: true
-      stdout: true
-      id: true
-      arguments: true
+      doc: true
       inputs: true
+      stdin: true
+      class: true
+      expression: true
+      label: true
+      hints: true
+      cwlVersion: true
+      outputs: true
+      temporaryFailCodes: true
+      arguments: true
+      successCodes: true
+      id: true
+      intent: true
+      stderr: true
+      $namespaces: true
+      stdout: true
+      $graph: true
+      permanentFailCodes: true
+      steps: true
+      $schemas: true
+      requirements: true
     patternProperties:
       ^\w+:.*$:
         type: object
