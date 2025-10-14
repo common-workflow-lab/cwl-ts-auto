@@ -6742,28 +6742,28 @@ definitions:
       - oneOf:
           - $ref: '#/definitions/CWLDocumentMetadata'
     properties:
-      baseCommand: true
-      doc: true
-      inputs: true
-      stdin: true
-      class: true
-      expression: true
-      label: true
-      hints: true
-      cwlVersion: true
-      outputs: true
-      temporaryFailCodes: true
-      arguments: true
-      successCodes: true
-      id: true
-      intent: true
-      stderr: true
       $namespaces: true
+      cwlVersion: true
+      temporaryFailCodes: true
+      hints: true
+      outputs: true
+      arguments: true
       stdout: true
-      permanentFailCodes: true
       steps: true
-      $schemas: true
+      stderr: true
+      expression: true
       requirements: true
+      baseCommand: true
+      successCodes: true
+      permanentFailCodes: true
+      id: true
+      inputs: true
+      doc: true
+      intent: true
+      label: true
+      class: true
+      $schemas: true
+      stdin: true
     patternProperties:
       ^\w+:.*$:
         type: object
@@ -6814,29 +6814,29 @@ definitions:
           - $ref: '#/definitions/CWLFile'
       - $ref: '#/definitions/CWLDocumentMetadata'
     properties:
-      baseCommand: true
-      doc: true
-      inputs: true
-      stdin: true
-      class: true
-      expression: true
-      label: true
-      hints: true
-      cwlVersion: true
-      outputs: true
-      temporaryFailCodes: true
-      arguments: true
-      successCodes: true
-      id: true
-      intent: true
-      stderr: true
       $namespaces: true
+      cwlVersion: true
+      temporaryFailCodes: true
+      hints: true
+      outputs: true
+      arguments: true
       stdout: true
-      $graph: true
-      permanentFailCodes: true
       steps: true
-      $schemas: true
+      stderr: true
+      expression: true
       requirements: true
+      baseCommand: true
+      successCodes: true
+      permanentFailCodes: true
+      id: true
+      inputs: true
+      doc: true
+      intent: true
+      label: true
+      class: true
+      $schemas: true
+      $graph: true
+      stdin: true
     patternProperties:
       ^\w+:.*$:
         type: object
