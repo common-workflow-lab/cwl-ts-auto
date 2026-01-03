@@ -46,7 +46,7 @@ export async function documentLoadByUrl (loader: Loader, url: string, loadingOpt
   return await documentLoad(loader, result, url, loadingOptions)
 }
 
-export async function loadDocument (doc: any, baseuri?: string, loadingOptions?: LoadingOptions): Promise<Internal.CommandLineTool | Internal.ExpressionTool | Internal.Workflow | Internal.Operation | Array<Internal.CommandLineTool | Internal.ExpressionTool | Internal.Workflow | Internal.Operation>> {
+export async function loadDocument (doc: any, baseuri?: string, loadingOptions?: LoadingOptions): Promise<Internal.CommandLineTool | Internal.ExpressionTool | Internal.Workflow | Internal.Operation | Internal.ProcessGenerator | Array<Internal.CommandLineTool | Internal.ExpressionTool | Internal.Workflow | Internal.Operation | Internal.ProcessGenerator>> {
   if (baseuri == null) {
     baseuri = URL.pathToFileURL(process.cwd() + '/').toString()
   }
@@ -55,10 +55,10 @@ export async function loadDocument (doc: any, baseuri?: string, loadingOptions?:
     loadingOptions = new LoadingOptions({})
   }
 
-  return await documentLoad(LoaderInstances.unionOfCommandLineToolLoaderOrExpressionToolLoaderOrWorkflowLoaderOrOperationLoaderOrarrayOfunionOfCommandLineToolLoaderOrExpressionToolLoaderOrWorkflowLoaderOrOperationLoader, doc, baseuri, loadingOptions)
+  return await documentLoad(LoaderInstances.unionOfCommandLineToolLoaderOrExpressionToolLoaderOrWorkflowLoaderOrOperationLoaderOrProcessGeneratorLoaderOrarrayOfunionOfCommandLineToolLoaderOrExpressionToolLoaderOrWorkflowLoaderOrOperationLoaderOrProcessGeneratorLoader, doc, baseuri, loadingOptions)
 }
 
-export async function loadDocumentByString (doc: string, uri: string, loadingOptions?: LoadingOptions): Promise<Internal.CommandLineTool | Internal.ExpressionTool | Internal.Workflow | Internal.Operation | Array<Internal.CommandLineTool | Internal.ExpressionTool | Internal.Workflow | Internal.Operation>> {
+export async function loadDocumentByString (doc: string, uri: string, loadingOptions?: LoadingOptions): Promise<Internal.CommandLineTool | Internal.ExpressionTool | Internal.Workflow | Internal.Operation | Internal.ProcessGenerator | Array<Internal.CommandLineTool | Internal.ExpressionTool | Internal.Workflow | Internal.Operation | Internal.ProcessGenerator>> {
   const result = yaml.load(doc)
 
   if (loadingOptions == null) {
@@ -66,5 +66,5 @@ export async function loadDocumentByString (doc: string, uri: string, loadingOpt
   }
   loadingOptions.idx[uri] = result
 
-  return await documentLoad(LoaderInstances.unionOfCommandLineToolLoaderOrExpressionToolLoaderOrWorkflowLoaderOrOperationLoaderOrarrayOfunionOfCommandLineToolLoaderOrExpressionToolLoaderOrWorkflowLoaderOrOperationLoader, result, uri, loadingOptions)
+  return await documentLoad(LoaderInstances.unionOfCommandLineToolLoaderOrExpressionToolLoaderOrWorkflowLoaderOrOperationLoaderOrProcessGeneratorLoaderOrarrayOfunionOfCommandLineToolLoaderOrExpressionToolLoaderOrWorkflowLoaderOrOperationLoaderOrProcessGeneratorLoader, result, uri, loadingOptions)
 }

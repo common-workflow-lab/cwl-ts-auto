@@ -8,9 +8,9 @@ import * as Internal from './util/Internal'
 export interface InputParameterProperties extends Internal.ParameterProperties, Internal.InputFormatProperties, Internal.LoadContentsProperties {
                     
   /**
-   * The unique identifier for this object.
+   * The unique identifier for this Parameter.
    */
-  id?: undefined | string
+  id: string
 
   /**
    * A short, human-readable label of this object.

@@ -8,12 +8,12 @@ import * as Internal from './util/Internal'
  * Define an input or output parameter to a process.
  * 
  */
-export interface ParameterProperties extends Internal.FieldBaseProperties, Internal.DocumentedProperties, Internal.IdentifiedProperties {
+export interface ParameterProperties extends Internal.FieldBaseProperties, Internal.DocumentedProperties, Internal.IdentifierRequiredProperties {
                     
   /**
-   * The unique identifier for this object.
+   * The unique identifier for this Parameter.
    */
-  id?: undefined | string
+  id: string
 
   /**
    * A short, human-readable label of this object.

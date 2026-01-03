@@ -16,41 +16,39 @@ import * as Internal from './util/Internal'
 
 
 /**
- * Auto-generated class implementation for https://w3id.org/cwl/cwl#WorkflowStepOutput
- *
- * Associate an output parameter of the underlying process with a workflow
- * parameter.  The workflow parameter (given in the `id` field) be may be used
- * as a `source` to connect with input parameters of other workflow steps, or
- * with an output parameter of the process.
- * 
- * A unique identifier for this workflow output parameter.  This is
- * the identifier to use in the `source` field of `WorkflowStepInput`
- * to connect the output value to downstream parameters.
- * 
+ * Auto-generated class implementation for http://commonwl.org/cwltool#Secrets
  */
-export class WorkflowStepOutput extends Saveable implements Internal.WorkflowStepOutputProperties {
+export class Secrets extends Saveable implements Internal.SecretsProperties {
   extensionFields?: Internal.Dictionary<any>
 
   /**
-   * The unique identifier of the workflow parameter to export.
+   * Always 'Secrets'
    */
-  id: string
+  class_: string
+
+  /**
+   * List one or more input parameters that are sensitive (such as passwords)
+   * which will be deliberately obscured from logging.
+   * 
+   */
+  secrets: Array<string>
 
 
-  constructor ({loadingOptions, extensionFields, id} : {loadingOptions?: LoadingOptions} & Internal.WorkflowStepOutputProperties) {
+  constructor ({loadingOptions, extensionFields, class_ = 'Secrets', secrets} : {loadingOptions?: LoadingOptions} & Internal.SecretsProperties) {
     super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.id = id
+    this.class_ = class_
+    this.secrets = secrets
   }
 
   /**
-   * Used to construct instances of {@link WorkflowStepOutput }.
+   * Used to construct instances of {@link Secrets }.
    *
    * @param __doc                           Document fragment to load this record object from.
    * @param baseuri                         Base URI to generate child document IDs against.
    * @param loadingOptions                  Context for loading URIs and populating objects.
    * @param docRoot                         ID at this position in the document (if available)
-   * @returns                               An instance of {@link WorkflowStepOutput }
+   * @returns                               An instance of {@link Secrets }
    * @throws {@link ValidationException}    If the document fragment is not a
    *                                        {@link Dictionary} or validation of fields fails.
    */
@@ -59,43 +57,44 @@ export class WorkflowStepOutput extends Saveable implements Internal.WorkflowSte
     const _doc = Object.assign({}, __doc)
     const __errors: ValidationException[] = []
             
-    let id
-    if ('id' in _doc) {
-      try {
-        id = await loadField(_doc.id, LoaderInstances.uristrtypeTrueFalseNoneNone,
-          baseuri, loadingOptions)
-      } catch (e) {
-        if (e instanceof ValidationException) {
-          __errors.push(
-            new ValidationException('the `id` field is not valid because: ', [e])
-          )
-        } else {
-          throw e
-        }
+    let class_
+    try {
+      class_ = await loadField(_doc.class, LoaderInstances.uristrtypeFalseTrueNoneNone,
+        baseuri, loadingOptions)
+    } catch (e) {
+      if (e instanceof ValidationException) {
+        __errors.push(
+          new ValidationException('the `class` field is not valid because: ', [e])
+        )
+      } else {
+        throw e
       }
     }
 
-    const originalidIsUndefined = (id === undefined)
-    if (originalidIsUndefined ) {
-      if (docRoot != null) {
-        id = docRoot
+    let secrets
+    try {
+      secrets = await loadField(_doc.secrets, LoaderInstances.uriarrayOfstrtypeFalseFalse0None,
+        baseuri, loadingOptions)
+    } catch (e) {
+      if (e instanceof ValidationException) {
+        __errors.push(
+          new ValidationException('the `secrets` field is not valid because: ', [e])
+        )
       } else {
-        throw new ValidationException("Missing id")
+        throw e
       }
-    } else {
-      baseuri = id as string
     }
-            
+
     const extensionFields: Dictionary<any> = {}
     for (const [key, value] of Object.entries(_doc)) {
-      if (!WorkflowStepOutput.attr.has(key)) {
+      if (!Secrets.attr.has(key)) {
         if ((key as string).includes(':')) {
           const ex = expandUrl(key, '', loadingOptions, false, false)
           extensionFields[ex] = value
         } else {
           __errors.push(
             new ValidationException(`invalid field ${key as string}, \
-            expected one of: \`id\``)
+            expected one of: \`class\`,\`secrets\``)
           )
           break
         }
@@ -103,13 +102,14 @@ export class WorkflowStepOutput extends Saveable implements Internal.WorkflowSte
     }
 
     if (__errors.length > 0) {
-      throw new ValidationException("Trying 'WorkflowStepOutput'", __errors)
+      throw new ValidationException("Trying 'Secrets'", __errors)
     }
 
-    const schema = new WorkflowStepOutput({
+    const schema = new Secrets({
       extensionFields: extensionFields,
       loadingOptions: loadingOptions,
-      id: id
+      class_: class_,
+      secrets: secrets
     })
     return schema
   }
@@ -121,11 +121,19 @@ export class WorkflowStepOutput extends Saveable implements Internal.WorkflowSte
       r[prefixUrl(ef, this.loadingOptions.vocab)] = this.extensionFields.ef
     }
 
-    if (this.id != null) {
-      const u = saveRelativeUri(this.id, baseUrl, true,
+    if (this.class_ != null) {
+      const u = saveRelativeUri(this.class_, baseUrl, false,
                                 relativeUris, undefined)
       if (u != null) {
-        r.id = u
+        r.class = u
+      }
+    }
+                
+    if (this.secrets != null) {
+      const u = saveRelativeUri(this.secrets, baseUrl, false,
+                                relativeUris, 0)
+      if (u != null) {
+        r.secrets = u
       }
     }
                 
@@ -140,5 +148,5 @@ export class WorkflowStepOutput extends Saveable implements Internal.WorkflowSte
     return r
   }
             
-  static attr: Set<string> = new Set(['id'])
+  static attr: Set<string> = new Set(['class','secrets'])
 }

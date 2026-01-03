@@ -10,9 +10,9 @@ export interface WorkflowInputParameterProperties extends Internal.InputParamete
   extensionFields?: Internal.Dictionary<any>
 
   /**
-   * The unique identifier for this object.
+   * The unique identifier for this Parameter.
    */
-  id?: undefined | string
+  id: string
 
   /**
    * A short, human-readable label of this object.

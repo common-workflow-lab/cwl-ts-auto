@@ -16,18 +16,9 @@ import * as Internal from './util/Internal'
 
 
 /**
- * Auto-generated class implementation for https://w3id.org/cwl/cwl#ExpressionTool
- *
- * An ExpressionTool is a type of Process object that can be run by itself
- * or as a Workflow step. It executes a pure Javascript expression that has
- * access to the same input parameters as a workflow. It is meant to be used
- * sparingly as a way to isolate complex Javascript expressions that need to
- * operate on input data and produce some result; perhaps just a
- * rearrangement of the inputs. No Docker software container is required
- * or allowed.
- * 
+ * Auto-generated class implementation for http://commonwl.org/cwltool#ProcessGenerator
  */
-export class ExpressionTool extends Saveable implements Internal.ExpressionToolProperties {
+export class ProcessGenerator extends Saveable implements Internal.ProcessGeneratorProperties {
   extensionFields?: Internal.Dictionary<any>
 
   /**
@@ -38,7 +29,7 @@ export class ExpressionTool extends Saveable implements Internal.ExpressionToolP
    * 
    */
   id?: undefined | string
-  class_: Internal.ExpressionTool_class
+  class_: string
 
   /**
    * A short, human-readable label of this object.
@@ -120,15 +111,13 @@ export class ExpressionTool extends Saveable implements Internal.ExpressionToolP
   intent?: undefined | Array<string>
 
   /**
-   * The expression to execute.  The expression must return a plain
-   * Javascript object which matches the output parameters of the
-   * ExpressionTool.
+   * Specifies the process to run.
    * 
    */
-  expression: string
+  run: string | Internal.CommandLineTool | Internal.ExpressionTool | Internal.Workflow | Internal.Operation | Internal.ProcessGenerator
 
 
-  constructor ({loadingOptions, extensionFields, id, class_ = Internal.ExpressionTool_class.EXPRESSIONTOOL, label, doc, inputs, outputs, requirements, hints, cwlVersion, intent, expression} : {loadingOptions?: LoadingOptions} & Internal.ExpressionToolProperties) {
+  constructor ({loadingOptions, extensionFields, id, class_ = 'ProcessGenerator', label, doc, inputs, outputs, requirements, hints, cwlVersion, intent, run} : {loadingOptions?: LoadingOptions} & Internal.ProcessGeneratorProperties) {
     super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
     this.id = id
@@ -141,17 +130,17 @@ export class ExpressionTool extends Saveable implements Internal.ExpressionToolP
     this.hints = hints
     this.cwlVersion = cwlVersion
     this.intent = intent
-    this.expression = expression
+    this.run = run
   }
 
   /**
-   * Used to construct instances of {@link ExpressionTool }.
+   * Used to construct instances of {@link ProcessGenerator }.
    *
    * @param __doc                           Document fragment to load this record object from.
    * @param baseuri                         Base URI to generate child document IDs against.
    * @param loadingOptions                  Context for loading URIs and populating objects.
    * @param docRoot                         ID at this position in the document (if available)
-   * @returns                               An instance of {@link ExpressionTool }
+   * @returns                               An instance of {@link ProcessGenerator }
    * @throws {@link ValidationException}    If the document fragment is not a
    *                                        {@link Dictionary} or validation of fields fails.
    */
@@ -189,7 +178,7 @@ export class ExpressionTool extends Saveable implements Internal.ExpressionToolP
             
     let class_
     try {
-      class_ = await loadField(_doc.class, LoaderInstances.uriExpressionTool_classLoaderFalseTrueNoneNone,
+      class_ = await loadField(_doc.class, LoaderInstances.uristrtypeFalseTrueNoneNone,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
@@ -325,14 +314,14 @@ export class ExpressionTool extends Saveable implements Internal.ExpressionToolP
       }
     }
 
-    let expression
+    let run
     try {
-      expression = await loadField(_doc.expression, LoaderInstances.ExpressionLoader,
+      run = await loadField(_doc.run, LoaderInstances.uriunionOfstrtypeOrCommandLineToolLoaderOrExpressionToolLoaderOrWorkflowLoaderOrOperationLoaderOrProcessGeneratorLoaderFalseFalseNoneNone,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {
         __errors.push(
-          new ValidationException('the `expression` field is not valid because: ', [e])
+          new ValidationException('the `run` field is not valid because: ', [e])
         )
       } else {
         throw e
@@ -341,14 +330,14 @@ export class ExpressionTool extends Saveable implements Internal.ExpressionToolP
 
     const extensionFields: Dictionary<any> = {}
     for (const [key, value] of Object.entries(_doc)) {
-      if (!ExpressionTool.attr.has(key)) {
+      if (!ProcessGenerator.attr.has(key)) {
         if ((key as string).includes(':')) {
           const ex = expandUrl(key, '', loadingOptions, false, false)
           extensionFields[ex] = value
         } else {
           __errors.push(
             new ValidationException(`invalid field ${key as string}, \
-            expected one of: \`id\`,\`label\`,\`doc\`,\`inputs\`,\`outputs\`,\`requirements\`,\`hints\`,\`cwlVersion\`,\`intent\`,\`class\`,\`expression\``)
+            expected one of: \`id\`,\`label\`,\`doc\`,\`inputs\`,\`outputs\`,\`requirements\`,\`hints\`,\`cwlVersion\`,\`intent\`,\`class\`,\`run\``)
           )
           break
         }
@@ -356,10 +345,10 @@ export class ExpressionTool extends Saveable implements Internal.ExpressionToolP
     }
 
     if (__errors.length > 0) {
-      throw new ValidationException("Trying 'ExpressionTool'", __errors)
+      throw new ValidationException("Trying 'ProcessGenerator'", __errors)
     }
 
-    const schema = new ExpressionTool({
+    const schema = new ProcessGenerator({
       extensionFields: extensionFields,
       loadingOptions: loadingOptions,
       id: id,
@@ -372,7 +361,7 @@ export class ExpressionTool extends Saveable implements Internal.ExpressionToolP
       cwlVersion: cwlVersion,
       intent: intent,
       class_: class_,
-      expression: expression
+      run: run
     })
     return schema
   }
@@ -440,8 +429,12 @@ export class ExpressionTool extends Saveable implements Internal.ExpressionToolP
       }
     }
                 
-    if (this.expression != null) {
-      r.expression = save(this.expression, false, this.id, relativeUris)
+    if (this.run != null) {
+      const u = saveRelativeUri(this.run, this.id, false,
+                                relativeUris, undefined)
+      if (u != null) {
+        r.run = u
+      }
     }
                 
     if (top) {
@@ -455,5 +448,5 @@ export class ExpressionTool extends Saveable implements Internal.ExpressionToolP
     return r
   }
             
-  static attr: Set<string> = new Set(['id','label','doc','inputs','outputs','requirements','hints','cwlVersion','intent','class','expression'])
+  static attr: Set<string> = new Set(['id','label','doc','inputs','outputs','requirements','hints','cwlVersion','intent','class','run'])
 }
