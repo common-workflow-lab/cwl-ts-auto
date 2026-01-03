@@ -6742,28 +6742,28 @@ definitions:
       - oneOf:
           - $ref: '#/definitions/CWLDocumentMetadata'
     properties:
-      successCodes: true
-      requirements: true
-      baseCommand: true
-      inputs: true
-      outputs: true
-      intent: true
-      id: true
-      hints: true
-      permanentFailCodes: true
       $schemas: true
-      $namespaces: true
-      expression: true
+      id: true
+      stderr: true
+      successCodes: true
       cwlVersion: true
+      outputs: true
+      label: true
       stdout: true
-      steps: true
+      requirements: true
+      doc: true
       temporaryFailCodes: true
+      expression: true
+      hints: true
       arguments: true
       stdin: true
+      baseCommand: true
       class: true
-      doc: true
-      label: true
-      stderr: true
+      permanentFailCodes: true
+      $namespaces: true
+      steps: true
+      inputs: true
+      intent: true
     patternProperties:
       ^\w+:.*$:
         type: object
@@ -6814,29 +6814,29 @@ definitions:
           - $ref: '#/definitions/CWLFile'
       - $ref: '#/definitions/CWLDocumentMetadata'
     properties:
-      successCodes: true
-      $graph: true
-      requirements: true
-      baseCommand: true
-      inputs: true
-      outputs: true
-      intent: true
-      id: true
-      hints: true
-      permanentFailCodes: true
       $schemas: true
-      $namespaces: true
-      expression: true
+      id: true
+      stderr: true
+      successCodes: true
       cwlVersion: true
+      outputs: true
+      label: true
       stdout: true
-      steps: true
+      requirements: true
+      doc: true
       temporaryFailCodes: true
+      expression: true
+      hints: true
+      $graph: true
       arguments: true
       stdin: true
+      baseCommand: true
       class: true
-      doc: true
-      label: true
-      stderr: true
+      permanentFailCodes: true
+      $namespaces: true
+      steps: true
+      inputs: true
+      intent: true
     patternProperties:
       ^\w+:.*$:
         type: object
