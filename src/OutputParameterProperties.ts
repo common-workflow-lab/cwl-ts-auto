@@ -8,9 +8,9 @@ import * as Internal from './util/Internal'
 export interface OutputParameterProperties extends Internal.ParameterProperties, Internal.OutputFormatProperties {
                     
   /**
-   * The unique identifier for this object.
+   * The unique identifier for this Parameter.
    */
-  id?: undefined | string
+  id: string
 
   /**
    * A short, human-readable label of this object.

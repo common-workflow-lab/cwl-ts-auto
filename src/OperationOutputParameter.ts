@@ -25,9 +25,9 @@ export class OperationOutputParameter extends Saveable implements Internal.Opera
   extensionFields?: Internal.Dictionary<any>
 
   /**
-   * The unique identifier for this object.
+   * The unique identifier for this Parameter.
    */
-  id?: undefined | string
+  id: string
 
   /**
    * A short, human-readable label of this object.
@@ -143,7 +143,7 @@ export class OperationOutputParameter extends Saveable implements Internal.Opera
     let id
     if ('id' in _doc) {
       try {
-        id = await loadField(_doc.id, LoaderInstances.uriunionOfundefinedtypeOrstrtypeTrueFalseNoneNone,
+        id = await loadField(_doc.id, LoaderInstances.uristrtypeTrueFalseNoneNone,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
@@ -161,7 +161,7 @@ export class OperationOutputParameter extends Saveable implements Internal.Opera
       if (docRoot != null) {
         id = docRoot
       } else {
-        id = "_" + uuidv4()
+        throw new ValidationException("Missing id")
       }
     } else {
       baseuri = id as string

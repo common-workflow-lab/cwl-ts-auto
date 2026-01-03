@@ -115,14 +115,14 @@ import * as Internal from './util/Internal'
  *    should be filtered out.
  * 
  */
-export interface WorkflowStepInputProperties extends Internal.IdentifiedProperties, Internal.SinkProperties, Internal.LoadContentsProperties, Internal.LabeledProperties {
+export interface WorkflowStepInputProperties extends Internal.IdentifierRequiredProperties, Internal.SinkProperties, Internal.LoadContentsProperties, Internal.LabeledProperties {
                     
   extensionFields?: Internal.Dictionary<any>
 
   /**
-   * The unique identifier for this object.
+   * The unique identifier of the source input field name.
    */
-  id?: undefined | string
+  id: string
 
   /**
    * Specifies one or more workflow parameters that will provide input to

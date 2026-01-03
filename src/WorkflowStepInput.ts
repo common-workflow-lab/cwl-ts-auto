@@ -132,9 +132,9 @@ export class WorkflowStepInput extends Saveable implements Internal.WorkflowStep
   extensionFields?: Internal.Dictionary<any>
 
   /**
-   * The unique identifier for this object.
+   * The unique identifier of the source input field name.
    */
-  id?: undefined | string
+  id: string
 
   /**
    * Specifies one or more workflow parameters that will provide input to
@@ -258,7 +258,7 @@ export class WorkflowStepInput extends Saveable implements Internal.WorkflowStep
     let id
     if ('id' in _doc) {
       try {
-        id = await loadField(_doc.id, LoaderInstances.uriunionOfundefinedtypeOrstrtypeTrueFalseNoneNone,
+        id = await loadField(_doc.id, LoaderInstances.uristrtypeTrueFalseNoneNone,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
@@ -276,7 +276,7 @@ export class WorkflowStepInput extends Saveable implements Internal.WorkflowStep
       if (docRoot != null) {
         id = docRoot
       } else {
-        id = "_" + uuidv4()
+        throw new ValidationException("Missing id")
       }
     } else {
       baseuri = id as string

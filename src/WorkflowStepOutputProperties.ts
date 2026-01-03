@@ -15,12 +15,12 @@ import * as Internal from './util/Internal'
  * to connect the output value to downstream parameters.
  * 
  */
-export interface WorkflowStepOutputProperties extends Internal.IdentifiedProperties {
+export interface WorkflowStepOutputProperties extends Internal.IdentifierRequiredProperties {
                     
   extensionFields?: Internal.Dictionary<any>
 
   /**
-   * The unique identifier for this object.
+   * The unique identifier of the workflow parameter to export.
    */
-  id?: undefined | string
+  id: string
 }

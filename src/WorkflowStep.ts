@@ -103,9 +103,9 @@ export class WorkflowStep extends Saveable implements Internal.WorkflowStepPrope
   extensionFields?: Internal.Dictionary<any>
 
   /**
-   * The unique identifier for this object.
+   * The unique identifier for this WorkflowStep.
    */
-  id?: undefined | string
+  id: string
 
   /**
    * A short, human-readable label of this object.
@@ -143,7 +143,7 @@ export class WorkflowStep extends Saveable implements Internal.WorkflowStepPrope
    * unless overridden at user option.
    * 
    */
-  requirements?: undefined | Array<Internal.InlineJavascriptRequirement | Internal.SchemaDefRequirement | Internal.LoadListingRequirement | Internal.DockerRequirement | Internal.SoftwareRequirement | Internal.InitialWorkDirRequirement | Internal.EnvVarRequirement | Internal.ShellCommandRequirement | Internal.ResourceRequirement | Internal.WorkReuse | Internal.NetworkAccess | Internal.InplaceUpdateRequirement | Internal.ToolTimeLimit | Internal.SubworkflowFeatureRequirement | Internal.ScatterFeatureRequirement | Internal.MultipleInputFeatureRequirement | Internal.StepInputExpressionRequirement>
+  requirements?: undefined | Array<Internal.InlineJavascriptRequirement | Internal.SchemaDefRequirement | Internal.LoadListingRequirement | Internal.DockerRequirement | Internal.SoftwareRequirement | Internal.InitialWorkDirRequirement | Internal.EnvVarRequirement | Internal.ShellCommandRequirement | Internal.ResourceRequirement | Internal.WorkReuse | Internal.NetworkAccess | Internal.InplaceUpdateRequirement | Internal.ToolTimeLimit | Internal.SubworkflowFeatureRequirement | Internal.ScatterFeatureRequirement | Internal.MultipleInputFeatureRequirement | Internal.StepInputExpressionRequirement | Internal.Secrets | Internal.MPIRequirement | Internal.CUDARequirement | Internal.Loop | Internal.ShmSize>
 
   /**
    * Declares hints applying to either the runtime environment or the
@@ -159,7 +159,7 @@ export class WorkflowStep extends Saveable implements Internal.WorkflowStepPrope
    * or a relative path from the primary document.
    * 
    */
-  run: string | Internal.CommandLineTool | Internal.ExpressionTool | Internal.Workflow | Internal.Operation
+  run: string | Internal.CommandLineTool | Internal.ExpressionTool | Internal.Workflow | Internal.Operation | Internal.ProcessGenerator
 
   /**
    * If defined, only run the step when the expression evaluates to
@@ -212,7 +212,7 @@ export class WorkflowStep extends Saveable implements Internal.WorkflowStepPrope
     let id
     if ('id' in _doc) {
       try {
-        id = await loadField(_doc.id, LoaderInstances.uriunionOfundefinedtypeOrstrtypeTrueFalseNoneNone,
+        id = await loadField(_doc.id, LoaderInstances.uristrtypeTrueFalseNoneNone,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
@@ -230,7 +230,7 @@ export class WorkflowStep extends Saveable implements Internal.WorkflowStepPrope
       if (docRoot != null) {
         id = docRoot
       } else {
-        id = "_" + uuidv4()
+        throw new ValidationException("Missing id")
       }
     } else {
       baseuri = id as string
@@ -299,7 +299,7 @@ export class WorkflowStep extends Saveable implements Internal.WorkflowStepPrope
     let requirements
     if ('requirements' in _doc) {
       try {
-        requirements = await loadField(_doc.requirements, LoaderInstances.idmaprequirementsunionOfundefinedtypeOrarrayOfunionOfInlineJavascriptRequirementLoaderOrSchemaDefRequirementLoaderOrLoadListingRequirementLoaderOrDockerRequirementLoaderOrSoftwareRequirementLoaderOrInitialWorkDirRequirementLoaderOrEnvVarRequirementLoaderOrShellCommandRequirementLoaderOrResourceRequirementLoaderOrWorkReuseLoaderOrNetworkAccessLoaderOrInplaceUpdateRequirementLoaderOrToolTimeLimitLoaderOrSubworkflowFeatureRequirementLoaderOrScatterFeatureRequirementLoaderOrMultipleInputFeatureRequirementLoaderOrStepInputExpressionRequirementLoader,
+        requirements = await loadField(_doc.requirements, LoaderInstances.idmaprequirementsunionOfundefinedtypeOrarrayOfunionOfInlineJavascriptRequirementLoaderOrSchemaDefRequirementLoaderOrLoadListingRequirementLoaderOrDockerRequirementLoaderOrSoftwareRequirementLoaderOrInitialWorkDirRequirementLoaderOrEnvVarRequirementLoaderOrShellCommandRequirementLoaderOrResourceRequirementLoaderOrWorkReuseLoaderOrNetworkAccessLoaderOrInplaceUpdateRequirementLoaderOrToolTimeLimitLoaderOrSubworkflowFeatureRequirementLoaderOrScatterFeatureRequirementLoaderOrMultipleInputFeatureRequirementLoaderOrStepInputExpressionRequirementLoaderOrSecretsLoaderOrMPIRequirementLoaderOrCUDARequirementLoaderOrLoopLoaderOrShmSizeLoader,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
@@ -330,7 +330,7 @@ export class WorkflowStep extends Saveable implements Internal.WorkflowStepPrope
 
     let run
     try {
-      run = await loadField(_doc.run, LoaderInstances.uriunionOfstrtypeOrCommandLineToolLoaderOrExpressionToolLoaderOrWorkflowLoaderOrOperationLoaderFalseFalseNoneNone,
+      run = await loadField(_doc.run, LoaderInstances.uriunionOfstrtypeOrCommandLineToolLoaderOrExpressionToolLoaderOrWorkflowLoaderOrOperationLoaderOrProcessGeneratorLoaderFalseFalseNoneNone,
         baseuri, loadingOptions)
     } catch (e) {
       if (e instanceof ValidationException) {

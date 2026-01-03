@@ -25,9 +25,9 @@ export class OperationInputParameter extends Saveable implements Internal.Operat
   extensionFields?: Internal.Dictionary<any>
 
   /**
-   * The unique identifier for this object.
+   * The unique identifier for this Parameter.
    */
-  id?: undefined | string
+  id: string
 
   /**
    * A short, human-readable label of this object.
@@ -185,7 +185,7 @@ export class OperationInputParameter extends Saveable implements Internal.Operat
     let id
     if ('id' in _doc) {
       try {
-        id = await loadField(_doc.id, LoaderInstances.uriunionOfundefinedtypeOrstrtypeTrueFalseNoneNone,
+        id = await loadField(_doc.id, LoaderInstances.uristrtypeTrueFalseNoneNone,
           baseuri, loadingOptions)
       } catch (e) {
         if (e instanceof ValidationException) {
@@ -203,7 +203,7 @@ export class OperationInputParameter extends Saveable implements Internal.Operat
       if (docRoot != null) {
         id = docRoot
       } else {
-        id = "_" + uuidv4()
+        throw new ValidationException("Missing id")
       }
     } else {
       baseuri = id as string

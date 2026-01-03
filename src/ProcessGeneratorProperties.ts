@@ -3,12 +3,9 @@ import * as Internal from './util/Internal'
 
 
 /**
- * Auto-generated interface for https://w3id.org/cwl/cwl#CommandLineTool
- *
- * This defines the schema of the CWL Command Line Tool Description document.
- * 
+ * Auto-generated interface for http://commonwl.org/cwltool#ProcessGenerator
  */
-export interface CommandLineToolProperties extends Internal.ProcessProperties {
+export interface ProcessGeneratorProperties extends Internal.ProcessProperties {
                     
   extensionFields?: Internal.Dictionary<any>
 
@@ -20,7 +17,7 @@ export interface CommandLineToolProperties extends Internal.ProcessProperties {
    * 
    */
   id?: undefined | string
-  class_?: Internal.CommandLineTool_class
+  class_?: string
 
   /**
    * A short, human-readable label of this object.
@@ -46,14 +43,14 @@ export interface CommandLineToolProperties extends Internal.ProcessProperties {
    * of expressions.
    * 
    */
-  inputs: Array<Internal.CommandInputParameter>
+  inputs: Array<Internal.WorkflowInputParameter>
 
   /**
    * Defines the parameters representing the output of the process.  May be
    * used to generate and/or validate the output object.
    * 
    */
-  outputs: Array<Internal.CommandOutputParameter>
+  outputs: Array<Internal.ExpressionToolOutputParameter>
 
   /**
    * Declares requirements that apply to either the runtime environment or the
@@ -102,94 +99,8 @@ export interface CommandLineToolProperties extends Internal.ProcessProperties {
   intent?: undefined | Array<string>
 
   /**
-   * Specifies the program to execute.  If an array, the first element of
-   * the array is the command to execute, and subsequent elements are
-   * mandatory command line arguments.  The elements in `baseCommand` must
-   * appear before any command line bindings from `inputBinding` or
-   * `arguments`.
-   * 
-   * If `baseCommand` is not provided or is an empty array, the first
-   * element of the command line produced after processing `inputBinding` or
-   * `arguments` must be used as the program to execute.
-   * 
-   * If the program includes a path separator character it must
-   * be an absolute path, otherwise it is an error.  If the program does not
-   * include a path separator, search the `$PATH` variable in the runtime
-   * environment of the workflow runner find the absolute path of the
-   * executable.
+   * Specifies the process to run.
    * 
    */
-  baseCommand?: undefined | string | Array<string>
-
-  /**
-   * Command line bindings which are not directly associated with input
-   * parameters. If the value is a string, it is used as a string literal
-   * argument. If it is an Expression, the result of the evaluation is used
-   * as an argument.
-   * 
-   */
-  arguments_?: undefined | Array<string | Internal.CommandLineBinding>
-
-  /**
-   * A path to a file whose contents must be piped into the command's
-   * standard input stream.
-   * 
-   */
-  stdin?: undefined | string
-
-  /**
-   * Capture the command's standard error stream to a file written to
-   * the designated output directory.
-   * 
-   * If `stderr` is a string, it specifies the file name to use.
-   * 
-   * If `stderr` is an expression, the expression is evaluated and must
-   * return a string with the file name to use to capture stderr.  If the
-   * return value is not a string, or the resulting path contains illegal
-   * characters (such as the path separator `/`) it is an error.
-   * 
-   */
-  stderr?: undefined | string
-
-  /**
-   * Capture the command's standard output stream to a file written to
-   * the designated output directory.
-   * 
-   * If the `CommandLineTool` contains logically chained commands
-   * (e.g. `echo a && echo b`) `stdout` must include the output of
-   * every command.
-   * 
-   * If `stdout` is a string, it specifies the file name to use.
-   * 
-   * If `stdout` is an expression, the expression is evaluated and must
-   * return a string with the file name to use to capture stdout.  If the
-   * return value is not a string, or the resulting path contains illegal
-   * characters (such as the path separator `/`) it is an error.
-   * 
-   */
-  stdout?: undefined | string
-
-  /**
-   * Exit codes that indicate the process completed successfully.
-   * 
-   * If not specified, only exit code 0 is considered success.
-   * 
-   */
-  successCodes?: undefined | Array<number>
-
-  /**
-   * Exit codes that indicate the process failed due to a possibly
-   * temporary condition, where executing the process with the same
-   * runtime environment and inputs may produce different results.
-   * 
-   * If not specified, no exit codes are considered temporary failure.
-   * 
-   */
-  temporaryFailCodes?: undefined | Array<number>
-
-  /**
-   * Exit codes that indicate the process failed due to a permanent logic error, where executing the process with the same runtime environment and same inputs is expected to always fail.
-   * If not specified, all exit codes except 0 are considered permanent failure.
-   */
-  permanentFailCodes?: undefined | Array<number>
+  run: string | Internal.CommandLineTool | Internal.ExpressionTool | Internal.Workflow | Internal.Operation | Internal.ProcessGenerator
 }

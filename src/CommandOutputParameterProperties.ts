@@ -12,9 +12,9 @@ export interface CommandOutputParameterProperties extends Internal.OutputParamet
   extensionFields?: Internal.Dictionary<any>
 
   /**
-   * The unique identifier for this object.
+   * The unique identifier for this Parameter.
    */
-  id?: undefined | string
+  id: string
 
   /**
    * A short, human-readable label of this object.

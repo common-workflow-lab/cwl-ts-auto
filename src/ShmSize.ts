@@ -16,41 +16,41 @@ import * as Internal from './util/Internal'
 
 
 /**
- * Auto-generated class implementation for https://w3id.org/cwl/cwl#WorkflowStepOutput
- *
- * Associate an output parameter of the underlying process with a workflow
- * parameter.  The workflow parameter (given in the `id` field) be may be used
- * as a `source` to connect with input parameters of other workflow steps, or
- * with an output parameter of the process.
- * 
- * A unique identifier for this workflow output parameter.  This is
- * the identifier to use in the `source` field of `WorkflowStepInput`
- * to connect the output value to downstream parameters.
- * 
+ * Auto-generated class implementation for http://commonwl.org/cwltool#ShmSize
  */
-export class WorkflowStepOutput extends Saveable implements Internal.WorkflowStepOutputProperties {
+export class ShmSize extends Saveable implements Internal.ShmSizeProperties {
   extensionFields?: Internal.Dictionary<any>
 
   /**
-   * The unique identifier of the workflow parameter to export.
+   * cwltool:ShmSize
    */
-  id: string
+  class_: string
+
+  /**
+   * Size of /dev/shm. The format is `<number><unit>`. <number> must be greater
+   * than 0. Unit is optional and can be `b` (bytes), `k` (kilobytes), `m`
+   * (megabytes), or `g` (gigabytes). If you omit the unit, the default is
+   * bytes. If you omit the size entirely, the value is `64m`."
+   * 
+   */
+  shmSize: string
 
 
-  constructor ({loadingOptions, extensionFields, id} : {loadingOptions?: LoadingOptions} & Internal.WorkflowStepOutputProperties) {
+  constructor ({loadingOptions, extensionFields, class_ = 'ShmSize', shmSize} : {loadingOptions?: LoadingOptions} & Internal.ShmSizeProperties) {
     super(loadingOptions)
     this.extensionFields = extensionFields ?? {}
-    this.id = id
+    this.class_ = class_
+    this.shmSize = shmSize
   }
 
   /**
-   * Used to construct instances of {@link WorkflowStepOutput }.
+   * Used to construct instances of {@link ShmSize }.
    *
    * @param __doc                           Document fragment to load this record object from.
    * @param baseuri                         Base URI to generate child document IDs against.
    * @param loadingOptions                  Context for loading URIs and populating objects.
    * @param docRoot                         ID at this position in the document (if available)
-   * @returns                               An instance of {@link WorkflowStepOutput }
+   * @returns                               An instance of {@link ShmSize }
    * @throws {@link ValidationException}    If the document fragment is not a
    *                                        {@link Dictionary} or validation of fields fails.
    */
@@ -59,43 +59,44 @@ export class WorkflowStepOutput extends Saveable implements Internal.WorkflowSte
     const _doc = Object.assign({}, __doc)
     const __errors: ValidationException[] = []
             
-    let id
-    if ('id' in _doc) {
-      try {
-        id = await loadField(_doc.id, LoaderInstances.uristrtypeTrueFalseNoneNone,
-          baseuri, loadingOptions)
-      } catch (e) {
-        if (e instanceof ValidationException) {
-          __errors.push(
-            new ValidationException('the `id` field is not valid because: ', [e])
-          )
-        } else {
-          throw e
-        }
+    let class_
+    try {
+      class_ = await loadField(_doc.class, LoaderInstances.uristrtypeFalseTrueNoneNone,
+        baseuri, loadingOptions)
+    } catch (e) {
+      if (e instanceof ValidationException) {
+        __errors.push(
+          new ValidationException('the `class` field is not valid because: ', [e])
+        )
+      } else {
+        throw e
       }
     }
 
-    const originalidIsUndefined = (id === undefined)
-    if (originalidIsUndefined ) {
-      if (docRoot != null) {
-        id = docRoot
+    let shmSize
+    try {
+      shmSize = await loadField(_doc.shmSize, LoaderInstances.strtype,
+        baseuri, loadingOptions)
+    } catch (e) {
+      if (e instanceof ValidationException) {
+        __errors.push(
+          new ValidationException('the `shmSize` field is not valid because: ', [e])
+        )
       } else {
-        throw new ValidationException("Missing id")
+        throw e
       }
-    } else {
-      baseuri = id as string
     }
-            
+
     const extensionFields: Dictionary<any> = {}
     for (const [key, value] of Object.entries(_doc)) {
-      if (!WorkflowStepOutput.attr.has(key)) {
+      if (!ShmSize.attr.has(key)) {
         if ((key as string).includes(':')) {
           const ex = expandUrl(key, '', loadingOptions, false, false)
           extensionFields[ex] = value
         } else {
           __errors.push(
             new ValidationException(`invalid field ${key as string}, \
-            expected one of: \`id\``)
+            expected one of: \`class\`,\`shmSize\``)
           )
           break
         }
@@ -103,13 +104,14 @@ export class WorkflowStepOutput extends Saveable implements Internal.WorkflowSte
     }
 
     if (__errors.length > 0) {
-      throw new ValidationException("Trying 'WorkflowStepOutput'", __errors)
+      throw new ValidationException("Trying 'ShmSize'", __errors)
     }
 
-    const schema = new WorkflowStepOutput({
+    const schema = new ShmSize({
       extensionFields: extensionFields,
       loadingOptions: loadingOptions,
-      id: id
+      class_: class_,
+      shmSize: shmSize
     })
     return schema
   }
@@ -121,12 +123,16 @@ export class WorkflowStepOutput extends Saveable implements Internal.WorkflowSte
       r[prefixUrl(ef, this.loadingOptions.vocab)] = this.extensionFields.ef
     }
 
-    if (this.id != null) {
-      const u = saveRelativeUri(this.id, baseUrl, true,
+    if (this.class_ != null) {
+      const u = saveRelativeUri(this.class_, baseUrl, false,
                                 relativeUris, undefined)
       if (u != null) {
-        r.id = u
+        r.class = u
       }
+    }
+                
+    if (this.shmSize != null) {
+      r.shmSize = save(this.shmSize, false, baseUrl, relativeUris)
     }
                 
     if (top) {
@@ -140,5 +146,5 @@ export class WorkflowStepOutput extends Saveable implements Internal.WorkflowSte
     return r
   }
             
-  static attr: Set<string> = new Set(['id'])
+  static attr: Set<string> = new Set(['class','shmSize'])
 }

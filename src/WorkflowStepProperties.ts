@@ -86,14 +86,14 @@ import * as Internal from './util/Internal'
  * a subworkflow (recursive workflows are not allowed).
  * 
  */
-export interface WorkflowStepProperties extends Internal.IdentifiedProperties, Internal.LabeledProperties, Internal.DocumentedProperties {
+export interface WorkflowStepProperties extends Internal.IdentifierRequiredProperties, Internal.LabeledProperties, Internal.DocumentedProperties {
                     
   extensionFields?: Internal.Dictionary<any>
 
   /**
-   * The unique identifier for this object.
+   * The unique identifier for this WorkflowStep.
    */
-  id?: undefined | string
+  id: string
 
   /**
    * A short, human-readable label of this object.
@@ -131,7 +131,7 @@ export interface WorkflowStepProperties extends Internal.IdentifiedProperties, I
    * unless overridden at user option.
    * 
    */
-  requirements?: undefined | Array<Internal.InlineJavascriptRequirement | Internal.SchemaDefRequirement | Internal.LoadListingRequirement | Internal.DockerRequirement | Internal.SoftwareRequirement | Internal.InitialWorkDirRequirement | Internal.EnvVarRequirement | Internal.ShellCommandRequirement | Internal.ResourceRequirement | Internal.WorkReuse | Internal.NetworkAccess | Internal.InplaceUpdateRequirement | Internal.ToolTimeLimit | Internal.SubworkflowFeatureRequirement | Internal.ScatterFeatureRequirement | Internal.MultipleInputFeatureRequirement | Internal.StepInputExpressionRequirement>
+  requirements?: undefined | Array<Internal.InlineJavascriptRequirement | Internal.SchemaDefRequirement | Internal.LoadListingRequirement | Internal.DockerRequirement | Internal.SoftwareRequirement | Internal.InitialWorkDirRequirement | Internal.EnvVarRequirement | Internal.ShellCommandRequirement | Internal.ResourceRequirement | Internal.WorkReuse | Internal.NetworkAccess | Internal.InplaceUpdateRequirement | Internal.ToolTimeLimit | Internal.SubworkflowFeatureRequirement | Internal.ScatterFeatureRequirement | Internal.MultipleInputFeatureRequirement | Internal.StepInputExpressionRequirement | Internal.Secrets | Internal.MPIRequirement | Internal.CUDARequirement | Internal.Loop | Internal.ShmSize>
 
   /**
    * Declares hints applying to either the runtime environment or the
@@ -147,7 +147,7 @@ export interface WorkflowStepProperties extends Internal.IdentifiedProperties, I
    * or a relative path from the primary document.
    * 
    */
-  run: string | Internal.CommandLineTool | Internal.ExpressionTool | Internal.Workflow | Internal.Operation
+  run: string | Internal.CommandLineTool | Internal.ExpressionTool | Internal.Workflow | Internal.Operation | Internal.ProcessGenerator
 
   /**
    * If defined, only run the step when the expression evaluates to
