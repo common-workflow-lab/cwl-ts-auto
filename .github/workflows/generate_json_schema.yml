@@ -74,7 +74,7 @@ jobs:
             --unwrapScalar < json_schemas/cwl_schema.json \
           > json_schemas/cwl_schema.yaml
       - name: Commit JSON Schema
-        uses: EndBug/add-and-commit@v9
+        uses: EndBug/add-and-commit@v10
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
